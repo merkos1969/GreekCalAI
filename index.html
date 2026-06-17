@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V15</title>
+<title>Greek Cal AI V16</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -260,6 +260,66 @@ body{padding-bottom:86px}
   .calDay{min-height:62px;padding:6px 4px}
   .calMini{font-size:9px}
   .legend{grid-template-columns:1fr}
+}
+
+
+.planCard{
+  background:#f8fafc;
+  border:1px solid #dbeafe;
+  border-radius:16px;
+  padding:13px;
+  margin:10px 0;
+}
+.planTop{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:flex-start;
+}
+.planMeal{
+  font-size:18px;
+  font-weight:900;
+  color:#0d47a1;
+}
+.planFood{
+  font-size:16px;
+  font-weight:800;
+  margin-top:4px;
+}
+.planMeta{
+  color:#64748b;
+  font-size:13px;
+  margin-top:4px;
+  line-height:1.35;
+}
+.planKcal{
+  font-size:20px;
+  font-weight:900;
+  color:#198754;
+  white-space:nowrap;
+}
+.planTotals{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+}
+.planTotals .calBox span{
+  font-size:22px;
+}
+.coachModeTabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:10px;
+}
+.coachModeTabs button{
+  font-size:15px;
+  padding:10px;
+}
+@media(max-width:560px){
+  .planTotals{grid-template-columns:1fr}
+  .coachModeTabs{grid-template-columns:1fr 1fr}
 }
 
 </style>
@@ -536,6 +596,14 @@ body{padding-bottom:86px}
     <input id="coachCalories" type="number" value="600">
 
     <button class="btnGreen" onclick="generateCoach()">✨ Τι να φάω σήμερα;</button>
+    <button onclick="generateFullDayPlan()">📋 Πλήρες πλάνο ημέρας</button>
+
+    <div class="coachModeTabs">
+      <button class="btnLight" onclick="generateFullDayPlan('economic')">💶 Οικονομικό</button>
+      <button class="btnLight" onclick="generateFullDayPlan('quick')">⚡ Γρήγορο</button>
+      <button class="btnLight" onclick="generateFullDayPlan('protein')">💪 Πρωτεΐνη</button>
+      <button class="btnLight" onclick="generateFullDayPlan('med')">🇬🇷 Μεσογειακό</button>
+    </div>
 
     <div id="coachResult" class="coachResult">
       <h3>Πρόταση ημέρας</h3>
@@ -776,6 +844,196 @@ function updateDashboard(){
   }
 }
 
+
+/* AI COACH FULL DAY PLAN */
+
+let currentCoachPlan = [];
+
+function foodByName(name){
+  return allFoods().find(f => f.name === name) || null;
+}
+function makePlanItem(meal, foodName, fallback){
+  const f = foodByName(foodName);
+  if(f){
+    return {
+      meal,
+      name:f.name,
+      cat:f.cat,
+      portion:f.portion,
+      cal:Number(f.cal)||0,
+      protein:Number(f.protein)||0,
+      carbs:Number(f.carbs)||0,
+      fat:Number(f.fat)||0
+    };
+  }
+  return {
+    meal,
+    name:foodName,
+    cat:fallback.cat || "Πρόταση",
+    portion:fallback.portion || "μερίδα",
+    cal:fallback.cal || 300,
+    protein:fallback.protein || 20,
+    carbs:fallback.carbs || 20,
+    fat:fallback.fat || 10
+  };
+}
+function getPlanTemplate(mode){
+  const goal = val("coachGoal");
+  const pref = val("coachPreference");
+  let selected = mode || goal;
+
+  if(selected === "economic"){
+    return [
+      makePlanItem("Πρωινό","Γιαούρτι στραγγιστό 2%",{}),
+      makePlanItem("Μεσημεριανό","Φακές σούπα",{}),
+      makePlanItem("Βραδινό","Ομελέτα 2 αυγών",{}),
+      makePlanItem("Σνακ","Μήλο",{})
+    ];
+  }
+
+  if(selected === "quick"){
+    return [
+      makePlanItem("Πρωινό","Τοστ γαλοπούλα τυρί",{}),
+      makePlanItem("Μεσημεριανό","Πίτα καλαμάκι κοτόπουλο",{}),
+      makePlanItem("Βραδινό","Τόνος κονσέρβα σε νερό",{}),
+      makePlanItem("Σνακ","Μπανάνα",{})
+    ];
+  }
+
+  if(selected === "protein" || goal === "protein"){
+    return [
+      makePlanItem("Πρωινό","Ομελέτα 2 αυγών",{}),
+      makePlanItem("Μεσημεριανό","Κοτόπουλο σχάρας",{}),
+      makePlanItem("Βραδινό","Τόνος κονσέρβα σε νερό",{}),
+      makePlanItem("Σνακ","Γιαούρτι στραγγιστό 2%",{})
+    ];
+  }
+
+  if(selected === "lowcarb" || goal === "lowcarb"){
+    return [
+      makePlanItem("Πρωινό","Αυγό βραστό",{cal:156,protein:12,carbs:1,fat:10,portion:"2 τεμάχια"}),
+      makePlanItem("Μεσημεριανό","Κοτόπουλο σχάρας",{}),
+      makePlanItem("Βραδινό","Σολομός ψητός",{}),
+      makePlanItem("Σνακ","Φέτα",{cal:150,protein:8,carbs:2,fat:12,portion:"μικρή μερίδα"})
+    ];
+  }
+
+  if(selected === "med" || goal === "med"){
+    return [
+      makePlanItem("Πρωινό","Γιαούρτι με μέλι",{}),
+      makePlanItem("Μεσημεριανό","Φασολάδα",{}),
+      makePlanItem("Βραδινό","Τσιπούρα ψητή",{}),
+      makePlanItem("Σνακ","Πορτοκάλι",{})
+    ];
+  }
+
+  if(goal === "loss"){
+    return [
+      makePlanItem("Πρωινό","Γιαούρτι στραγγιστό 2%",{}),
+      makePlanItem("Μεσημεριανό","Κοτόπουλο σχάρας",{}),
+      makePlanItem("Βραδινό","Πράσινη σαλάτα",{}),
+      makePlanItem("Σνακ","Μήλο",{})
+    ];
+  }
+
+  return [
+    makePlanItem("Πρωινό","Βρώμη με γάλα",{}),
+    makePlanItem("Μεσημεριανό","Κοτόπουλο φούρνου με πατάτες",{}),
+    makePlanItem("Βραδινό","Χωριάτικη σαλάτα",{}),
+    makePlanItem("Σνακ","Γιαούρτι στραγγιστό 2%",{})
+  ];
+}
+function scalePlanToCalories(plan, targetCalories){
+  const total = plan.reduce((s,x)=>s+x.cal,0);
+  if(total <= 0) return plan;
+  const factor = Math.min(1.35, Math.max(0.65, targetCalories / total));
+  return plan.map(x => ({
+    ...x,
+    qty: Number(factor.toFixed(1)),
+    total: Math.round(x.cal * factor),
+    p: Math.round(x.protein * factor),
+    c: Math.round(x.carbs * factor),
+    f: Math.round(x.fat * factor)
+  }));
+}
+function generateFullDayPlan(mode){
+  prepareCoach();
+  const remaining = Math.max(500, num("coachCalories") || 1600);
+  let plan = getPlanTemplate(mode);
+  currentCoachPlan = scalePlanToCalories(plan, remaining);
+
+  const totals = currentCoachPlan.reduce((a,x)=>{
+    a.kcal += x.total;
+    a.p += x.p;
+    a.c += x.c;
+    a.f += x.f;
+    return a;
+  }, {kcal:0,p:0,c:0,f:0});
+
+  const titleMap = {
+    economic:"Οικονομικό πλάνο ημέρας",
+    quick:"Γρήγορο πλάνο ημέρας",
+    protein:"Πλάνο υψηλής πρωτεΐνης",
+    med:"Μεσογειακό πλάνο ημέρας"
+  };
+  const title = titleMap[mode] || "Πλήρες πλάνο ημέρας";
+
+  document.getElementById("coachResult").innerHTML = `
+    <h3>${title}</h3>
+    <p><b>Προσαρμογή στις διαθέσιμες θερμίδες:</b> περίπου ${remaining} kcal</p>
+
+    ${currentCoachPlan.map((x,i)=>`
+      <div class="planCard">
+        <div class="planTop">
+          <div>
+            <div class="planMeal">${x.meal}</div>
+            <div class="planFood">${x.name}</div>
+            <div class="planMeta">Ποσότητα: ${x.qty} x ${x.portion}<br>Π:${x.p}g • Υ:${x.c}g • Λ:${x.f}g</div>
+          </div>
+          <div class="planKcal">${x.total} kcal</div>
+        </div>
+      </div>
+    `).join("")}
+
+    <div class="planTotals">
+      <div class="calBox"><b>Σύνολο θερμίδων</b><span>${totals.kcal} kcal</span></div>
+      <div class="calBox"><b>Σύνολο πρωτεΐνης</b><span>${totals.p} g</span></div>
+      <div class="calBox"><b>Υδατάνθρακες</b><span>${totals.c} g</span></div>
+      <div class="calBox"><b>Λιπαρά</b><span>${totals.f} g</span></div>
+    </div>
+
+    <button class="btnGreen" onclick="addCoachPlanToDiary()">➕ Προσθήκη πλάνου στο ημερήσιο</button>
+    <p class="small">Οι προτάσεις είναι ενδεικτικές και μπορούν να προσαρμοστούν από τον χρήστη.</p>
+  `;
+}
+function addCoachPlanToDiary(){
+  if(!currentCoachPlan || currentCoachPlan.length===0){
+    alert("Πρώτα δημιούργησε πλάνο ημέρας.");
+    return;
+  }
+  const items = getDiary();
+  currentCoachPlan.slice().reverse().forEach(x=>{
+    items.unshift({
+      name:x.name,
+      cat:x.cat,
+      portion:x.portion,
+      cal:x.cal,
+      protein:x.protein,
+      carbs:x.carbs,
+      fat:x.fat,
+      qty:x.qty,
+      total:x.total,
+      p:x.p,
+      c:x.c,
+      f:x.f,
+      meal:x.meal,
+      time:new Date().toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"})
+    });
+  });
+  setDiary(items);
+  updateDashboard();
+  alert("Το πλάνο προστέθηκε στο ημερήσιο.");
+}
 
 /* AI COACH */
 function prepareCoach(){
