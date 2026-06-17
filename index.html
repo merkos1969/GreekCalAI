@@ -3,53 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V3</title>
+<title>Greek Cal AI V4</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-:root{
-  --blue:#1e6cc7;--blue2:#0d47a1;--bg:#eef3f8;--card:#fff;
-  --text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;
-  --purple:#7c3aed;--light:#f8fafc;
-}
+:root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);padding:18px}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);padding:14px}
 .app{max-width:800px;margin:0 auto}
-.card{background:var(--card);border-radius:22px;padding:20px;margin:14px 0;box-shadow:0 10px 28px rgba(0,0,0,.08)}
-h1{text-align:center;color:var(--blue);font-size:36px;margin:24px 0 30px}
-h2{font-size:30px;margin:10px 0 22px}
-h3{font-size:22px;margin:12px 0}
-button,.btn{width:100%;border:0;border-radius:15px;padding:17px;margin:9px 0;background:var(--blue);color:#fff;font-size:22px;cursor:pointer}
-button:hover{filter:brightness(.95)}
-.btnLight{background:#e8eef7;color:var(--blue)}
-.btnGreen{background:var(--green)}
-.btnRed{background:var(--red)}
-.btnOrange{background:var(--orange)}
-.btnPurple{background:var(--purple)}
-.back{display:inline-block;width:auto;background:#e8eef7;color:var(--blue);padding:13px 18px;margin-bottom:20px}
-label{display:block;font-weight:800;font-size:17px;margin:12px 0 7px}
-input,select,textarea{width:100%;padding:15px;border:1px solid #cfd7e2;border-radius:14px;font-size:20px;background:#fff}
-textarea{min-height:74px}
-.hidden{display:none}
-.menu button{font-size:28px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:15px}
-.stat b{display:block;color:var(--muted);font-size:14px;margin-bottom:6px}
-.stat span{font-size:24px;font-weight:900}
-.progressWrap{height:24px;background:#e5e7eb;border-radius:999px;overflow:hidden}
-.progressBar{height:100%;width:0%;background:linear-gradient(90deg,#1e6cc7,#28a0ff);transition:.3s}
-.bigCenter{text-align:center;font-size:38px;font-weight:900;margin:18px 0;color:var(--blue)}
-.small{color:var(--muted);font-size:14px;line-height:1.35}
-.historyItem{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#f8fafc;border:1px solid #e5e7eb;border-radius:15px;padding:12px;margin:10px 0}
-.deleteBtn{width:auto;background:#fee2e2;color:#b91c1c;padding:8px 12px;font-size:18px}
-canvas{max-height:320px}
-.badge{display:inline-block;padding:7px 11px;border-radius:999px;font-weight:900;background:#e8eef7;color:var(--blue);margin:4px 4px 4px 0}
-.goalMessage{font-size:18px;font-weight:900;line-height:1.4;padding:15px;border-radius:16px;background:#eff6ff;color:#174a8b}
-.rowBtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:560px){
-  body{padding:12px}
-  h1{font-size:34px}.menu button{font-size:27px}
-  .grid,.rowBtns{grid-template-columns:1fr}
-}
+.card{background:var(--card);border-radius:20px;padding:16px;margin:12px 0;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+h1{text-align:center;color:var(--blue);font-size:31px;margin:18px 0 22px}
+h2{font-size:25px;margin:8px 0 15px}
+button,.btn{width:100%;border:0;border-radius:14px;padding:14px;margin:7px 0;background:var(--blue);color:#fff;font-size:19px;cursor:pointer}
+.btnLight{background:#e8eef7;color:var(--blue)}.btnGreen{background:var(--green)}.btnRed{background:var(--red)}.btnOrange{background:var(--orange)}.btnPurple{background:var(--purple)}
+.back{display:inline-block;width:auto;background:#e8eef7;color:var(--blue);padding:11px 15px;margin-bottom:12px}
+label{display:block;font-weight:800;font-size:15px;margin:9px 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cfd7e2;border-radius:12px;font-size:17px;background:#fff}
+textarea{min-height:64px}.hidden{display:none}.menu button{font-size:22px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:12px}
+.stat b{display:block;color:var(--muted);font-size:13px;margin-bottom:5px}.stat span{font-size:21px;font-weight:900}
+.progressWrap{height:20px;background:#e5e7eb;border-radius:999px;overflow:hidden}.progressBar{height:100%;width:0%;background:linear-gradient(90deg,#1e6cc7,#28a0ff);transition:.3s}
+.bigCenter{text-align:center;font-size:32px;font-weight:900;margin:14px 0;color:var(--blue)}.small{color:var(--muted);font-size:13px;line-height:1.35}
+.historyItem{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#f8fafc;border:1px solid #e5e7eb;border-radius:13px;padding:10px;margin:8px 0}
+.deleteBtn{width:auto;background:#fee2e2;color:#b91c1c;padding:7px 10px;font-size:16px}canvas{max-height:300px}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:900;background:#e8eef7;color:var(--blue);font-size:12px}
+.foodCard{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:12px;margin:9px 0}
+.foodTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.foodName{font-size:18px;font-weight:900}.foodMeta{font-size:13px;color:var(--muted);margin-top:4px}.foodCal{font-size:20px;font-weight:900;color:#0d47a1;white-space:nowrap}
+.tabs{display:flex;gap:7px;overflow:auto;padding-bottom:6px}.tab{width:auto;white-space:nowrap;font-size:14px;padding:9px 12px;background:#e8eef7;color:#1e6cc7}.tab.active{background:#1e6cc7;color:#fff}
+.goalMessage{font-size:16px;font-weight:900;line-height:1.4;padding:13px;border-radius:14px;background:#eff6ff;color:#174a8b}.rowBtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){body{padding:10px}h1{font-size:30px}h2{font-size:24px}.grid,.rowBtns{grid-template-columns:1fr}.menu button{font-size:21px}}
 </style>
 </head>
 <body>
@@ -69,7 +51,9 @@ canvas{max-height:320px}
   <button class="back" onclick="showPage('home')">← Πίσω</button>
   <div class="card">
     <h2>🍽 Ελληνικά Φαγητά</h2>
-    <p class="small">Πρώτη εμπορική βάση τροφίμων. Στις επόμενες εκδόσεις θα μπει αναζήτηση και θερμίδες ανά μερίδα.</p>
+    <input id="foodSearch" placeholder="Αναζήτηση π.χ. σουβλάκι, φακές, γιαούρτι" oninput="renderFoods()">
+    <div class="tabs" id="foodTabs"></div>
+    <p class="small"><b id="foodCount"></b> τρόφιμα/γεύματα. Οι θερμίδες είναι ενδεικτικές ανά μερίδα.</p>
     <div id="foodList"></div>
   </div>
 </section>
@@ -78,316 +62,75 @@ canvas{max-height:320px}
   <button class="back" onclick="showPage('home')">← Πίσω</button>
   <div class="card">
     <h2>⏱ Διαλειμματική Νηστεία</h2>
-
     <label>Πλάνο</label>
-    <select id="fastingPlan" onchange="saveFastingPlan()">
-      <option value="16">16:8</option>
-      <option value="18">18:6</option>
-      <option value="20">20:4</option>
-      <option value="23">OMAD 23:1</option>
-    </select>
-
-    <div class="stat" style="margin-top:14px">
-      <b>Τρέχον πλάνο</b>
-      <span id="fastingPlanText">16:8</span>
-    </div>
-
-    <div class="bigCenter" id="fastingTimer">00:00:00</div>
-    <div class="progressWrap"><div id="fastingProgress" class="progressBar"></div></div>
+    <select id="fastingPlan" onchange="saveFastingPlan()"><option value="16">16:8</option><option value="18">18:6</option><option value="20">20:4</option><option value="23">OMAD 23:1</option></select>
+    <div class="stat" style="margin-top:12px"><b>Τρέχον πλάνο</b><span id="fastingPlanText">16:8</span></div>
+    <div class="bigCenter" id="fastingTimer">00:00:00</div><div class="progressWrap"><div id="fastingProgress" class="progressBar"></div></div>
     <p id="fastingStatus" class="small" style="text-align:center;margin-top:10px">Δεν έχει ξεκινήσει νηστεία.</p>
-
-    <button class="btnGreen" onclick="startFasting()">▶️ Έναρξη Νηστείας</button>
-    <button class="btnOrange" onclick="finishFasting()">✅ Τερματισμός</button>
-    <button class="btnRed" onclick="resetFasting()">🗑 Μηδενισμός</button>
+    <button class="btnGreen" onclick="startFasting()">▶️ Έναρξη Νηστείας</button><button class="btnOrange" onclick="finishFasting()">✅ Τερματισμός</button><button class="btnRed" onclick="resetFasting()">🗑 Μηδενισμός</button>
   </div>
 </section>
 
 <section id="weight" class="hidden">
   <button class="back" onclick="showPage('home')">← Πίσω</button>
-
   <div class="card">
     <h2>⚖️ Στόχος Βάρους</h2>
-    <label>Όνομα χρήστη / προφίλ</label>
-    <input id="profileName" type="text" placeholder="π.χ. Γιάννης">
-
-    <label>Αρχικό βάρος (kg)</label>
-    <input id="startWeight" type="number" step="0.1" value="90">
-
-    <label>Τωρινό βάρος (kg)</label>
-    <input id="currentWeight" type="number" step="0.1" value="90">
-
-    <label>Στόχος βάρους (kg)</label>
-    <input id="targetWeight" type="number" step="0.1" value="80">
-
-    <label>Ύψος π.χ. 1.75</label>
-    <input id="height" type="number" step="0.01" value="1.75">
-
-    <label>Ηλικία</label>
-    <input id="age" type="number" step="1" value="40">
-
-    <label>Φύλο</label>
-    <select id="gender">
-      <option value="male">Άνδρας</option>
-      <option value="female">Γυναίκα</option>
-    </select>
-
-    <label>Επίπεδο δραστηριότητας</label>
-    <select id="activity">
-      <option value="1.2">Καθιστική ζωή</option>
-      <option value="1.375">Ελαφριά δραστηριότητα</option>
-      <option value="1.55">Μέτρια δραστηριότητα</option>
-      <option value="1.725">Υψηλή δραστηριότητα</option>
-    </select>
-
-    <label>Σημείωση μέτρησης</label>
-    <textarea id="note" placeholder="π.χ. περπάτημα / 16:8 / μεσογειακή διατροφή"></textarea>
-
-    <button class="btnGreen" onclick="saveWeightData()">💾 Αποθήκευση Στοιχείων</button>
-    <button onclick="addMeasurement()">➕ Καταχώρηση Μέτρησης</button>
-    <button class="btnLight" onclick="calculateWeight()">📊 Υπολογισμός Προόδου</button>
+    <label>Όνομα χρήστη / προφίλ</label><input id="profileName" type="text" placeholder="π.χ. Γιάννης">
+    <label>Αρχικό βάρος (kg)</label><input id="startWeight" type="number" step="0.1" value="90">
+    <label>Τωρινό βάρος (kg)</label><input id="currentWeight" type="number" step="0.1" value="90">
+    <label>Στόχος βάρους (kg)</label><input id="targetWeight" type="number" step="0.1" value="80">
+    <label>Ύψος π.χ. 1.75</label><input id="height" type="number" step="0.01" value="1.75">
+    <label>Ηλικία</label><input id="age" type="number" step="1" value="40">
+    <label>Φύλο</label><select id="gender"><option value="male">Άνδρας</option><option value="female">Γυναίκα</option></select>
+    <label>Επίπεδο δραστηριότητας</label><select id="activity"><option value="1.2">Καθιστική ζωή</option><option value="1.375">Ελαφριά δραστηριότητα</option><option value="1.55">Μέτρια δραστηριότητα</option><option value="1.725">Υψηλή δραστηριότητα</option></select>
+    <label>Σημείωση μέτρησης</label><textarea id="note" placeholder="π.χ. περπάτημα / 16:8 / μεσογειακή διατροφή"></textarea>
+    <button class="btnGreen" onclick="saveWeightData()">💾 Αποθήκευση Στοιχείων</button><button onclick="addMeasurement()">➕ Καταχώρηση Μέτρησης</button><button class="btnLight" onclick="calculateWeight()">📊 Υπολογισμός Προόδου</button>
   </div>
-
-  <div class="card">
-    <h2>Πρόοδος</h2>
-    <div class="progressWrap"><div id="weightProgressBar" class="progressBar"></div></div>
-    <p id="weightProgressText" class="bigCenter">0%</p>
-    <div class="grid">
-      <div class="stat"><b>Χαμένα κιλά</b><span id="lostKg">0 kg</span></div>
-      <div class="stat"><b>Κιλά που απομένουν</b><span id="remainingKg">0 kg</span></div>
-      <div class="stat"><b>BMI</b><span id="bmi">-</span></div>
-      <div class="stat"><b>Κατηγορία BMI</b><span id="bmiCategory">-</span></div>
-      <div class="stat"><b>Θερμίδες συντήρησης</b><span id="maintenanceCalories">-</span></div>
-      <div class="stat"><b>Πρόταση απώλειας</b><span id="cutCalories">-</span></div>
-      <div class="stat"><b>Μετρήσεις</b><span id="totalMeasurements">0</span></div>
-      <div class="stat"><b>Μέσος ρυθμός</b><span id="avgRate">-</span></div>
-    </div>
+  <div class="card"><h2>Πρόοδος</h2><div class="progressWrap"><div id="weightProgressBar" class="progressBar"></div></div><p id="weightProgressText" class="bigCenter">0%</p>
+    <div class="grid"><div class="stat"><b>Χαμένα κιλά</b><span id="lostKg">0 kg</span></div><div class="stat"><b>Κιλά που απομένουν</b><span id="remainingKg">0 kg</span></div><div class="stat"><b>BMI</b><span id="bmi">-</span></div><div class="stat"><b>Κατηγορία BMI</b><span id="bmiCategory">-</span></div><div class="stat"><b>Θερμίδες συντήρησης</b><span id="maintenanceCalories">-</span></div><div class="stat"><b>Πρόταση απώλειας</b><span id="cutCalories">-</span></div><div class="stat"><b>Μετρήσεις</b><span id="totalMeasurements">0</span></div><div class="stat"><b>Μέσος ρυθμός</b><span id="avgRate">-</span></div></div>
     <div class="goalMessage" id="goalMessage" style="margin-top:14px">Καταχώρησε στοιχεία για να εμφανιστεί αξιολόγηση.</div>
   </div>
-
-  <div class="card">
-    <h2>📈 Γράφημα Βάρους</h2>
-    <canvas id="weightChart"></canvas>
-    <p class="small">Το γράφημα ενημερώνεται από το ιστορικό μετρήσεων.</p>
-  </div>
-
-  <div class="card">
-    <h2>📋 Ιστορικό Μετρήσεων</h2>
-    <div id="historyList"></div>
-    <div class="rowBtns">
-      <button class="btnPurple" onclick="exportBackup()">⬇️ Export Backup</button>
-      <button class="btnRed" onclick="clearHistory()">🗑 Διαγραφή ιστορικού</button>
-    </div>
-    <textarea id="backupBox" placeholder="Εδώ εμφανίζεται το backup JSON ή κάνε επικόλληση για restore"></textarea>
-    <button class="btnLight" onclick="importBackup()">⬆️ Import Backup</button>
-  </div>
-
+  <div class="card"><h2>📈 Γράφημα Βάρους</h2><canvas id="weightChart"></canvas><p class="small" id="chartHelp">Το γράφημα ενημερώνεται από το ιστορικό μετρήσεων.</p></div>
+  <div class="card"><h2>📋 Ιστορικό Μετρήσεων</h2><div id="historyList"></div><div class="rowBtns"><button class="btnPurple" onclick="exportBackup()">⬇️ Export Backup</button><button class="btnRed" onclick="clearHistory()">🗑 Διαγραφή ιστορικού</button></div><textarea id="backupBox" placeholder="Εδώ εμφανίζεται το backup JSON ή κάνε επικόλληση για restore"></textarea><button class="btnLight" onclick="importBackup()">⬆️ Import Backup</button></div>
   <p class="small">Οι υπολογισμοί είναι ενδεικτικοί και δεν αποτελούν ιατρική συμβουλή.</p>
 </section>
-
 </div>
 
 <script>
-let weightChart = null;
-let fastingInterval = null;
+const greekFoods=[{"name": "Χωριάτικη σαλάτα", "cat": "Σαλάτες", "cal": 320, "portion": "μερίδα", "tag": "Μεσογειακό"}, {"name": "Ντάκος", "cat": "Σαλάτες", "cal": 360, "portion": "μερίδα", "tag": "Κρητικό"}, {"name": "Πράσινη σαλάτα", "cat": "Σαλάτες", "cal": 120, "portion": "μερίδα", "tag": "Light"}, {"name": "Σαλάτα του Καίσαρα", "cat": "Σαλάτες", "cal": 520, "portion": "μερίδα", "tag": "Υψηλές θερμίδες"}, {"name": "Τονοσαλάτα", "cat": "Σαλάτες", "cal": 390, "portion": "μερίδα", "tag": "Πρωτεΐνη"}, {"name": "Φασολάδα", "cat": "Όσπρια", "cal": 430, "portion": "πιάτο", "tag": "Παραδοσιακό"}, {"name": "Φακές σούπα", "cat": "Όσπρια", "cal": 390, "portion": "πιάτο", "tag": "Φυτική πρωτεΐνη"}, {"name": "Ρεβύθια", "cat": "Όσπρια", "cal": 410, "portion": "πιάτο", "tag": "Φυτικές ίνες"}, {"name": "Γίγαντες πλακί", "cat": "Όσπρια", "cal": 480, "portion": "πιάτο", "tag": "Παραδοσιακό"}, {"name": "Φάβα", "cat": "Όσπρια", "cal": 330, "portion": "μερίδα", "tag": "Σαντορίνη"}, {"name": "Μπριάμ", "cat": "Λαδερά", "cal": 420, "portion": "πιάτο", "tag": "Λαδερό"}, {"name": "Γεμιστά", "cat": "Λαδερά", "cal": 520, "portion": "2 τεμάχια", "tag": "Παραδοσιακό"}, {"name": "Ιμάμ μπαϊλντί", "cat": "Λαδερά", "cal": 460, "portion": "μερίδα", "tag": "Λαδερό"}, {"name": "Σπανακόρυζο", "cat": "Λαδερά", "cal": 380, "portion": "πιάτο", "tag": "Light"}, {"name": "Λαχανόρυζο", "cat": "Λαδερά", "cal": 350, "portion": "πιάτο", "tag": "Light"}, {"name": "Αρακάς λαδερός", "cat": "Λαδερά", "cal": 410, "portion": "πιάτο", "tag": "Παραδοσιακό"}, {"name": "Μπάμιες", "cat": "Λαδερά", "cal": 360, "portion": "πιάτο", "tag": "Παραδοσιακό"}, {"name": "Φασολάκια λαδερά", "cat": "Λαδερά", "cal": 390, "portion": "πιάτο", "tag": "Παραδοσιακό"}, {"name": "Λαχανοντολμάδες", "cat": "Παραδοσιακά", "cal": 520, "portion": "μερίδα", "tag": "Παραδοσιακό"}, {"name": "Ντολμαδάκια", "cat": "Παραδοσιακά", "cal": 330, "portion": "μερίδα", "tag": "Μεσογειακό"}, {"name": "Σουβλάκι χοιρινό καλαμάκι", "cat": "Κρέατα", "cal": 190, "portion": "τεμάχιο", "tag": "Πρωτεΐνη"}, {"name": "Σουβλάκι κοτόπουλο καλαμάκι", "cat": "Κρέατα", "cal": 160, "portion": "τεμάχιο", "tag": "Πρωτεΐνη"}, {"name": "Πίτα γύρος χοιρινός", "cat": "Fast Food", "cal": 760, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες"}, {"name": "Πίτα γύρος κοτόπουλο", "cat": "Fast Food", "cal": 680, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες"}, {"name": "Πίτα καλαμάκι κοτόπουλο", "cat": "Fast Food", "cal": 560, "portion": "τεμάχιο", "tag": "Πρωτεΐνη"}, {"name": "Μπιφτέκι μοσχαρίσιο", "cat": "Κρέατα", "cal": 290, "portion": "τεμάχιο", "tag": "Πρωτεΐνη"}, {"name": "Μπιφτέκια με πατάτες", "cat": "Κρέατα", "cal": 780, "portion": "μερίδα", "tag": "Υψηλές θερμίδες"}, {"name": "Κοτόπουλο σχάρας", "cat": "Κρέατα", "cal": 320, "portion": "μερίδα", "tag": "Πρωτεΐνη"}, {"name": "Κοτόπουλο φούρνου με πατάτες", "cat": "Κρέατα", "cal": 690, "portion": "μερίδα", "tag": "Παραδοσιακό"}, {"name": "Μοσχάρι κοκκινιστό", "cat": "Κρέατα", "cal": 560, "portion": "μερίδα", "tag": "Πρωτεΐνη"}, {"name": "Μοσχάρι λεμονάτο", "cat": "Κρέατα", "cal": 520, "portion": "μερίδα", "tag": "Πρωτεΐνη"}, {"name": "Χοιρινή μπριζόλα", "cat": "Κρέατα", "cal": 520, "portion": "μερίδα", "tag": "Πρωτεΐνη"}, {"name": "Μπριζόλα μοσχαρίσια", "cat": "Κρέατα", "cal": 610, "portion": "μερίδα", "tag": "Πρωτεΐνη"}, {"name": "Αρνί ψητό", "cat": "Κρέατα", "cal": 680, "portion": "μερίδα", "tag": "Υψηλές θερμίδες"}, {"name": "Κεφτεδάκια", "cat": "Κρέατα", "cal": 450, "portion": "μερίδα", "tag": "Παραδοσιακό"}, {"name": "Σουτζουκάκια", "cat": "Κρέατα", "cal": 540, "portion": "μερίδα", "tag": "Παραδοσιακό"}, {"name": "Κοκκινιστό με μακαρόνια", "cat": "Κρέατα", "cal": 820, "portion": "μερίδα", "tag": "Υψηλές θερμίδες"}, {"name": "Τσιπούρα ψητή", "cat": "Ψάρια", "cal": 360, "portion": "μερίδα", "tag": "Πρωτεΐνη"}, {"name": "Λαβράκι ψητό", "cat": "Ψάρια", "cal": 330, "portion": "μερίδα", "tag": "Πρωτεΐνη"}, {"name": "Σαρδέλες ψητές", "cat": "Ψάρια", "cal": 310, "portion": "μερίδα", "tag": "Ωμέγα-3"}, {"name": "Γαύρος τηγανητός", "cat": "Ψάρια", "cal": 480, "portion": "μερίδα", "tag": "Τηγανητό"}, {"name": "Μπακαλιάρος σκορδαλιά", "cat": "Ψάρια", "cal": 690, "portion": "μερίδα", "tag": "Παραδοσιακό"}, {"name": "Σολομός ψητός", "cat": "Ψάρια", "cal": 420, "portion": "μερίδα", "tag": "Ωμέγα-3"}, {"name": "Τόνος κονσέρβα σε νερό", "cat": "Ψάρια", "cal": 140, "portion": "κονσέρβα", "tag": "Πρωτεΐνη"}, {"name": "Καλαμάρι ψητό", "cat": "Θαλασσινά", "cal": 240, "portion": "μερίδα", "tag": "Πρωτεΐνη"}, {"name": "Καλαμαράκια τηγανητά", "cat": "Θαλασσινά", "cal": 590, "portion": "μερίδα", "tag": "Τηγανητό"}, {"name": "Γαρίδες ψητές", "cat": "Θαλασσινά", "cal": 220, "portion": "μερίδα", "tag": "Πρωτεΐνη"}, {"name": "Χταπόδι ξυδάτο", "cat": "Θαλασσινά", "cal": 230, "portion": "μερίδα", "tag": "Πρωτεΐνη"}, {"name": "Μακαρόνια με κιμά", "cat": "Ζυμαρικά", "cal": 760, "portion": "μερίδα", "tag": "Κλασικό"}, {"name": "Παστίτσιο", "cat": "Ζυμαρικά", "cal": 780, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες"}, {"name": "Μουσακάς", "cat": "Παραδοσιακά", "cal": 820, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες"}, {"name": "Λαζάνια", "cat": "Ζυμαρικά", "cal": 740, "portion": "μερίδα", "tag": "Υψηλές θερμίδες"}, {"name": "Σπαγγέτι ναπολιτέν", "cat": "Ζυμαρικά", "cal": 520, "portion": "μερίδα", "tag": "Κλασικό"}, {"name": "Κριθαράκι με κοτόπουλο", "cat": "Ζυμαρικά", "cal": 650, "portion": "μερίδα", "tag": "Παραδοσιακό"}, {"name": "Γιουβέτσι μοσχάρι", "cat": "Ζυμαρικά", "cal": 760, "portion": "μερίδα", "tag": "Παραδοσιακό"}, {"name": "Ριζότο λαχανικών", "cat": "Ρύζι", "cal": 480, "portion": "μερίδα", "tag": "Μεσογειακό"}, {"name": "Ρύζι βραστό", "cat": "Ρύζι", "cal": 210, "portion": "μερίδα", "tag": "Βάση"}, {"name": "Πατάτες φούρνου", "cat": "Συνοδευτικά", "cal": 330, "portion": "μερίδα", "tag": "Συνοδευτικό"}, {"name": "Πατάτες τηγανητές", "cat": "Συνοδευτικά", "cal": 520, "portion": "μερίδα", "tag": "Τηγανητό"}, {"name": "Σπανακόπιτα", "cat": "Πίτες", "cal": 420, "portion": "κομμάτι", "tag": "Παραδοσιακό"}, {"name": "Τυρόπιτα", "cat": "Πίτες", "cal": 460, "portion": "κομμάτι", "tag": "Παραδοσιακό"}, {"name": "Πρασόπιτα", "cat": "Πίτες", "cal": 390, "portion": "κομμάτι", "tag": "Παραδοσιακό"}, {"name": "Κοτόπιτα", "cat": "Πίτες", "cal": 520, "portion": "κομμάτι", "tag": "Πρωτεΐνη"}, {"name": "Κρεατόπιτα", "cat": "Πίτες", "cal": 570, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες"}, {"name": "Κουλούρι Θεσσαλονίκης", "cat": "Πρωινό", "cal": 260, "portion": "τεμάχιο", "tag": "Πρωινό"}, {"name": "Ψωμί λευκό", "cat": "Αρτοποιήματα", "cal": 80, "portion": "φέτα", "tag": "Υδατάνθρακες"}, {"name": "Ψωμί ολικής", "cat": "Αρτοποιήματα", "cal": 75, "portion": "φέτα", "tag": "Ολικής"}, {"name": "Παξιμάδι κρίθινο", "cat": "Αρτοποιήματα", "cal": 120, "portion": "τεμάχιο", "tag": "Κρητικό"}, {"name": "Γιαούρτι στραγγιστό 2%", "cat": "Πρωινό", "cal": 150, "portion": "200g", "tag": "Πρωτεΐνη"}, {"name": "Γιαούρτι στραγγιστό 10%", "cat": "Πρωινό", "cal": 240, "portion": "200g", "tag": "Πρωτεΐνη"}, {"name": "Γιαούρτι με μέλι", "cat": "Πρωινό", "cal": 310, "portion": "μπολ", "tag": "Πρωινό"}, {"name": "Βρώμη με γάλα", "cat": "Πρωινό", "cal": 380, "portion": "μπολ", "tag": "Πρωινό"}, {"name": "Αυγό βραστό", "cat": "Πρωινό", "cal": 78, "portion": "τεμάχιο", "tag": "Πρωτεΐνη"}, {"name": "Ομελέτα 2 αυγών", "cat": "Πρωινό", "cal": 260, "portion": "μερίδα", "tag": "Πρωτεΐνη"}, {"name": "Τοστ γαλοπούλα τυρί", "cat": "Πρωινό", "cal": 330, "portion": "τεμάχιο", "tag": "Γρήγορο"}, {"name": "Φέτα", "cat": "Γαλακτοκομικά", "cal": 270, "portion": "100g", "tag": "Παραδοσιακό"}, {"name": "Ανθότυρο", "cat": "Γαλακτοκομικά", "cal": 170, "portion": "100g", "tag": "Light"}, {"name": "Γραβιέρα", "cat": "Γαλακτοκομικά", "cal": 390, "portion": "100g", "tag": "Υψηλές θερμίδες"}, {"name": "Γάλα 1.5%", "cat": "Γαλακτοκομικά", "cal": 120, "portion": "ποτήρι", "tag": "Πρωινό"}, {"name": "Burger απλό", "cat": "Fast Food", "cal": 620, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες"}, {"name": "Cheeseburger", "cat": "Fast Food", "cal": 700, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες"}, {"name": "Club sandwich", "cat": "Fast Food", "cal": 850, "portion": "μερίδα", "tag": "Υψηλές θερμίδες"}, {"name": "Pizza μαργαρίτα", "cat": "Fast Food", "cal": 270, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες"}, {"name": "Pizza σπέσιαλ", "cat": "Fast Food", "cal": 340, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες"}, {"name": "Hot dog", "cat": "Fast Food", "cal": 430, "portion": "τεμάχιο", "tag": "Fast"}, {"name": "Κρέπα πραλίνα", "cat": "Fast Food", "cal": 780, "portion": "τεμάχιο", "tag": "Γλυκό"}, {"name": "Κρέπα γαλοπούλα τυρί", "cat": "Fast Food", "cal": 620, "portion": "τεμάχιο", "tag": "Fast"}, {"name": "Ποπ κορν", "cat": "Σνακ", "cal": 380, "portion": "μερίδα", "tag": "Σνακ"}, {"name": "Πατατάκια", "cat": "Σνακ", "cal": 530, "portion": "100g", "tag": "Σνακ"}, {"name": "Ξηροί καρποί", "cat": "Σνακ", "cal": 600, "portion": "100g", "tag": "Ενέργεια"}, {"name": "Μπακλαβάς", "cat": "Γλυκά", "cal": 430, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες"}, {"name": "Γαλακτομπούρεκο", "cat": "Γλυκά", "cal": 410, "portion": "κομμάτι", "tag": "Παραδοσιακό"}, {"name": "Καρυδόπιτα", "cat": "Γλυκά", "cal": 390, "portion": "κομμάτι", "tag": "Γλυκό"}, {"name": "Ρυζόγαλο", "cat": "Γλυκά", "cal": 250, "portion": "μπολ", "tag": "Παραδοσιακό"}, {"name": "Παγωτό βανίλια", "cat": "Γλυκά", "cal": 210, "portion": "μπάλα", "tag": "Γλυκό"}, {"name": "Σοκολάτα γάλακτος", "cat": "Γλυκά", "cal": 540, "portion": "100g", "tag": "Γλυκό"}, {"name": "Μπουγάτσα κρέμα", "cat": "Γλυκά", "cal": 520, "portion": "κομμάτι", "tag": "Θεσσαλονίκη"}, {"name": "Λουκουμάδες", "cat": "Γλυκά", "cal": 560, "portion": "μερίδα", "tag": "Γλυκό"}, {"name": "Μήλο", "cat": "Φρούτα", "cal": 95, "portion": "τεμάχιο", "tag": "Φρούτο"}, {"name": "Μπανάνα", "cat": "Φρούτα", "cal": 110, "portion": "τεμάχιο", "tag": "Φρούτο"}, {"name": "Πορτοκάλι", "cat": "Φρούτα", "cal": 70, "portion": "τεμάχιο", "tag": "Φρούτο"}, {"name": "Καρπούζι", "cat": "Φρούτα", "cal": 90, "portion": "μερίδα", "tag": "Φρούτο"}, {"name": "Πεπόνι", "cat": "Φρούτα", "cal": 85, "portion": "μερίδα", "tag": "Φρούτο"}, {"name": "Ροδάκινο", "cat": "Φρούτα", "cal": 60, "portion": "τεμάχιο", "tag": "Φρούτο"}, {"name": "Σταφύλια", "cat": "Φρούτα", "cal": 140, "portion": "μερίδα", "tag": "Φρούτο"}, {"name": "Ελληνικός καφές", "cat": "Ροφήματα", "cal": 5, "portion": "σκέτος", "tag": "Ρόφημα"}, {"name": "Φραπέ σκέτος", "cat": "Ροφήματα", "cal": 5, "portion": "ποτήρι", "tag": "Ρόφημα"}, {"name": "Freddo espresso σκέτος", "cat": "Ροφήματα", "cal": 5, "portion": "ποτήρι", "tag": "Ρόφημα"}, {"name": "Freddo cappuccino", "cat": "Ροφήματα", "cal": 120, "portion": "ποτήρι", "tag": "Ρόφημα"}, {"name": "Χυμός πορτοκάλι", "cat": "Ροφήματα", "cal": 120, "portion": "ποτήρι", "tag": "Ρόφημα"}, {"name": "Αναψυκτικό ζάχαρη", "cat": "Ροφήματα", "cal": 140, "portion": "κουτάκι", "tag": "Ζάχαρη"}, {"name": "Μπύρα", "cat": "Ροφήματα", "cal": 150, "portion": "330ml", "tag": "Αλκοόλ"}, {"name": "Κρασί κόκκινο", "cat": "Ροφήματα", "cal": 125, "portion": "ποτήρι", "tag": "Αλκοόλ"}];
+let activeCat="Όλα", weightChart=null, fastingInterval=null;
 
-const greekFoods = [
-  ["Χωριάτικη σαλάτα","Μεσογειακό / χαμηλές θερμίδες"],
-  ["Σουβλάκι κοτόπουλο","Υψηλή πρωτεΐνη"],
-  ["Μπιφτέκι μοσχαρίσιο","Υψηλή πρωτεΐνη"],
-  ["Φασολάδα","Παραδοσιακό / φυτικές ίνες"],
-  ["Φακές","Παραδοσιακό / φυτική πρωτεΐνη"],
-  ["Γεμιστά","Μεσογειακό"],
-  ["Μουσακάς","Υψηλές θερμίδες"],
-  ["Παστίτσιο","Υψηλές θερμίδες"],
-  ["Γιαούρτι στραγγιστό","Πρωτεΐνη"],
-  ["Ομελέτα","Πρωτεΐνη / low carb"]
-];
-
-function showPage(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
-  if(id==="weight"){loadWeightData();calculateWeight();renderHistory();renderChart();}
-  if(id==="fasting"){loadFasting();updateFastingTimer();}
-  if(id==="foods"){renderFoods();}
-}
+function showPage(id){document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");if(id==="weight"){loadWeightData();calculateWeight();renderHistory();renderChart();}if(id==="fasting"){loadFasting();updateFastingTimer();}if(id==="foods"){renderFoodTabs();renderFoods();}}
 function soon(){alert("Η λειτουργία θα προστεθεί σε επόμενη έκδοση.");}
 function num(id){return parseFloat(String(document.getElementById(id).value).replace(",","."))||0;}
 
-function renderFoods(){
-  document.getElementById("foodList").innerHTML = greekFoods.map(f=>`
-    <div class="historyItem">
-      <div><b>${f[0]}</b><br><span class="small">${f[1]}</span></div>
-      <span class="badge">GR</span>
-    </div>
-  `).join("");
-}
+function renderFoodTabs(){const cats=["Όλα",...Array.from(new Set(greekFoods.map(f=>f.cat)))];document.getElementById("foodTabs").innerHTML=cats.map(c=>`<button class="tab ${activeCat===c?"active":""}" onclick="activeCat='${c}';renderFoodTabs();renderFoods();">${c}</button>`).join("");}
+function renderFoods(){const q=(document.getElementById("foodSearch")?.value||"").toLowerCase();let list=greekFoods.filter(f=>(activeCat==="Όλα"||f.cat===activeCat)&&(f.name.toLowerCase().includes(q)||f.cat.toLowerCase().includes(q)||f.tag.toLowerCase().includes(q)));document.getElementById("foodCount").textContent=list.length;document.getElementById("foodList").innerHTML=list.map(f=>`<div class="foodCard"><div class="foodTop"><div><div class="foodName">${f.name}</div><div class="foodMeta">${f.cat} • ${f.portion} • <span class="badge">${f.tag}</span></div></div><div class="foodCal">${f.cal} kcal</div></div></div>`).join("")||"<p class='small'>Δεν βρέθηκε φαγητό.</p>";}
 
-/* ΒΑΡΟΣ */
-function saveWeightData(){
-  const data={
-    profileName:document.getElementById("profileName").value,
-    startWeight:document.getElementById("startWeight").value,
-    currentWeight:document.getElementById("currentWeight").value,
-    targetWeight:document.getElementById("targetWeight").value,
-    height:document.getElementById("height").value,
-    age:document.getElementById("age").value,
-    gender:document.getElementById("gender").value,
-    activity:document.getElementById("activity").value
-  };
-  localStorage.setItem("gca_weight_data",JSON.stringify(data));
-  calculateWeight();
-  alert("Τα στοιχεία αποθηκεύτηκαν.");
-}
-function loadWeightData(){
-  const raw=localStorage.getItem("gca_weight_data");
-  if(!raw)return;
-  const d=JSON.parse(raw);
-  document.getElementById("profileName").value=d.profileName||"";
-  document.getElementById("startWeight").value=d.startWeight||"90";
-  document.getElementById("currentWeight").value=d.currentWeight||"90";
-  document.getElementById("targetWeight").value=d.targetWeight||"80";
-  document.getElementById("height").value=d.height||"1.75";
-  document.getElementById("age").value=d.age||"40";
-  document.getElementById("gender").value=d.gender||"male";
-  document.getElementById("activity").value=d.activity||"1.2";
-}
-function calculateWeight(){
-  const start=num("startWeight"), current=num("currentWeight"), target=num("targetWeight"), h=num("height"), age=num("age");
-  const gender=document.getElementById("gender").value;
-  const activity=num("activity");
-  let progress=0;
-  if(start>target)progress=((start-current)/(start-target))*100;
-  progress=Math.max(0,Math.min(100,progress));
-  const lost=start-current, remaining=Math.max(0,current-target), bmi=h>0?current/(h*h):0;
-
-  let bmr=0;
-  const cm=h*100;
-  if(gender==="male") bmr=10*current+6.25*cm-5*age+5;
-  else bmr=10*current+6.25*cm-5*age-161;
-  const maintenance=Math.round(bmr*activity);
-  const cut=Math.max(1200, maintenance-500);
-
-  document.getElementById("weightProgressBar").style.width=progress+"%";
-  document.getElementById("weightProgressText").textContent=progress.toFixed(1)+"%";
-  document.getElementById("lostKg").textContent=lost.toFixed(1)+" kg";
-  document.getElementById("remainingKg").textContent=remaining.toFixed(1)+" kg";
-  document.getElementById("bmi").textContent=bmi?bmi.toFixed(1):"-";
-  document.getElementById("bmiCategory").textContent=bmiCategory(bmi);
-  document.getElementById("maintenanceCalories").textContent=maintenance?maintenance+" kcal":"-";
-  document.getElementById("cutCalories").textContent=cut?cut+" kcal":"-";
-  document.getElementById("goalMessage").textContent=makeGoalMessage(progress,lost,remaining,bmi);
-
-  updateStatsFromHistory();
-}
-function bmiCategory(bmi){
-  if(!bmi)return "-";
-  if(bmi<18.5)return "Χαμηλό";
-  if(bmi<25)return "Φυσιολογικό";
-  if(bmi<30)return "Υπέρβαρο";
-  return "Παχυσαρκία";
-}
-function makeGoalMessage(progress,lost,remaining,bmi){
-  if(progress>=100) return "Συγχαρητήρια! Ο στόχος έχει επιτευχθεί.";
-  if(lost>0) return `Καλή πρόοδος. Έχουν χαθεί ${lost.toFixed(1)} kg και απομένουν ${remaining.toFixed(1)} kg.`;
-  if(bmi>=30) return "Ξεκίνα σταθερά και με ασφαλή ρυθμό. Μικρά βήματα κάθε εβδομάδα.";
-  return "Καταχώρησε μετρήσεις για να δεις την πραγματική πορεία.";
-}
-function getHistory(){return JSON.parse(localStorage.getItem("gca_weight_history")||"[]");}
-function setHistory(h){localStorage.setItem("gca_weight_history",JSON.stringify(h));}
-function addMeasurement(){
-  const weight=num("currentWeight");
-  const note=document.getElementById("note").value.trim();
-  if(weight<=0){alert("Βάλε σωστό τωρινό βάρος.");return;}
-  const now=new Date();
-  const item={date:now.toLocaleDateString("el-GR"),time:now.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"}),ts:Date.now(),weight,note};
-  const h=getHistory();h.unshift(item);setHistory(h);
-  document.getElementById("note").value="";
-  saveWeightDataNoAlert();
-  renderHistory();renderChart();calculateWeight();
-}
-function saveWeightDataNoAlert(){
-  const data={
-    profileName:document.getElementById("profileName").value,startWeight:document.getElementById("startWeight").value,currentWeight:document.getElementById("currentWeight").value,targetWeight:document.getElementById("targetWeight").value,height:document.getElementById("height").value,age:document.getElementById("age").value,gender:document.getElementById("gender").value,activity:document.getElementById("activity").value
-  };
-  localStorage.setItem("gca_weight_data",JSON.stringify(data));
-}
-function deleteMeasurement(i){const h=getHistory();h.splice(i,1);setHistory(h);renderHistory();renderChart();calculateWeight();}
-function clearHistory(){if(!confirm("Να διαγραφεί όλο το ιστορικό;"))return;localStorage.removeItem("gca_weight_history");renderHistory();renderChart();calculateWeight();}
-function renderHistory(){
-  const h=getHistory();document.getElementById("totalMeasurements").textContent=h.length;
-  const box=document.getElementById("historyList");
-  if(h.length===0){box.innerHTML="<p class='small'>Δεν υπάρχουν ακόμα μετρήσεις.</p>";return;}
-  box.innerHTML=h.map((x,i)=>`<div class="historyItem"><div><b>${x.date} ${x.time}</b><br>⚖️ ${Number(x.weight).toFixed(1)} kg ${x.note?`<br>📝 ${escapeHtml(x.note)}`:""}</div><button class="deleteBtn" onclick="deleteMeasurement(${i})">🗑</button></div>`).join("");
-}
-function renderChart(){
-  const h=getHistory().slice().reverse();
-  const ctx=document.getElementById("weightChart");
-  if(weightChart)weightChart.destroy();
-  weightChart=new Chart(ctx,{type:"line",data:{labels:h.map(x=>x.date),datasets:[{label:"Βάρος kg",data:h.map(x=>x.weight),tension:.35,borderWidth:3,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:false}}}});
-}
-function updateStatsFromHistory(){
-  const h=getHistory().slice().reverse();
-  document.getElementById("totalMeasurements").textContent=h.length;
-  if(h.length<2){document.getElementById("avgRate").textContent="-";return;}
-  const first=h[0], last=h[h.length-1];
-  const days=Math.max(1,(last.ts-first.ts)/(1000*60*60*24));
-  const diff=first.weight-last.weight;
-  const weekly=diff/days*7;
-  document.getElementById("avgRate").textContent=weekly.toFixed(2)+" kg/εβδ.";
-}
-function exportBackup(){
-  const backup={weightData:JSON.parse(localStorage.getItem("gca_weight_data")||"{}"),history:getHistory(),fastingPlan:localStorage.getItem("gca_fasting_plan")||"16"};
-  document.getElementById("backupBox").value=JSON.stringify(backup);
-}
-function importBackup(){
-  try{
-    const data=JSON.parse(document.getElementById("backupBox").value);
-    localStorage.setItem("gca_weight_data",JSON.stringify(data.weightData||{}));
-    localStorage.setItem("gca_weight_history",JSON.stringify(data.history||[]));
-    if(data.fastingPlan)localStorage.setItem("gca_fasting_plan",data.fastingPlan);
-    loadWeightData();renderHistory();renderChart();calculateWeight();alert("Το backup φορτώθηκε.");
-  }catch(e){alert("Λάθος μορφή backup.");}
-}
+function saveWeightData(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity")};localStorage.setItem("gca_weight_data",JSON.stringify(data));calculateWeight();alert("Τα στοιχεία αποθηκεύτηκαν.");}
+function val(id){return document.getElementById(id).value;}
+function loadWeightData(){const raw=localStorage.getItem("gca_weight_data");if(!raw)return;const d=JSON.parse(raw);["profileName","startWeight","currentWeight","targetWeight","height","age","gender","activity"].forEach(k=>{if(d[k])document.getElementById(k).value=d[k];});}
+function calculateWeight(){const start=num("startWeight"),current=num("currentWeight"),target=num("targetWeight"),h=num("height"),age=num("age"),gender=val("gender"),activity=num("activity");let progress=0;if(start>target)progress=((start-current)/(start-target))*100;progress=Math.max(0,Math.min(100,progress));const lost=start-current,remaining=Math.max(0,current-target),bmi=h>0?current/(h*h):0;let bmr=gender==="male"?10*current+6.25*h*100-5*age+5:10*current+6.25*h*100-5*age-161;const maintenance=Math.round(bmr*activity),cut=Math.max(1200,maintenance-500);setText("weightProgressText",progress.toFixed(1)+"%");document.getElementById("weightProgressBar").style.width=progress+"%";setText("lostKg",lost.toFixed(1)+" kg");setText("remainingKg",remaining.toFixed(1)+" kg");setText("bmi",bmi?bmi.toFixed(1):"-");setText("bmiCategory",bmiCategory(bmi));setText("maintenanceCalories",maintenance?maintenance+" kcal":"-");setText("cutCalories",cut?cut+" kcal":"-");setText("goalMessage",makeGoalMessage(progress,lost,remaining,bmi));updateStatsFromHistory();}
+function setText(id,t){document.getElementById(id).textContent=t;}
+function bmiCategory(bmi){if(!bmi)return "-";if(bmi<18.5)return "Χαμηλό";if(bmi<25)return "Φυσιολογικό";if(bmi<30)return "Υπέρβαρο";return "Παχυσαρκία";}
+function makeGoalMessage(progress,lost,remaining,bmi){if(progress>=100)return"Συγχαρητήρια! Ο στόχος έχει επιτευχθεί.";if(lost>0)return`Καλή πρόοδος. Έχουν χαθεί ${lost.toFixed(1)} kg και απομένουν ${remaining.toFixed(1)} kg.`;if(bmi>=30)return"Ξεκίνα σταθερά και με ασφαλή ρυθμό. Μικρά βήματα κάθε εβδομάδα.";return"Καταχώρησε μετρήσεις για να δεις την πραγματική πορεία.";}
+function getHistory(){return JSON.parse(localStorage.getItem("gca_weight_history")||"[]");}function setHistory(h){localStorage.setItem("gca_weight_history",JSON.stringify(h));}
+function addMeasurement(){const weight=num("currentWeight"),note=val("note").trim();if(weight<=0){alert("Βάλε σωστό τωρινό βάρος.");return;}const now=new Date(),item={date:now.toLocaleDateString("el-GR"),time:now.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"}),ts:Date.now(),weight,note};const h=getHistory();h.unshift(item);setHistory(h);document.getElementById("note").value="";saveWeightDataNoAlert();renderHistory();renderChart();calculateWeight();}
+function saveWeightDataNoAlert(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity")};localStorage.setItem("gca_weight_data",JSON.stringify(data));}
+function deleteMeasurement(i){const h=getHistory();h.splice(i,1);setHistory(h);renderHistory();renderChart();calculateWeight();}function clearHistory(){if(!confirm("Να διαγραφεί όλο το ιστορικό;"))return;localStorage.removeItem("gca_weight_history");renderHistory();renderChart();calculateWeight();}
+function renderHistory(){const h=getHistory();setText("totalMeasurements",h.length);const box=document.getElementById("historyList");if(h.length===0){box.innerHTML="<p class='small'>Δεν υπάρχουν ακόμα μετρήσεις.</p>";return;}box.innerHTML=h.map((x,i)=>`<div class="historyItem"><div><b>${x.date} ${x.time}</b><br>⚖️ ${Number(x.weight).toFixed(1)} kg ${x.note?`<br>📝 ${escapeHtml(x.note)}`:""}</div><button class="deleteBtn" onclick="deleteMeasurement(${i})">🗑</button></div>`).join("");}
+function renderChart(){const h=getHistory().slice().reverse(),ctx=document.getElementById("weightChart");if(weightChart)weightChart.destroy();if(h.length<2)document.getElementById("chartHelp").textContent="Καταχώρησε τουλάχιστον 2 μετρήσεις για να εμφανιστεί σωστό γράφημα.";else document.getElementById("chartHelp").textContent="Το γράφημα ενημερώνεται από το ιστορικό μετρήσεων.";weightChart=new Chart(ctx,{type:"line",data:{labels:h.map(x=>x.date),datasets:[{label:"Βάρος kg",data:h.map(x=>x.weight),tension:.35,borderWidth:3,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:false}}}});}
+function updateStatsFromHistory(){const h=getHistory().slice().reverse();setText("totalMeasurements",h.length);if(h.length<2){setText("avgRate","-");return;}const first=h[0],last=h[h.length-1],days=Math.max(1,(last.ts-first.ts)/(1000*60*60*24)),diff=first.weight-last.weight,weekly=diff/days*7;setText("avgRate",weekly.toFixed(2)+" kg/εβδ.");}
+function exportBackup(){const backup={weightData:JSON.parse(localStorage.getItem("gca_weight_data")||"{}"),history:getHistory(),fastingPlan:localStorage.getItem("gca_fasting_plan")||"16"};document.getElementById("backupBox").value=JSON.stringify(backup);}
+function importBackup(){try{const data=JSON.parse(val("backupBox"));localStorage.setItem("gca_weight_data",JSON.stringify(data.weightData||{}));localStorage.setItem("gca_weight_history",JSON.stringify(data.history||[]));if(data.fastingPlan)localStorage.setItem("gca_fasting_plan",data.fastingPlan);loadWeightData();renderHistory();renderChart();calculateWeight();alert("Το backup φορτώθηκε.");}catch(e){alert("Λάθος μορφή backup.");}}
 function escapeHtml(t){return t.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
 
-/* ΝΗΣΤΕΙΑ */
-function fastingHours(){return parseInt(document.getElementById("fastingPlan").value,10)||16;}
-function planText(){const v=document.getElementById("fastingPlan").value;return v==="23"?"OMAD 23:1":`${v}:${24-parseInt(v,10)}`;}
-function saveFastingPlan(){localStorage.setItem("gca_fasting_plan",document.getElementById("fastingPlan").value);loadFasting();}
-function loadFasting(){
-  const plan=localStorage.getItem("gca_fasting_plan")||"16";
-  document.getElementById("fastingPlan").value=plan;
-  document.getElementById("fastingPlanText").textContent=planText();
-  if(fastingInterval)clearInterval(fastingInterval);
-  fastingInterval=setInterval(updateFastingTimer,1000);
-}
-function startFasting(){localStorage.setItem("gca_fasting_start",String(Date.now()));updateFastingTimer();}
-function finishFasting(){localStorage.removeItem("gca_fasting_start");updateFastingTimer();alert("Η νηστεία τερματίστηκε.");}
-function resetFasting(){localStorage.removeItem("gca_fasting_start");updateFastingTimer();}
-function updateFastingTimer(){
-  const start=parseInt(localStorage.getItem("gca_fasting_start")||"0",10);
-  const goal=fastingHours()*60*60*1000;
-  if(!start){
-    document.getElementById("fastingTimer").textContent="00:00:00";
-    document.getElementById("fastingProgress").style.width="0%";
-    document.getElementById("fastingStatus").textContent="Δεν έχει ξεκινήσει νηστεία.";
-    return;
-  }
-  const elapsed=Date.now()-start;
-  const remain=Math.max(0,goal-elapsed);
-  const pct=Math.min(100,(elapsed/goal)*100);
-  document.getElementById("fastingTimer").textContent=formatTime(remain);
-  document.getElementById("fastingProgress").style.width=pct+"%";
-  document.getElementById("fastingStatus").textContent=pct>=100?"Ολοκληρώθηκε η νηστεία!":"Απομένει χρόνος για ολοκλήρωση.";
-}
-function formatTime(ms){
-  const total=Math.floor(ms/1000);
-  const h=String(Math.floor(total/3600)).padStart(2,"0");
-  const m=String(Math.floor((total%3600)/60)).padStart(2,"0");
-  const s=String(total%60).padStart(2,"0");
-  return `${h}:${m}:${s}`;
-}
-
+function fastingHours(){return parseInt(val("fastingPlan"),10)||16;}function planText(){const v=val("fastingPlan");return v==="23"?"OMAD 23:1":`${v}:${24-parseInt(v,10)}`;}
+function saveFastingPlan(){localStorage.setItem("gca_fasting_plan",val("fastingPlan"));loadFasting();}
+function loadFasting(){const plan=localStorage.getItem("gca_fasting_plan")||"16";document.getElementById("fastingPlan").value=plan;setText("fastingPlanText",planText());if(fastingInterval)clearInterval(fastingInterval);fastingInterval=setInterval(updateFastingTimer,1000);}
+function startFasting(){localStorage.setItem("gca_fasting_start",String(Date.now()));updateFastingTimer();}function finishFasting(){localStorage.removeItem("gca_fasting_start");updateFastingTimer();alert("Η νηστεία τερματίστηκε.");}function resetFasting(){localStorage.removeItem("gca_fasting_start");updateFastingTimer();}
+function updateFastingTimer(){const start=parseInt(localStorage.getItem("gca_fasting_start")||"0",10),goal=fastingHours()*60*60*1000;if(!start){setText("fastingTimer","00:00:00");document.getElementById("fastingProgress").style.width="0%";setText("fastingStatus","Δεν έχει ξεκινήσει νηστεία.");return;}const elapsed=Date.now()-start,remain=Math.max(0,goal-elapsed),pct=Math.min(100,(elapsed/goal)*100);setText("fastingTimer",formatTime(remain));document.getElementById("fastingProgress").style.width=pct+"%";setText("fastingStatus",pct>=100?"Ολοκληρώθηκε η νηστεία!":"Απομένει χρόνος για ολοκλήρωση.");}
+function formatTime(ms){const total=Math.floor(ms/1000),h=String(Math.floor(total/3600)).padStart(2,"0"),m=String(Math.floor((total%3600)/60)).padStart(2,"0"),s=String(total%60).padStart(2,"0");return `${h}:${m}:${s}`;}
 loadWeightData();calculateWeight();loadFasting();
 </script>
 </body>
