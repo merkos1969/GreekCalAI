@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V29</title>
+<title>Greek Cal AI V30</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -751,13 +751,154 @@ label{
   }
 }
 
+
+/* V30 brand / splash / PWA feel */
+.brandTop{
+  text-align:center;
+  padding:6px 0 2px;
+}
+.appLogo{
+  width:86px;
+  height:86px;
+  border-radius:26px;
+  margin:0 auto 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:44px;
+  background:linear-gradient(135deg,#0d47a1,#1e88e5);
+  color:white;
+  box-shadow:0 14px 30px rgba(30,108,199,.25);
+  border:3px solid rgba(255,255,255,.9);
+}
+.appSubTitle{
+  text-align:center;
+  margin-top:-12px;
+  color:#667085;
+  font-weight:800;
+  font-size:14px;
+}
+.splash{
+  position:fixed;
+  inset:0;
+  z-index:20000;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.25), transparent 32%),
+    linear-gradient(160deg,#0d47a1,#1e88e5 55%,#16a34a);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  padding:24px;
+  transition:opacity .45s ease, visibility .45s ease;
+}
+.splash.hide{
+  opacity:0;
+  visibility:hidden;
+}
+.splashCard{
+  text-align:center;
+  width:100%;
+  max-width:360px;
+}
+.splashIcon{
+  width:112px;
+  height:112px;
+  border-radius:32px;
+  margin:0 auto 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:58px;
+  background:rgba(255,255,255,.18);
+  border:2px solid rgba(255,255,255,.35);
+  box-shadow:0 20px 45px rgba(0,0,0,.18);
+}
+.splashTitle{
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:-.8px;
+}
+.splashText{
+  margin-top:10px;
+  opacity:.92;
+  font-size:16px;
+  line-height:1.4;
+}
+.splashLoader{
+  margin:24px auto 0;
+  width:72%;
+  height:8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.25);
+  overflow:hidden;
+}
+.splashLoader div{
+  width:45%;
+  height:100%;
+  background:white;
+  border-radius:999px;
+  animation:splashMove 1.2s infinite ease-in-out;
+}
+@keyframes splashMove{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(260%)}
+}
+.installBox{
+  background:#f8fbff;
+  border:1px solid #bfdbfe;
+  border-radius:20px;
+  padding:13px;
+  margin:10px 0;
+  color:#174a8b;
+}
+.installBox b{
+  display:block;
+  font-size:16px;
+  margin-bottom:4px;
+}
+.installBox p{
+  margin:0;
+  color:#667085;
+  font-size:13px;
+  line-height:1.35;
+}
+@media(max-width:560px){
+  .appLogo{width:74px;height:74px;font-size:38px;border-radius:22px}
+  .splashTitle{font-size:30px}
+  .splashIcon{width:98px;height:98px;font-size:50px}
+}
+
 </style>
+
+<meta name="theme-color" content="#1767c2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Greek Cal AI">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+
 </head>
 <body>
+
+<div id="splash" class="splash">
+  <div class="splashCard">
+    <div class="splashIcon">🇬🇷</div>
+    <div class="splashTitle">Greek Cal AI</div>
+    <div class="splashText">Θερμίδες • Νερό • Άσκηση • Βάρος • AI Coach</div>
+    <div class="splashLoader"><div></div></div>
+  </div>
+</div>
+
 <div class="app">
 
 <section id="home" class="card menu">
-  <h1>🇬🇷 Greek Cal AI</h1>
+  <div class="brandTop"><div class="appLogo">🇬🇷</div><h1>Greek Cal AI</h1><div class="appSubTitle">Smart Greek Diet Coach</div></div>
+
+<div class="installBox">
+  <b>📲 Έτοιμο για εγκατάσταση στο κινητό</b>
+  <p>Ανέβασέ το στο GitHub Pages και από Chrome πάτα ⋮ → Προσθήκη στην αρχική οθόνη.</p>
+</div>
+
 <div class="dashboardCard">
     <h2>📊 Σήμερα</h2>
     <div class="dashboardGrid">
@@ -2688,6 +2829,15 @@ function quickFasting(){
     startFasting();
   }
 }
+
+
+/* V30 splash */
+window.addEventListener("load", ()=>{
+  setTimeout(()=>{
+    const s = document.getElementById("splash");
+    if(s) s.classList.add("hide");
+  }, 900);
+});
 
 loadWeightData();calculateWeight();loadFasting();updateDashboard();
 </script>

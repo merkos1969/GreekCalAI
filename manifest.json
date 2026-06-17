@@ -1,0 +1,17 @@
+{
+  "name": "Greek Cal AI",
+  "short_name": "GreekCalAI",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eef5fb",
+  "theme_color": "#1767c2",
+  "description": "Greek Cal AI - διατροφή, θερμίδες, νερό, άσκηση, βάρος και AI Coach.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
