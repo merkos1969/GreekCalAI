@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V17</title>
+<title>Greek Cal AI V18</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -425,31 +425,39 @@ body{padding-bottom:86px}
 </section>
 
 
+
 <section id="barcode" class="hidden">
   <button class="back" onclick="showPage('home')">← Πίσω</button>
   <div class="card">
-    <h2>📦 Σάρωση Barcode</h2>
-    <p class="small">Σάρωσε barcode προϊόντος. Αν η συσκευή/Browser δεν υποστηρίζει σάρωση, βάλε τον κωδικό χειροκίνητα.</p>
+    <h2>📦 Barcode / Προϊόν</h2>
+    <p class="small">Η κάμερα από browser δεν δουλεύει σε όλα τα κινητά. Γι’ αυτό η χειροκίνητη καταχώρηση είναι πλέον πάντα διαθέσιμη.</p>
 
     <div class="videoBox">
       <video id="barcodeVideo" autoplay playsinline></video>
-      <div id="barcodePlaceholder">📷 Η κάμερα θα εμφανιστεί εδώ</div>
+      <div id="barcodePlaceholder">📷 Προαιρετική σάρωση με κάμερα</div>
     </div>
 
-    <div id="scanStatus" class="scanStatus">Πάτησε έναρξη σάρωσης ή βάλε barcode χειροκίνητα.</div>
+    <div id="scanStatus" class="scanStatus">Βάλε barcode χειροκίνητα ή άνοιξε την κάμερα.</div>
 
     <div class="rowBtns">
-      <button class="btnGreen" onclick="startBarcodeScan()">▶️ Έναρξη σάρωσης</button>
+      <button class="btnGreen" onclick="startBarcodeScan()">▶️ Κάμερα</button>
       <button class="btnRed" onclick="stopBarcodeScan()">⏹ Διακοπή</button>
     </div>
 
-    <label>Χειροκίνητο Barcode</label>
-    <input id="manualBarcode" placeholder="π.χ. 5201234567890">
-    <button onclick="useManualBarcode()">🔎 Χρήση barcode</button>
+    <label>Φωτογραφία προϊόντος / barcode</label>
+    <input id="barcodePhoto" type="file" accept="image/*" onchange="previewBarcodePhoto(event)">
+    <div id="photoPreviewBox" class="productCard hidden">
+      <img id="barcodePhotoPreview" style="width:100%;border-radius:14px;max-height:240px;object-fit:contain;background:#f8fafc">
+      <p class="small">Η φωτογραφία αποθηκεύεται μόνο για προβολή. Η αναγνώριση με AI θα μπει σε επόμενη έκδοση.</p>
+    </div>
 
-    <div id="barcodeResult" class="productCard hidden">
-      <div class="productTitle" id="barcodeProductTitle">Προϊόν</div>
-      <div class="productMeta" id="barcodeProductMeta">Barcode</div>
+    <label>Barcode / Κωδικός προϊόντος</label>
+    <input id="manualBarcode" placeholder="π.χ. 5201234567890">
+    <button onclick="useManualBarcode()">🔎 Άνοιγμα φόρμας προϊόντος</button>
+
+    <div id="barcodeResult" class="productCard">
+      <div class="productTitle" id="barcodeProductTitle">Χειροκίνητη καταχώρηση προϊόντος</div>
+      <div class="productMeta" id="barcodeProductMeta">Βάλε στοιχεία και αποθήκευσέ το στα Δικά μου ή στο ημερήσιο.</div>
 
       <label>Όνομα προϊόντος</label>
       <input id="barcodeFoodName" placeholder="π.χ. Γιαούρτι 2%">
@@ -466,11 +474,22 @@ body{padding-bottom:86px}
       <label>Μερίδα</label>
       <input id="barcodePortion" value="μερίδα">
 
-      <button class="btnGreen" onclick="saveBarcodeProduct()">💾 Αποθήκευση στα Δικά μου</button>
-      <button onclick="addBarcodeToDiary()">➕ Προσθήκη στο ημερήσιο</button>
+      <label>Γεύμα</label>
+      <select id="barcodeMeal">
+        <option>Πρωινό</option>
+        <option>Μεσημεριανό</option>
+        <option>Βραδινό</option>
+        <option selected>Σνακ</option>
+      </select>
+
+      <div class="rowBtns">
+        <button class="btnGreen" onclick="saveBarcodeProduct()">💾 Αποθήκευση</button>
+        <button onclick="addBarcodeToDiary()">➕ Στο ημερήσιο</button>
+      </div>
     </div>
   </div>
 </section>
+
 
 <section id="foods" class="hidden">
   <button class="back" onclick="showPage('home')">← Πίσω</button>
@@ -1569,6 +1588,7 @@ function renderWeeklyReport(){
 }
 
 
+
 /* BARCODE SCANNER */
 let barcodeStream = null;
 let barcodeDetector = null;
@@ -1576,8 +1596,16 @@ let barcodeScanning = false;
 let lastBarcode = "";
 
 function prepareBarcode(){
-  setText("scanStatus", "Πάτησε έναρξη σάρωσης ή βάλε barcode χειροκίνητα.");
-  document.getElementById("barcodeResult").classList.add("hidden");
+  setText("scanStatus", "Βάλε barcode χειροκίνητα ή άνοιξε την κάμερα.");
+  document.getElementById("barcodeResult").classList.remove("hidden");
+}
+
+function previewBarcodePhoto(event){
+  const file = event.target.files && event.target.files[0];
+  if(!file) return;
+  const url = URL.createObjectURL(file);
+  document.getElementById("barcodePhotoPreview").src = url;
+  document.getElementById("photoPreviewBox").classList.remove("hidden");
 }
 
 async function startBarcodeScan(){
@@ -1585,7 +1613,14 @@ async function startBarcodeScan(){
   const placeholder = document.getElementById("barcodePlaceholder");
 
   if(!("BarcodeDetector" in window)){
-    setText("scanStatus", "Ο browser δεν υποστηρίζει αυτόματη σάρωση. Βάλε τον κωδικό χειροκίνητα.");
+    setText("scanStatus", "Ο browser δεν υποστηρίζει αυτόματη σάρωση. Η χειροκίνητη καταχώρηση δουλεύει κανονικά.");
+    document.getElementById("barcodeResult").classList.remove("hidden");
+    return;
+  }
+
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    setText("scanStatus", "Δεν υπάρχει πρόσβαση κάμερας από τον browser. Χρησιμοποίησε χειροκίνητη καταχώρηση.");
+    document.getElementById("barcodeResult").classList.remove("hidden");
     return;
   }
 
@@ -1599,7 +1634,8 @@ async function startBarcodeScan(){
     setText("scanStatus", "Σάρωση ενεργή. Στόχευσε το barcode με την κάμερα.");
     scanBarcodeLoop();
   }catch(e){
-    setText("scanStatus", "Δεν άνοιξε η κάμερα. Έλεγξε άδεια κάμερας ή βάλε barcode χειροκίνητα.");
+    setText("scanStatus", "Δεν άνοιξε η κάμερα. Η χειροκίνητη καταχώρηση δουλεύει κανονικά.");
+    document.getElementById("barcodeResult").classList.remove("hidden");
   }
 }
 
@@ -1612,6 +1648,7 @@ async function scanBarcodeLoop(){
       const code = codes[0].rawValue;
       if(code && code !== lastBarcode){
         lastBarcode = code;
+        document.getElementById("manualBarcode").value = code;
         stopBarcodeScan();
         showBarcodeProduct(code);
         return;
@@ -1639,20 +1676,21 @@ function stopBarcodeScan(){
 function useManualBarcode(){
   const code = val("manualBarcode").trim();
   if(!code){
-    alert("Βάλε barcode.");
+    setText("scanStatus", "Δεν έβαλες barcode. Μπορείς όμως να καταχωρήσεις προϊόν και χωρίς barcode.");
+    document.getElementById("barcodeResult").classList.remove("hidden");
     return;
   }
   showBarcodeProduct(code);
 }
 
 function showBarcodeProduct(code){
-  lastBarcode = code;
-  setText("scanStatus", "Βρέθηκε barcode: " + code);
+  lastBarcode = code || "";
+  setText("scanStatus", code ? "Barcode: " + code : "Χειροκίνητη καταχώρηση προϊόντος.");
   document.getElementById("barcodeResult").classList.remove("hidden");
-  setText("barcodeProductTitle", "Προϊόν Barcode");
-  setText("barcodeProductMeta", "Κωδικός: " + code);
+  setText("barcodeProductTitle", code ? "Προϊόν Barcode" : "Χειροκίνητη καταχώρηση προϊόντος");
+  setText("barcodeProductMeta", code ? "Κωδικός: " + code : "Χωρίς barcode");
 
-  const saved = getBarcodeProducts().find(x=>x.barcode===code);
+  const saved = code ? getBarcodeProducts().find(x=>x.barcode===code) : null;
   if(saved){
     document.getElementById("barcodeFoodName").value = saved.name;
     document.getElementById("barcodeFoodCal").value = saved.cal;
@@ -1661,13 +1699,6 @@ function showBarcodeProduct(code){
     document.getElementById("barcodeFat").value = saved.fat || 0;
     document.getElementById("barcodePortion").value = saved.portion || "μερίδα";
     setText("scanStatus", "Το προϊόν βρέθηκε στα αποθηκευμένα σου.");
-  }else{
-    document.getElementById("barcodeFoodName").value = "";
-    document.getElementById("barcodeFoodCal").value = 100;
-    document.getElementById("barcodeProtein").value = 5;
-    document.getElementById("barcodeCarbs").value = 10;
-    document.getElementById("barcodeFat").value = 3;
-    document.getElementById("barcodePortion").value = "μερίδα";
   }
 }
 
@@ -1679,8 +1710,9 @@ function setBarcodeProducts(items){
 }
 
 function barcodeFoodObject(){
+  const code = val("manualBarcode").trim() || lastBarcode || ("manual_" + Date.now());
   return {
-    barcode:lastBarcode || val("manualBarcode").trim(),
+    barcode:code,
     name:val("barcodeFoodName").trim(),
     cat:"Barcode",
     cal:num("barcodeFoodCal"),
@@ -1694,8 +1726,8 @@ function barcodeFoodObject(){
 
 function saveBarcodeProduct(){
   const food = barcodeFoodObject();
-  if(!food.barcode || !food.name || food.cal<=0){
-    alert("Βάλε barcode, όνομα και θερμίδες.");
+  if(!food.name || food.cal<=0){
+    alert("Βάλε τουλάχιστον όνομα προϊόντος και θερμίδες.");
     return;
   }
 
@@ -1713,10 +1745,11 @@ function saveBarcodeProduct(){
 function addBarcodeToDiary(){
   const food = barcodeFoodObject();
   if(!food.name || food.cal<=0){
-    alert("Βάλε όνομα προϊόντος και θερμίδες.");
+    alert("Βάλε τουλάχιστον όνομα προϊόντος και θερμίδες.");
     return;
   }
   initDiaryDate();
+  const meal = document.getElementById("barcodeMeal").value || "Σνακ";
   const item = {
     name:food.name,
     cat:"Barcode",
@@ -1730,7 +1763,7 @@ function addBarcodeToDiary(){
     p:Math.round(food.protein),
     c:Math.round(food.carbs),
     f:Math.round(food.fat),
-    meal:"Σνακ",
+    meal:meal,
     time:new Date().toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"})
   };
   const items = getDiary();
