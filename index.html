@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V43</title>
+<title>Greek Cal AI V44</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -1341,6 +1341,38 @@ label{
   line-height:1.25;
 }
 
+
+/* V44 stable home */
+.homeTopGrid{
+  display:grid;
+  gap:12px;
+}
+.miniStatsGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.miniStatsGrid .dashBox{
+  min-height:82px;
+}
+.heroCalBox{
+  grid-column:auto!important;
+}
+#home .dashboardGrid:not(.homeDashboardV41),
+#home > .dashboardGrid,
+#home > .dashBox,
+#home .oldDashboard{
+  display:none!important;
+}
+@media(max-width:560px){
+  .miniStatsGrid{
+    grid-template-columns:1fr 1fr;
+  }
+  .miniStatsGrid .dashBox{
+    min-height:78px;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -1377,17 +1409,21 @@ label{
 <div class="dashboardCard">
     <h2>📊 Σήμερα</h2>
 
-    <div class="dashboardGrid homeDashboardV41">
+    <div class="homeTopGrid">
       <div class="dashBox heroCalBox">
         <b>Θερμίδες</b>
         <span id="dashCalories">0 / 1800</span>
         <small id="dashRemainingMini">Υπόλοιπο 1800 kcal</small>
       </div>
-      <div class="dashBox"><b>Γεύματα</b><span id="dashMeals">0</span></div>
-      <div class="dashBox"><b>Άσκηση</b><span id="dashExercise">0 kcal</span></div>
-      <div class="dashBox"><b>Βάρος</b><span id="dashWeight">Δεν υπάρχει</span></div>
-      <div class="dashBox"><b>Στόχος σε</b><span id="dashGoalTime">-</span></div>
-      <div class="dashBox"><b>Ρυθμός</b><span id="dashPace">-</span></div>
+
+      <div class="miniStatsGrid">
+        <div class="dashBox"><b>Γεύματα</b><span id="dashMeals">0</span></div>
+        <div class="dashBox"><b>Άσκηση</b><span id="dashExercise">0 kcal</span></div>
+        <div class="dashBox"><b>Βάρος</b><span id="dashWeight">Δεν υπάρχει</span></div>
+        <div class="dashBox"><b>Στόχος</b><span id="dashGoalTime">-</span></div>
+        <div class="dashBox"><b>Ρυθμός</b><span id="dashPace">-</span></div>
+        <div class="dashBox"><b>Νηστεία</b><span id="dashFasting">Ανενεργή</span></div>
+      </div>
     </div>
 
     <div class="homeMacroPanel">
@@ -1396,9 +1432,9 @@ label{
         <span id="homeMacroSplitText">Π/Υ/Λ</span>
       </div>
       <div class="macroBars">
-        <div class="macroBarLine"><span>Πρωτεΐνη</span><div class="macroMiniWrap"><div id="homeProteinBar" class="macroMini macroProtein"></div></div><span id="homeProteinText">0%</span></div>
-        <div class="macroBarLine"><span>Υδατάνθ.</span><div class="macroMiniWrap"><div id="homeCarbsBar" class="macroMini macroCarbs"></div></div><span id="homeCarbsText">0%</span></div>
-        <div class="macroBarLine"><span>Λιπαρά</span><div class="macroMiniWrap"><div id="homeFatBar" class="macroMini macroFat"></div></div><span id="homeFatText">0%</span></div>
+        <div class="macroBarLine"><span>Πρωτεΐνη</span><div class="macroMiniWrap"><div id="homeProteinBar" class="macroMini macroProtein"></div></div><span id="homeProteinText">0g</span></div>
+        <div class="macroBarLine"><span>Υδατάνθ.</span><div class="macroMiniWrap"><div id="homeCarbsBar" class="macroMini macroCarbs"></div></div><span id="homeCarbsText">0g</span></div>
+        <div class="macroBarLine"><span>Λιπαρά</span><div class="macroMiniWrap"><div id="homeFatBar" class="macroMini macroFat"></div></div><span id="homeFatText">0g</span></div>
       </div>
     </div>
 
@@ -2338,9 +2374,9 @@ function computeWeightGoalDashboard(){
 
 /* V41 home macros */
 function updateHomeMacroDashboard(totals){
-  const prot = totals && totals.prot ? totals.prot : 0;
-  const carbs = totals && totals.carbs ? totals.carbs : 0;
-  const fat = totals && totals.fat ? totals.fat : 0;
+  const prot = Math.round((totals && totals.prot) ? totals.prot : 0);
+  const carbs = Math.round((totals && totals.carbs) ? totals.carbs : 0);
+  const fat = Math.round((totals && totals.fat) ? totals.fat : 0);
 
   let targets = {pG:120,cG:180,fG:60,pPct:30,cPct:40,fPct:30};
   if(typeof getMacroTargets === "function"){
@@ -2377,6 +2413,36 @@ function getDailyGoalWithExercise(){
   return getDailyGoalBase() + getExerciseCaloriesToday();
 }
 
+
+/* V44 stable daily totals */
+function diaryKeyForToday(){
+  return "gca_diary_" + todayKey();
+}
+function getTodayDiaryItems(){
+  try{
+    return JSON.parse(localStorage.getItem(diaryKeyForToday()) || "[]");
+  }catch(e){
+    return [];
+  }
+}
+function getTodayTotals(){
+  const items = getTodayDiaryItems();
+  return items.reduce((a,x)=>{
+    a.total += Number(x.total || x.cal || 0);
+    a.prot += Number(x.p || x.protein || 0);
+    a.carbs += Number(x.c || x.carbs || 0);
+    a.fat += Number(x.f || x.fat || 0);
+    a.count += 1;
+    return a;
+  }, {total:0, prot:0, carbs:0, fat:0, count:0});
+}
+function getWaterTodayMl(){
+  return parseInt(localStorage.getItem("gca_water_" + todayKey()) || "0", 10);
+}
+function getWaterGoalMl(){
+  return parseInt(localStorage.getItem("gca_water_goal") || "2500", 10);
+}
+
 /* DASHBOARD */
 function getTodayDiaryItems(){
   const key = "gca_diary_" + todayKey();
@@ -2408,49 +2474,46 @@ function getFastingDashboardText(){
   return "Ενεργή • " + pct + "% • απομένει " + formatTime(remain);
 }
 function updateDashboard(){
-  const items = getTodayDiaryItems();
-  const total = items.reduce((s,x)=>s+(Number(x.total)||0),0);
-  const prot = items.reduce((s,x)=>s+(Number(x.p)||0),0);
-  const baseGoal = getDailyGoalBase();
-  const exerciseBonus = getExerciseCaloriesToday();
-  const goal = baseGoal + exerciseBonus;
-  const pGoal = parseInt(localStorage.getItem("gca_protein_goal") || "120", 10);
-  const todayActs = getActivitiesForKey ? getActivitiesForKey(todayKey()) : [];
-  const burned = todayActs.reduce((s,x)=>s+(Number(x.burned)||0),0);
-  const remaining = goal - total + burned;
-  const pct = Math.round(((total - burned) / Math.max(1, goal)) * 100);
+  const today = getTodayTotals();
+  const exercise = (typeof getActivityCalories === "function") ? getActivityCalories(todayKey()) : 0;
 
-  setText("dashCalories", total + " / " + goal);
-  setText("dashRemainingMini", "Υπόλοιπο " + Math.max(0, goal-total) + " kcal" + (exerciseBonus>0 ? " • +"+exerciseBonus+" από άσκηση" : ""));
-  setText("dashRemaining", (remaining >= 0 ? remaining : Math.abs(remaining)) + " kcal");
-  setText("dashProtein", prot + " / " + pGoal + "g");
-  setText("dashMeals", items.length);
-  setText("dashActivity", burned + " kcal");
-  const waterMl = waterTotalForKey ? waterTotalForKey(todayKey()) : 0;
-  const waterGoal = localStorage.getItem("gca_water_goal") || "2.5";
-  setText("dashWater", (waterMl/1000).toFixed(1) + " / " + waterGoal + "L");
-  setText("dashFasting", getFastingDashboardText());
+  let baseGoal = 1800;
+  if(typeof getDailyGoalBase === "function"){
+    baseGoal = getDailyGoalBase();
+  }else{
+    baseGoal = parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
+  }
+
+  const goal = baseGoal + exercise;
+  const remaining = Math.max(0, goal - today.total);
+  const progress = Math.min(100, Math.round((today.total / Math.max(1, goal)) * 100));
+
+  setText("dashCalories", today.total + " / " + goal);
+  setText("dashRemainingMini", "Υπόλοιπο " + remaining + " kcal" + (exercise>0 ? " • +" + exercise + " από άσκηση" : ""));
+  setText("dashMeals", today.count);
+  setText("dashExercise", exercise + " kcal");
+  setText("dashFasting", fastingActive() ? "Ενεργή" : "Ανενεργή");
   setText("dashWeight", getLastWeightText());
+
   const goalDash = computeWeightGoalDashboard();
   setText("dashGoalCalories", goalDash.cal);
   setText("dashGoalTime", goalDash.time);
   setText("dashPace", goalDash.pace || "-");
   const goalNote = document.getElementById("dashGoalNote");
   if(goalNote) goalNote.textContent = goalDash.note;
-  updateHomeMacroDashboard({prot:prot, carbs:carbs, fat:fat});
 
-  const bar = document.getElementById("dashCalBar");
-  bar.style.width = Math.min(100, pct) + "%";
-  bar.classList.toggle("warn", total > goal);
+  const bar = document.getElementById("dashProgressBar");
+  if(bar) bar.style.width = progress + "%";
+  setText("dashMessage", today.count ? "Έχεις " + today.count + " καταχωρήσεις γεύματος σήμερα." : "Δεν έχεις καταχωρήσει ακόμα γεύμα σήμερα.");
 
-  const msg = document.getElementById("dashMessage");
-  if(total > goal){
-    msg.textContent = "Έχεις ξεπεράσει τον ημερήσιο στόχο θερμίδων.";
-  }else if(total === 0){
-    msg.textContent = "Δεν έχεις καταχωρήσει ακόμα γεύμα σήμερα.";
-  }else{
-    msg.textContent = "Απομένουν " + remaining + " kcal για σήμερα.";
-  }
+  const water = getWaterTodayMl();
+  const waterGoal = getWaterGoalMl();
+  const waterPct = Math.min(100, Math.round((water / Math.max(1, waterGoal)) * 100));
+  const waterBar = document.getElementById("dashWaterBar");
+  if(waterBar) waterBar.style.width = waterPct + "%";
+  setText("dashWaterPercent", waterPct + "%");
+
+  updateHomeMacroDashboard({prot:today.prot, carbs:today.carbs, fat:today.fat});
 }
 
 
