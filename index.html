@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V38</title>
+<title>Greek Cal AI V39</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -1022,6 +1022,134 @@ label{
 }
 .dashWaterProgress{
   margin-top:6px;
+}
+
+
+/* V39 color polish */
+:root{
+  --primary:#1565c0;
+  --primaryDark:#0d47a1;
+  --success:#16834a;
+  --warning:#f59e0b;
+  --danger:#dc3545;
+  --cyan:#0ea5e9;
+  --purple:#7c3aed;
+}
+.brandTop .appLogo{
+  background:linear-gradient(135deg,#0d47a1 0%,#1e88e5 60%,#0ea5e9 100%);
+}
+.dashboardCard{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.98),rgba(242,248,255,.96)),
+    radial-gradient(circle at top right,rgba(14,165,233,.10),transparent 30%);
+}
+.dashBox:nth-child(1) span,
+.dashBox:nth-child(2) span{
+  color:#0d47a1;
+}
+.dashBox:nth-child(3) span{
+  color:#7c3aed;
+}
+.dashBox:nth-child(4) span{
+  color:#16834a;
+}
+.dashBox:nth-child(5) span{
+  color:#f59e0b;
+}
+.dashBox:nth-child(6) span{
+  color:#0ea5e9;
+}
+.progressBar{
+  background:linear-gradient(90deg,#1e88e5,#0ea5e9);
+}
+.progressBar.warn{
+  background:linear-gradient(90deg,#f59e0b,#ef4444);
+}
+.waterBar{
+  background:linear-gradient(90deg,#67e8f9,#0ea5e9,#0284c7);
+}
+.homeMenuGrid button:nth-child(1){
+  background:linear-gradient(135deg,#0d47a1,#1e88e5);
+}
+.homeMenuGrid button:nth-child(2){
+  background:linear-gradient(135deg,#155e75,#0ea5e9);
+}
+.homeMenuGrid button:nth-child(3){
+  background:linear-gradient(135deg,#166534,#22c55e);
+}
+.homeMenuGrid button:nth-child(4){
+  background:linear-gradient(135deg,#92400e,#f59e0b);
+}
+.homeMenuGrid button:nth-child(5){
+  background:linear-gradient(135deg,#7c3aed,#a855f7);
+}
+.homeMenuGrid button:nth-child(6){
+  background:linear-gradient(135deg,#0f766e,#14b8a6);
+}
+.homeMenuGrid button:nth-child(7){
+  background:linear-gradient(135deg,#374151,#64748b);
+}
+.mealQuick:nth-child(1){
+  background:linear-gradient(135deg,#fff7ed,#fffbeb);
+  border-color:#fed7aa;
+}
+.mealQuick:nth-child(1) b{color:#9a3412}
+.mealQuick:nth-child(2){
+  background:linear-gradient(135deg,#f5f3ff,#faf5ff);
+  border-color:#ddd6fe;
+}
+.mealQuick:nth-child(2) b{color:#6d28d9}
+.mealQuick:nth-child(3){
+  background:linear-gradient(135deg,#eff6ff,#f8fbff);
+  border-color:#bfdbfe;
+}
+.mealQuick:nth-child(3) b{color:#0d47a1}
+.mealQuick:nth-child(4){
+  background:linear-gradient(135deg,#eef2ff,#f8fafc);
+  border-color:#c7d2fe;
+}
+.mealQuick:nth-child(4) b{color:#3730a3}
+.btnGreen, button.btnGreen{
+  background:linear-gradient(135deg,#16834a,#16a34a)!important;
+}
+.btnRed, button.btnRed{
+  background:linear-gradient(135deg,#dc3545,#ef4444)!important;
+}
+.btnPurple, button.btnPurple{
+  background:linear-gradient(135deg,#6d28d9,#8b5cf6)!important;
+}
+.bottomNav.cleanNav button:hover,
+.bottomNav.cleanNav button:focus{
+  background:#eff6ff;
+}
+.fab{
+  background:linear-gradient(135deg,#16a34a,#0f9f6e);
+}
+.goalMessage.okmsg,
+.waterMsg.okmsg{
+  background:#ecfdf5;
+  border-color:#bbf7d0;
+  color:#166534;
+}
+.goalMessage.warning{
+  background:#fff7ed;
+  border-color:#fed7aa;
+  color:#9a3412;
+}
+.foodCard{
+  background:linear-gradient(180deg,#ffffff,#f8fbff);
+}
+.foodCard .tag{
+  background:#eaf3ff;
+  color:#0d47a1;
+}
+.fabClose{
+  background:#eaf3ff!important;
+}
+@media(max-width:560px){
+  .homeMenuGrid button{
+    font-weight:900;
+  }
 }
 
 </style>
