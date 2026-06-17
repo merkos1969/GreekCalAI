@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V45</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<title>Greek Cal AI V46</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js">setInterval(()=>{ if(typeof v46RefreshHome==='function') v46RefreshHome(); }, 1000);
+</script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
 *{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);padding:10px}
@@ -1435,6 +1436,123 @@ label{
   }
 }
 
+
+/* V46 stable clean home - independent IDs */
+.homeV46{overflow:hidden}
+.calHeroV46{
+  background:linear-gradient(135deg,#0d47a1,#1e88e5);
+  color:#fff;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 12px 26px rgba(30,108,199,.22);
+}
+.calHeroV46 .label{font-weight:900;opacity:.95}
+.calHeroV46 .value{font-size:36px;font-weight:1000;line-height:1.05;margin-top:6px}
+.calHeroV46 .sub{font-size:16px;font-weight:900;opacity:.94;margin-top:8px}
+.v46MainBar,.trackV46{
+  width:100%;
+  height:14px;
+  border-radius:999px;
+  background:#e5e7eb;
+  overflow:hidden;
+}
+.v46MainBar{margin-top:14px;background:rgba(255,255,255,.28)}
+.v46MainBar div,.trackV46 div{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  transition:width .25s ease;
+}
+#v46CalBar{background:#fff}
+.statsV46{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+}
+.statV46{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:18px;
+  padding:12px;
+  min-height:78px;
+  box-shadow:0 6px 16px rgba(15,23,42,.04);
+}
+.statV46 b{
+  display:block;
+  color:#667085;
+  font-size:13px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+.statV46 span{
+  color:#0d47a1;
+  font-size:20px;
+  font-weight:1000;
+  line-height:1.12;
+}
+.panelV46{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:22px;
+  padding:14px;
+  margin-top:12px;
+  box-shadow:0 6px 16px rgba(15,23,42,.04);
+}
+.panelTitleV46{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  margin-bottom:10px;
+}
+.panelTitleV46 b{font-size:18px;color:#17202c}
+.panelTitleV46 span{
+  background:#eaf3ff;
+  color:#0d47a1;
+  border-radius:999px;
+  padding:6px 10px;
+  font-weight:900;
+  font-size:13px;
+}
+.lineV46{
+  display:grid;
+  grid-template-columns:82px 1fr 76px;
+  gap:8px;
+  align-items:center;
+  margin:10px 0;
+  color:#475467;
+  font-size:13px;
+  font-weight:900;
+}
+.lineV46 b{text-align:right;color:#17202c}
+.proteinV46{background:linear-gradient(90deg,#7c3aed,#a855f7)}
+.carbsV46{background:linear-gradient(90deg,#0ea5e9,#38bdf8)}
+.fatV46{background:linear-gradient(90deg,#f59e0b,#f97316)}
+.waterV46{background:linear-gradient(90deg,#67e8f9,#0ea5e9,#0284c7)}
+.waterTrackV46{height:16px}
+.waterTextV46{
+  margin-top:8px;
+  color:#0d47a1;
+  font-weight:900;
+  text-align:right;
+}
+.v46Note{
+  background:#f8fbff;
+  border:1px solid #bfdbfe;
+  color:#174a8b;
+  border-radius:18px;
+  padding:12px;
+  margin-top:12px;
+  line-height:1.35;
+}
+.homeV46 .quickActions{margin-top:12px}
+@media(max-width:560px){
+  .calHeroV46 .value{font-size:33px}
+  .statsV46{grid-template-columns:1fr 1fr}
+  .lineV46{grid-template-columns:78px 1fr 64px}
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -1460,61 +1578,58 @@ label{
 <section id="home" class="card menu">
   <div class="brandTop"><div class="appLogo">🇬🇷</div><h1>Greek Cal AI</h1><div class="appSubTitle">Smart Greek Diet Coach</div></div>
 
-<div class="installMini" onclick="toggleInstallHelp()">
-  📲 Εγκατάσταση στο κινητό
-  <span>πάτησε για οδηγίες</span>
-</div>
-<div id="installHelp" class="installHelp hidden">
-  Από Chrome πάτα ⋮ → <b>Προσθήκη στην αρχική οθόνη</b>.
-</div>
-
-  <div class="dashboardCard compactHome">
+  <div class="dashboardCard homeV46">
     <h2>📊 Σήμερα</h2>
 
-    <div class="dashBox heroCalBox">
-      <b>Θερμίδες</b>
-      <span id="dashCalories">0 / 1800</span>
-      <small id="dashRemainingMini">Υπόλοιπο 1800 kcal</small>
+    <div class="calHeroV46">
+      <div class="label">Θερμίδες</div>
+      <div class="value" id="v46Calories">0 / 1800</div>
+      <div class="sub" id="v46Remaining">Υπόλοιπο 1800 kcal</div>
+      <div class="v46MainBar"><div id="v46CalBar"></div></div>
     </div>
 
-    <div class="compactStats">
-      <div class="dashBox"><b>Γεύματα</b><span id="dashMeals">0</span></div>
-      <div class="dashBox"><b>Άσκηση</b><span id="dashExercise">0 kcal</span></div>
-      <div class="dashBox"><b>Βάρος</b><span id="dashWeight">Δεν υπάρχει</span></div>
-      <div class="dashBox"><b>Στόχος</b><span id="dashGoalTime">-</span></div>
+    <div class="statsV46">
+      <div class="statV46"><b>Γεύματα</b><span id="v46Meals">0</span></div>
+      <div class="statV46"><b>Άσκηση</b><span id="v46Exercise">0 kcal</span></div>
+      <div class="statV46"><b>Βάρος</b><span id="v46Weight">Δεν υπάρχει</span></div>
+      <div class="statV46"><b>Στόχος</b><span id="v46GoalTime">-</span></div>
     </div>
 
-    <div class="homeMacroPanel">
-      <div class="homePanelTitle">
-        <b>Μακροθρεπτικά σήμερα</b>
-        <span id="homeMacroSplitText">Π/Υ/Λ</span>
+    <div class="panelV46">
+      <div class="panelTitleV46"><b>Μακροθρεπτικά σήμερα</b><span id="v46MacroSplit">Π/Υ/Λ</span></div>
+
+      <div class="lineV46">
+        <span>Πρωτεΐνη</span>
+        <div class="trackV46"><div id="v46ProteinBar" class="proteinV46"></div></div>
+        <b id="v46ProteinText">0g</b>
       </div>
-      <div class="macroBars">
-        <div class="macroBarLine"><span>Πρωτεΐνη</span><div class="macroMiniWrap"><div id="homeProteinBar" class="macroMini macroProtein"></div></div><span id="homeProteinText">0g</span></div>
-        <div class="macroBarLine"><span>Υδατάνθ.</span><div class="macroMiniWrap"><div id="homeCarbsBar" class="macroMini macroCarbs"></div></div><span id="homeCarbsText">0g</span></div>
-        <div class="macroBarLine"><span>Λιπαρά</span><div class="macroMiniWrap"><div id="homeFatBar" class="macroMini macroFat"></div></div><span id="homeFatText">0g</span></div>
+
+      <div class="lineV46">
+        <span>Υδατάνθ.</span>
+        <div class="trackV46"><div id="v46CarbsBar" class="carbsV46"></div></div>
+        <b id="v46CarbsText">0g</b>
+      </div>
+
+      <div class="lineV46">
+        <span>Λιπαρά</span>
+        <div class="trackV46"><div id="v46FatBar" class="fatV46"></div></div>
+        <b id="v46FatText">0g</b>
       </div>
     </div>
 
-    <div class="dashWaterProgress">
-      <div class="dashWaterTop">
-        <b>Πρόοδος νερού</b>
-        <span id="dashWaterPercent">0%</span>
-      </div>
-      <div class="progressWrap waterProgressWrap">
-        <div id="dashWaterBar" class="progressBar waterBar"></div>
-      </div>
+    <div class="panelV46">
+      <div class="panelTitleV46"><b>Πρόοδος νερού</b><span id="v46WaterPercent">0%</span></div>
+      <div class="trackV46 waterTrackV46"><div id="v46WaterBar" class="waterV46"></div></div>
+      <div class="waterTextV46" id="v46WaterText">0.0 / 2.5 L</div>
     </div>
 
-    <div class="progressWrap"><div id="dashProgressBar" class="progressBar"></div></div>
-    <p class="small" id="dashMessage" style="text-align:center;margin-top:8px">Καλή αρχή για σήμερα.</p>
-    <div class="dashGoalNote" id="dashGoalNote">Συμπλήρωσε τον στόχο βάρους για να εμφανιστεί εκτίμηση.</div>
+    <div class="v46Note" id="v46Message">Καλή αρχή για σήμερα.</div>
 
     <div class="quickActions">
       <button onclick="showPage('foods')">+ Φαγητό</button>
       <button onclick="showPage('diary')">Ημερήσιο</button>
-      <button onclick="showPage('fasting')">Νηστεία</button>
-      <button onclick="showPage('weight')">Βάρος</button>
+      <button onclick="showPage('water')">Νερό</button>
+      <button onclick="showPage('activities')">Άσκηση</button>
     </div>
   </div>
 
@@ -2041,7 +2156,7 @@ label{
 const baseFoods = [{"name": "Χωριάτικη σαλάτα", "cat": "Σαλάτες", "cal": 320, "portion": "μερίδα", "tag": "Μεσογειακό", "protein": 10, "carbs": 36, "fat": 15}, {"name": "Ντάκος", "cat": "Σαλάτες", "cal": 360, "portion": "μερίδα", "tag": "Κρητικό", "protein": 11, "carbs": 40, "fat": 17}, {"name": "Πράσινη σαλάτα", "cat": "Σαλάτες", "cal": 120, "portion": "μερίδα", "tag": "Light", "protein": 4, "carbs": 14, "fat": 6}, {"name": "Σαλάτα του Καίσαρα", "cat": "Σαλάτες", "cal": 520, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 16, "carbs": 58, "fat": 25}, {"name": "Τονοσαλάτα", "cat": "Σαλάτες", "cal": 390, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 12, "carbs": 44, "fat": 19}, {"name": "Φασολάδα", "cat": "Όσπρια", "cal": 430, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 17, "carbs": 58, "fat": 14}, {"name": "Φακές σούπα", "cat": "Όσπρια", "cal": 390, "portion": "πιάτο", "tag": "Φυτική πρωτεΐνη", "protein": 16, "carbs": 53, "fat": 13}, {"name": "Ρεβύθια", "cat": "Όσπρια", "cal": 410, "portion": "πιάτο", "tag": "Φυτικές ίνες", "protein": 16, "carbs": 55, "fat": 14}, {"name": "Γίγαντες πλακί", "cat": "Όσπρια", "cal": 480, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 19, "carbs": 65, "fat": 16}, {"name": "Φάβα", "cat": "Όσπρια", "cal": 330, "portion": "μερίδα", "tag": "Σαντορίνη", "protein": 13, "carbs": 45, "fat": 11}, {"name": "Μπριάμ", "cat": "Λαδερά", "cal": 420, "portion": "πιάτο", "tag": "Λαδερό", "protein": 17, "carbs": 57, "fat": 14}, {"name": "Γεμιστά", "cat": "Λαδερά", "cal": 520, "portion": "2 τεμάχια", "tag": "Παραδοσιακό", "protein": 21, "carbs": 70, "fat": 17}, {"name": "Ιμάμ μπαϊλντί", "cat": "Λαδερά", "cal": 460, "portion": "μερίδα", "tag": "Λαδερό", "protein": 18, "carbs": 62, "fat": 15}, {"name": "Σπανακόρυζο", "cat": "Λαδερά", "cal": 380, "portion": "πιάτο", "tag": "Light", "protein": 15, "carbs": 51, "fat": 13}, {"name": "Λαχανόρυζο", "cat": "Λαδερά", "cal": 350, "portion": "πιάτο", "tag": "Light", "protein": 14, "carbs": 47, "fat": 12}, {"name": "Αρακάς λαδερός", "cat": "Λαδερά", "cal": 410, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 16, "carbs": 55, "fat": 14}, {"name": "Μπάμιες", "cat": "Λαδερά", "cal": 360, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 14, "carbs": 49, "fat": 12}, {"name": "Φασολάκια λαδερά", "cat": "Λαδερά", "cal": 390, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 16, "carbs": 53, "fat": 13}, {"name": "Λαχανοντολμάδες", "cat": "Παραδοσιακά", "cal": 520, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 21, "carbs": 70, "fat": 17}, {"name": "Ντολμαδάκια", "cat": "Παραδοσιακά", "cal": 330, "portion": "μερίδα", "tag": "Μεσογειακό", "protein": 13, "carbs": 45, "fat": 11}, {"name": "Σουβλάκι χοιρινό καλαμάκι", "cat": "Κρέατα", "cal": 190, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 14, "carbs": 7, "fat": 12}, {"name": "Σουβλάκι κοτόπουλο καλαμάκι", "cat": "Κρέατα", "cal": 160, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 12, "carbs": 6, "fat": 10}, {"name": "Πίτα γύρος χοιρινός", "cat": "Fast Food", "cal": 760, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 19, "carbs": 95, "fat": 34}, {"name": "Πίτα γύρος κοτόπουλο", "cat": "Fast Food", "cal": 680, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 17, "carbs": 85, "fat": 30}, {"name": "Πίτα καλαμάκι κοτόπουλο", "cat": "Fast Food", "cal": 560, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 14, "carbs": 70, "fat": 25}, {"name": "Μπιφτέκι μοσχαρίσιο", "cat": "Κρέατα", "cal": 290, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 22, "carbs": 11, "fat": 18}, {"name": "Μπιφτέκια με πατάτες", "cat": "Κρέατα", "cal": 780, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 58, "carbs": 29, "fat": 48}, {"name": "Κοτόπουλο σχάρας", "cat": "Κρέατα", "cal": 320, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 24, "carbs": 12, "fat": 20}, {"name": "Κοτόπουλο φούρνου με πατάτες", "cat": "Κρέατα", "cal": 690, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 52, "carbs": 26, "fat": 42}, {"name": "Μοσχάρι κοκκινιστό", "cat": "Κρέατα", "cal": 560, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 42, "carbs": 21, "fat": 34}, {"name": "Μοσχάρι λεμονάτο", "cat": "Κρέατα", "cal": 520, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 39, "carbs": 20, "fat": 32}, {"name": "Χοιρινή μπριζόλα", "cat": "Κρέατα", "cal": 520, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 39, "carbs": 20, "fat": 32}, {"name": "Μπριζόλα μοσχαρίσια", "cat": "Κρέατα", "cal": 610, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 46, "carbs": 23, "fat": 37}, {"name": "Αρνί ψητό", "cat": "Κρέατα", "cal": 680, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 51, "carbs": 26, "fat": 42}, {"name": "Κεφτεδάκια", "cat": "Κρέατα", "cal": 450, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 34, "carbs": 17, "fat": 28}, {"name": "Σουτζουκάκια", "cat": "Κρέατα", "cal": 540, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 40, "carbs": 20, "fat": 33}, {"name": "Κοκκινιστό με μακαρόνια", "cat": "Κρέατα", "cal": 820, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 62, "carbs": 31, "fat": 50}, {"name": "Τσιπούρα ψητή", "cat": "Ψάρια", "cal": 360, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 27, "carbs": 14, "fat": 22}, {"name": "Λαβράκι ψητό", "cat": "Ψάρια", "cal": 330, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 25, "carbs": 12, "fat": 20}, {"name": "Σαρδέλες ψητές", "cat": "Ψάρια", "cal": 310, "portion": "μερίδα", "tag": "Ωμέγα-3", "protein": 23, "carbs": 12, "fat": 19}, {"name": "Γαύρος τηγανητός", "cat": "Ψάρια", "cal": 480, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 36, "carbs": 18, "fat": 29}, {"name": "Μπακαλιάρος σκορδαλιά", "cat": "Ψάρια", "cal": 690, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 52, "carbs": 26, "fat": 42}, {"name": "Σολομός ψητός", "cat": "Ψάρια", "cal": 420, "portion": "μερίδα", "tag": "Ωμέγα-3", "protein": 32, "carbs": 16, "fat": 26}, {"name": "Τόνος κονσέρβα σε νερό", "cat": "Ψάρια", "cal": 140, "portion": "κονσέρβα", "tag": "Πρωτεΐνη", "protein": 10, "carbs": 5, "fat": 9}, {"name": "Καλαμάρι ψητό", "cat": "Θαλασσινά", "cal": 240, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 18, "carbs": 9, "fat": 15}, {"name": "Καλαμαράκια τηγανητά", "cat": "Θαλασσινά", "cal": 590, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 44, "carbs": 22, "fat": 36}, {"name": "Γαρίδες ψητές", "cat": "Θαλασσινά", "cal": 220, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 16, "carbs": 8, "fat": 13}, {"name": "Χταπόδι ξυδάτο", "cat": "Θαλασσινά", "cal": 230, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 17, "carbs": 9, "fat": 14}, {"name": "Μακαρόνια με κιμά", "cat": "Ζυμαρικά", "cal": 760, "portion": "μερίδα", "tag": "Κλασικό", "protein": 27, "carbs": 110, "fat": 24}, {"name": "Παστίτσιο", "cat": "Ζυμαρικά", "cal": 780, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 27, "carbs": 113, "fat": 24}, {"name": "Μουσακάς", "cat": "Παραδοσιακά", "cal": 820, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 33, "carbs": 111, "fat": 27}, {"name": "Λαζάνια", "cat": "Ζυμαρικά", "cal": 740, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 26, "carbs": 107, "fat": 23}, {"name": "Σπαγγέτι ναπολιτέν", "cat": "Ζυμαρικά", "cal": 520, "portion": "μερίδα", "tag": "Κλασικό", "protein": 18, "carbs": 75, "fat": 16}, {"name": "Κριθαράκι με κοτόπουλο", "cat": "Ζυμαρικά", "cal": 650, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 23, "carbs": 94, "fat": 20}, {"name": "Γιουβέτσι μοσχάρι", "cat": "Ζυμαρικά", "cal": 760, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 27, "carbs": 110, "fat": 24}, {"name": "Ριζότο λαχανικών", "cat": "Ρύζι", "cal": 480, "portion": "μερίδα", "tag": "Μεσογειακό", "protein": 17, "carbs": 70, "fat": 15}, {"name": "Ρύζι βραστό", "cat": "Ρύζι", "cal": 210, "portion": "μερίδα", "tag": "Βάση", "protein": 7, "carbs": 30, "fat": 7}, {"name": "Πατάτες φούρνου", "cat": "Συνοδευτικά", "cal": 330, "portion": "μερίδα", "tag": "Συνοδευτικό", "protein": 10, "carbs": 37, "fat": 16}, {"name": "Πατάτες τηγανητές", "cat": "Συνοδευτικά", "cal": 520, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 16, "carbs": 58, "fat": 25}, {"name": "Σπανακόπιτα", "cat": "Πίτες", "cal": 420, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 15, "carbs": 61, "fat": 13}, {"name": "Τυρόπιτα", "cat": "Πίτες", "cal": 460, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 16, "carbs": 67, "fat": 14}, {"name": "Πρασόπιτα", "cat": "Πίτες", "cal": 390, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 14, "carbs": 57, "fat": 12}, {"name": "Κοτόπιτα", "cat": "Πίτες", "cal": 520, "portion": "κομμάτι", "tag": "Πρωτεΐνη", "protein": 18, "carbs": 75, "fat": 16}, {"name": "Κρεατόπιτα", "cat": "Πίτες", "cal": 570, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 20, "carbs": 83, "fat": 18}, {"name": "Κουλούρι Θεσσαλονίκης", "cat": "Πρωινό", "cal": 260, "portion": "τεμάχιο", "tag": "Πρωινό", "protein": 16, "carbs": 23, "fat": 12}, {"name": "Ψωμί λευκό", "cat": "Αρτοποιήματα", "cal": 80, "portion": "φέτα", "tag": "Υδατάνθρακες", "protein": 3, "carbs": 12, "fat": 2}, {"name": "Ψωμί ολικής", "cat": "Αρτοποιήματα", "cal": 75, "portion": "φέτα", "tag": "Ολικής", "protein": 3, "carbs": 11, "fat": 2}, {"name": "Παξιμάδι κρίθινο", "cat": "Αρτοποιήματα", "cal": 120, "portion": "τεμάχιο", "tag": "Κρητικό", "protein": 4, "carbs": 17, "fat": 4}, {"name": "Γιαούρτι στραγγιστό 2%", "cat": "Πρωινό", "cal": 150, "portion": "200g", "tag": "Πρωτεΐνη", "protein": 9, "carbs": 13, "fat": 7}, {"name": "Γιαούρτι στραγγιστό 10%", "cat": "Πρωινό", "cal": 240, "portion": "200g", "tag": "Πρωτεΐνη", "protein": 15, "carbs": 21, "fat": 11}, {"name": "Γιαούρτι με μέλι", "cat": "Πρωινό", "cal": 310, "portion": "μπολ", "tag": "Πρωινό", "protein": 19, "carbs": 27, "fat": 14}, {"name": "Βρώμη με γάλα", "cat": "Πρωινό", "cal": 380, "portion": "μπολ", "tag": "Πρωινό", "protein": 24, "carbs": 33, "fat": 17}, {"name": "Αυγό βραστό", "cat": "Πρωινό", "cal": 78, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 5, "carbs": 7, "fat": 3}, {"name": "Ομελέτα 2 αυγών", "cat": "Πρωινό", "cal": 260, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 16, "carbs": 23, "fat": 12}, {"name": "Τοστ γαλοπούλα τυρί", "cat": "Πρωινό", "cal": 330, "portion": "τεμάχιο", "tag": "Γρήγορο", "protein": 21, "carbs": 29, "fat": 15}, {"name": "Φέτα", "cat": "Γαλακτοκομικά", "cal": 270, "portion": "100g", "tag": "Παραδοσιακό", "protein": 17, "carbs": 24, "fat": 12}, {"name": "Ανθότυρο", "cat": "Γαλακτοκομικά", "cal": 170, "portion": "100g", "tag": "Light", "protein": 11, "carbs": 15, "fat": 8}, {"name": "Γραβιέρα", "cat": "Γαλακτοκομικά", "cal": 390, "portion": "100g", "tag": "Υψηλές θερμίδες", "protein": 24, "carbs": 34, "fat": 17}, {"name": "Γάλα 1.5%", "cat": "Γαλακτοκομικά", "cal": 120, "portion": "ποτήρι", "tag": "Πρωινό", "protein": 8, "carbs": 10, "fat": 5}, {"name": "Burger απλό", "cat": "Fast Food", "cal": 620, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 16, "carbs": 78, "fat": 28}, {"name": "Cheeseburger", "cat": "Fast Food", "cal": 700, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 18, "carbs": 88, "fat": 31}, {"name": "Club sandwich", "cat": "Fast Food", "cal": 850, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 21, "carbs": 106, "fat": 38}, {"name": "Pizza μαργαρίτα", "cat": "Fast Food", "cal": 270, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 7, "carbs": 34, "fat": 12}, {"name": "Pizza σπέσιαλ", "cat": "Fast Food", "cal": 340, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 8, "carbs": 42, "fat": 15}, {"name": "Hot dog", "cat": "Fast Food", "cal": 430, "portion": "τεμάχιο", "tag": "Fast", "protein": 11, "carbs": 54, "fat": 19}, {"name": "Κρέπα πραλίνα", "cat": "Fast Food", "cal": 780, "portion": "τεμάχιο", "tag": "Γλυκό", "protein": 20, "carbs": 98, "fat": 35}, {"name": "Κρέπα γαλοπούλα τυρί", "cat": "Fast Food", "cal": 620, "portion": "τεμάχιο", "tag": "Fast", "protein": 16, "carbs": 78, "fat": 28}, {"name": "Ποπ κορν", "cat": "Σνακ", "cal": 380, "portion": "μερίδα", "tag": "Σνακ", "protein": 10, "carbs": 48, "fat": 17}, {"name": "Πατατάκια", "cat": "Σνακ", "cal": 530, "portion": "100g", "tag": "Σνακ", "protein": 13, "carbs": 66, "fat": 24}, {"name": "Ξηροί καρποί", "cat": "Σνακ", "cal": 600, "portion": "100g", "tag": "Ενέργεια", "protein": 15, "carbs": 75, "fat": 27}, {"name": "Μπακλαβάς", "cat": "Γλυκά", "cal": 430, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 11, "carbs": 54, "fat": 19}, {"name": "Γαλακτομπούρεκο", "cat": "Γλυκά", "cal": 410, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 10, "carbs": 51, "fat": 18}, {"name": "Καρυδόπιτα", "cat": "Γλυκά", "cal": 390, "portion": "κομμάτι", "tag": "Γλυκό", "protein": 10, "carbs": 49, "fat": 17}, {"name": "Ρυζόγαλο", "cat": "Γλυκά", "cal": 250, "portion": "μπολ", "tag": "Παραδοσιακό", "protein": 6, "carbs": 31, "fat": 11}, {"name": "Παγωτό βανίλια", "cat": "Γλυκά", "cal": 210, "portion": "μπάλα", "tag": "Γλυκό", "protein": 5, "carbs": 26, "fat": 9}, {"name": "Σοκολάτα γάλακτος", "cat": "Γλυκά", "cal": 540, "portion": "100g", "tag": "Γλυκό", "protein": 14, "carbs": 68, "fat": 24}, {"name": "Μπουγάτσα κρέμα", "cat": "Γλυκά", "cal": 520, "portion": "κομμάτι", "tag": "Θεσσαλονίκη", "protein": 13, "carbs": 65, "fat": 23}, {"name": "Λουκουμάδες", "cat": "Γλυκά", "cal": 560, "portion": "μερίδα", "tag": "Γλυκό", "protein": 14, "carbs": 70, "fat": 25}, {"name": "Μήλο", "cat": "Φρούτα", "cal": 95, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 1, "carbs": 21, "fat": 1}, {"name": "Μπανάνα", "cat": "Φρούτα", "cal": 110, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 1, "carbs": 25, "fat": 1}, {"name": "Πορτοκάλι", "cat": "Φρούτα", "cal": 70, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 1, "carbs": 16, "fat": 1}, {"name": "Καρπούζι", "cat": "Φρούτα", "cal": 90, "portion": "μερίδα", "tag": "Φρούτο", "protein": 1, "carbs": 20, "fat": 1}, {"name": "Πεπόνι", "cat": "Φρούτα", "cal": 85, "portion": "μερίδα", "tag": "Φρούτο", "protein": 1, "carbs": 19, "fat": 1}, {"name": "Ροδάκινο", "cat": "Φρούτα", "cal": 60, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 0, "carbs": 14, "fat": 0}, {"name": "Σταφύλια", "cat": "Φρούτα", "cal": 140, "portion": "μερίδα", "tag": "Φρούτο", "protein": 1, "carbs": 32, "fat": 1}, {"name": "Ελληνικός καφές", "cat": "Ροφήματα", "cal": 5, "portion": "σκέτος", "tag": "Ρόφημα", "protein": 0, "carbs": 1, "fat": 0}, {"name": "Φραπέ σκέτος", "cat": "Ροφήματα", "cal": 5, "portion": "ποτήρι", "tag": "Ρόφημα", "protein": 0, "carbs": 1, "fat": 0}, {"name": "Freddo espresso σκέτος", "cat": "Ροφήματα", "cal": 5, "portion": "ποτήρι", "tag": "Ρόφημα", "protein": 0, "carbs": 1, "fat": 0}, {"name": "Freddo cappuccino", "cat": "Ροφήματα", "cal": 120, "portion": "ποτήρι", "tag": "Ρόφημα", "protein": 1, "carbs": 27, "fat": 1}, {"name": "Χυμός πορτοκάλι", "cat": "Ροφήματα", "cal": 120, "portion": "ποτήρι", "tag": "Ρόφημα", "protein": 1, "carbs": 27, "fat": 1}, {"name": "Αναψυκτικό ζάχαρη", "cat": "Ροφήματα", "cal": 140, "portion": "κουτάκι", "tag": "Ζάχαρη", "protein": 1, "carbs": 32, "fat": 1}, {"name": "Μπύρα", "cat": "Ροφήματα", "cal": 150, "portion": "330ml", "tag": "Αλκοόλ", "protein": 1, "carbs": 34, "fat": 1}, {"name": "Κρασί κόκκινο", "cat": "Ροφήματα", "cal": 125, "portion": "ποτήρι", "tag": "Αλκοόλ", "protein": 1, "carbs": 28, "fat": 1}];
 let activeCat="Όλα", weightChart=null, fastingInterval=null;
 
-function showPage(id){ updateDashboard(); 
+function showPage(id){ if(typeof v46RefreshHome==="function") v46RefreshHome();  updateDashboard(); 
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
   updateFabVisibility(id);
@@ -2591,6 +2706,167 @@ function getDailyGoalBaseV45(){
   return parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
 }
 
+
+/* V46 independent home engine */
+function v46Num(v){
+  const n = Number(String(v ?? 0).replace(",", "."));
+  return isNaN(n) ? 0 : n;
+}
+function v46JsonArray(key){
+  try{
+    const v = JSON.parse(localStorage.getItem(key) || "[]");
+    return Array.isArray(v) ? v : [];
+  }catch(e){ return []; }
+}
+function v46TodayKey(){
+  return typeof todayKey === "function" ? todayKey() : new Date().toISOString().slice(0,10);
+}
+function v46DiaryItems(){
+  const t = v46TodayKey();
+  let arr = [];
+  ["gca_diary_"+t,"diary_"+t,"meals_"+t,"gca_daily_"+t].forEach(k=>{
+    arr = arr.concat(v46JsonArray(k));
+  });
+  return arr;
+}
+function v46Pick(o, keys){
+  for(const k of keys){
+    if(o && o[k] !== undefined && o[k] !== null && o[k] !== ""){
+      const n = v46Num(o[k]);
+      if(n || n === 0) return n;
+    }
+  }
+  return 0;
+}
+function v46Totals(){
+  return v46DiaryItems().reduce((a,x)=>{
+    const qty = v46Pick(x,["qty","quantity","amount"]) || 1;
+    let total = v46Pick(x,["total","totalCal","totalCalories","kcalTotal","caloriesTotal"]);
+    if(!total) total = v46Pick(x,["cal","kcal","calories"]) * qty;
+
+    let p = v46Pick(x,["p","protein","proteins","proteinG"]);
+    let c = v46Pick(x,["c","carbs","carbohydrates","carbsG"]);
+    let f = v46Pick(x,["f","fat","fats","fatG"]);
+
+    // Τα custom/food objects κρατούν συνήθως p/c/f ήδη πολλαπλασιασμένα.
+    // Αν λείπουν p/c/f αλλά υπάρχουν protein/carbs/fat ανά μερίδα, τα πολλαπλασιάζουμε.
+    if(qty !== 1 && x.p === undefined && x.c === undefined && x.f === undefined){
+      p *= qty; c *= qty; f *= qty;
+    }
+
+    a.total += Math.round(total);
+    a.protein += Math.round(p);
+    a.carbs += Math.round(c);
+    a.fat += Math.round(f);
+    a.count += 1;
+    return a;
+  },{total:0,protein:0,carbs:0,fat:0,count:0});
+}
+function v46Water(){
+  const t = v46TodayKey();
+  for(const k of ["gca_water_"+t,"water_"+t,"gca_water_today"]){
+    const n = parseInt(localStorage.getItem(k) || "0",10);
+    if(n>0) return n;
+  }
+  return 0;
+}
+function v46WaterGoal(){
+  return parseInt(localStorage.getItem("gca_water_goal") || localStorage.getItem("water_goal") || "2500",10);
+}
+function v46Exercise(){
+  const t = v46TodayKey();
+  let sum = 0;
+  if(typeof getActivityCalories === "function"){
+    sum = getActivityCalories(t) || 0;
+  }
+  if(sum) return Math.round(sum);
+  ["gca_activities_"+t,"activities_"+t,"gca_activity_"+t].forEach(k=>{
+    v46JsonArray(k).forEach(x=>{
+      sum += v46Pick(x,["cal","kcal","calories","burned","total"]);
+    });
+  });
+  return Math.round(sum);
+}
+function v46BaseGoal(){
+  try{
+    if(typeof getDailyGoalBase === "function"){
+      const n = getDailyGoalBase();
+      if(n) return n;
+    }
+    if(typeof isAutoDailyGoal === "function" && isAutoDailyGoal() && typeof getWeightTargetCalories === "function"){
+      const a = getWeightTargetCalories();
+      if(a && a.calories) return a.calories;
+    }
+  }catch(e){}
+  return parseInt(localStorage.getItem("gca_daily_goal") || "1800",10);
+}
+function v46MacroTargets(goal){
+  let p=30,c=40,f=30;
+  try{
+    p = parseInt(localStorage.getItem("gca_macro_p") || "30",10);
+    c = parseInt(localStorage.getItem("gca_macro_c") || "40",10);
+    f = parseInt(localStorage.getItem("gca_macro_f") || "30",10);
+  }catch(e){}
+  return {
+    pPct:p,cPct:c,fPct:f,
+    pG:Math.round((goal*p/100)/4),
+    cG:Math.round((goal*c/100)/4),
+    fG:Math.round((goal*f/100)/9)
+  };
+}
+function v46Set(id,text){
+  const el=document.getElementById(id);
+  if(el) el.textContent=text;
+}
+function v46Width(id,pct){
+  const el=document.getElementById(id);
+  if(el) el.style.width=Math.max(0,Math.min(100,pct))+"%";
+}
+function v46RefreshHome(){
+  const totals = v46Totals();
+  const exercise = v46Exercise();
+  const baseGoal = v46BaseGoal();
+  const goal = baseGoal + exercise;
+  const remaining = Math.max(0, goal - totals.total);
+  const calPct = Math.round((totals.total/Math.max(1,goal))*100);
+
+  v46Set("v46Calories", totals.total + " / " + goal);
+  v46Set("v46Remaining", "Υπόλοιπο " + remaining + " kcal" + (exercise>0 ? " • +"+exercise+" από άσκηση" : ""));
+  v46Width("v46CalBar", calPct);
+
+  v46Set("v46Meals", totals.count);
+  v46Set("v46Exercise", exercise + " kcal");
+  v46Set("v46Weight", (typeof getLastWeightText==="function" ? getLastWeightText() : "Δεν υπάρχει"));
+
+  try{
+    if(typeof computeWeightGoalDashboard==="function"){
+      const g=computeWeightGoalDashboard();
+      v46Set("v46GoalTime", g.time || "-");
+    }
+  }catch(e){ v46Set("v46GoalTime","-"); }
+
+  const targets = v46MacroTargets(goal);
+  v46Set("v46MacroSplit", targets.pPct+"% / "+targets.cPct+"% / "+targets.fPct+"%");
+  const pp=Math.round((totals.protein/Math.max(1,targets.pG))*100);
+  const cp=Math.round((totals.carbs/Math.max(1,targets.cG))*100);
+  const fp=Math.round((totals.fat/Math.max(1,targets.fG))*100);
+  v46Width("v46ProteinBar", pp);
+  v46Width("v46CarbsBar", cp);
+  v46Width("v46FatBar", fp);
+  v46Set("v46ProteinText", totals.protein+"/"+targets.pG+"g");
+  v46Set("v46CarbsText", totals.carbs+"/"+targets.cG+"g");
+  v46Set("v46FatText", totals.fat+"/"+targets.fG+"g");
+
+  const water = v46Water();
+  const waterGoal = v46WaterGoal();
+  const wp = Math.round((water/Math.max(1,waterGoal))*100);
+  v46Width("v46WaterBar", wp);
+  v46Set("v46WaterPercent", Math.min(100,wp)+"%");
+  v46Set("v46WaterText", (water/1000).toFixed(1)+" / "+(waterGoal/1000).toFixed(1)+" L");
+
+  v46Set("v46Message", totals.count ? "Έχεις " + totals.count + " γεύμα/γεύματα σήμερα." : "Δεν έχεις καταχωρήσει ακόμα γεύμα σήμερα.");
+}
+
 /* DASHBOARD */
 function getTodayDiaryItems(){
   const key = "gca_diary_" + todayKey();
@@ -2621,7 +2897,7 @@ function getFastingDashboardText(){
   if(pct >= 100) return "Ολοκληρώθηκε";
   return "Ενεργή • " + pct + "% • απομένει " + formatTime(remain);
 }
-function updateDashboard(){
+function updateDashboard(){ if(typeof v46RefreshHome==="function") v46RefreshHome(); 
   const today = getTodayTotalsV45();
   const exercise = getExerciseCaloriesTodayV45();
 
@@ -3726,7 +4002,7 @@ window.addEventListener("load", ()=>{
   }, 900);
 });
 
-loadWeightData();calculateWeight();loadFasting();updateDashboard();
+loadWeightData();calculateWeight();loadFasting();updateDashboard();setTimeout(v46RefreshHome,100);
 </script>
 </body>
 </html>
