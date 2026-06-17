@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V23</title>
+<title>Greek Cal AI V25</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -456,6 +456,33 @@ body{padding-bottom:86px}
   line-height:1.45;
 }
 
+
+.dashGoalNote{
+  background:#f8fbff;
+  border:1px solid #bfdbfe;
+  border-radius:14px;
+  padding:10px;
+  color:#174a8b;
+  font-size:13px;
+  line-height:1.35;
+  margin-top:8px;
+}
+
+
+.autoGoalBox{
+  background:#f8fbff;
+  border:1px solid #bfdbfe;
+  color:#174a8b;
+  border-radius:14px;
+  padding:10px;
+  margin:8px 0 12px;
+}
+#dailyGoal[readonly]{
+  background:#f1f5f9;
+  color:#0d47a1;
+  font-weight:900;
+}
+
 </style>
 </head>
 <body>
@@ -474,9 +501,11 @@ body{padding-bottom:86px}
       <div class="dashBox"><b>Νερό</b><span id="dashWater">0 / 2.5L</span></div>
       <div class="dashBox"><b>Νηστεία</b><span id="dashFasting">Ανενεργή</span></div>
       <div class="dashBox"><b>Βάρος</b><span id="dashWeight">Δεν υπάρχει</span></div>
+      <div class="dashBox"><b>Θερμίδες στόχου</b><span id="dashGoalCalories">-</span></div>
+      <div class="dashBox"><b>Στόχος σε</b><span id="dashGoalTime">-</span></div>
     </div>
     <div class="progressWrap"><div id="dashCalBar" class="progressBar"></div></div>
-    <p class="small" id="dashMessage" style="text-align:center;margin-top:8px">Καλή αρχή για σήμερα.</p>
+    <p class="small" id="dashMessage" style="text-align:center;margin-top:8px">Καλή αρχή για σήμερα.</p><div class="dashGoalNote" id="dashGoalNote">Συμπλήρωσε τον στόχο βάρους για να εμφανιστεί εκτίμηση.</div>
     <div class="quickActions">
       <button onclick="showPage('foods')">+ Φαγητό</button>
       <button onclick="showPage('diary')">Ημερήσιο</button>
@@ -1043,15 +1072,52 @@ function initDiaryDate(){if(!val("diaryDate"))document.getElementById("diaryDate
 function diaryKey(){initDiaryDate();return "gca_diary_"+val("diaryDate");}
 function getDiary(){return JSON.parse(localStorage.getItem(diaryKey())||"[]");}
 function setDiary(items){localStorage.setItem(diaryKey(),JSON.stringify(items));}
-function saveDailyGoal(){localStorage.setItem("gca_daily_goal",val("dailyGoal")||"1800");localStorage.setItem("gca_protein_goal",val("proteinGoal")||"120");}
-function loadDailyGoal(){document.getElementById("dailyGoal").value=localStorage.getItem("gca_daily_goal")||"1800";document.getElementById("proteinGoal").value=localStorage.getItem("gca_protein_goal")||"120";}
+function saveDailyGoal(){
+  if(!isAutoDailyGoal()){
+    localStorage.setItem("gca_daily_goal", val("dailyGoal") || "1800");
+  }else{
+    const calc = getWeightTargetCalories();
+    if(calc) localStorage.setItem("gca_daily_goal", String(calc.calories));
+  }
+  localStorage.setItem("gca_protein_goal", val("proteinGoal") || "120");
+}
+function loadDailyGoal(){
+  const auto = isAutoDailyGoal();
+  const cb = document.getElementById("autoDailyGoal");
+  if(cb) cb.checked = auto;
+
+  const input = document.getElementById("dailyGoal");
+  const info = document.getElementById("autoGoalInfo");
+  if(!input) return;
+
+  if(auto){
+    const calc = getWeightTargetCalories();
+    if(calc){
+      input.value = calc.calories;
+      input.readOnly = true;
+      localStorage.setItem("gca_daily_goal", String(calc.calories));
+      if(info) info.textContent = "Αυτόματος στόχος: " + calc.calories + " kcal (" + calc.mode + "). Συντήρηση: " + calc.maintenance + " kcal.";
+    }else{
+      input.value = localStorage.getItem("gca_daily_goal") || "1800";
+      input.readOnly = false;
+      if(info) info.textContent = "Συμπλήρωσε πρώτα τη σελίδα Βάρος για αυτόματο στόχο.";
+    }
+  }else{
+    input.value = localStorage.getItem("gca_daily_goal") || "1800";
+    input.readOnly = false;
+    if(info) info.textContent = "Χειροκίνητος στόχος θερμίδων ημέρας.";
+  }
+
+  const pInput = document.getElementById("proteinGoal");
+  if(pInput) pInput.value = localStorage.getItem("gca_protein_goal") || "120";
+}
 function addFoodToDiary(food, qtyId, mealId){initDiaryDate();const qty=parseFloat(document.getElementById(qtyId).value)||1;const meal=document.getElementById(mealId).value;const item={name:food.name,cat:food.cat,portion:food.portion,cal:food.cal,protein:food.protein||0,carbs:food.carbs||0,fat:food.fat||0,qty:qty,total:Math.round(food.cal*qty),p:Math.round((food.protein||0)*qty),c:Math.round((food.carbs||0)*qty),f:Math.round((food.fat||0)*qty),meal,time:new Date().toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"})};const items=getDiary();items.unshift(item);setDiary(items);alert("Προστέθηκε στο ημερήσιο γεύμα.");updateDashboard();}
 function renderDiary(){initDiaryDate();loadDailyGoal();const items=getDiary();const total=items.reduce((s,x)=>s+(Number(x.total)||0),0);const prot=items.reduce((s,x)=>s+(Number(x.p)||0),0);const carbs=items.reduce((s,x)=>s+(Number(x.c)||0),0);const fat=items.reduce((s,x)=>s+(Number(x.f)||0),0);const goal=Math.max(1,num("dailyGoal")||1800);const pGoal=Math.max(1,num("proteinGoal")||120);const remaining=goal-total;const percent=Math.round((total/goal)*100);setText("dailyCalories",total+" kcal");setText("dailyRemaining",(remaining>=0?remaining:Math.abs(remaining))+" kcal");setText("dailyItems",items.length);setText("dailyPercent",percent+"%");setText("dailyProtein",prot+" g");setText("dailyCarbs",carbs+" g");setText("dailyFat",fat+" g");const pPct=Math.round((prot/pGoal)*100);setText("proteinStatus","Στόχος πρωτεΐνης: "+pPct+"%");document.getElementById("proteinProgressBar").style.width=Math.min(100,pPct)+"%";const bar=document.getElementById("dailyProgressBar");bar.style.width=Math.min(100,percent)+"%";bar.classList.toggle("warn", total>goal);const status=document.getElementById("dailyStatus");status.className="goalMessage "+(total>goal?"warning":"okmsg");status.textContent=total>goal?`Ξεπέρασες τον στόχο κατά ${Math.abs(remaining)} kcal.`:`Απομένουν ${remaining} kcal μέχρι τον στόχο ημέρας.`;const box=document.getElementById("diaryList");if(items.length===0){box.innerHTML="<p class='small'>Δεν έχεις προσθέσει γεύματα για αυτή την ημέρα.</p>";return;}const groups=["Πρωινό","Μεσημεριανό","Βραδινό","Σνακ"];box.innerHTML=groups.map(g=>{const arr=items.map((x,i)=>({...x,idx:i})).filter(x=>x.meal===g);if(arr.length===0)return "";const sum=arr.reduce((s,x)=>s+x.total,0);return `<div class="mealHeader">${g} • ${sum} kcal</div>`+arr.map(x=>`<div class="historyItem"><div><b>${x.name}</b><br><span class="small">${x.time} • ${x.qty} x ${x.portion} • ${x.cat}</span><br><b>${x.total} kcal</b><br><span class="small">Π:${x.p||0}g • Υ:${x.c||0}g • Λ:${x.f||0}g</span></div><button class="deleteBtn" onclick="deleteDiaryItem(${x.idx})">🗑</button></div>`).join("");}).join("");}
 function deleteDiaryItem(i){const items=getDiary();items.splice(i,1);setDiary(items);renderDiary();updateDashboard();}
 function clearDiaryDay(){if(!confirm("Να διαγραφούν όλα τα γεύματα της ημέρας;"))return;localStorage.removeItem(diaryKey());renderDiary();updateDashboard();}
 
 /* ΒΑΡΟΣ */
-function saveWeightData(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity")};localStorage.setItem("gca_weight_data",JSON.stringify(data));calculateWeight();alert("Τα στοιχεία αποθηκεύτηκαν.");}
+function saveWeightData(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity")};localStorage.setItem("gca_weight_data",JSON.stringify(data));calculateWeight();loadDailyGoal();updateDashboard();alert("Τα στοιχεία αποθηκεύτηκαν.");}
 function loadWeightData(){const raw=localStorage.getItem("gca_weight_data");if(!raw)return;const d=JSON.parse(raw);["profileName","startWeight","currentWeight","targetWeight","height","age","gender","activity"].forEach(k=>{if(d[k])document.getElementById(k).value=d[k];});}
 function calculateWeight(){
   const start=num("startWeight"),current=num("currentWeight"),target=num("targetWeight"),h=num("height"),age=num("age"),gender=val("gender"),activity=num("activity");
@@ -1128,7 +1194,7 @@ function makeGoalMessage(progress,lost,remaining,bmi){
 }
 function getHistory(){return JSON.parse(localStorage.getItem("gca_weight_history")||"[]");}function setHistory(h){localStorage.setItem("gca_weight_history",JSON.stringify(h));}
 function addMeasurement(){const weight=num("currentWeight"),note=val("note").trim();if(weight<=0){alert("Βάλε σωστό τωρινό βάρος.");return;}const now=new Date(),item={date:now.toLocaleDateString("el-GR"),time:now.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"}),ts:Date.now(),weight,note};const h=getHistory();h.unshift(item);setHistory(h);document.getElementById("note").value="";saveWeightDataNoAlert();renderHistory();renderChart();calculateWeight();}
-function saveWeightDataNoAlert(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity")};localStorage.setItem("gca_weight_data",JSON.stringify(data));}
+function saveWeightDataNoAlert(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity")};localStorage.setItem("gca_weight_data",JSON.stringify(data));updateDashboard();}
 function deleteMeasurement(i){const h=getHistory();h.splice(i,1);setHistory(h);renderHistory();renderChart();calculateWeight();}function clearHistory(){if(!confirm("Να διαγραφεί όλο το ιστορικό;"))return;localStorage.removeItem("gca_weight_history");renderHistory();renderChart();calculateWeight();}
 function renderHistory(){const h=getHistory();setText("totalMeasurements",h.length);const box=document.getElementById("historyList");if(h.length===0){box.innerHTML="<p class='small'>Δεν υπάρχουν ακόμα μετρήσεις.</p>";return;}box.innerHTML=h.map((x,i)=>`<div class="historyItem"><div><b>${x.date} ${x.time}</b><br>⚖️ ${Number(x.weight).toFixed(1)} kg ${x.note?`<br>📝 ${escapeHtml(x.note)}`:""}</div><button class="deleteBtn" onclick="deleteMeasurement(${i})">🗑</button></div>`).join("");}
 function renderChart(){const h=getHistory().slice().reverse(),ctx=document.getElementById("weightChart");if(weightChart)weightChart.destroy();if(h.length<2)document.getElementById("chartHelp").textContent="Καταχώρησε τουλάχιστον 2 μετρήσεις για να εμφανιστεί σωστό γράφημα.";else document.getElementById("chartHelp").textContent="Το γράφημα ενημερώνεται από το ιστορικό μετρήσεων.";weightChart=new Chart(ctx,{type:"line",data:{labels:h.map(x=>x.date),datasets:[{label:"Βάρος kg",data:h.map(x=>x.weight),tension:.35,borderWidth:3,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:false}}}});}
@@ -1144,6 +1210,103 @@ function loadFasting(){const plan=localStorage.getItem("gca_fasting_plan")||"16"
 function startFasting(){localStorage.setItem("gca_fasting_start",String(Date.now()));updateFastingTimer();}function finishFasting(){localStorage.removeItem("gca_fasting_start");updateFastingTimer();alert("Η νηστεία τερματίστηκε.");}function resetFasting(){localStorage.removeItem("gca_fasting_start");updateFastingTimer();}
 function updateFastingTimer(){const start=parseInt(localStorage.getItem("gca_fasting_start")||"0",10),goal=fastingHours()*60*60*1000;if(!start){setText("fastingTimer","00:00:00");document.getElementById("fastingProgress").style.width="0%";setText("fastingStatus","Δεν έχει ξεκινήσει νηστεία.");return;}const elapsed=Date.now()-start,remain=Math.max(0,goal-elapsed),pct=Math.min(100,(elapsed/goal)*100);setText("fastingTimer",formatTime(remain));document.getElementById("fastingProgress").style.width=pct+"%";setText("fastingStatus",pct>=100?"Ολοκληρώθηκε η νηστεία!":"Απομένει χρόνος για ολοκλήρωση.");}
 function formatTime(ms){const total=Math.floor(ms/1000),h=String(Math.floor(total/3600)).padStart(2,"0"),m=String(Math.floor((total%3600)/60)).padStart(2,"0"),s=String(total%60).padStart(2,"0");return `${h}:${m}:${s}`;}
+
+
+
+/* AUTO DAILY CALORIE GOAL */
+function getWeightTargetCalories(){
+  const raw = localStorage.getItem("gca_weight_data");
+  if(!raw) return null;
+  let d = {};
+  try{ d = JSON.parse(raw); }catch(e){ return null; }
+
+  const current = parseFloat(String(d.currentWeight||"0").replace(",", ".")) || 0;
+  const target = parseFloat(String(d.targetWeight||"0").replace(",", ".")) || 0;
+  const h = parseFloat(String(d.height||"0").replace(",", ".")) || 0;
+  const age = parseFloat(String(d.age||"0").replace(",", ".")) || 0;
+  const activity = parseFloat(String(d.activity||"1.2").replace(",", ".")) || 1.2;
+  const gender = d.gender || "male";
+
+  if(current<=0 || target<=0 || h<=0 || age<=0) return null;
+
+  const bmr = gender==="male"
+    ? 10*current + 6.25*h*100 - 5*age + 5
+    : 10*current + 6.25*h*100 - 5*age - 161;
+
+  const maintenance = Math.round(bmr * activity);
+  let calories = maintenance;
+  let mode = "Συντήρηση";
+
+  if(current > target){
+    calories = Math.max(1200, maintenance - 500);
+    mode = "Απώλεια βάρους";
+  }else if(current < target){
+    calories = maintenance + 300;
+    mode = "Αύξηση/επιστροφή στον στόχο";
+  }
+
+  return {calories, maintenance, mode};
+}
+function isAutoDailyGoal(){
+  return localStorage.getItem("gca_auto_daily_goal") !== "false";
+}
+function saveAutoDailyGoal(){
+  const el = document.getElementById("autoDailyGoal");
+  if(el) localStorage.setItem("gca_auto_daily_goal", el.checked ? "true" : "false");
+}
+
+function computeWeightGoalDashboard(){
+  const raw = localStorage.getItem("gca_weight_data");
+  if(!raw){
+    return {cal:"-", time:"-", note:"Συμπλήρωσε τον στόχο βάρους για να εμφανιστεί εκτίμηση."};
+  }
+  let d = {};
+  try{ d = JSON.parse(raw); }catch(e){ return {cal:"-", time:"-", note:"Δεν βρέθηκαν σωστά στοιχεία στόχου βάρους."}; }
+
+  const current = parseFloat(String(d.currentWeight||"0").replace(",", ".")) || 0;
+  const target = parseFloat(String(d.targetWeight||"0").replace(",", ".")) || 0;
+  const h = parseFloat(String(d.height||"0").replace(",", ".")) || 0;
+  const age = parseFloat(String(d.age||"0").replace(",", ".")) || 0;
+  const activity = parseFloat(String(d.activity||"1.2").replace(",", ".")) || 1.2;
+  const gender = d.gender || "male";
+
+  if(current<=0 || target<=0 || h<=0 || age<=0){
+    return {cal:"-", time:"-", note:"Συμπλήρωσε βάρος, στόχο, ύψος και ηλικία."};
+  }
+
+  const bmr = gender==="male" ? 10*current + 6.25*h*100 - 5*age + 5 : 10*current + 6.25*h*100 - 5*age - 161;
+  const maintenance = Math.round(bmr * activity);
+
+  let targetCalories = maintenance;
+  let timeline = "Στόχος";
+  let note = "";
+
+  if(current > target){
+    const deficit = 500;
+    targetCalories = Math.max(1200, maintenance - deficit);
+    const weeklyLoss = (deficit * 7) / 7700;
+    const kgLeft = current - target;
+    const weeks = weeklyLoss > 0 ? Math.ceil(kgLeft / weeklyLoss) : 0;
+    const months = weeks / 4.345;
+    timeline = weeks < 8 ? weeks + " εβδομ." : months.toFixed(1) + " μήνες";
+    note = `Απομένουν ${kgLeft.toFixed(1)} kg. Ενδεικτικά ${targetCalories} kcal/ημέρα για στόχο σε ${timeline}.`;
+  }else if(current < target){
+    const surplus = 300;
+    targetCalories = maintenance + surplus;
+    const weeklyGain = (surplus * 7) / 7700;
+    const kgLeft = target - current;
+    const weeks = weeklyGain > 0 ? Math.ceil(kgLeft / weeklyGain) : 0;
+    const months = weeks / 4.345;
+    timeline = weeks < 8 ? weeks + " εβδομ." : months.toFixed(1) + " μήνες";
+    note = `Το τωρινό βάρος είναι κάτω από τον στόχο. Ενδεικτικά ${targetCalories} kcal/ημέρα για αύξηση προς στόχο.`;
+  }else{
+    targetCalories = maintenance;
+    timeline = "Τώρα";
+    note = `Είσαι στον στόχο. Ενδεικτικές θερμίδες συντήρησης: ${targetCalories} kcal/ημέρα.`;
+  }
+
+  return {cal:targetCalories+" kcal", time:timeline, note};
+}
 
 /* DASHBOARD */
 function getTodayDiaryItems(){
@@ -1179,7 +1342,8 @@ function updateDashboard(){
   const items = getTodayDiaryItems();
   const total = items.reduce((s,x)=>s+(Number(x.total)||0),0);
   const prot = items.reduce((s,x)=>s+(Number(x.p)||0),0);
-  const goal = parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
+  const autoCalc = isAutoDailyGoal ? getWeightTargetCalories() : null;
+  const goal = autoCalc ? autoCalc.calories : parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
   const pGoal = parseInt(localStorage.getItem("gca_protein_goal") || "120", 10);
   const todayActs = getActivitiesForKey ? getActivitiesForKey(todayKey()) : [];
   const burned = todayActs.reduce((s,x)=>s+(Number(x.burned)||0),0);
@@ -1196,6 +1360,11 @@ function updateDashboard(){
   setText("dashWater", (waterMl/1000).toFixed(1) + " / " + waterGoal + "L");
   setText("dashFasting", getFastingDashboardText());
   setText("dashWeight", getLastWeightText());
+  const goalDash = computeWeightGoalDashboard();
+  setText("dashGoalCalories", goalDash.cal);
+  setText("dashGoalTime", goalDash.time);
+  const goalNote = document.getElementById("dashGoalNote");
+  if(goalNote) goalNote.textContent = goalDash.note;
 
   const bar = document.getElementById("dashCalBar");
   bar.style.width = Math.min(100, pct) + "%";
