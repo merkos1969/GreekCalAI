@@ -1,439 +1,270 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Greek Cal AI</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    :root{
-      --blue:#1769c2;
-      --blue2:#0d47a1;
-      --bg:#f2f5f8;
-      --card:#ffffff;
-      --text:#18202a;
-      --muted:#6b7280;
-      --green:#198754;
-      --red:#dc3545;
-      --orange:#f59e0b;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      padding:14px;
-    }
-    .app{
-      max-width:760px;
-      margin:0 auto;
-    }
-    .card{
-      background:var(--card);
-      border-radius:18px;
-      padding:18px;
-      margin:12px 0;
-      box-shadow:0 6px 20px rgba(0,0,0,.08);
-    }
-    h1{
-      text-align:center;
-      color:var(--blue);
-      font-size:34px;
-      margin:18px 0 28px;
-    }
-    h2{margin:8px 0 16px;font-size:24px}
-    .menu button,.btn{
-      width:100%;
-      border:none;
-      background:var(--blue);
-      color:white;
-      border-radius:12px;
-      padding:15px;
-      font-size:20px;
-      margin:9px 0;
-      cursor:pointer;
-    }
-    .btn.secondary{background:#e8eef7;color:var(--blue)}
-    .btn.green{background:var(--green)}
-    .btn.red{background:var(--red)}
-    .btn.orange{background:var(--orange)}
-    .menu button:hover,.btn:hover{filter:brightness(.95)}
-    label{
-      display:block;
-      font-weight:bold;
-      margin:10px 0 6px;
-    }
-    input, textarea, select{
-      width:100%;
-      padding:13px;
-      border:1px solid #cfd7e2;
-      border-radius:10px;
-      font-size:17px;
-      background:#fff;
-    }
-    textarea{min-height:70px}
-    .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    }
-    .stat{
-      background:#f8fafc;
-      padding:14px;
-      border-radius:12px;
-      border:1px solid #e5e7eb;
-    }
-    .stat b{
-      display:block;
-      font-size:13px;
-      color:var(--muted);
-      margin-bottom:4px;
-    }
-    .stat span{font-size:20px;font-weight:bold}
-    .progressWrap{
-      height:22px;
-      background:#e5e7eb;
-      border-radius:999px;
-      overflow:hidden;
-    }
-    .progressBar{
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg,#1769c2,#28a0ff);
-      transition:.3s;
-    }
-    .historyItem{
-      display:flex;
-      gap:8px;
-      justify-content:space-between;
-      align-items:center;
-      background:#f8fafc;
-      border:1px solid #e5e7eb;
-      border-radius:12px;
-      padding:11px;
-      margin:8px 0;
-    }
-    .historyText{font-size:15px;line-height:1.35}
-    .deleteBtn{
-      border:none;
-      background:#fee2e2;
-      color:#b91c1c;
-      border-radius:9px;
-      padding:8px 10px;
-      font-size:16px;
-    }
-    .back{
-      display:inline-block;
-      margin-bottom:10px;
-      border:none;
-      background:#e8eef7;
-      color:var(--blue);
-      border-radius:10px;
-      padding:10px 14px;
-      font-size:16px;
-    }
-    .hidden{display:none}
-    .small{font-size:13px;color:var(--muted)}
-    canvas{max-height:300px}
-    @media(max-width:520px){
-      body{padding:10px}
-      h1{font-size:32px}
-      .grid{grid-template-columns:1fr}
-      .menu button{font-size:19px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greek Cal AI V2</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{
+  --blue:#1e6cc7;--blue2:#0d47a1;--bg:#eef3f8;--card:#fff;
+  --text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);padding:18px}
+.app{max-width:760px;margin:0 auto}
+.card{background:var(--card);border-radius:22px;padding:20px;margin:14px 0;box-shadow:0 10px 28px rgba(0,0,0,.08)}
+h1{text-align:center;color:var(--blue);font-size:36px;margin:24px 0 30px}
+h2{font-size:30px;margin:10px 0 22px}
+button,.btn{width:100%;border:0;border-radius:15px;padding:17px;margin:9px 0;background:var(--blue);color:#fff;font-size:22px;cursor:pointer}
+button:hover{filter:brightness(.95)}
+.btnLight{background:#e8eef7;color:var(--blue)}
+.btnGreen{background:var(--green)}
+.btnRed{background:var(--red)}
+.btnOrange{background:var(--orange)}
+.back{display:inline-block;width:auto;background:#e8eef7;color:var(--blue);padding:13px 18px;margin-bottom:20px}
+label{display:block;font-weight:800;font-size:17px;margin:12px 0 7px}
+input,select,textarea{width:100%;padding:15px;border:1px solid #cfd7e2;border-radius:14px;font-size:20px;background:#fff}
+textarea{min-height:74px}
+.hidden{display:none}
+.menu button{font-size:28px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:15px}
+.stat b{display:block;color:var(--muted);font-size:14px;margin-bottom:6px}
+.stat span{font-size:24px;font-weight:900}
+.progressWrap{height:24px;background:#e5e7eb;border-radius:999px;overflow:hidden}
+.progressBar{height:100%;width:0%;background:linear-gradient(90deg,#1e6cc7,#28a0ff);transition:.3s}
+.bigCenter{text-align:center;font-size:38px;font-weight:900;margin:18px 0;color:var(--blue)}
+.small{color:var(--muted);font-size:14px;line-height:1.35}
+.historyItem{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#f8fafc;border:1px solid #e5e7eb;border-radius:15px;padding:12px;margin:10px 0}
+.deleteBtn{width:auto;background:#fee2e2;color:#b91c1c;padding:8px 12px;font-size:18px}
+canvas{max-height:310px}
+@media(max-width:560px){
+  body{padding:12px}
+  h1{font-size:34px}.menu button{font-size:27px}
+  .grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 <div class="app">
 
-  <section id="home" class="card menu">
-    <h1>🇬🇷 Greek Cal AI</h1>
-    <button onclick="soon()">📷 Φωτογραφία Γεύματος</button>
-    <button onclick="soon()">📦 Σάρωση Barcode</button>
-    <button onclick="soon()">🍽 Ελληνικά Φαγητά</button>
-    <button onclick="showPage('fasting')">⏱ Διαλειμματική Νηστεία</button>
-    <button onclick="soon()">📅 Ημερολόγιο</button>
-    <button onclick="showPage('weight')">⚖️ Στόχος Βάρους</button>
-  </section>
+<section id="home" class="card menu">
+  <h1>🇬🇷 Greek Cal AI</h1>
+  <button onclick="soon()">📷 Φωτογραφία Γεύματος</button>
+  <button onclick="soon()">📦 Σάρωση Barcode</button>
+  <button onclick="soon()">🍽 Ελληνικά Φαγητά</button>
+  <button onclick="showPage('fasting')">⏱ Διαλειμματική Νηστεία</button>
+  <button onclick="soon()">📅 Ημερολόγιο</button>
+  <button onclick="showPage('weight')">⚖️ Στόχος Βάρους</button>
+</section>
 
-  <section id="weight" class="hidden">
-    <button class="back" onclick="showPage('home')">← Πίσω</button>
+<section id="fasting" class="hidden">
+  <button class="back" onclick="showPage('home')">← Πίσω</button>
+  <div class="card">
+    <h2>⏱ Διαλειμματική Νηστεία</h2>
 
-    <div class="card">
-      <h2>⚖️ Στόχος Βάρους</h2>
+    <label>Πλάνο</label>
+    <select id="fastingPlan" onchange="saveFastingPlan()">
+      <option value="16">16:8</option>
+      <option value="18">18:6</option>
+      <option value="20">20:4</option>
+      <option value="23">OMAD 23:1</option>
+    </select>
 
-      <label>Αρχικό βάρος (kg)</label>
-      <input id="startWeight" type="number" step="0.1" value="135">
-
-      <label>Τωρινό βάρος (kg)</label>
-      <input id="currentWeight" type="number" step="0.1" value="135">
-
-      <label>Στόχος βάρους (kg)</label>
-      <input id="targetWeight" type="number" step="0.1" value="100">
-
-      <label>Ύψος π.χ. 1.75</label>
-      <input id="height" type="number" step="0.01" value="1.75">
-
-      <label>Σημείωση μέτρησης</label>
-      <textarea id="note" placeholder="π.χ. Carnivore / 16:8 / περπάτημα"></textarea>
-
-      <button class="btn green" onclick="saveWeightData()">💾 Αποθήκευση Στοιχείων</button>
-      <button class="btn" onclick="addMeasurement()">➕ Καταχώρηση Μέτρησης</button>
-      <button class="btn secondary" onclick="calculateWeight()">📊 Υπολογισμός Προόδου</button>
+    <div class="stat" style="margin-top:14px">
+      <b>Τρέχον πλάνο</b>
+      <span id="fastingPlanText">16:8</span>
     </div>
 
-    <div class="card">
-      <h2>Πρόοδος</h2>
-      <div class="progressWrap"><div id="progressBar" class="progressBar"></div></div>
-      <p id="progressText" style="text-align:center;font-size:24px;font-weight:bold">0%</p>
+    <div class="bigCenter" id="fastingTimer">00:00:00</div>
+    <div class="progressWrap"><div id="fastingProgress" class="progressBar"></div></div>
+    <p id="fastingStatus" class="small" style="text-align:center;margin-top:10px">Δεν έχει ξεκινήσει νηστεία.</p>
 
-      <div class="grid">
-        <div class="stat"><b>Χαμένα κιλά</b><span id="lostKg">0 kg</span></div>
-        <div class="stat"><b>Κιλά που απομένουν</b><span id="remainingKg">0 kg</span></div>
-        <div class="stat"><b>BMI</b><span id="bmi">-</span></div>
-        <div class="stat"><b>Συνολικές μετρήσεις</b><span id="totalMeasurements">0</span></div>
-      </div>
+    <button class="btnGreen" onclick="startFasting()">▶️ Έναρξη Νηστείας</button>
+    <button class="btnOrange" onclick="finishFasting()">✅ Τερματισμός</button>
+    <button class="btnRed" onclick="resetFasting()">🗑 Μηδενισμός</button>
+  </div>
+</section>
+
+<section id="weight" class="hidden">
+  <button class="back" onclick="showPage('home')">← Πίσω</button>
+
+  <div class="card">
+    <h2>⚖️ Στόχος Βάρους</h2>
+    <label>Αρχικό βάρος (kg)</label>
+    <input id="startWeight" type="number" step="0.1" value="135">
+    <label>Τωρινό βάρος (kg)</label>
+    <input id="currentWeight" type="number" step="0.1" value="135">
+    <label>Στόχος βάρους (kg)</label>
+    <input id="targetWeight" type="number" step="0.1" value="100">
+    <label>Ύψος π.χ. 1.75</label>
+    <input id="height" type="number" step="0.01" value="1.75">
+    <label>Σημείωση μέτρησης</label>
+    <textarea id="note" placeholder="π.χ. Carnivore / 16:8 / περπάτημα"></textarea>
+
+    <button class="btnGreen" onclick="saveWeightData()">💾 Αποθήκευση Στοιχείων</button>
+    <button onclick="addMeasurement()">➕ Καταχώρηση Μέτρησης</button>
+    <button class="btnLight" onclick="calculateWeight()">📊 Υπολογισμός Προόδου</button>
+  </div>
+
+  <div class="card">
+    <h2>Πρόοδος</h2>
+    <div class="progressWrap"><div id="weightProgressBar" class="progressBar"></div></div>
+    <p id="weightProgressText" class="bigCenter">0%</p>
+    <div class="grid">
+      <div class="stat"><b>Χαμένα κιλά</b><span id="lostKg">0 kg</span></div>
+      <div class="stat"><b>Κιλά που απομένουν</b><span id="remainingKg">0 kg</span></div>
+      <div class="stat"><b>BMI</b><span id="bmi">-</span></div>
+      <div class="stat"><b>Μετρήσεις</b><span id="totalMeasurements">0</span></div>
     </div>
+  </div>
 
-    <div class="card">
-      <h2>📈 Γράφημα Βάρους</h2>
-      <canvas id="weightChart"></canvas>
-      <p class="small">Το γράφημα εμφανίζεται όταν υπάρχουν τουλάχιστον 2 μετρήσεις.</p>
-    </div>
+  <div class="card">
+    <h2>📈 Γράφημα Βάρους</h2>
+    <canvas id="weightChart"></canvas>
+    <p class="small">Το γράφημα εμφανίζεται όταν υπάρχουν τουλάχιστον 2 μετρήσεις.</p>
+  </div>
 
-    <div class="card">
-      <h2>📋 Ιστορικό Μετρήσεων</h2>
-      <div id="historyList"></div>
-      <button class="btn red" onclick="clearHistory()">🗑 Διαγραφή όλου του ιστορικού</button>
-    </div>
+  <div class="card">
+    <h2>📋 Ιστορικό Μετρήσεων</h2>
+    <div id="historyList"></div>
+    <button class="btnRed" onclick="clearHistory()">🗑 Διαγραφή όλου του ιστορικού</button>
+  </div>
 
-    <p class="small">Σημείωση: Οι υπολογισμοί είναι ενδεικτικοί και δεν αποτελούν ιατρική συμβουλή.</p>
-  </section>
-
-  <section id="fasting" class="hidden">
-    <button class="back" onclick="showPage('home')">← Πίσω</button>
-    <div class="card">
-      <h2>⏱ Διαλειμματική Νηστεία</h2>
-      <label>Πλάνο</label>
-      <select id="fastingPlan">
-        <option value="16:8">16:8</option>
-        <option value="18:6">18:6</option>
-        <option value="20:4">20:4</option>
-        <option value="OMAD">OMAD</option>
-      </select>
-      <button class="btn" onclick="saveFasting()">💾 Αποθήκευση Πλάνου</button>
-      <div class="stat" style="margin-top:12px">
-        <b>Τρέχον πλάνο</b>
-        <span id="currentFasting">16:8</span>
-      </div>
-      <p class="small">Στην επόμενη έκδοση θα μπει χρονόμετρο νηστείας.</p>
-    </div>
-  </section>
+  <p class="small">Οι υπολογισμοί είναι ενδεικτικοί και δεν αποτελούν ιατρική συμβουλή.</p>
+</section>
 
 </div>
 
 <script>
-let chart = null;
+let weightChart = null;
+let fastingInterval = null;
 
 function showPage(id){
-  document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
+  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
-  if(id === "weight"){
-    loadWeightData();
-    calculateWeight();
-    renderHistory();
-    renderChart();
-  }
-  if(id === "fasting"){
-    loadFasting();
-  }
+  if(id==="weight"){loadWeightData();calculateWeight();renderHistory();renderChart();}
+  if(id==="fasting"){loadFasting();updateFastingTimer();}
 }
+function soon(){alert("Η λειτουργία θα προστεθεί σε επόμενη έκδοση.");}
+function num(id){return parseFloat(String(document.getElementById(id).value).replace(",","."))||0;}
 
-function soon(){
-  alert("Η λειτουργία θα προστεθεί σε επόμενη έκδοση.");
-}
-
-function num(id){
-  return parseFloat(String(document.getElementById(id).value).replace(",", ".")) || 0;
-}
-
+/* ΒΑΡΟΣ */
 function saveWeightData(){
-  const data = {
-    startWeight: document.getElementById("startWeight").value,
-    currentWeight: document.getElementById("currentWeight").value,
-    targetWeight: document.getElementById("targetWeight").value,
-    height: document.getElementById("height").value
+  const data={
+    startWeight:document.getElementById("startWeight").value,
+    currentWeight:document.getElementById("currentWeight").value,
+    targetWeight:document.getElementById("targetWeight").value,
+    height:document.getElementById("height").value
   };
-  localStorage.setItem("gca_weight_data", JSON.stringify(data));
+  localStorage.setItem("gca_weight_data",JSON.stringify(data));
   calculateWeight();
   alert("Τα στοιχεία αποθηκεύτηκαν.");
 }
-
 function loadWeightData(){
-  const raw = localStorage.getItem("gca_weight_data");
-  if(!raw) return;
-  const data = JSON.parse(raw);
-  document.getElementById("startWeight").value = data.startWeight || "135";
-  document.getElementById("currentWeight").value = data.currentWeight || "135";
-  document.getElementById("targetWeight").value = data.targetWeight || "100";
-  document.getElementById("height").value = data.height || "1.75";
+  const raw=localStorage.getItem("gca_weight_data");
+  if(!raw)return;
+  const d=JSON.parse(raw);
+  document.getElementById("startWeight").value=d.startWeight||"135";
+  document.getElementById("currentWeight").value=d.currentWeight||"135";
+  document.getElementById("targetWeight").value=d.targetWeight||"100";
+  document.getElementById("height").value=d.height||"1.75";
 }
-
 function calculateWeight(){
-  const start = num("startWeight");
-  const current = num("currentWeight");
-  const target = num("targetWeight");
-  const h = num("height");
-
-  let lost = start - current;
-  let remaining = current - target;
-  let progress = 0;
-
-  if(start > target){
-    progress = ((start - current) / (start - target)) * 100;
-  }
-  progress = Math.max(0, Math.min(100, progress));
-
-  const bmi = h > 0 ? current / (h*h) : 0;
-
-  document.getElementById("progressBar").style.width = progress + "%";
-  document.getElementById("progressText").textContent = progress.toFixed(1) + "%";
-  document.getElementById("lostKg").textContent = lost.toFixed(1) + " kg";
-  document.getElementById("remainingKg").textContent = Math.max(0, remaining).toFixed(1) + " kg";
-  document.getElementById("bmi").textContent = bmi ? bmi.toFixed(1) : "-";
+  const start=num("startWeight"), current=num("currentWeight"), target=num("targetWeight"), h=num("height");
+  let progress=0;
+  if(start>target)progress=((start-current)/(start-target))*100;
+  progress=Math.max(0,Math.min(100,progress));
+  const lost=start-current, remaining=Math.max(0,current-target), bmi=h>0?current/(h*h):0;
+  document.getElementById("weightProgressBar").style.width=progress+"%";
+  document.getElementById("weightProgressText").textContent=progress.toFixed(1)+"%";
+  document.getElementById("lostKg").textContent=lost.toFixed(1)+" kg";
+  document.getElementById("remainingKg").textContent=remaining.toFixed(1)+" kg";
+  document.getElementById("bmi").textContent=bmi?bmi.toFixed(1):"-";
 }
-
-function getHistory(){
-  return JSON.parse(localStorage.getItem("gca_weight_history") || "[]");
-}
-
-function setHistory(history){
-  localStorage.setItem("gca_weight_history", JSON.stringify(history));
-}
-
+function getHistory(){return JSON.parse(localStorage.getItem("gca_weight_history")||"[]");}
+function setHistory(h){localStorage.setItem("gca_weight_history",JSON.stringify(h));}
 function addMeasurement(){
-  const weight = num("currentWeight");
-  const note = document.getElementById("note").value.trim();
-  if(weight <= 0){
-    alert("Βάλε πρώτα σωστό τωρινό βάρος.");
-    return;
-  }
-
-  const now = new Date();
-  const item = {
-    date: now.toLocaleDateString("el-GR"),
-    time: now.toLocaleTimeString("el-GR", {hour:"2-digit", minute:"2-digit"}),
-    weight,
-    note
-  };
-
-  const history = getHistory();
-  history.unshift(item);
-  setHistory(history);
-  document.getElementById("note").value = "";
-  saveWeightData();
-  renderHistory();
-  renderChart();
+  const weight=num("currentWeight");
+  const note=document.getElementById("note").value.trim();
+  if(weight<=0){alert("Βάλε σωστό τωρινό βάρος.");return;}
+  const now=new Date();
+  const item={date:now.toLocaleDateString("el-GR"),time:now.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"}),weight,note};
+  const h=getHistory();h.unshift(item);setHistory(h);
+  document.getElementById("note").value="";
+  saveWeightDataNoAlert();
+  renderHistory();renderChart();calculateWeight();
 }
-
-function deleteMeasurement(index){
-  const history = getHistory();
-  history.splice(index,1);
-  setHistory(history);
-  renderHistory();
-  renderChart();
+function saveWeightDataNoAlert(){
+  const data={startWeight:document.getElementById("startWeight").value,currentWeight:document.getElementById("currentWeight").value,targetWeight:document.getElementById("targetWeight").value,height:document.getElementById("height").value};
+  localStorage.setItem("gca_weight_data",JSON.stringify(data));
 }
-
-function clearHistory(){
-  if(!confirm("Να διαγραφεί όλο το ιστορικό;")) return;
-  localStorage.removeItem("gca_weight_history");
-  renderHistory();
-  renderChart();
-}
-
+function deleteMeasurement(i){const h=getHistory();h.splice(i,1);setHistory(h);renderHistory();renderChart();}
+function clearHistory(){if(!confirm("Να διαγραφεί όλο το ιστορικό;"))return;localStorage.removeItem("gca_weight_history");renderHistory();renderChart();}
 function renderHistory(){
-  const history = getHistory();
-  document.getElementById("totalMeasurements").textContent = history.length;
-  const box = document.getElementById("historyList");
-
-  if(history.length === 0){
-    box.innerHTML = "<p class='small'>Δεν υπάρχουν ακόμα μετρήσεις.</p>";
-    return;
-  }
-
-  box.innerHTML = history.map((h,i)=>`
-    <div class="historyItem">
-      <div class="historyText">
-        <b>${h.date} ${h.time}</b><br>
-        ⚖️ ${Number(h.weight).toFixed(1)} kg
-        ${h.note ? "<br>📝 " + escapeHtml(h.note) : ""}
-      </div>
-      <button class="deleteBtn" onclick="deleteMeasurement(${i})">🗑</button>
-    </div>
-  `).join("");
+  const h=getHistory();document.getElementById("totalMeasurements").textContent=h.length;
+  const box=document.getElementById("historyList");
+  if(h.length===0){box.innerHTML="<p class='small'>Δεν υπάρχουν ακόμα μετρήσεις.</p>";return;}
+  box.innerHTML=h.map((x,i)=>`<div class="historyItem"><div><b>${x.date} ${x.time}</b><br>⚖️ ${Number(x.weight).toFixed(1)} kg ${x.note?`<br>📝 ${escapeHtml(x.note)}`:""}</div><button class="deleteBtn" onclick="deleteMeasurement(${i})">🗑</button></div>`).join("");
 }
-
 function renderChart(){
-  const history = getHistory().slice().reverse();
-  const ctx = document.getElementById("weightChart");
+  const h=getHistory().slice().reverse();
+  const ctx=document.getElementById("weightChart");
+  if(weightChart)weightChart.destroy();
+  weightChart=new Chart(ctx,{type:"line",data:{labels:h.map(x=>x.date),datasets:[{label:"Βάρος kg",data:h.map(x=>x.weight),tension:.35,borderWidth:3,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:false}}}});
+}
+function escapeHtml(t){return t.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
 
-  if(chart) chart.destroy();
-
-  if(history.length < 2){
-    chart = new Chart(ctx, {
-      type:"line",
-      data:{labels:[""],datasets:[{label:"Βάρος",data:[]}]},
-      options:{plugins:{legend:{display:false}}}
-    });
+/* ΝΗΣΤΕΙΑ */
+function fastingHours(){return parseInt(document.getElementById("fastingPlan").value,10)||16;}
+function planText(){const v=document.getElementById("fastingPlan").value;return v==="23"?"OMAD 23:1":`${v}:${24-parseInt(v,10)}`;}
+function saveFastingPlan(){localStorage.setItem("gca_fasting_plan",document.getElementById("fastingPlan").value);loadFasting();}
+function loadFasting(){
+  const plan=localStorage.getItem("gca_fasting_plan")||"16";
+  document.getElementById("fastingPlan").value=plan;
+  document.getElementById("fastingPlanText").textContent=planText();
+  if(fastingInterval)clearInterval(fastingInterval);
+  fastingInterval=setInterval(updateFastingTimer,1000);
+}
+function startFasting(){
+  localStorage.setItem("gca_fasting_start",String(Date.now()));
+  updateFastingTimer();
+}
+function finishFasting(){
+  localStorage.removeItem("gca_fasting_start");
+  updateFastingTimer();
+  alert("Η νηστεία τερματίστηκε.");
+}
+function resetFasting(){
+  localStorage.removeItem("gca_fasting_start");
+  updateFastingTimer();
+}
+function updateFastingTimer(){
+  const start=parseInt(localStorage.getItem("gca_fasting_start")||"0",10);
+  const goal=fastingHours()*60*60*1000;
+  if(!start){
+    document.getElementById("fastingTimer").textContent="00:00:00";
+    document.getElementById("fastingProgress").style.width="0%";
+    document.getElementById("fastingStatus").textContent="Δεν έχει ξεκινήσει νηστεία.";
     return;
   }
-
-  chart = new Chart(ctx, {
-    type:"line",
-    data:{
-      labels: history.map(h => h.date),
-      datasets:[{
-        label:"Βάρος kg",
-        data: history.map(h => h.weight),
-        tension:.35,
-        borderWidth:3,
-        pointRadius:5
-      }]
-    },
-    options:{
-      responsive:true,
-      maintainAspectRatio:false,
-      scales:{
-        y:{beginAtZero:false}
-      }
-    }
-  });
+  const elapsed=Date.now()-start;
+  const remain=Math.max(0,goal-elapsed);
+  const pct=Math.min(100,(elapsed/goal)*100);
+  document.getElementById("fastingTimer").textContent=formatTime(remain);
+  document.getElementById("fastingProgress").style.width=pct+"%";
+  document.getElementById("fastingStatus").textContent=pct>=100?"Ολοκληρώθηκε η νηστεία!":"Απομένει χρόνος για ολοκλήρωση.";
+}
+function formatTime(ms){
+  const total=Math.floor(ms/1000);
+  const h=String(Math.floor(total/3600)).padStart(2,"0");
+  const m=String(Math.floor((total%3600)/60)).padStart(2,"0");
+  const s=String(total%60).padStart(2,"0");
+  return `${h}:${m}:${s}`;
 }
 
-function escapeHtml(text){
-  return text.replace(/[&<>"']/g, function(m){
-    return ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    })[m];
-  });
-}
-
-function saveFasting(){
-  const plan = document.getElementById("fastingPlan").value;
-  localStorage.setItem("gca_fasting_plan", plan);
-  loadFasting();
-  alert("Το πλάνο αποθηκεύτηκε.");
-}
-
-function loadFasting(){
-  const plan = localStorage.getItem("gca_fasting_plan") || "16:8";
-  document.getElementById("fastingPlan").value = plan;
-  document.getElementById("currentFasting").textContent = plan;
-}
-
-loadWeightData();
-calculateWeight();
+loadWeightData();calculateWeight();loadFasting();
 </script>
 </body>
 </html>
