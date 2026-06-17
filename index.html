@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V39</title>
+<title>Greek Cal AI V40</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -1152,6 +1152,82 @@ label{
   }
 }
 
+
+/* V40 macro split */
+.macroSplitBox{
+  background:#f8fbff;
+  border:1px solid #bfdbfe;
+  border-radius:18px;
+  padding:12px;
+  margin:10px 0;
+}
+.macroSplitGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+}
+.macroSplitGrid input{
+  text-align:center;
+  font-weight:900;
+}
+.macroPresetGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin:8px 0;
+}
+.macroPresetGrid button{
+  background:#eaf3ff;
+  color:#0d47a1;
+  box-shadow:none;
+  border-radius:14px;
+  padding:10px;
+  font-size:13px;
+}
+.macroSplitInfo{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:14px;
+  padding:10px;
+  font-weight:900;
+  line-height:1.35;
+  margin-top:8px;
+}
+.macroBars{
+  display:grid;
+  gap:8px;
+  margin:10px 0;
+}
+.macroBarLine{
+  display:grid;
+  grid-template-columns:84px 1fr 54px;
+  gap:8px;
+  align-items:center;
+  font-size:13px;
+  font-weight:900;
+  color:#475467;
+}
+.macroMiniWrap{
+  height:12px;
+  background:#e5e7eb;
+  border-radius:999px;
+  overflow:hidden;
+}
+.macroMini{
+  height:100%;
+  border-radius:999px;
+  width:0%;
+}
+.macroProtein{background:linear-gradient(90deg,#7c3aed,#a855f7)}
+.macroCarbs{background:linear-gradient(90deg,#0ea5e9,#38bdf8)}
+.macroFat{background:linear-gradient(90deg,#f59e0b,#f97316)}
+@media(max-width:560px){
+  .macroSplitGrid,.macroPresetGrid{
+    grid-template-columns:1fr;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -1768,7 +1844,8 @@ function saveDailyGoal(){
     const calc = getWeightTargetCalories();
     if(calc) localStorage.setItem("gca_daily_goal", String(calc.calories));
   }
-  localStorage.setItem("gca_protein_goal", val("proteinGoal") || "120");
+  saveMacroSplit();
+  updateMacroTargets();
 }
 function loadDailyGoal(){
   const auto = isAutoDailyGoal();
@@ -1799,9 +1876,87 @@ function loadDailyGoal(){
 
   const pInput = document.getElementById("proteinGoal");
   if(pInput) pInput.value = localStorage.getItem("gca_protein_goal") || "120";
+  loadMacroSplit();
 }
+
+/* V40 macro split */
+function getMacroSplit(){
+  return {
+    p: parseInt(localStorage.getItem("gca_macro_p") || "30", 10),
+    c: parseInt(localStorage.getItem("gca_macro_c") || "40", 10),
+    f: parseInt(localStorage.getItem("gca_macro_f") || "30", 10)
+  };
+}
+function loadMacroSplit(){
+  const m = getMacroSplit();
+  const p=document.getElementById("macroProteinPct"), c=document.getElementById("macroCarbsPct"), f=document.getElementById("macroFatPct");
+  if(p) p.value=m.p;
+  if(c) c.value=m.c;
+  if(f) f.value=m.f;
+  updateMacroTargets();
+}
+function saveMacroSplit(){
+  const p=parseInt(val("macroProteinPct")||"30",10);
+  const c=parseInt(val("macroCarbsPct")||"40",10);
+  const f=parseInt(val("macroFatPct")||"30",10);
+  localStorage.setItem("gca_macro_p", String(p));
+  localStorage.setItem("gca_macro_c", String(c));
+  localStorage.setItem("gca_macro_f", String(f));
+}
+function setMacroPreset(p,c,f){
+  document.getElementById("macroProteinPct").value=p;
+  document.getElementById("macroCarbsPct").value=c;
+  document.getElementById("macroFatPct").value=f;
+  saveMacroSplit();
+  updateMacroTargets();
+  renderDiary();
+  updateDashboard();
+}
+function getMacroTargets(){
+  const goal = Math.max(1, num("dailyGoal") || parseInt(localStorage.getItem("gca_daily_goal") || "1800",10));
+  const m = getMacroSplit();
+  return {
+    pPct:m.p, cPct:m.c, fPct:m.f,
+    pG: Math.round((goal * m.p / 100) / 4),
+    cG: Math.round((goal * m.c / 100) / 4),
+    fG: Math.round((goal * m.f / 100) / 9),
+    totalPct: m.p + m.c + m.f
+  };
+}
+function updateMacroTargets(){
+  const t = getMacroTargets();
+  const info = document.getElementById("macroSplitInfo");
+  if(info){
+    if(t.totalPct !== 100){
+      info.textContent = "Προσοχή: το σύνολο είναι " + t.totalPct + "%. Καλό είναι να είναι 100%.";
+      info.style.background = "#fff7ed";
+      info.style.borderColor = "#fed7aa";
+      info.style.color = "#9a3412";
+    }else{
+      info.textContent = `Στόχοι: Πρωτεΐνη ${t.pG}g • Υδατάνθρακες ${t.cG}g • Λιπαρά ${t.fG}g`;
+      info.style.background = "#ecfdf5";
+      info.style.borderColor = "#bbf7d0";
+      info.style.color = "#166534";
+    }
+  }
+  const pg = document.getElementById("proteinGoal");
+  if(pg) pg.value = t.pG;
+  localStorage.setItem("gca_protein_goal", String(t.pG));
+}
+
 function addFoodToDiary(food, qtyId, mealId){initDiaryDate();const qty=parseFloat(document.getElementById(qtyId).value)||1;const meal=document.getElementById(mealId).value;const item={name:food.name,cat:food.cat,portion:food.portion,cal:food.cal,protein:food.protein||0,carbs:food.carbs||0,fat:food.fat||0,qty:qty,total:Math.round(food.cal*qty),p:Math.round((food.protein||0)*qty),c:Math.round((food.carbs||0)*qty),f:Math.round((food.fat||0)*qty),meal,time:new Date().toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"})};const items=getDiary();items.unshift(item);setDiary(items);alert("Προστέθηκε στο ημερήσιο γεύμα.");updateDashboard();}
-function renderDiary(){initDiaryDate();loadDailyGoal();const items=getDiary();const total=items.reduce((s,x)=>s+(Number(x.total)||0),0);const prot=items.reduce((s,x)=>s+(Number(x.p)||0),0);const carbs=items.reduce((s,x)=>s+(Number(x.c)||0),0);const fat=items.reduce((s,x)=>s+(Number(x.f)||0),0);const goal=Math.max(1,num("dailyGoal")||1800);const pGoal=Math.max(1,num("proteinGoal")||120);const remaining=goal-total;const percent=Math.round((total/goal)*100);setText("dailyCalories",total+" kcal");setText("dailyRemaining",(remaining>=0?remaining:Math.abs(remaining))+" kcal");setText("dailyItems",items.length);setText("dailyPercent",percent+"%");setText("dailyProtein",prot+" g");setText("dailyCarbs",carbs+" g");setText("dailyFat",fat+" g");const pPct=Math.round((prot/pGoal)*100);setText("proteinStatus","Στόχος πρωτεΐνης: "+pPct+"%");document.getElementById("proteinProgressBar").style.width=Math.min(100,pPct)+"%";const bar=document.getElementById("dailyProgressBar");bar.style.width=Math.min(100,percent)+"%";bar.classList.toggle("warn", total>goal);const status=document.getElementById("dailyStatus");status.className="goalMessage "+(total>goal?"warning":"okmsg");status.textContent=total>goal?`Ξεπέρασες τον στόχο κατά ${Math.abs(remaining)} kcal.`:`Απομένουν ${remaining} kcal μέχρι τον στόχο ημέρας.`;const box=document.getElementById("diaryList");if(items.length===0){box.innerHTML="<p class='small'>Δεν έχεις προσθέσει γεύματα για αυτή την ημέρα.</p>";return;}const groups=["Πρωινό","Σνακ","Μεσημεριανό","Βραδινό","Σνακ"];box.innerHTML=groups.map(g=>{const arr=items.map((x,i)=>({...x,idx:i})).filter(x=>x.meal===g);if(arr.length===0)return "";const sum=arr.reduce((s,x)=>s+x.total,0);return `<div class="mealHeader">${g} • ${sum} kcal</div>`+arr.map(x=>`<div class="historyItem"><div><b>${x.name}</b><br><span class="small">${x.time} • ${x.qty} x ${x.portion} • ${x.cat}</span><br><b>${x.total} kcal</b><br><span class="small">Π:${x.p||0}g • Υ:${x.c||0}g • Λ:${x.f||0}g</span></div><button class="deleteBtn" onclick="deleteDiaryItem(${x.idx})">🗑</button></div>`).join("");}).join("");}
+function renderDiary(){initDiaryDate();loadDailyGoal();const items=getDiary();const total=items.reduce((s,x)=>s+(Number(x.total)||0),0);const prot=items.reduce((s,x)=>s+(Number(x.p)||0),0);const carbs=items.reduce((s,x)=>s+(Number(x.c)||0),0);const fat=items.reduce((s,x)=>s+(Number(x.f)||0),0);const goal=Math.max(1,num("dailyGoal")||1800);const pGoal=Math.max(1,num("proteinGoal")||120);const remaining=goal-total;const percent=Math.round((total/goal)*100);setText("dailyCalories",total+" kcal");setText("dailyRemaining",(remaining>=0?remaining:Math.abs(remaining))+" kcal");setText("dailyItems",items.length);setText("dailyPercent",percent+"%");setText("dailyProtein",prot+" g");setText("dailyCarbs",carbs+" g");setText("dailyFat",fat+" g");const targets=getMacroTargets();
+const pPct=Math.round((prot/Math.max(1,targets.pG))*100);
+const cPct=Math.round((carbs/Math.max(1,targets.cG))*100);
+const fPct=Math.round((fat/Math.max(1,targets.fG))*100);
+setText("proteinStatus","Στόχος πρωτεΐνης: "+pPct+"% • "+prot+"g / "+targets.pG+"g");
+document.getElementById("proteinProgressBar").style.width=Math.min(100,pPct)+"%";
+const pb=document.getElementById("proteinMacroBar"); if(pb) pb.style.width=Math.min(100,pPct)+"%";
+const cb=document.getElementById("carbsMacroBar"); if(cb) cb.style.width=Math.min(100,cPct)+"%";
+const fb=document.getElementById("fatMacroBar"); if(fb) fb.style.width=Math.min(100,fPct)+"%";
+setText("proteinMacroText", pPct+"%");
+setText("carbsMacroText", cPct+"%");
+setText("fatMacroText", fPct+"%");const bar=document.getElementById("dailyProgressBar");bar.style.width=Math.min(100,percent)+"%";bar.classList.toggle("warn", total>goal);const status=document.getElementById("dailyStatus");status.className="goalMessage "+(total>goal?"warning":"okmsg");status.textContent=total>goal?`Ξεπέρασες τον στόχο κατά ${Math.abs(remaining)} kcal.`:`Απομένουν ${remaining} kcal μέχρι τον στόχο ημέρας.`;const box=document.getElementById("diaryList");if(items.length===0){box.innerHTML="<p class='small'>Δεν έχεις προσθέσει γεύματα για αυτή την ημέρα.</p>";return;}const groups=["Πρωινό","Σνακ","Μεσημεριανό","Βραδινό","Σνακ"];box.innerHTML=groups.map(g=>{const arr=items.map((x,i)=>({...x,idx:i})).filter(x=>x.meal===g);if(arr.length===0)return "";const sum=arr.reduce((s,x)=>s+x.total,0);return `<div class="mealHeader">${g} • ${sum} kcal</div>`+arr.map(x=>`<div class="historyItem"><div><b>${x.name}</b><br><span class="small">${x.time} • ${x.qty} x ${x.portion} • ${x.cat}</span><br><b>${x.total} kcal</b><br><span class="small">Π:${x.p||0}g • Υ:${x.c||0}g • Λ:${x.f||0}g</span></div><button class="deleteBtn" onclick="deleteDiaryItem(${x.idx})">🗑</button></div>`).join("");}).join("");}
 function deleteDiaryItem(i){const items=getDiary();items.splice(i,1);setDiary(items);renderDiary();updateDashboard();}
 function clearDiaryDay(){if(!confirm("Να διαγραφούν όλα τα γεύματα της ημέρας;"))return;localStorage.removeItem(diaryKey());renderDiary();updateDashboard();}
 
