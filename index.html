@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V22</title>
+<title>Greek Cal AI V23</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -443,6 +443,17 @@ body{padding-bottom:86px}
   font-size:12px;
   color:#64748b;
   margin-top:4px;
+}
+
+
+.goalExplain{
+  background:#f8fbff;
+  border:1px solid #bfdbfe;
+  color:#174a8b;
+  border-radius:16px;
+  padding:13px;
+  margin-top:12px;
+  line-height:1.45;
 }
 
 </style>
@@ -915,8 +926,8 @@ body{padding-bottom:86px}
     <button class="btnGreen" onclick="saveWeightData()">💾 Αποθήκευση Στοιχείων</button><button onclick="addMeasurement()">➕ Καταχώρηση Μέτρησης</button><button class="btnLight" onclick="calculateWeight()">📊 Υπολογισμός Προόδου</button>
   </div>
   <div class="card"><h2>Πρόοδος</h2><div class="progressWrap"><div id="weightProgressBar" class="progressBar"></div></div><p id="weightProgressText" class="bigCenter">0%</p>
-    <div class="grid"><div class="stat"><b>Χαμένα κιλά</b><span id="lostKg">0 kg</span></div><div class="stat"><b>Κιλά που απομένουν</b><span id="remainingKg">0 kg</span></div><div class="stat"><b>BMI</b><span id="bmi">-</span></div><div class="stat"><b>Κατηγορία BMI</b><span id="bmiCategory">-</span></div><div class="stat"><b>Θερμίδες συντήρησης</b><span id="maintenanceCalories">-</span></div><div class="stat"><b>Πρόταση απώλειας</b><span id="cutCalories">-</span></div><div class="stat"><b>Μετρήσεις</b><span id="totalMeasurements">0</span></div><div class="stat"><b>Μέσος ρυθμός</b><span id="avgRate">-</span></div></div>
-    <div class="goalMessage" id="goalMessage" style="margin-top:14px">Καταχώρησε στοιχεία για να εμφανιστεί αξιολόγηση.</div>
+    <div class="grid"><div class="stat"><b>Χαμένα κιλά</b><span id="lostKg">0 kg</span></div><div class="stat"><b>Κιλά που απομένουν</b><span id="remainingKg">0 kg</span></div><div class="stat"><b>BMI</b><span id="bmi">-</span></div><div class="stat"><b>Κατηγορία BMI</b><span id="bmiCategory">-</span></div><div class="stat"><b>Θερμίδες συντήρησης</b><span id="maintenanceCalories">-</span></div><div class="stat"><b>Ημ. θερμίδες στόχου</b><span id="cutCalories">-</span></div><div class="stat"><b>Εκτίμηση χρόνου</b><span id="goalTimeline">-</span></div><div class="stat"><b>Ρυθμός στόχου</b><span id="goalWeeklyLoss">-</span></div><div class="stat"><b>Μετρήσεις</b><span id="totalMeasurements">0</span></div><div class="stat"><b>Μέσος ρυθμός</b><span id="avgRate">-</span></div></div>
+    <div class="goalMessage" id="goalMessage" style="margin-top:14px">Καταχώρησε στοιχεία για να εμφανιστεί αξιολόγηση.</div><div class="goalExplain" id="goalExplain">Η εκτίμηση χρόνου βασίζεται σε ενδεικτικό έλλειμμα θερμίδων και δεν αποτελεί ιατρική οδηγία.</div>
   </div>
   <div class="card"><h2>📈 Γράφημα Βάρους</h2><canvas id="weightChart"></canvas><p class="small" id="chartHelp">Το γράφημα ενημερώνεται από το ιστορικό μετρήσεων.</p></div>
   <div class="card"><h2>📋 Ιστορικό Μετρήσεων</h2><div id="historyList"></div><div class="rowBtns"><button class="btnPurple" onclick="exportBackup()">⬇️ Export Backup</button><button class="btnRed" onclick="clearHistory()">🗑 Διαγραφή ιστορικού</button></div><textarea id="backupBox" placeholder="Εδώ εμφανίζεται το backup JSON ή κάνε επικόλληση για restore"></textarea><button class="btnLight" onclick="importBackup()">⬆️ Import Backup</button></div>
@@ -1042,9 +1053,79 @@ function clearDiaryDay(){if(!confirm("Να διαγραφούν όλα τα γε
 /* ΒΑΡΟΣ */
 function saveWeightData(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity")};localStorage.setItem("gca_weight_data",JSON.stringify(data));calculateWeight();alert("Τα στοιχεία αποθηκεύτηκαν.");}
 function loadWeightData(){const raw=localStorage.getItem("gca_weight_data");if(!raw)return;const d=JSON.parse(raw);["profileName","startWeight","currentWeight","targetWeight","height","age","gender","activity"].forEach(k=>{if(d[k])document.getElementById(k).value=d[k];});}
-function calculateWeight(){const start=num("startWeight"),current=num("currentWeight"),target=num("targetWeight"),h=num("height"),age=num("age"),gender=val("gender"),activity=num("activity");let progress=0;if(start>target)progress=((start-current)/(start-target))*100;progress=Math.max(0,Math.min(100,progress));const lost=start-current,remaining=Math.max(0,current-target),bmi=h>0?current/(h*h):0;let bmr=gender==="male"?10*current+6.25*h*100-5*age+5:10*current+6.25*h*100-5*age-161;const maintenance=Math.round(bmr*activity),cut=Math.max(1200,maintenance-500);setText("weightProgressText",progress.toFixed(1)+"%");document.getElementById("weightProgressBar").style.width=progress+"%";setText("lostKg",lost.toFixed(1)+" kg");setText("remainingKg",remaining.toFixed(1)+" kg");setText("bmi",bmi?bmi.toFixed(1):"-");setText("bmiCategory",bmiCategory(bmi));setText("maintenanceCalories",maintenance?maintenance+" kcal":"-");setText("cutCalories",cut?cut+" kcal":"-");setText("goalMessage",makeGoalMessage(progress,lost,remaining,bmi));updateStatsFromHistory();}
+function calculateWeight(){
+  const start=num("startWeight"),current=num("currentWeight"),target=num("targetWeight"),h=num("height"),age=num("age"),gender=val("gender"),activity=num("activity");
+
+  let progress=0;
+  if(start>target){
+    progress=((start-current)/(start-target))*100;
+  }else if(start<target){
+    progress=((current-start)/(target-start))*100;
+  }
+  progress=Math.max(0,Math.min(100,progress));
+
+  const lost=start-current;
+  const remainingLoss=Math.max(0,current-target);
+  const remainingGain=Math.max(0,target-current);
+  const bmi=h>0?current/(h*h):0;
+
+  let bmr=gender==="male"?10*current+6.25*h*100-5*age+5:10*current+6.25*h*100-5*age-161;
+  const maintenance=Math.round(bmr*activity);
+
+  let targetCalories=maintenance;
+  let weeklyChangeKg=0;
+  let timelineText="-";
+  let explain="";
+
+  if(current>target){
+    const dailyDeficit=500;
+    targetCalories=Math.max(1200,maintenance-dailyDeficit);
+    weeklyChangeKg=(dailyDeficit*7)/7700;
+    const kgLeft=current-target;
+    const weeks=weeklyChangeKg>0?Math.ceil(kgLeft/weeklyChangeKg):0;
+    const months=weeks/4.345;
+    timelineText=weeks<8?weeks+" εβδομ.":months.toFixed(1)+" μήνες";
+    explain=`Για να πας από ${current.toFixed(1)} kg σε ${target.toFixed(1)} kg, απομένουν ${kgLeft.toFixed(1)} kg. Με περίπου ${targetCalories} kcal/ημέρα, η εκτίμηση είναι ${timelineText}.`;
+  }else if(current<target){
+    const dailySurplus=300;
+    targetCalories=maintenance+dailySurplus;
+    weeklyChangeKg=(dailySurplus*7)/7700;
+    const kgLeft=target-current;
+    const weeks=weeklyChangeKg>0?Math.ceil(kgLeft/weeklyChangeKg):0;
+    const months=weeks/4.345;
+    timelineText=weeks<8?weeks+" εβδομ.":months.toFixed(1)+" μήνες";
+    explain=`Το τωρινό βάρος είναι κάτω από τον στόχο. Αν θες να φτάσεις τα ${target.toFixed(1)} kg, ενδεικτικός στόχος είναι ${targetCalories} kcal/ημέρα. Αν θες απώλεια βάρους, βάλε μικρότερο στόχο.`;
+  }else{
+    targetCalories=maintenance;
+    timelineText="Στόχος";
+    explain="Το τωρινό βάρος είναι ήδη στον στόχο. Ο ημερήσιος στόχος είναι περίπου οι θερμίδες συντήρησης.";
+  }
+
+  setText("weightProgressText",progress.toFixed(1)+"%");
+  document.getElementById("weightProgressBar").style.width=progress+"%";
+  setText("lostKg",lost.toFixed(1)+" kg");
+  setText("remainingKg",(current>target?remainingLoss:remainingGain).toFixed(1)+" kg");
+  setText("bmi",bmi?bmi.toFixed(1):"-");
+  setText("bmiCategory",bmiCategory(bmi));
+  setText("maintenanceCalories",maintenance?maintenance+" kcal":"-");
+  setText("cutCalories",targetCalories?targetCalories+" kcal":"-");
+  setText("goalTimeline",timelineText);
+  setText("goalWeeklyLoss",current>target?weeklyChangeKg.toFixed(2)+" kg/εβδ.":(current<target?"+"+weeklyChangeKg.toFixed(2)+" kg/εβδ.":"-"));
+  setText("goalMessage",makeGoalMessage(progress,lost,(current>target?remainingLoss:remainingGain),bmi));
+  const exp=document.getElementById("goalExplain");
+  if(exp) exp.textContent=explain+" Οι υπολογισμοί είναι ενδεικτικοί.";
+  updateStatsFromHistory();
+}
 function bmiCategory(bmi){if(!bmi)return "-";if(bmi<18.5)return "Χαμηλό";if(bmi<25)return "Φυσιολογικό";if(bmi<30)return "Υπέρβαρο";return "Παχυσαρκία";}
-function makeGoalMessage(progress,lost,remaining,bmi){if(progress>=100)return"Συγχαρητήρια! Ο στόχος έχει επιτευχθεί.";if(lost>0)return`Καλή πρόοδος. Έχουν χαθεί ${lost.toFixed(1)} kg και απομένουν ${remaining.toFixed(1)} kg.`;if(bmi>=30)return"Ξεκίνα σταθερά και με ασφαλή ρυθμό. Μικρά βήματα κάθε εβδομάδα.";return"Καταχώρησε μετρήσεις για να δεις την πραγματική πορεία.";}
+function makeGoalMessage(progress,lost,remaining,bmi){
+  const current=num("currentWeight"), target=num("targetWeight");
+  if(current===target)return"Είσαι ακριβώς στον στόχο βάρους.";
+  if(current<target)return"Το τωρινό βάρος είναι κάτω από τον στόχο. Αν στόχος σου είναι απώλεια, βάλε μικρότερο στόχο βάρους.";
+  if(progress>=100)return"Συγχαρητήρια! Ο στόχος έχει επιτευχθεί.";
+  if(lost>0)return`Καλή πρόοδος. Έχουν χαθεί ${lost.toFixed(1)} kg και απομένουν ${remaining.toFixed(1)} kg.`;
+  if(bmi>=30)return"Ξεκίνα σταθερά και με ασφαλή ρυθμό. Μικρά βήματα κάθε εβδομάδα.";
+  return"Καταχώρησε μετρήσεις για να δεις την πραγματική πορεία.";
+}
 function getHistory(){return JSON.parse(localStorage.getItem("gca_weight_history")||"[]");}function setHistory(h){localStorage.setItem("gca_weight_history",JSON.stringify(h));}
 function addMeasurement(){const weight=num("currentWeight"),note=val("note").trim();if(weight<=0){alert("Βάλε σωστό τωρινό βάρος.");return;}const now=new Date(),item={date:now.toLocaleDateString("el-GR"),time:now.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"}),ts:Date.now(),weight,note};const h=getHistory();h.unshift(item);setHistory(h);document.getElementById("note").value="";saveWeightDataNoAlert();renderHistory();renderChart();calculateWeight();}
 function saveWeightDataNoAlert(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity")};localStorage.setItem("gca_weight_data",JSON.stringify(data));}
