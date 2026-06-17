@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V48</title>
+<title>Greek Cal AI V49</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js">
 /* V47 safe refresh without breaking navigation */
 window.addEventListener("load", ()=>{
@@ -17,6 +17,50 @@ window.addEventListener("load", ()=>{
   const home=document.getElementById("home");
   if(home) home.classList.add("active");
   try{ updateDashboard(); }catch(e){}
+});
+
+
+/* V49 final FAB modal functions */
+function showQuickAdd(){
+  const o = document.getElementById("fabOverlay");
+  if(!o) return;
+  o.classList.remove("forceHide");
+  o.classList.add("show");
+  o.style.display = "flex";
+}
+
+function hideQuickAdd(){
+  const o = document.getElementById("fabOverlay");
+  if(!o) return;
+  o.classList.remove("show");
+  o.classList.add("forceHide");
+  o.style.display = "none";
+}
+
+function closeQuickAdd(e){
+  if(!e || e.target.id === "fabOverlay"){
+    hideQuickAdd();
+  }
+}
+
+function quickGo(id){
+  hideQuickAdd();
+  if(typeof showPage === "function") showPage(id);
+}
+
+/* Κλείσιμο και με το κουμπί Κλείσιμο, ακόμα κι αν το onclick δεν πιάσει */
+document.addEventListener("click", function(e){
+  const closeBtn = e.target.closest(".fabClose");
+  if(closeBtn){
+    e.preventDefault();
+    e.stopPropagation();
+    hideQuickAdd();
+  }
+});
+
+/* Κλείσιμο με Escape σε desktop */
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape") hideQuickAdd();
 });
 
 </script>
@@ -1493,6 +1537,18 @@ section.active{
 }
 .fab{
   z-index:9100;
+}
+
+
+/* V49 modal close fix */
+#fabOverlay{
+  display:none;
+}
+#fabOverlay.show{
+  display:flex;
+}
+#fabOverlay.forceHide{
+  display:none!important;
 }
 
 </style>
@@ -3724,21 +3780,10 @@ function quickAddWater250(){
 
 
 /* V48 fab fix */
-function showQuickAdd(){
-  const o=document.getElementById("fabOverlay");
-  if(o) o.classList.add("show");
-}
-function hideQuickAdd(){
-  const o=document.getElementById("fabOverlay");
-  if(o) o.classList.remove("show");
-}
-function closeQuickAdd(e){
-  if(e && e.target && e.target.id==="fabOverlay") hideQuickAdd();
-}
-function quickGo(id){
-  hideQuickAdd();
-  showPage(id);
-}
+
+
+
+
 
 /* QUICK ADD FAB */
 function openQuickAdd(){
