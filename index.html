@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V32</title>
+<title>Greek Cal AI V34</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -937,6 +937,73 @@ label{
   }
 }
 
+
+/* V33 home water progress */
+.dashWaterProgress{
+  background:#f8fbff;
+  border:1px solid #bfdbfe;
+  border-radius:18px;
+  padding:12px;
+  margin:10px 0;
+}
+.dashWaterTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+.dashWaterTop b{
+  color:#174a8b;
+  font-size:14px;
+}
+.dashWaterTop span{
+  color:#0d47a1;
+  font-weight:900;
+  font-size:16px;
+}
+.waterProgressWrap{
+  height:16px;
+}
+.waterBar{
+  background:linear-gradient(90deg,#38bdf8,#0ea5e9);
+}
+
+
+/* V34 meal-first quick add */
+.quickMealGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:8px;
+}
+.quickMealGrid .fabAction{margin:0}
+.mealTargetBox{
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  color:#174a8b;
+  border-radius:18px;
+  padding:12px;
+  margin:10px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.mealTargetBox span{color:#0d47a1}
+.mealSmallBtn{
+  font-size:14px;
+  padding:9px;
+  border-radius:14px;
+  margin-top:8px;
+}
+.singleQty{grid-template-columns:1fr!important}
+@media(max-width:560px){
+  .quickMealGrid{grid-template-columns:1fr 1fr}
+  .quickMealGrid .fabAction{padding:10px}
+  .quickMealGrid .fabAction span{font-size:22px}
+  .quickMealGrid .fabAction b{font-size:15px}
+  .quickMealGrid .fabAction small{font-size:11px}
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -1000,7 +1067,7 @@ label{
     <button onclick="showPage('barcode')">📦 Barcode</button>
     <button onclick="showPage('reports')">📊 Αναφορά</button>
     <button onclick="showPage('activities')">🏃 Δραστηριότητες</button>
-    <button onclick="showPage('water')">💧 Νερό</button>
+    <button onclick="showPage('water')">Νερό</button>
     <button onclick="showPage('progressCalendar')">📅 Ημερολόγιο</button>
     <button onclick="showPage('custom')">➕ Δικό μου</button>
     <button onclick="showPage('fasting')">⏱ Νηστεία</button>
@@ -1059,6 +1126,7 @@ label{
     <label>Γεύμα</label>
     <select id="photoMealType">
       <option>Πρωινό</option>
+      <option>Δεκατιανό</option>
       <option>Μεσημεριανό</option>
       <option>Βραδινό</option>
       <option selected>Σνακ</option>
@@ -1151,6 +1219,7 @@ label{
       <label>Γεύμα</label>
       <select id="barcodeMeal">
         <option>Πρωινό</option>
+        <option>Δεκατιανό</option>
         <option>Μεσημεριανό</option>
         <option>Βραδινό</option>
         <option selected>Σνακ</option>
@@ -1169,6 +1238,10 @@ label{
   <button class="back" onclick="showPage('home')">← Πίσω</button>
   <div class="card">
     <h2>🍽 Ελληνικά Φαγητά</h2>
+  <div id="foodMealTargetBox" class="mealTargetBox">
+    Θα προστεθεί στο: <span id="foodMealTargetText">Σνακ</span>
+    <button class="btnLight mealSmallBtn" onclick="cycleFoodMeal()">Αλλαγή γεύματος</button>
+  </div>
     <input id="foodSearch" placeholder="Αναζήτηση π.χ. σουβλάκι, φακές, γιαούρτι" oninput="renderFoods()">
     <div class="tabs" id="foodTabs"></div>
     <p class="small"><b id="foodCount"></b> τρόφιμα / γεύματα. Θερμίδες και μακροθρεπτικά είναι ενδεικτικά ανά μερίδα.</p>
@@ -1261,7 +1334,7 @@ label{
 <section id="water" class="hidden">
   <button class="back" onclick="showPage('home')">← Πίσω</button>
   <div class="card">
-    <h2>💧 Νερό</h2>
+    <h2>Νερό</h2>
     <p class="small">Καταγραφή ημερήσιας κατανάλωσης νερού. Πολύ χρήσιμο σε πρόγραμμα διατροφής και απώλειας βάρους.</p>
 
     <label>Ημερομηνία</label>
@@ -1470,13 +1543,30 @@ label{
   <div class="fabSheet" onclick="event.stopPropagation()">
     <h2>➕ Γρήγορη καταχώρηση</h2>
 
-    <button class="fabAction" onclick="quickGo('foods')">
-      <span>🍽</span>
-      <div><b>Προσθήκη φαγητού</b><br><small>Άνοιγμα λίστας φαγητών</small></div>
-    </button>
+    <div class="quickMealGrid">
+      <button class="fabAction mealQuick" onclick="quickMeal('Πρωινό')">
+        <span>🌅</span>
+        <div><b>Πρωινό</b><br><small>Προσθήκη φαγητού στο πρωινό</small></div>
+      </button>
+
+      <button class="fabAction mealQuick" onclick="quickMeal('Δεκατιανό')">
+        <span>☕</span>
+        <div><b>Δεκατιανό</b><br><small>Προσθήκη μικρού γεύματος</small></div>
+      </button>
+
+      <button class="fabAction mealQuick" onclick="quickMeal('Μεσημεριανό')">
+        <span>🍽</span>
+        <div><b>Μεσημεριανό</b><br><small>Προσθήκη φαγητού στο μεσημεριανό</small></div>
+      </button>
+
+      <button class="fabAction mealQuick" onclick="quickMeal('Βραδινό')">
+        <span>🌙</span>
+        <div><b>Βραδινό</b><br><small>Προσθήκη φαγητού στο βραδινό</small></div>
+      </button>
+    </div>
 
     <button class="fabAction" onclick="quickAddWater250()">
-      <span>💧</span>
+      <span>＋</span>
       <div><b>+250 ml νερό</b><br><small>Άμεση καταχώρηση νερού για σήμερα</small></div>
     </button>
 
@@ -1516,7 +1606,7 @@ function num(id){return parseFloat(String(document.getElementById(id).value).rep
 function allFoods(){return [...baseFoods, ...getCustomFoods()];}
 
 function renderFoodTabs(){const cats=["Όλα","⭐ Αγαπημένα",...Array.from(new Set(allFoods().map(f=>f.cat)))];document.getElementById("foodTabs").innerHTML=cats.map(c=>`<button class="tab ${activeCat===c?"active":""}" onclick="activeCat='${c}';renderFoodTabs();renderFoods();">${c}</button>`).join("");}
-function renderFoods(){const q=(document.getElementById("foodSearch")?.value||"").toLowerCase();const favs=getFavs();let list=allFoods().filter(f=>(activeCat==="Όλα"||f.cat===activeCat||(activeCat==="⭐ Αγαπημένα"&&favs.includes(f.name)))&&(f.name.toLowerCase().includes(q)||f.cat.toLowerCase().includes(q)||f.tag.toLowerCase().includes(q)));document.getElementById("foodCount").textContent=list.length;document.getElementById("foodList").innerHTML=list.map((f,i)=>`<div class="foodCard"><div class="foodTop"><div><div class="foodName">${f.name}</div><div class="foodMeta">Κατηγορία: ${f.cat} | Μερίδα: ${f.portion} <span class="badge">${f.tag}</span></div><div class="foodMeta">Π: ${f.protein||0}g • Υ: ${f.carbs||0}g • Λ: ${f.fat||0}g</div></div><div class="foodCal">${f.cal} kcal</div></div><button class="mealBtn btnLight" onclick='toggleFav("${encodeURIComponent(f.name)}")'>${favs.includes(f.name)?"★ Αγαπημένο":"☆ Αγαπημένο"}</button><div class="qtyRow"><select id="qty_${i}"><option value="0.25">0.25 μερίδα</option><option value="0.5">0.5 μερίδα</option><option value="1" selected>1 μερίδα</option><option value="1.5">1.5 μερίδα</option><option value="2">2 μερίδες</option><option value="3">3 μερίδες</option></select><select id="meal_${i}"><option>Πρωινό</option><option>Μεσημεριανό</option><option>Βραδινό</option><option>Σνακ</option></select></div><button class="mealBtn btnGreen" onclick='addFoodToDiary(${JSON.stringify(f)}, "qty_${i}", "meal_${i}")'>+ Προσθήκη στο ημερήσιο γεύμα</button></div>`).join("")||"<p class='small'>Δεν βρέθηκε φαγητό.</p>";}
+function renderFoods(){const q=(document.getElementById("foodSearch")?.value||"").toLowerCase();const favs=getFavs();let list=allFoods().filter(f=>(activeCat==="Όλα"||f.cat===activeCat||(activeCat==="⭐ Αγαπημένα"&&favs.includes(f.name)))&&(f.name.toLowerCase().includes(q)||f.cat.toLowerCase().includes(q)||f.tag.toLowerCase().includes(q)));document.getElementById("foodCount").textContent=list.length;document.getElementById("foodList").innerHTML=list.map((f,i)=>`<div class="foodCard"><div class="foodTop"><div><div class="foodName">${f.name}</div><div class="foodMeta">Κατηγορία: ${f.cat} | Μερίδα: ${f.portion} <span class="badge">${f.tag}</span></div><div class="foodMeta">Π: ${f.protein||0}g • Υ: ${f.carbs||0}g • Λ: ${f.fat||0}g</div></div><div class="foodCal">${f.cal} kcal</div></div><button class="mealBtn btnLight" onclick='toggleFav("${encodeURIComponent(f.name)}")'>${favs.includes(f.name)?"★ Αγαπημένο":"☆ Αγαπημένο"}</button><div class="qtyRow singleQty"><select id="qty_${i}"><option value="0.25">0.25 μερίδα</option><option value="0.5">0.5 μερίδα</option><option value="1" selected>1 μερίδα</option><option value="1.5">1.5 μερίδα</option><option value="2">2 μερίδες</option><option value="3">3 μερίδες</option></select></div><button class="mealBtn btnGreen" onclick='addFoodToDiarySelectedMeal(${JSON.stringify(f)}, "qty_${i}")'>+ Προσθήκη στο ${selectedFoodMeal}</button></div>`).join("")||"<p class='small'>Δεν βρέθηκε φαγητό.</p>";}
 
 function getFavs(){return JSON.parse(localStorage.getItem("gca_favs")||"[]");}
 function setFavs(f){localStorage.setItem("gca_favs",JSON.stringify(f));}
@@ -1574,7 +1664,7 @@ function loadDailyGoal(){
   if(pInput) pInput.value = localStorage.getItem("gca_protein_goal") || "120";
 }
 function addFoodToDiary(food, qtyId, mealId){initDiaryDate();const qty=parseFloat(document.getElementById(qtyId).value)||1;const meal=document.getElementById(mealId).value;const item={name:food.name,cat:food.cat,portion:food.portion,cal:food.cal,protein:food.protein||0,carbs:food.carbs||0,fat:food.fat||0,qty:qty,total:Math.round(food.cal*qty),p:Math.round((food.protein||0)*qty),c:Math.round((food.carbs||0)*qty),f:Math.round((food.fat||0)*qty),meal,time:new Date().toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"})};const items=getDiary();items.unshift(item);setDiary(items);alert("Προστέθηκε στο ημερήσιο γεύμα.");updateDashboard();}
-function renderDiary(){initDiaryDate();loadDailyGoal();const items=getDiary();const total=items.reduce((s,x)=>s+(Number(x.total)||0),0);const prot=items.reduce((s,x)=>s+(Number(x.p)||0),0);const carbs=items.reduce((s,x)=>s+(Number(x.c)||0),0);const fat=items.reduce((s,x)=>s+(Number(x.f)||0),0);const goal=Math.max(1,num("dailyGoal")||1800);const pGoal=Math.max(1,num("proteinGoal")||120);const remaining=goal-total;const percent=Math.round((total/goal)*100);setText("dailyCalories",total+" kcal");setText("dailyRemaining",(remaining>=0?remaining:Math.abs(remaining))+" kcal");setText("dailyItems",items.length);setText("dailyPercent",percent+"%");setText("dailyProtein",prot+" g");setText("dailyCarbs",carbs+" g");setText("dailyFat",fat+" g");const pPct=Math.round((prot/pGoal)*100);setText("proteinStatus","Στόχος πρωτεΐνης: "+pPct+"%");document.getElementById("proteinProgressBar").style.width=Math.min(100,pPct)+"%";const bar=document.getElementById("dailyProgressBar");bar.style.width=Math.min(100,percent)+"%";bar.classList.toggle("warn", total>goal);const status=document.getElementById("dailyStatus");status.className="goalMessage "+(total>goal?"warning":"okmsg");status.textContent=total>goal?`Ξεπέρασες τον στόχο κατά ${Math.abs(remaining)} kcal.`:`Απομένουν ${remaining} kcal μέχρι τον στόχο ημέρας.`;const box=document.getElementById("diaryList");if(items.length===0){box.innerHTML="<p class='small'>Δεν έχεις προσθέσει γεύματα για αυτή την ημέρα.</p>";return;}const groups=["Πρωινό","Μεσημεριανό","Βραδινό","Σνακ"];box.innerHTML=groups.map(g=>{const arr=items.map((x,i)=>({...x,idx:i})).filter(x=>x.meal===g);if(arr.length===0)return "";const sum=arr.reduce((s,x)=>s+x.total,0);return `<div class="mealHeader">${g} • ${sum} kcal</div>`+arr.map(x=>`<div class="historyItem"><div><b>${x.name}</b><br><span class="small">${x.time} • ${x.qty} x ${x.portion} • ${x.cat}</span><br><b>${x.total} kcal</b><br><span class="small">Π:${x.p||0}g • Υ:${x.c||0}g • Λ:${x.f||0}g</span></div><button class="deleteBtn" onclick="deleteDiaryItem(${x.idx})">🗑</button></div>`).join("");}).join("");}
+function renderDiary(){initDiaryDate();loadDailyGoal();const items=getDiary();const total=items.reduce((s,x)=>s+(Number(x.total)||0),0);const prot=items.reduce((s,x)=>s+(Number(x.p)||0),0);const carbs=items.reduce((s,x)=>s+(Number(x.c)||0),0);const fat=items.reduce((s,x)=>s+(Number(x.f)||0),0);const goal=Math.max(1,num("dailyGoal")||1800);const pGoal=Math.max(1,num("proteinGoal")||120);const remaining=goal-total;const percent=Math.round((total/goal)*100);setText("dailyCalories",total+" kcal");setText("dailyRemaining",(remaining>=0?remaining:Math.abs(remaining))+" kcal");setText("dailyItems",items.length);setText("dailyPercent",percent+"%");setText("dailyProtein",prot+" g");setText("dailyCarbs",carbs+" g");setText("dailyFat",fat+" g");const pPct=Math.round((prot/pGoal)*100);setText("proteinStatus","Στόχος πρωτεΐνης: "+pPct+"%");document.getElementById("proteinProgressBar").style.width=Math.min(100,pPct)+"%";const bar=document.getElementById("dailyProgressBar");bar.style.width=Math.min(100,percent)+"%";bar.classList.toggle("warn", total>goal);const status=document.getElementById("dailyStatus");status.className="goalMessage "+(total>goal?"warning":"okmsg");status.textContent=total>goal?`Ξεπέρασες τον στόχο κατά ${Math.abs(remaining)} kcal.`:`Απομένουν ${remaining} kcal μέχρι τον στόχο ημέρας.`;const box=document.getElementById("diaryList");if(items.length===0){box.innerHTML="<p class='small'>Δεν έχεις προσθέσει γεύματα για αυτή την ημέρα.</p>";return;}const groups=["Πρωινό","Δεκατιανό","Μεσημεριανό","Βραδινό","Σνακ"];box.innerHTML=groups.map(g=>{const arr=items.map((x,i)=>({...x,idx:i})).filter(x=>x.meal===g);if(arr.length===0)return "";const sum=arr.reduce((s,x)=>s+x.total,0);return `<div class="mealHeader">${g} • ${sum} kcal</div>`+arr.map(x=>`<div class="historyItem"><div><b>${x.name}</b><br><span class="small">${x.time} • ${x.qty} x ${x.portion} • ${x.cat}</span><br><b>${x.total} kcal</b><br><span class="small">Π:${x.p||0}g • Υ:${x.c||0}g • Λ:${x.f||0}g</span></div><button class="deleteBtn" onclick="deleteDiaryItem(${x.idx})">🗑</button></div>`).join("");}).join("");}
 function deleteDiaryItem(i){const items=getDiary();items.splice(i,1);setDiary(items);renderDiary();updateDashboard();}
 function clearDiaryDay(){if(!confirm("Να διαγραφούν όλα τα γεύματα της ημέρας;"))return;localStorage.removeItem(diaryKey());renderDiary();updateDashboard();}
 
@@ -2840,6 +2930,56 @@ function updateFabVisibility(pageId){
   }
 }
 
+
+
+/* V34 meal target for foods */
+let selectedFoodMeal = localStorage.getItem("gca_selected_food_meal") || "Σνακ";
+const mealOrderV34 = ["Πρωινό","Δεκατιανό","Μεσημεριανό","Βραδινό","Σνακ"];
+
+function setSelectedFoodMeal(meal){
+  selectedFoodMeal = meal || "Σνακ";
+  localStorage.setItem("gca_selected_food_meal", selectedFoodMeal);
+  const t = document.getElementById("foodMealTargetText");
+  if(t) t.textContent = selectedFoodMeal;
+}
+function cycleFoodMeal(){
+  const idx = mealOrderV34.indexOf(selectedFoodMeal);
+  const next = mealOrderV34[(idx + 1) % mealOrderV34.length];
+  setSelectedFoodMeal(next);
+  renderFoods();
+}
+function quickMeal(meal){
+  hideQuickAdd();
+  setSelectedFoodMeal(meal);
+  showPage("foods");
+  setTimeout(()=>renderFoods(), 50);
+}
+function addFoodToDiarySelectedMeal(food, qtyId){
+  initDiaryDate();
+  const qty = parseFloat(document.getElementById(qtyId).value) || 1;
+  const meal = selectedFoodMeal || "Σνακ";
+  const item = {
+    name:food.name,
+    cat:food.cat,
+    portion:food.portion,
+    cal:food.cal,
+    protein:food.protein||0,
+    carbs:food.carbs||0,
+    fat:food.fat||0,
+    qty:qty,
+    total:Math.round(food.cal*qty),
+    p:Math.round((food.protein||0)*qty),
+    c:Math.round((food.carbs||0)*qty),
+    f:Math.round((food.fat||0)*qty),
+    meal:meal,
+    time:new Date().toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"})
+  };
+  const items=getDiary();
+  items.unshift(item);
+  setDiary(items);
+  alert("Προστέθηκε στο " + meal + ".");
+  updateDashboard();
+}
 
 /* V32 direct quick water */
 function quickAddWater250(){
