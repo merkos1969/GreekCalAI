@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V40</title>
+<title>Greek Cal AI V41</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -1228,6 +1228,84 @@ label{
   }
 }
 
+
+/* V41 improved home dashboard */
+.homeDashboardV41{
+  grid-template-columns:1fr 1fr!important;
+}
+.heroCalBox{
+  grid-column:1 / -1;
+  background:linear-gradient(135deg,#0d47a1,#1e88e5)!important;
+  color:white!important;
+  min-height:105px;
+}
+.heroCalBox b,
+.heroCalBox span,
+.heroCalBox small{
+  color:white!important;
+}
+.heroCalBox span{
+  font-size:30px!important;
+}
+.heroCalBox small{
+  display:block;
+  margin-top:6px;
+  opacity:.9;
+  font-size:14px;
+  font-weight:800;
+}
+.homeMacroPanel{
+  background:#ffffff;
+  border:1px solid #d7e8f8;
+  border-radius:22px;
+  padding:14px;
+  margin:12px 0;
+  box-shadow:0 6px 16px rgba(15,23,42,.04);
+}
+.homePanelTitle{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin-bottom:8px;
+}
+.homePanelTitle b{
+  font-size:18px;
+  color:#17202c;
+}
+.homePanelTitle span{
+  background:#eaf3ff;
+  color:#0d47a1;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:900;
+}
+.dashboardCard .dashBox:nth-child(2) span{
+  color:#16834a;
+}
+.dashboardCard .dashBox:nth-child(3) span{
+  color:#f59e0b;
+}
+.dashboardCard .dashBox:nth-child(4) span{
+  color:#0d47a1;
+}
+.dashboardCard .dashBox:nth-child(5) span{
+  color:#7c3aed;
+}
+.dashboardCard .dashBox:nth-child(6) span{
+  color:#0d47a1;
+}
+@media(max-width:560px){
+  .heroCalBox span{
+    font-size:27px!important;
+  }
+  .homePanelTitle{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -1263,8 +1341,26 @@ label{
 
 <div class="dashboardCard">
     <h2>📊 Σήμερα</h2>
-    <div class="dashboardGrid">
-      <div class="dashBox"><b>Θερμίδες</b><span id="dashCalories">0 / 1800</span></div>
+    <div class="dashboardGrid homeDashboardV41">
+      <div class="dashBox heroCalBox"><b>Θερμίδες</b><span id="dashCalories">0 / 1800</span><small id="dashRemainingMini">Υπόλοιπο 1800 kcal</small></div>
+      <div class="dashBox"><b>Γεύματα</b><span id="dashMeals">0</span></div>
+      <div class="dashBox"><b>Άσκηση</b><span id="dashExercise">0 kcal</span></div>
+      <div class="dashBox"><b>Βάρος</b><span id="dashWeight">Δεν υπάρχει</span></div>
+      <div class="dashBox"><b>Στόχος σε</b><span id="dashGoalTime">-</span></div>
+      <div class="dashBox"><b>Ρυθμός</b><span id="dashPace">-</span></div>
+    </div>
+
+    <div class="homeMacroPanel">
+      <div class="homePanelTitle">
+        <b>Μακροθρεπτικά σήμερα</b>
+        <span id="homeMacroSplitText">Π/Υ/Λ</span>
+      </div>
+      <div class="macroBars">
+        <div class="macroBarLine"><span>Πρωτεΐνη</span><div class="macroMiniWrap"><div id="homeProteinBar" class="macroMini macroProtein"></div></div><span id="homeProteinText">0%</span></div>
+        <div class="macroBarLine"><span>Υδατάνθ.</span><div class="macroMiniWrap"><div id="homeCarbsBar" class="macroMini macroCarbs"></div></div><span id="homeCarbsText">0%</span></div>
+        <div class="macroBarLine"><span>Λιπαρά</span><div class="macroMiniWrap"><div id="homeFatBar" class="macroMini macroFat"></div></div><span id="homeFatText">0%</span></div>
+      </div>
+    </div>
       <div class="dashBox"><b>Υπόλοιπο</b><span id="dashRemaining">1800 kcal</span></div>
       <div class="dashBox"><b>Πρωτεΐνη</b><span id="dashProtein">0 / 120g</span></div>
       <div class="dashBox"><b>Γεύματα</b><span id="dashMeals">0</span></div>
@@ -2197,6 +2293,35 @@ function computeWeightGoalDashboard(){
   return {cal:targetCalories+" kcal", time:timeline, note, pace:paceLabel};
 }
 
+
+/* V41 home macros */
+function updateHomeMacroDashboard(totals){
+  const prot = totals && totals.prot ? totals.prot : 0;
+  const carbs = totals && totals.carbs ? totals.carbs : 0;
+  const fat = totals && totals.fat ? totals.fat : 0;
+
+  let targets = {pG:120,cG:180,fG:60,pPct:30,cPct:40,fPct:30};
+  if(typeof getMacroTargets === "function"){
+    targets = getMacroTargets();
+  }
+
+  const pPct = Math.round((prot / Math.max(1, targets.pG)) * 100);
+  const cPct = Math.round((carbs / Math.max(1, targets.cG)) * 100);
+  const fPct = Math.round((fat / Math.max(1, targets.fG)) * 100);
+
+  const hp = document.getElementById("homeProteinBar");
+  const hc = document.getElementById("homeCarbsBar");
+  const hf = document.getElementById("homeFatBar");
+  if(hp) hp.style.width = Math.min(100,pPct) + "%";
+  if(hc) hc.style.width = Math.min(100,cPct) + "%";
+  if(hf) hf.style.width = Math.min(100,fPct) + "%";
+
+  setText("homeProteinText", prot + "/" + targets.pG + "g");
+  setText("homeCarbsText", carbs + "/" + targets.cG + "g");
+  setText("homeFatText", fat + "/" + targets.fG + "g");
+  setText("homeMacroSplitText", (targets.pPct||30) + "% / " + (targets.cPct||40) + "% / " + (targets.fPct||30) + "%");
+}
+
 /* DASHBOARD */
 function getTodayDiaryItems(){
   const key = "gca_diary_" + todayKey();
@@ -2240,6 +2365,7 @@ function updateDashboard(){
   const pct = Math.round(((total - burned) / Math.max(1, goal)) * 100);
 
   setText("dashCalories", total + " / " + goal);
+  setText("dashRemainingMini", "Υπόλοιπο " + Math.max(0, goal-total) + " kcal");
   setText("dashRemaining", (remaining >= 0 ? remaining : Math.abs(remaining)) + " kcal");
   setText("dashProtein", prot + " / " + pGoal + "g");
   setText("dashMeals", items.length);
@@ -2255,6 +2381,7 @@ function updateDashboard(){
   setText("dashPace", goalDash.pace || "-");
   const goalNote = document.getElementById("dashGoalNote");
   if(goalNote) goalNote.textContent = goalDash.note;
+  updateHomeMacroDashboard({prot:prot, carbs:carbs, fat:fat});
 
   const bar = document.getElementById("dashCalBar");
   bar.style.width = Math.min(100, pct) + "%";
