@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V26</title>
+<title>Greek Cal AI V28</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -37,7 +37,12 @@ textarea{min-height:64px}.hidden{display:none}.menu button{font-size:21px}
 .dashWide{grid-column:1/-1}
 .quickActions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .quickActions button{font-size:16px;padding:12px}
-@media(max-width:560px){.dashboardGrid,.quickActions{grid-template-columns:1fr}}
+.paceButtons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:6px}
+.paceBtn{background:#f8fafc;color:#0d47a1;border:1px solid #bfdbfe;border-radius:14px;padding:12px;font-size:15px;font-weight:900;line-height:1.25}
+.paceBtn small{display:block;font-size:12px;color:#64748b;font-weight:700;margin-top:4px}
+.paceBtn.active{background:#1e6cc7;color:#fff;border-color:#1e6cc7;box-shadow:0 8px 18px rgba(30,108,199,.18)}
+.paceBtn.active small{color:#dbeafe}
+@media(max-width:560px){.dashboardGrid,.quickActions{grid-template-columns:1fr}.paceButtons{grid-template-columns:1fr}}
 
 @media(max-width:560px){.grid,.rowBtns,.diarySummary{grid-template-columns:1fr}.macroGrid{grid-template-columns:1fr}.foodTop{align-items:flex-start}.menu button{font-size:20px}h1{font-size:29px}h2{font-size:23px}.qtyRow{grid-template-columns:1fr}}
 
@@ -500,6 +505,51 @@ body{padding-bottom:86px}
   margin-top:8px;
   font-weight:900;
   line-height:1.35;
+}
+
+
+/* V28 colored pace buttons */
+.paceBtn.paceMild{
+  border-color:#bbf7d0;
+  background:#ecfdf5;
+  color:#166534;
+}
+.paceBtn.paceMild small{
+  color:#15803d;
+}
+.paceBtn.paceNormal{
+  border-color:#bfdbfe;
+  background:#eff6ff;
+  color:#0d47a1;
+}
+.paceBtn.paceNormal small{
+  color:#1d4ed8;
+}
+.paceBtn.paceFast{
+  border-color:#fed7aa;
+  background:#fff7ed;
+  color:#9a3412;
+}
+.paceBtn.paceFast small{
+  color:#c2410c;
+}
+.paceBtn.paceMild.active{
+  background:#198754;
+  border-color:#198754;
+  color:#fff;
+}
+.paceBtn.paceNormal.active{
+  background:#1e6cc7;
+  border-color:#1e6cc7;
+  color:#fff;
+}
+.paceBtn.paceFast.active{
+  background:#f59e0b;
+  border-color:#f59e0b;
+  color:#fff;
+}
+.paceBtn.active small{
+  color:#fff;
 }
 
 </style>
@@ -974,11 +1024,12 @@ body{padding-bottom:86px}
 
 <div class="paceBox">
   <label>Ρυθμός στόχου</label>
-  <select id="goalPace" onchange="saveWeightData();calculateWeight();loadDailyGoal();updateDashboard()">
-    <option value="300">Ήπιος ρυθμός (-300 kcal/ημέρα)</option>
-    <option value="500" selected>Κανονικός ρυθμός (-500 kcal/ημέρα)</option>
-    <option value="700">Γρήγορος ρυθμός (-700 kcal/ημέρα)</option>
-  </select>
+  <input id="goalPace" type="hidden" value="500">
+  <div class="paceButtons">
+    <button type="button" id="pace300" class="paceBtn paceMild" onclick="setGoalPace(300)">Ήπιος<small>-300 kcal/ημέρα</small></button>
+    <button type="button" id="pace500" class="paceBtn paceNormal active" onclick="setGoalPace(500)">Κανονικός<small>-500 kcal/ημέρα</small></button>
+    <button type="button" id="pace700" class="paceBtn paceFast" onclick="setGoalPace(700)">Γρήγορος<small>-700 kcal/ημέρα</small></button>
+  </div>
   <div id="paceInfo" class="paceInfo">Ο κανονικός ρυθμός είναι περίπου 0.45 kg/εβδομάδα.</div>
 </div>
     <label>Σημείωση μέτρησης</label><textarea id="note" placeholder="π.χ. περπάτημα / 16:8 / μεσογειακή διατροφή"></textarea>
@@ -1147,8 +1198,8 @@ function deleteDiaryItem(i){const items=getDiary();items.splice(i,1);setDiary(it
 function clearDiaryDay(){if(!confirm("Να διαγραφούν όλα τα γεύματα της ημέρας;"))return;localStorage.removeItem(diaryKey());renderDiary();updateDashboard();}
 
 /* ΒΑΡΟΣ */
-function saveWeightData(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity")};localStorage.setItem("gca_weight_data",JSON.stringify(data));calculateWeight();loadDailyGoal();updateDashboard();alert("Τα στοιχεία αποθηκεύτηκαν.");}
-function loadWeightData(){const raw=localStorage.getItem("gca_weight_data");if(!raw)return;const d=JSON.parse(raw);["profileName","startWeight","currentWeight","targetWeight","height","age","gender","activity"].forEach(k=>{if(d[k])document.getElementById(k).value=d[k];});}
+function saveWeightData(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity"),goalPace:val("goalPace")||"500"};localStorage.setItem("gca_weight_data",JSON.stringify(data));calculateWeight();loadDailyGoal();updateDashboard();alert("Τα στοιχεία αποθηκεύτηκαν.");}
+function loadWeightData(){const raw=localStorage.getItem("gca_weight_data");if(!raw){setGoalPace(500,true);return;}const d=JSON.parse(raw);["profileName","startWeight","currentWeight","targetWeight","height","age","gender","activity"].forEach(k=>{if(d[k])document.getElementById(k).value=d[k];});setGoalPace(parseInt(d.goalPace||"500",10),true);}
 function calculateWeight(){
   const start=num("startWeight"),current=num("currentWeight"),target=num("targetWeight"),h=num("height"),age=num("age"),gender=val("gender"),activity=num("activity");
 
@@ -1225,7 +1276,7 @@ function makeGoalMessage(progress,lost,remaining,bmi){
 }
 function getHistory(){return JSON.parse(localStorage.getItem("gca_weight_history")||"[]");}function setHistory(h){localStorage.setItem("gca_weight_history",JSON.stringify(h));}
 function addMeasurement(){const weight=num("currentWeight"),note=val("note").trim();if(weight<=0){alert("Βάλε σωστό τωρινό βάρος.");return;}const now=new Date(),item={date:now.toLocaleDateString("el-GR"),time:now.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"}),ts:Date.now(),weight,note};const h=getHistory();h.unshift(item);setHistory(h);document.getElementById("note").value="";saveWeightDataNoAlert();renderHistory();renderChart();calculateWeight();}
-function saveWeightDataNoAlert(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity")};localStorage.setItem("gca_weight_data",JSON.stringify(data));updateDashboard();}
+function saveWeightDataNoAlert(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity"),goalPace:val("goalPace")||"500"};localStorage.setItem("gca_weight_data",JSON.stringify(data));updateDashboard();}
 function deleteMeasurement(i){const h=getHistory();h.splice(i,1);setHistory(h);renderHistory();renderChart();calculateWeight();}function clearHistory(){if(!confirm("Να διαγραφεί όλο το ιστορικό;"))return;localStorage.removeItem("gca_weight_history");renderHistory();renderChart();calculateWeight();}
 function renderHistory(){const h=getHistory();setText("totalMeasurements",h.length);const box=document.getElementById("historyList");if(h.length===0){box.innerHTML="<p class='small'>Δεν υπάρχουν ακόμα μετρήσεις.</p>";return;}box.innerHTML=h.map((x,i)=>`<div class="historyItem"><div><b>${x.date} ${x.time}</b><br>⚖️ ${Number(x.weight).toFixed(1)} kg ${x.note?`<br>📝 ${escapeHtml(x.note)}`:""}</div><button class="deleteBtn" onclick="deleteMeasurement(${i})">🗑</button></div>`).join("");}
 function renderChart(){const h=getHistory().slice().reverse(),ctx=document.getElementById("weightChart");if(weightChart)weightChart.destroy();if(h.length<2)document.getElementById("chartHelp").textContent="Καταχώρησε τουλάχιστον 2 μετρήσεις για να εμφανιστεί σωστό γράφημα.";else document.getElementById("chartHelp").textContent="Το γράφημα ενημερώνεται από το ιστορικό μετρήσεων.";weightChart=new Chart(ctx,{type:"line",data:{labels:h.map(x=>x.date),datasets:[{label:"Βάρος kg",data:h.map(x=>x.weight),tension:.35,borderWidth:3,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:false}}}});}
@@ -1246,15 +1297,28 @@ function formatTime(ms){const total=Math.floor(ms/1000),h=String(Math.floor(tota
 
 
 function getGoalPaceDeficit(){
-  const raw = localStorage.getItem("gca_weight_data");
-  let saved = "500";
-  if(raw){
-    try{ saved = JSON.parse(raw).goalPace || "500"; }catch(e){}
-  }
   const el = document.getElementById("goalPace");
-  const value = parseInt((el && el.value) ? el.value : saved, 10);
-  if(value === 300 || value === 500 || value === 700) return value;
+  const rawVal = (el && el.value) ? el.value : ((JSON.parse(localStorage.getItem("gca_weight_data")||"{}")).goalPace || "500");
+  const value = parseInt(rawVal,10);
+  if(value===300 || value===500 || value===700) return value;
   return 500;
+}
+function setGoalPace(deficit, skipSave){
+  const allowed = [300,500,700];
+  const value = allowed.includes(Number(deficit)) ? Number(deficit) : 500;
+  const input = document.getElementById("goalPace");
+  if(input) input.value = String(value);
+  [300,500,700].forEach(v=>{
+    const btn = document.getElementById("pace"+v);
+    if(btn) btn.classList.toggle("active", v===value);
+  });
+  updatePaceInfo();
+  if(!skipSave){
+    saveWeightDataNoAlert();
+    calculateWeight();
+    loadDailyGoal();
+    updateDashboard();
+  }
 }
 function updatePaceInfo(){
   const deficit = getGoalPaceDeficit();
@@ -1266,6 +1330,10 @@ function updatePaceInfo(){
       : `Κανονικός ρυθμός: περίπου ${weekly.toFixed(2)} kg/εβδομάδα. Ισορροπημένη επιλογή.`;
   const box = document.getElementById("paceInfo");
   if(box) box.textContent = text;
+  [300,500,700].forEach(v=>{
+    const btn = document.getElementById("pace"+v);
+    if(btn) btn.classList.toggle("active", v===deficit);
+  });
 }
 
 /* AUTO DAILY CALORIE GOAL */
