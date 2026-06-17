@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V31</title>
+<title>Greek Cal AI V32</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -911,6 +911,32 @@ label{
   }
 }
 
+
+/* V32 clean quick menu */
+.fabSheet h2{
+  font-size:22px;
+  margin-bottom:10px;
+}
+.fabAction{
+  padding:12px;
+  margin:7px 0;
+}
+.fabAction span{
+  font-size:24px;
+}
+.fabAction small{
+  color:#667085;
+}
+@media(max-width:560px){
+  .fabSheet{
+    max-height:82vh;
+    overflow:auto;
+  }
+  .fabAction{
+    padding:11px;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -1442,66 +1468,36 @@ label{
 
 <div id="fabOverlay" class="fabOverlay" onclick="closeQuickAdd(event)">
   <div class="fabSheet" onclick="event.stopPropagation()">
-    <h2>➕ Γρήγορη προσθήκη</h2>
+    <h2>➕ Γρήγορη καταχώρηση</h2>
 
     <button class="fabAction" onclick="quickGo('foods')">
       <span>🍽</span>
       <div><b>Προσθήκη φαγητού</b><br><small>Άνοιγμα λίστας φαγητών</small></div>
     </button>
 
-    <button class="fabAction" onclick="quickGo('barcode')">
-      <span>📦</span>
-      <div><b>Σάρωση Barcode</b><br><small>Προσθήκη προϊόντος</small></div>
-    </button>
-
-    <button class="fabAction" onclick="quickGo('photoMeal')">
-      <span>📷</span>
-      <div><b>Φωτογραφία γεύματος</b><br><small>Προσθήκη από φωτογραφία</small></div>
-    </button>
-
-    <button class="fabAction" onclick="quickGo('custom')">
-      <span>➕</span>
-      <div><b>Δικό μου φαγητό</b><br><small>Καταχώρηση νέου φαγητού</small></div>
-    </button>
-
-    <button class="fabAction" onclick="quickWeight()">
-      <span>⚖️</span>
-      <div><b>Καταχώρηση βάρους</b><br><small>Άνοιγμα στόχου βάρους</small></div>
-    </button>
-
-    <button class="fabAction" onclick="quickFasting()">
-      <span>⏱</span>
-      <div><b>Έναρξη νηστείας</b><br><small>Ξεκινά το χρονόμετρο νηστείας</small></div>
-    </button>
-
-    <button class="fabAction" onclick="quickGo('coach')">
-      <span>🤖</span>
-      <div><b>Ρώτα τον Coach</b><br><small>Τι να φάω σήμερα;</small></div>
-    </button>
-
-    <button class="fabAction" onclick="quickGo('reports')">
-      <span>📊</span>
-      <div><b>Εβδομαδιαία αναφορά</b><br><small>Πρόοδος τελευταίων 7 ημερών</small></div>
+    <button class="fabAction" onclick="quickAddWater250()">
+      <span>💧</span>
+      <div><b>+250 ml νερό</b><br><small>Άμεση καταχώρηση νερού για σήμερα</small></div>
     </button>
 
     <button class="fabAction" onclick="quickGo('activities')">
       <span>🏃</span>
-      <div><b>Δραστηριότητα</b><br><small>Υπολογισμός θερμίδων άσκησης</small></div>
+      <div><b>Καταχώρηση άσκησης</b><br><small>Βάδισμα, τρέξιμο, ποδήλατο</small></div>
     </button>
 
-    <button class="fabAction" onclick="quickGo('water')">
-      <span>💧</span>
-      <div><b>Νερό</b><br><small>Καταχώρηση ποτηριών νερού</small></div>
+    <button class="fabAction" onclick="quickWeight()">
+      <span>⚖️</span>
+      <div><b>Καταχώρηση βάρους</b><br><small>Άμεση ενημέρωση τωρινού βάρους</small></div>
     </button>
 
-    <button class="fabAction" onclick="quickGo('progressCalendar')">
-      <span>📅</span>
-      <div><b>Ημερολόγιο προόδου</b><br><small>Προβολή ημέρας / μήνα</small></div>
+    <button class="fabAction" onclick="quickFasting()">
+      <span>⏱</span>
+      <div><b>Έναρξη νηστείας</b><br><small>Ξεκινάει ο χρονομετρητής</small></div>
     </button>
 
     <button class="fabAction fabClose" onclick="hideQuickAdd()">
-      <span>✖️</span>
-      <div><b>Κλείσιμο</b></div>
+      <span>✖</span>
+      <div><b>Κλείσιμο</b><br><small>Επιστροφή στην εφαρμογή</small></div>
     </button>
   </div>
 </div>
@@ -2842,6 +2838,17 @@ function updateFabVisibility(pageId){
   }else{
     fab.classList.remove("hiddenFab");
   }
+}
+
+
+/* V32 direct quick water */
+function quickAddWater250(){
+  hideQuickAdd();
+  const key = "gca_water_" + todayKey();
+  const current = parseInt(localStorage.getItem(key) || "0", 10);
+  localStorage.setItem(key, String(current + 250));
+  updateDashboard();
+  alert("Προστέθηκαν 250 ml νερό για σήμερα.");
 }
 
 /* QUICK ADD FAB */
