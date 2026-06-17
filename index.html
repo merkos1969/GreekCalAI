@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V30</title>
+<title>Greek Cal AI V31</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -869,6 +869,48 @@ label{
   .splashIcon{width:98px;height:98px;font-size:50px}
 }
 
+
+/* V31 smaller install prompt */
+.installMini{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:#f8fbff;
+  border:1px solid #bfdbfe;
+  border-radius:18px;
+  padding:10px 12px;
+  margin:8px 0 10px;
+  color:#174a8b;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(15,23,42,.04);
+}
+.installMini span{
+  font-size:12px;
+  color:#667085;
+  font-weight:800;
+}
+.installHelp{
+  background:#fff;
+  border:1px solid #dbeafe;
+  color:#475467;
+  border-radius:16px;
+  padding:10px 12px;
+  margin:-2px 0 10px;
+  font-size:13px;
+  line-height:1.35;
+}
+@media(max-width:560px){
+  .installMini{
+    font-size:14px;
+    padding:9px 11px;
+  }
+  .installMini span{
+    font-size:11px;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -894,9 +936,12 @@ label{
 <section id="home" class="card menu">
   <div class="brandTop"><div class="appLogo">🇬🇷</div><h1>Greek Cal AI</h1><div class="appSubTitle">Smart Greek Diet Coach</div></div>
 
-<div class="installBox">
-  <b>📲 Έτοιμο για εγκατάσταση στο κινητό</b>
-  <p>Ανέβασέ το στο GitHub Pages και από Chrome πάτα ⋮ → Προσθήκη στην αρχική οθόνη.</p>
+<div class="installMini" onclick="toggleInstallHelp()">
+  📲 Εγκατάσταση στο κινητό
+  <span>πάτησε για οδηγίες</span>
+</div>
+<div id="installHelp" class="installHelp hidden">
+  Από Chrome πάτα ⋮ → <b>Προσθήκη στην αρχική οθόνη</b>.
 </div>
 
 <div class="dashboardCard">
@@ -2830,6 +2875,13 @@ function quickFasting(){
   }
 }
 
+
+
+/* V31 install help */
+function toggleInstallHelp(){
+  const el = document.getElementById("installHelp");
+  if(el) el.classList.toggle("hidden");
+}
 
 /* V30 splash */
 window.addEventListener("load", ()=>{
