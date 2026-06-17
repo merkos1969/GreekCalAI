@@ -3,25 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V2</title>
+<title>Greek Cal AI V3</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{
   --blue:#1e6cc7;--blue2:#0d47a1;--bg:#eef3f8;--card:#fff;
   --text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;
+  --purple:#7c3aed;--light:#f8fafc;
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);padding:18px}
-.app{max-width:760px;margin:0 auto}
+.app{max-width:800px;margin:0 auto}
 .card{background:var(--card);border-radius:22px;padding:20px;margin:14px 0;box-shadow:0 10px 28px rgba(0,0,0,.08)}
 h1{text-align:center;color:var(--blue);font-size:36px;margin:24px 0 30px}
 h2{font-size:30px;margin:10px 0 22px}
+h3{font-size:22px;margin:12px 0}
 button,.btn{width:100%;border:0;border-radius:15px;padding:17px;margin:9px 0;background:var(--blue);color:#fff;font-size:22px;cursor:pointer}
 button:hover{filter:brightness(.95)}
 .btnLight{background:#e8eef7;color:var(--blue)}
 .btnGreen{background:var(--green)}
 .btnRed{background:var(--red)}
 .btnOrange{background:var(--orange)}
+.btnPurple{background:var(--purple)}
 .back{display:inline-block;width:auto;background:#e8eef7;color:var(--blue);padding:13px 18px;margin-bottom:20px}
 label{display:block;font-weight:800;font-size:17px;margin:12px 0 7px}
 input,select,textarea{width:100%;padding:15px;border:1px solid #cfd7e2;border-radius:14px;font-size:20px;background:#fff}
@@ -38,11 +41,14 @@ textarea{min-height:74px}
 .small{color:var(--muted);font-size:14px;line-height:1.35}
 .historyItem{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#f8fafc;border:1px solid #e5e7eb;border-radius:15px;padding:12px;margin:10px 0}
 .deleteBtn{width:auto;background:#fee2e2;color:#b91c1c;padding:8px 12px;font-size:18px}
-canvas{max-height:310px}
+canvas{max-height:320px}
+.badge{display:inline-block;padding:7px 11px;border-radius:999px;font-weight:900;background:#e8eef7;color:var(--blue);margin:4px 4px 4px 0}
+.goalMessage{font-size:18px;font-weight:900;line-height:1.4;padding:15px;border-radius:16px;background:#eff6ff;color:#174a8b}
+.rowBtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:560px){
   body{padding:12px}
   h1{font-size:34px}.menu button{font-size:27px}
-  .grid{grid-template-columns:1fr}
+  .grid,.rowBtns{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -53,10 +59,19 @@ canvas{max-height:310px}
   <h1>🇬🇷 Greek Cal AI</h1>
   <button onclick="soon()">📷 Φωτογραφία Γεύματος</button>
   <button onclick="soon()">📦 Σάρωση Barcode</button>
-  <button onclick="soon()">🍽 Ελληνικά Φαγητά</button>
+  <button onclick="showPage('foods')">🍽 Ελληνικά Φαγητά</button>
   <button onclick="showPage('fasting')">⏱ Διαλειμματική Νηστεία</button>
   <button onclick="soon()">📅 Ημερολόγιο</button>
   <button onclick="showPage('weight')">⚖️ Στόχος Βάρους</button>
+</section>
+
+<section id="foods" class="hidden">
+  <button class="back" onclick="showPage('home')">← Πίσω</button>
+  <div class="card">
+    <h2>🍽 Ελληνικά Φαγητά</h2>
+    <p class="small">Πρώτη εμπορική βάση τροφίμων. Στις επόμενες εκδόσεις θα μπει αναζήτηση και θερμίδες ανά μερίδα.</p>
+    <div id="foodList"></div>
+  </div>
 </section>
 
 <section id="fasting" class="hidden">
@@ -92,16 +107,40 @@ canvas{max-height:310px}
 
   <div class="card">
     <h2>⚖️ Στόχος Βάρους</h2>
+    <label>Όνομα χρήστη / προφίλ</label>
+    <input id="profileName" type="text" placeholder="π.χ. Γιάννης">
+
     <label>Αρχικό βάρος (kg)</label>
-    <input id="startWeight" type="number" step="0.1" value="135">
+    <input id="startWeight" type="number" step="0.1" value="90">
+
     <label>Τωρινό βάρος (kg)</label>
-    <input id="currentWeight" type="number" step="0.1" value="135">
+    <input id="currentWeight" type="number" step="0.1" value="90">
+
     <label>Στόχος βάρους (kg)</label>
-    <input id="targetWeight" type="number" step="0.1" value="100">
+    <input id="targetWeight" type="number" step="0.1" value="80">
+
     <label>Ύψος π.χ. 1.75</label>
     <input id="height" type="number" step="0.01" value="1.75">
+
+    <label>Ηλικία</label>
+    <input id="age" type="number" step="1" value="40">
+
+    <label>Φύλο</label>
+    <select id="gender">
+      <option value="male">Άνδρας</option>
+      <option value="female">Γυναίκα</option>
+    </select>
+
+    <label>Επίπεδο δραστηριότητας</label>
+    <select id="activity">
+      <option value="1.2">Καθιστική ζωή</option>
+      <option value="1.375">Ελαφριά δραστηριότητα</option>
+      <option value="1.55">Μέτρια δραστηριότητα</option>
+      <option value="1.725">Υψηλή δραστηριότητα</option>
+    </select>
+
     <label>Σημείωση μέτρησης</label>
-    <textarea id="note" placeholder="π.χ. Carnivore / 16:8 / περπάτημα"></textarea>
+    <textarea id="note" placeholder="π.χ. περπάτημα / 16:8 / μεσογειακή διατροφή"></textarea>
 
     <button class="btnGreen" onclick="saveWeightData()">💾 Αποθήκευση Στοιχείων</button>
     <button onclick="addMeasurement()">➕ Καταχώρηση Μέτρησης</button>
@@ -116,20 +155,30 @@ canvas{max-height:310px}
       <div class="stat"><b>Χαμένα κιλά</b><span id="lostKg">0 kg</span></div>
       <div class="stat"><b>Κιλά που απομένουν</b><span id="remainingKg">0 kg</span></div>
       <div class="stat"><b>BMI</b><span id="bmi">-</span></div>
+      <div class="stat"><b>Κατηγορία BMI</b><span id="bmiCategory">-</span></div>
+      <div class="stat"><b>Θερμίδες συντήρησης</b><span id="maintenanceCalories">-</span></div>
+      <div class="stat"><b>Πρόταση απώλειας</b><span id="cutCalories">-</span></div>
       <div class="stat"><b>Μετρήσεις</b><span id="totalMeasurements">0</span></div>
+      <div class="stat"><b>Μέσος ρυθμός</b><span id="avgRate">-</span></div>
     </div>
+    <div class="goalMessage" id="goalMessage" style="margin-top:14px">Καταχώρησε στοιχεία για να εμφανιστεί αξιολόγηση.</div>
   </div>
 
   <div class="card">
     <h2>📈 Γράφημα Βάρους</h2>
     <canvas id="weightChart"></canvas>
-    <p class="small">Το γράφημα εμφανίζεται όταν υπάρχουν τουλάχιστον 2 μετρήσεις.</p>
+    <p class="small">Το γράφημα ενημερώνεται από το ιστορικό μετρήσεων.</p>
   </div>
 
   <div class="card">
     <h2>📋 Ιστορικό Μετρήσεων</h2>
     <div id="historyList"></div>
-    <button class="btnRed" onclick="clearHistory()">🗑 Διαγραφή όλου του ιστορικού</button>
+    <div class="rowBtns">
+      <button class="btnPurple" onclick="exportBackup()">⬇️ Export Backup</button>
+      <button class="btnRed" onclick="clearHistory()">🗑 Διαγραφή ιστορικού</button>
+    </div>
+    <textarea id="backupBox" placeholder="Εδώ εμφανίζεται το backup JSON ή κάνε επικόλληση για restore"></textarea>
+    <button class="btnLight" onclick="importBackup()">⬆️ Import Backup</button>
   </div>
 
   <p class="small">Οι υπολογισμοί είναι ενδεικτικοί και δεν αποτελούν ιατρική συμβουλή.</p>
@@ -141,22 +190,49 @@ canvas{max-height:310px}
 let weightChart = null;
 let fastingInterval = null;
 
+const greekFoods = [
+  ["Χωριάτικη σαλάτα","Μεσογειακό / χαμηλές θερμίδες"],
+  ["Σουβλάκι κοτόπουλο","Υψηλή πρωτεΐνη"],
+  ["Μπιφτέκι μοσχαρίσιο","Υψηλή πρωτεΐνη"],
+  ["Φασολάδα","Παραδοσιακό / φυτικές ίνες"],
+  ["Φακές","Παραδοσιακό / φυτική πρωτεΐνη"],
+  ["Γεμιστά","Μεσογειακό"],
+  ["Μουσακάς","Υψηλές θερμίδες"],
+  ["Παστίτσιο","Υψηλές θερμίδες"],
+  ["Γιαούρτι στραγγιστό","Πρωτεΐνη"],
+  ["Ομελέτα","Πρωτεΐνη / low carb"]
+];
+
 function showPage(id){
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
   if(id==="weight"){loadWeightData();calculateWeight();renderHistory();renderChart();}
   if(id==="fasting"){loadFasting();updateFastingTimer();}
+  if(id==="foods"){renderFoods();}
 }
 function soon(){alert("Η λειτουργία θα προστεθεί σε επόμενη έκδοση.");}
 function num(id){return parseFloat(String(document.getElementById(id).value).replace(",","."))||0;}
 
+function renderFoods(){
+  document.getElementById("foodList").innerHTML = greekFoods.map(f=>`
+    <div class="historyItem">
+      <div><b>${f[0]}</b><br><span class="small">${f[1]}</span></div>
+      <span class="badge">GR</span>
+    </div>
+  `).join("");
+}
+
 /* ΒΑΡΟΣ */
 function saveWeightData(){
   const data={
+    profileName:document.getElementById("profileName").value,
     startWeight:document.getElementById("startWeight").value,
     currentWeight:document.getElementById("currentWeight").value,
     targetWeight:document.getElementById("targetWeight").value,
-    height:document.getElementById("height").value
+    height:document.getElementById("height").value,
+    age:document.getElementById("age").value,
+    gender:document.getElementById("gender").value,
+    activity:document.getElementById("activity").value
   };
   localStorage.setItem("gca_weight_data",JSON.stringify(data));
   calculateWeight();
@@ -166,22 +242,55 @@ function loadWeightData(){
   const raw=localStorage.getItem("gca_weight_data");
   if(!raw)return;
   const d=JSON.parse(raw);
-  document.getElementById("startWeight").value=d.startWeight||"135";
-  document.getElementById("currentWeight").value=d.currentWeight||"135";
-  document.getElementById("targetWeight").value=d.targetWeight||"100";
+  document.getElementById("profileName").value=d.profileName||"";
+  document.getElementById("startWeight").value=d.startWeight||"90";
+  document.getElementById("currentWeight").value=d.currentWeight||"90";
+  document.getElementById("targetWeight").value=d.targetWeight||"80";
   document.getElementById("height").value=d.height||"1.75";
+  document.getElementById("age").value=d.age||"40";
+  document.getElementById("gender").value=d.gender||"male";
+  document.getElementById("activity").value=d.activity||"1.2";
 }
 function calculateWeight(){
-  const start=num("startWeight"), current=num("currentWeight"), target=num("targetWeight"), h=num("height");
+  const start=num("startWeight"), current=num("currentWeight"), target=num("targetWeight"), h=num("height"), age=num("age");
+  const gender=document.getElementById("gender").value;
+  const activity=num("activity");
   let progress=0;
   if(start>target)progress=((start-current)/(start-target))*100;
   progress=Math.max(0,Math.min(100,progress));
   const lost=start-current, remaining=Math.max(0,current-target), bmi=h>0?current/(h*h):0;
+
+  let bmr=0;
+  const cm=h*100;
+  if(gender==="male") bmr=10*current+6.25*cm-5*age+5;
+  else bmr=10*current+6.25*cm-5*age-161;
+  const maintenance=Math.round(bmr*activity);
+  const cut=Math.max(1200, maintenance-500);
+
   document.getElementById("weightProgressBar").style.width=progress+"%";
   document.getElementById("weightProgressText").textContent=progress.toFixed(1)+"%";
   document.getElementById("lostKg").textContent=lost.toFixed(1)+" kg";
   document.getElementById("remainingKg").textContent=remaining.toFixed(1)+" kg";
   document.getElementById("bmi").textContent=bmi?bmi.toFixed(1):"-";
+  document.getElementById("bmiCategory").textContent=bmiCategory(bmi);
+  document.getElementById("maintenanceCalories").textContent=maintenance?maintenance+" kcal":"-";
+  document.getElementById("cutCalories").textContent=cut?cut+" kcal":"-";
+  document.getElementById("goalMessage").textContent=makeGoalMessage(progress,lost,remaining,bmi);
+
+  updateStatsFromHistory();
+}
+function bmiCategory(bmi){
+  if(!bmi)return "-";
+  if(bmi<18.5)return "Χαμηλό";
+  if(bmi<25)return "Φυσιολογικό";
+  if(bmi<30)return "Υπέρβαρο";
+  return "Παχυσαρκία";
+}
+function makeGoalMessage(progress,lost,remaining,bmi){
+  if(progress>=100) return "Συγχαρητήρια! Ο στόχος έχει επιτευχθεί.";
+  if(lost>0) return `Καλή πρόοδος. Έχουν χαθεί ${lost.toFixed(1)} kg και απομένουν ${remaining.toFixed(1)} kg.`;
+  if(bmi>=30) return "Ξεκίνα σταθερά και με ασφαλή ρυθμό. Μικρά βήματα κάθε εβδομάδα.";
+  return "Καταχώρησε μετρήσεις για να δεις την πραγματική πορεία.";
 }
 function getHistory(){return JSON.parse(localStorage.getItem("gca_weight_history")||"[]");}
 function setHistory(h){localStorage.setItem("gca_weight_history",JSON.stringify(h));}
@@ -190,18 +299,20 @@ function addMeasurement(){
   const note=document.getElementById("note").value.trim();
   if(weight<=0){alert("Βάλε σωστό τωρινό βάρος.");return;}
   const now=new Date();
-  const item={date:now.toLocaleDateString("el-GR"),time:now.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"}),weight,note};
+  const item={date:now.toLocaleDateString("el-GR"),time:now.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"}),ts:Date.now(),weight,note};
   const h=getHistory();h.unshift(item);setHistory(h);
   document.getElementById("note").value="";
   saveWeightDataNoAlert();
   renderHistory();renderChart();calculateWeight();
 }
 function saveWeightDataNoAlert(){
-  const data={startWeight:document.getElementById("startWeight").value,currentWeight:document.getElementById("currentWeight").value,targetWeight:document.getElementById("targetWeight").value,height:document.getElementById("height").value};
+  const data={
+    profileName:document.getElementById("profileName").value,startWeight:document.getElementById("startWeight").value,currentWeight:document.getElementById("currentWeight").value,targetWeight:document.getElementById("targetWeight").value,height:document.getElementById("height").value,age:document.getElementById("age").value,gender:document.getElementById("gender").value,activity:document.getElementById("activity").value
+  };
   localStorage.setItem("gca_weight_data",JSON.stringify(data));
 }
-function deleteMeasurement(i){const h=getHistory();h.splice(i,1);setHistory(h);renderHistory();renderChart();}
-function clearHistory(){if(!confirm("Να διαγραφεί όλο το ιστορικό;"))return;localStorage.removeItem("gca_weight_history");renderHistory();renderChart();}
+function deleteMeasurement(i){const h=getHistory();h.splice(i,1);setHistory(h);renderHistory();renderChart();calculateWeight();}
+function clearHistory(){if(!confirm("Να διαγραφεί όλο το ιστορικό;"))return;localStorage.removeItem("gca_weight_history");renderHistory();renderChart();calculateWeight();}
 function renderHistory(){
   const h=getHistory();document.getElementById("totalMeasurements").textContent=h.length;
   const box=document.getElementById("historyList");
@@ -213,6 +324,29 @@ function renderChart(){
   const ctx=document.getElementById("weightChart");
   if(weightChart)weightChart.destroy();
   weightChart=new Chart(ctx,{type:"line",data:{labels:h.map(x=>x.date),datasets:[{label:"Βάρος kg",data:h.map(x=>x.weight),tension:.35,borderWidth:3,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:false}}}});
+}
+function updateStatsFromHistory(){
+  const h=getHistory().slice().reverse();
+  document.getElementById("totalMeasurements").textContent=h.length;
+  if(h.length<2){document.getElementById("avgRate").textContent="-";return;}
+  const first=h[0], last=h[h.length-1];
+  const days=Math.max(1,(last.ts-first.ts)/(1000*60*60*24));
+  const diff=first.weight-last.weight;
+  const weekly=diff/days*7;
+  document.getElementById("avgRate").textContent=weekly.toFixed(2)+" kg/εβδ.";
+}
+function exportBackup(){
+  const backup={weightData:JSON.parse(localStorage.getItem("gca_weight_data")||"{}"),history:getHistory(),fastingPlan:localStorage.getItem("gca_fasting_plan")||"16"};
+  document.getElementById("backupBox").value=JSON.stringify(backup);
+}
+function importBackup(){
+  try{
+    const data=JSON.parse(document.getElementById("backupBox").value);
+    localStorage.setItem("gca_weight_data",JSON.stringify(data.weightData||{}));
+    localStorage.setItem("gca_weight_history",JSON.stringify(data.history||[]));
+    if(data.fastingPlan)localStorage.setItem("gca_fasting_plan",data.fastingPlan);
+    loadWeightData();renderHistory();renderChart();calculateWeight();alert("Το backup φορτώθηκε.");
+  }catch(e){alert("Λάθος μορφή backup.");}
 }
 function escapeHtml(t){return t.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
 
@@ -227,19 +361,9 @@ function loadFasting(){
   if(fastingInterval)clearInterval(fastingInterval);
   fastingInterval=setInterval(updateFastingTimer,1000);
 }
-function startFasting(){
-  localStorage.setItem("gca_fasting_start",String(Date.now()));
-  updateFastingTimer();
-}
-function finishFasting(){
-  localStorage.removeItem("gca_fasting_start");
-  updateFastingTimer();
-  alert("Η νηστεία τερματίστηκε.");
-}
-function resetFasting(){
-  localStorage.removeItem("gca_fasting_start");
-  updateFastingTimer();
-}
+function startFasting(){localStorage.setItem("gca_fasting_start",String(Date.now()));updateFastingTimer();}
+function finishFasting(){localStorage.removeItem("gca_fasting_start");updateFastingTimer();alert("Η νηστεία τερματίστηκε.");}
+function resetFasting(){localStorage.removeItem("gca_fasting_start");updateFastingTimer();}
 function updateFastingTimer(){
   const start=parseInt(localStorage.getItem("gca_fasting_start")||"0",10);
   const goal=fastingHours()*60*60*1000;
