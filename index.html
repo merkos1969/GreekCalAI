@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V25</title>
+<title>Greek Cal AI V26</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -483,6 +483,25 @@ body{padding-bottom:86px}
   font-weight:900;
 }
 
+
+.paceBox{
+  background:#f8fbff;
+  border:1px solid #bfdbfe;
+  border-radius:16px;
+  padding:12px;
+  margin:12px 0;
+}
+.paceInfo{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:14px;
+  padding:11px;
+  margin-top:8px;
+  font-weight:900;
+  line-height:1.35;
+}
+
 </style>
 </head>
 <body>
@@ -503,6 +522,7 @@ body{padding-bottom:86px}
       <div class="dashBox"><b>Βάρος</b><span id="dashWeight">Δεν υπάρχει</span></div>
       <div class="dashBox"><b>Θερμίδες στόχου</b><span id="dashGoalCalories">-</span></div>
       <div class="dashBox"><b>Στόχος σε</b><span id="dashGoalTime">-</span></div>
+      <div class="dashBox"><b>Ρυθμός</b><span id="dashPace">Κανονικός</span></div>
     </div>
     <div class="progressWrap"><div id="dashCalBar" class="progressBar"></div></div>
     <p class="small" id="dashMessage" style="text-align:center;margin-top:8px">Καλή αρχή για σήμερα.</p><div class="dashGoalNote" id="dashGoalNote">Συμπλήρωσε τον στόχο βάρους για να εμφανιστεί εκτίμηση.</div>
@@ -951,6 +971,16 @@ body{padding-bottom:86px}
     <label>Ηλικία</label><input id="age" type="number" step="1" value="40">
     <label>Φύλο</label><select id="gender"><option value="male">Άνδρας</option><option value="female">Γυναίκα</option></select>
     <label>Επίπεδο δραστηριότητας</label><select id="activity"><option value="1.2">Καθιστική ζωή</option><option value="1.375">Ελαφριά δραστηριότητα</option><option value="1.55">Μέτρια δραστηριότητα</option><option value="1.725">Υψηλή δραστηριότητα</option></select>
+
+<div class="paceBox">
+  <label>Ρυθμός στόχου</label>
+  <select id="goalPace" onchange="saveWeightData();calculateWeight();loadDailyGoal();updateDashboard()">
+    <option value="300">Ήπιος ρυθμός (-300 kcal/ημέρα)</option>
+    <option value="500" selected>Κανονικός ρυθμός (-500 kcal/ημέρα)</option>
+    <option value="700">Γρήγορος ρυθμός (-700 kcal/ημέρα)</option>
+  </select>
+  <div id="paceInfo" class="paceInfo">Ο κανονικός ρυθμός είναι περίπου 0.45 kg/εβδομάδα.</div>
+</div>
     <label>Σημείωση μέτρησης</label><textarea id="note" placeholder="π.χ. περπάτημα / 16:8 / μεσογειακή διατροφή"></textarea>
     <button class="btnGreen" onclick="saveWeightData()">💾 Αποθήκευση Στοιχείων</button><button onclick="addMeasurement()">➕ Καταχώρηση Μέτρησης</button><button class="btnLight" onclick="calculateWeight()">📊 Υπολογισμός Προόδου</button>
   </div>
@@ -1144,7 +1174,7 @@ function calculateWeight(){
   let explain="";
 
   if(current>target){
-    const dailyDeficit=500;
+    const dailyDeficit=getGoalPaceDeficit();
     targetCalories=Math.max(1200,maintenance-dailyDeficit);
     weeklyChangeKg=(dailyDeficit*7)/7700;
     const kgLeft=current-target;
@@ -1180,6 +1210,7 @@ function calculateWeight(){
   setText("goalMessage",makeGoalMessage(progress,lost,(current>target?remainingLoss:remainingGain),bmi));
   const exp=document.getElementById("goalExplain");
   if(exp) exp.textContent=explain+" Οι υπολογισμοί είναι ενδεικτικοί.";
+  updatePaceInfo();
   updateStatsFromHistory();
 }
 function bmiCategory(bmi){if(!bmi)return "-";if(bmi<18.5)return "Χαμηλό";if(bmi<25)return "Φυσιολογικό";if(bmi<30)return "Υπέρβαρο";return "Παχυσαρκία";}
@@ -1213,6 +1244,30 @@ function formatTime(ms){const total=Math.floor(ms/1000),h=String(Math.floor(tota
 
 
 
+
+function getGoalPaceDeficit(){
+  const raw = localStorage.getItem("gca_weight_data");
+  let saved = "500";
+  if(raw){
+    try{ saved = JSON.parse(raw).goalPace || "500"; }catch(e){}
+  }
+  const el = document.getElementById("goalPace");
+  const value = parseInt((el && el.value) ? el.value : saved, 10);
+  if(value === 300 || value === 500 || value === 700) return value;
+  return 500;
+}
+function updatePaceInfo(){
+  const deficit = getGoalPaceDeficit();
+  const weekly = (deficit * 7 / 7700);
+  const text = deficit===300
+    ? `Ήπιος ρυθμός: περίπου ${weekly.toFixed(2)} kg/εβδομάδα. Πιο αργά αλλά πιο εύκολα.`
+    : deficit===700
+      ? `Γρήγορος ρυθμός: περίπου ${weekly.toFixed(2)} kg/εβδομάδα. Θέλει προσοχή και συνέπεια.`
+      : `Κανονικός ρυθμός: περίπου ${weekly.toFixed(2)} kg/εβδομάδα. Ισορροπημένη επιλογή.`;
+  const box = document.getElementById("paceInfo");
+  if(box) box.textContent = text;
+}
+
 /* AUTO DAILY CALORIE GOAL */
 function getWeightTargetCalories(){
   const raw = localStorage.getItem("gca_weight_data");
@@ -1238,7 +1293,8 @@ function getWeightTargetCalories(){
   let mode = "Συντήρηση";
 
   if(current > target){
-    calories = Math.max(1200, maintenance - 500);
+    const deficit = getGoalPaceDeficit();
+    calories = Math.max(1200, maintenance - deficit);
     mode = "Απώλεια βάρους";
   }else if(current < target){
     calories = maintenance + 300;
@@ -1282,7 +1338,7 @@ function computeWeightGoalDashboard(){
   let note = "";
 
   if(current > target){
-    const deficit = 500;
+    const deficit = getGoalPaceDeficit();
     targetCalories = Math.max(1200, maintenance - deficit);
     const weeklyLoss = (deficit * 7) / 7700;
     const kgLeft = current - target;
@@ -1305,7 +1361,9 @@ function computeWeightGoalDashboard(){
     note = `Είσαι στον στόχο. Ενδεικτικές θερμίδες συντήρησης: ${targetCalories} kcal/ημέρα.`;
   }
 
-  return {cal:targetCalories+" kcal", time:timeline, note};
+  const paceVal = getGoalPaceDeficit();
+  const paceLabel = paceVal===300 ? "Ήπιος" : (paceVal===700 ? "Γρήγορος" : "Κανονικός");
+  return {cal:targetCalories+" kcal", time:timeline, note, pace:paceLabel};
 }
 
 /* DASHBOARD */
@@ -1363,6 +1421,7 @@ function updateDashboard(){
   const goalDash = computeWeightGoalDashboard();
   setText("dashGoalCalories", goalDash.cal);
   setText("dashGoalTime", goalDash.time);
+  setText("dashPace", goalDash.pace || "-");
   const goalNote = document.getElementById("dashGoalNote");
   if(goalNote) goalNote.textContent = goalDash.note;
 
