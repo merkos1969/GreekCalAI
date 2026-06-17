@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V42</title>
+<title>Greek Cal AI V43</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -1329,6 +1329,18 @@ label{
   }
 }
 
+
+/* V43 clean home/fix duplicate old boxes */
+#home > .dashboardCard + .dashboardGrid,
+#home > .dashboardCard + .dashBox,
+#home .oldDashboard,
+#home .waterDashBox.hidden{
+  display:none!important;
+}
+.heroCalBox small{
+  line-height:1.25;
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -1410,7 +1422,7 @@ label{
       <button onclick="showPage('fasting')">Νηστεία</button>
       <button onclick="showPage('weight')">Βάρος</button>
     </div>
-  </div></div>
+  </div>
 
 <div class="homeMenuGrid">
     <button onclick="showPage('photoMeal')">📷 Φωτογραφία</button>
@@ -2039,7 +2051,7 @@ function setMacroPreset(p,c,f){
   updateDashboard();
 }
 function getMacroTargets(){
-  const goal = Math.max(1, num("dailyGoal") || parseInt(localStorage.getItem("gca_daily_goal") || "1800",10));
+  const goal = Math.max(1, (typeof getDailyGoalWithExercise==="function" ? getDailyGoalWithExercise() : (num("dailyGoal") || parseInt(localStorage.getItem("gca_daily_goal") || "1800",10))));
   const m = getMacroSplit();
   return {
     pPct:m.p, cPct:m.c, fPct:m.f,
@@ -2352,6 +2364,19 @@ function updateHomeMacroDashboard(totals){
   setText("homeMacroSplitText", (targets.pPct||30) + "% / " + (targets.cPct||40) + "% / " + (targets.fPct||30) + "%");
 }
 
+
+/* V43 exercise-adjusted calorie goal */
+function getDailyGoalBase(){
+  const autoCalc = (typeof isAutoDailyGoal === "function" && isAutoDailyGoal()) ? getWeightTargetCalories() : null;
+  return autoCalc ? autoCalc.calories : parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
+}
+function getExerciseCaloriesToday(){
+  return (typeof getActivityCalories === "function") ? getActivityCalories(todayKey()) : 0;
+}
+function getDailyGoalWithExercise(){
+  return getDailyGoalBase() + getExerciseCaloriesToday();
+}
+
 /* DASHBOARD */
 function getTodayDiaryItems(){
   const key = "gca_diary_" + todayKey();
@@ -2386,8 +2411,9 @@ function updateDashboard(){
   const items = getTodayDiaryItems();
   const total = items.reduce((s,x)=>s+(Number(x.total)||0),0);
   const prot = items.reduce((s,x)=>s+(Number(x.p)||0),0);
-  const autoCalc = isAutoDailyGoal ? getWeightTargetCalories() : null;
-  const goal = autoCalc ? autoCalc.calories : parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
+  const baseGoal = getDailyGoalBase();
+  const exerciseBonus = getExerciseCaloriesToday();
+  const goal = baseGoal + exerciseBonus;
   const pGoal = parseInt(localStorage.getItem("gca_protein_goal") || "120", 10);
   const todayActs = getActivitiesForKey ? getActivitiesForKey(todayKey()) : [];
   const burned = todayActs.reduce((s,x)=>s+(Number(x.burned)||0),0);
@@ -2395,7 +2421,7 @@ function updateDashboard(){
   const pct = Math.round(((total - burned) / Math.max(1, goal)) * 100);
 
   setText("dashCalories", total + " / " + goal);
-  setText("dashRemainingMini", "Υπόλοιπο " + Math.max(0, goal-total) + " kcal");
+  setText("dashRemainingMini", "Υπόλοιπο " + Math.max(0, goal-total) + " kcal" + (exerciseBonus>0 ? " • +"+exerciseBonus+" από άσκηση" : ""));
   setText("dashRemaining", (remaining >= 0 ? remaining : Math.abs(remaining)) + " kcal");
   setText("dashProtein", prot + " / " + pGoal + "g");
   setText("dashMeals", items.length);
@@ -2622,7 +2648,9 @@ function addCoachPlanToDiary(){
 function prepareCoach(){
   const items = getTodayDiaryItems ? getTodayDiaryItems() : [];
   const total = items.reduce((s,x)=>s+(Number(x.total)||0),0);
-  const goal = parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
+  const baseGoal = getDailyGoalBase();
+  const exerciseBonus = getExerciseCaloriesToday();
+  const goal = baseGoal + exerciseBonus;
   const remaining = Math.max(0, goal - total);
   document.getElementById("coachCalories").value = remaining || 600;
 }
@@ -2704,7 +2732,9 @@ function daySummary(key){
   const protein = diary.reduce((s,x)=>s+(Number(x.p)||0),0);
   const burned = acts.reduce((s,x)=>s+(Number(x.burned)||0),0);
   const net = calories - burned;
-  const goal = parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
+  const baseGoal = getDailyGoalBase();
+  const exerciseBonus = getExerciseCaloriesToday();
+  const goal = baseGoal + exerciseBonus;
   return {key, diary, acts, waterMl, calories, protein, burned, net, goal};
 }
 function dayClass(sum){
@@ -2989,7 +3019,9 @@ function prettyDateKey(key){
   return parts[2] + "/" + parts[1];
 }
 function renderWeeklyReport(){
-  const goal = parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
+  const baseGoal = getDailyGoalBase();
+  const exerciseBonus = getExerciseCaloriesToday();
+  const goal = baseGoal + exerciseBonus;
   let days = [];
   for(let i=6;i>=0;i--){
     const key = dateKeyOffset(i);
