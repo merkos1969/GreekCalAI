@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V34</title>
+<title>Greek Cal AI V36</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -1004,6 +1004,26 @@ label{
   .quickMealGrid .fabAction small{font-size:11px}
 }
 
+
+/* V35 cleaner quick add */
+.fabSheet{
+  max-width:620px;
+}
+@media(max-width:560px){
+  .fabSheet{
+    max-height:78vh;
+  }
+}
+
+
+/* V36 water cleanup */
+.waterDashBox.hidden{
+  display:none!important;
+}
+.dashWaterProgress{
+  margin-top:6px;
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -1045,7 +1065,7 @@ label{
       <div class="dashBox"><b>Πρωτεΐνη</b><span id="dashProtein">0 / 120g</span></div>
       <div class="dashBox"><b>Γεύματα</b><span id="dashMeals">0</span></div>
       <div class="dashBox"><b>Άσκηση</b><span id="dashActivity">0 kcal</span></div>
-      <div class="dashBox"><b>Νερό</b><span id="dashWater">0 / 2.5L</span></div>
+      <div class="dashBox waterDashBox hidden"><b>Νερό</b><span id="dashWater">0.0 / 2.5L</span></div>
       <div class="dashBox"><b>Νηστεία</b><span id="dashFasting">Ανενεργή</span></div>
       <div class="dashBox"><b>Βάρος</b><span id="dashWeight">Δεν υπάρχει</span></div>
       <div class="dashBox"><b>Θερμίδες στόχου</b><span id="dashGoalCalories">-</span></div>
@@ -1067,7 +1087,6 @@ label{
     <button onclick="showPage('barcode')">📦 Barcode</button>
     <button onclick="showPage('reports')">📊 Αναφορά</button>
     <button onclick="showPage('activities')">🏃 Δραστηριότητες</button>
-    <button onclick="showPage('water')">Νερό</button>
     <button onclick="showPage('progressCalendar')">📅 Ημερολόγιο</button>
     <button onclick="showPage('custom')">➕ Δικό μου</button>
     <button onclick="showPage('fasting')">⏱ Νηστεία</button>
@@ -1565,24 +1584,14 @@ label{
       </button>
     </div>
 
-    <button class="fabAction" onclick="quickAddWater250()">
+    <button class="fabAction" onclick="quickGo('water')">
       <span>＋</span>
-      <div><b>+250 ml νερό</b><br><small>Άμεση καταχώρηση νερού για σήμερα</small></div>
+      <div><b>Νερό</b><br><small>Άνοιγμα καταχώρησης νερού</small></div>
     </button>
 
     <button class="fabAction" onclick="quickGo('activities')">
       <span>🏃</span>
       <div><b>Καταχώρηση άσκησης</b><br><small>Βάδισμα, τρέξιμο, ποδήλατο</small></div>
-    </button>
-
-    <button class="fabAction" onclick="quickWeight()">
-      <span>⚖️</span>
-      <div><b>Καταχώρηση βάρους</b><br><small>Άμεση ενημέρωση τωρινού βάρους</small></div>
-    </button>
-
-    <button class="fabAction" onclick="quickFasting()">
-      <span>⏱</span>
-      <div><b>Έναρξη νηστείας</b><br><small>Ξεκινάει ο χρονομετρητής</small></div>
     </button>
 
     <button class="fabAction fabClose" onclick="hideQuickAdd()">
