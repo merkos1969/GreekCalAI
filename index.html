@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V19</title>
+<title>Greek Cal AI V21</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -389,6 +389,39 @@ body{padding-bottom:86px}
 }
 .app{padding-bottom:130px}
 
+
+.homeMenuGrid.v20clean{}
+.homeMenuGrid button{
+  min-height:68px;
+}
+@media(max-width:560px){
+  .homeMenuGrid button{
+    font-size:17px;
+    min-height:64px;
+    padding:12px 8px;
+  }
+}
+
+
+.photoPreview{
+  width:100%;
+  border-radius:16px;
+  max-height:320px;
+  object-fit:contain;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  margin-top:10px;
+}
+.photoNote{
+  background:#eff6ff;
+  color:#174a8b;
+  border:1px solid #bfdbfe;
+  border-radius:16px;
+  padding:13px;
+  font-weight:900;
+  margin-top:12px;
+}
+
 </style>
 </head>
 <body>
@@ -396,8 +429,7 @@ body{padding-bottom:86px}
 
 <section id="home" class="card menu">
   <h1>🇬🇷 Greek Cal AI</h1>
-
-  <div class="dashboardCard">
+<div class="dashboardCard">
     <h2>📊 Σήμερα</h2>
     <div class="dashboardGrid">
       <div class="dashBox"><b>Θερμίδες</b><span id="dashCalories">0 / 1800</span></div>
@@ -419,24 +451,55 @@ body{padding-bottom:86px}
     </div>
   </div>
 
-  <div class="homeMenuGrid">
-    <button onclick="soon()">📷 Φωτογραφία</button>
+<div class="homeMenuGrid">
+    <button onclick="showPage('photoMeal')">📷 Φωτογραφία</button>
     <button onclick="showPage('barcode')">📦 Barcode</button>
-    <button onclick="showPage('foods')">🍽 Φαγητά</button>
-    <button onclick="showPage('diary')">📝 Ημερήσιο</button>
     <button onclick="showPage('reports')">📊 Αναφορά</button>
     <button onclick="showPage('activities')">🏃 Δραστηριότητες</button>
     <button onclick="showPage('water')">💧 Νερό</button>
     <button onclick="showPage('progressCalendar')">📅 Ημερολόγιο</button>
     <button onclick="showPage('custom')">➕ Δικό μου</button>
-    <button onclick="showPage('coach')">🤖 AI Coach</button>
     <button onclick="showPage('fasting')">⏱ Νηστεία</button>
-    <button onclick="showPage('weight')">⚖️ Βάρος</button>
-    <button onclick="showPage('progressCalendar')">📅 Ημερολόγιο</button>
   </div>
+  <p class="small" style="text-align:center;margin-top:10px">Οι βασικές λειτουργίες είναι κάτω. Τα πρόσθετα εργαλεία είναι εδώ και στο πράσινο +.</p>
 </section>
 
 
+
+
+<section id="photoMeal" class="hidden">
+  <button class="back" onclick="showPage('home')">← Πίσω</button>
+  <div class="card">
+    <h2>📷 Φωτογραφία Γεύματος</h2>
+    <p class="small">Πρώτη λειτουργική έκδοση: ανεβάζεις/τραβάς φωτογραφία, βλέπεις προεπισκόπηση και μετά διαλέγεις χειροκίνητα το φαγητό που αντιστοιχεί.</p>
+
+    <label>Φωτογραφία γεύματος</label>
+    <input id="mealPhotoInput" type="file" accept="image/*" capture="environment" onchange="previewMealPhoto(event)">
+
+    <div id="mealPhotoBox" class="hidden">
+      <img id="mealPhotoPreview" class="photoPreview">
+      <div class="photoNote">Η AI αναγνώριση φαγητού θα μπει αργότερα. Προς το παρόν διάλεξε φαγητό από τη λίστα ή καταχώρησέ το χειροκίνητα.</div>
+    </div>
+
+    <label>Γρήγορη επιλογή φαγητού</label>
+    <select id="photoFoodSelect"></select>
+
+    <label>Ποσότητα / μερίδες</label>
+    <input id="photoFoodQty" type="number" step="0.5" value="1">
+
+    <label>Γεύμα</label>
+    <select id="photoMealType">
+      <option>Πρωινό</option>
+      <option>Μεσημεριανό</option>
+      <option>Βραδινό</option>
+      <option selected>Σνακ</option>
+    </select>
+
+    <button class="btnGreen" onclick="addPhotoFoodToDiary()">➕ Προσθήκη στο ημερήσιο</button>
+    <button onclick="showPage('foods')">🍽 Άνοιγμα Ελληνικών Φαγητών</button>
+    <button class="btnLight" onclick="showPage('custom')">➕ Δικό μου φαγητό</button>
+  </div>
+</section>
 
 <section id="barcode" class="hidden">
   <button class="back" onclick="showPage('home')">← Πίσω</button>
@@ -807,6 +870,11 @@ body{padding-bottom:86px}
       <div><b>Σάρωση Barcode</b><br><small>Προσθήκη προϊόντος</small></div>
     </button>
 
+    <button class="fabAction" onclick="quickGo('photoMeal')">
+      <span>📷</span>
+      <div><b>Φωτογραφία γεύματος</b><br><small>Προσθήκη από φωτογραφία</small></div>
+    </button>
+
     <button class="fabAction" onclick="quickGo('custom')">
       <span>➕</span>
       <div><b>Δικό μου φαγητό</b><br><small>Καταχώρηση νέου φαγητού</small></div>
@@ -862,7 +930,7 @@ function showPage(id){
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
   updateFabVisibility(id);
-if(id==="home"){updateDashboard();}if(id==="weight"){loadWeightData();calculateWeight();renderHistory();renderChart();}if(id==="fasting"){loadFasting();updateFastingTimer();}if(id==="foods"){renderFoodTabs();renderFoods();}if(id==="diary"){initDiaryDate();loadDailyGoal();renderDiary();}if(id==="custom"){renderCustomList();}if(id==="coach"){prepareCoach();}if(id==="barcode"){prepareBarcode();}if(id==="reports"){renderWeeklyReport();}if(id==="activities"){initActivityDate();loadActivityWeight();renderActivities();}if(id==="water"){initWaterDate();loadWaterGoal();renderWater();}if(id==="progressCalendar"){renderProgressCalendar();}}
+if(id==="home"){updateDashboard();}if(id==="weight"){loadWeightData();calculateWeight();renderHistory();renderChart();}if(id==="fasting"){loadFasting();updateFastingTimer();}if(id==="foods"){renderFoodTabs();renderFoods();}if(id==="diary"){initDiaryDate();loadDailyGoal();renderDiary();}if(id==="custom"){renderCustomList();}if(id==="coach"){prepareCoach();}if(id==="barcode"){prepareBarcode();}if(id==="photoMeal"){preparePhotoMeal();}if(id==="reports"){renderWeeklyReport();}if(id==="activities"){initActivityDate();loadActivityWeight();renderActivities();}if(id==="water"){initWaterDate();loadWaterGoal();renderWater();}if(id==="progressCalendar"){renderProgressCalendar();}}
 function soon(){alert("Η λειτουργία θα προστεθεί σε επόμενη έκδοση.");}
 function num(id){return parseFloat(String(document.getElementById(id).value).replace(",","."))||0;} function val(id){return document.getElementById(id).value;} function setText(id,t){document.getElementById(id).textContent=t;}
 function allFoods(){return [...baseFoods, ...getCustomFoods()];}
@@ -1601,6 +1669,55 @@ function renderWeeklyReport(){
 
 
 
+
+/* PHOTO MEAL */
+function preparePhotoMeal(){
+  const sel = document.getElementById("photoFoodSelect");
+  if(!sel) return;
+  const foods = allFoods();
+  sel.innerHTML = foods.slice(0, 180).map((f,i)=>`<option value="${i}">${f.name} • ${f.cal} kcal</option>`).join("");
+}
+function previewMealPhoto(event){
+  const file = event.target.files && event.target.files[0];
+  if(!file) return;
+  const url = URL.createObjectURL(file);
+  document.getElementById("mealPhotoPreview").src = url;
+  document.getElementById("mealPhotoBox").classList.remove("hidden");
+}
+function addPhotoFoodToDiary(){
+  const foods = allFoods();
+  const index = parseInt(val("photoFoodSelect"),10) || 0;
+  const food = foods[index];
+  if(!food){
+    alert("Διάλεξε φαγητό.");
+    return;
+  }
+  const qty = Math.max(0.5, num("photoFoodQty") || 1);
+  const meal = val("photoMealType") || "Σνακ";
+  initDiaryDate();
+  const item = {
+    name:food.name + " (από φωτογραφία)",
+    cat:food.cat,
+    portion:food.portion,
+    cal:food.cal,
+    protein:food.protein || 0,
+    carbs:food.carbs || 0,
+    fat:food.fat || 0,
+    qty:qty,
+    total:Math.round((food.cal||0)*qty),
+    p:Math.round((food.protein||0)*qty),
+    c:Math.round((food.carbs||0)*qty),
+    f:Math.round((food.fat||0)*qty),
+    meal:meal,
+    time:new Date().toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"})
+  };
+  const items = getDiary();
+  items.unshift(item);
+  setDiary(items);
+  updateDashboard();
+  alert("Το γεύμα από φωτογραφία προστέθηκε στο ημερήσιο.");
+}
+
 /* BARCODE SCANNER */
 let barcodeStream = null;
 let barcodeDetector = null;
@@ -1789,7 +1906,7 @@ function addBarcodeToDiary(){
 function updateFabVisibility(pageId){
   const fab = document.querySelector(".fab");
   if(!fab) return;
-  const hidePages = ["barcode","water","activities","custom","weight"];
+  const hidePages = ["barcode","photoMeal","water","activities","custom","weight"];
   if(hidePages.includes(pageId)){
     fab.classList.add("hiddenFab");
   }else{
