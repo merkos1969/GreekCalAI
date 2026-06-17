@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V41</title>
+<title>Greek Cal AI V42</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -1306,6 +1306,29 @@ label{
   }
 }
 
+
+/* V42 clean home */
+.dashboardCard{
+  overflow:hidden;
+}
+.dashboardCard .quickActions{
+  margin-top:12px;
+}
+.dashGoalNote{
+  margin-top:10px;
+}
+.homeMacroPanel{
+  margin-top:12px;
+}
+@media(max-width:560px){
+  .homeDashboardV41 .dashBox{
+    min-height:78px;
+  }
+  .heroCalBox{
+    min-height:102px!important;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -1341,8 +1364,13 @@ label{
 
 <div class="dashboardCard">
     <h2>📊 Σήμερα</h2>
+
     <div class="dashboardGrid homeDashboardV41">
-      <div class="dashBox heroCalBox"><b>Θερμίδες</b><span id="dashCalories">0 / 1800</span><small id="dashRemainingMini">Υπόλοιπο 1800 kcal</small></div>
+      <div class="dashBox heroCalBox">
+        <b>Θερμίδες</b>
+        <span id="dashCalories">0 / 1800</span>
+        <small id="dashRemainingMini">Υπόλοιπο 1800 kcal</small>
+      </div>
       <div class="dashBox"><b>Γεύματα</b><span id="dashMeals">0</span></div>
       <div class="dashBox"><b>Άσκηση</b><span id="dashExercise">0 kcal</span></div>
       <div class="dashBox"><b>Βάρος</b><span id="dashWeight">Δεν υπάρχει</span></div>
@@ -1361,26 +1389,28 @@ label{
         <div class="macroBarLine"><span>Λιπαρά</span><div class="macroMiniWrap"><div id="homeFatBar" class="macroMini macroFat"></div></div><span id="homeFatText">0%</span></div>
       </div>
     </div>
-      <div class="dashBox"><b>Υπόλοιπο</b><span id="dashRemaining">1800 kcal</span></div>
-      <div class="dashBox"><b>Πρωτεΐνη</b><span id="dashProtein">0 / 120g</span></div>
-      <div class="dashBox"><b>Γεύματα</b><span id="dashMeals">0</span></div>
-      <div class="dashBox"><b>Άσκηση</b><span id="dashActivity">0 kcal</span></div>
-      <div class="dashBox waterDashBox hidden"><b>Νερό</b><span id="dashWater">0.0 / 2.5L</span></div>
-      <div class="dashBox"><b>Νηστεία</b><span id="dashFasting">Ανενεργή</span></div>
-      <div class="dashBox"><b>Βάρος</b><span id="dashWeight">Δεν υπάρχει</span></div>
-      <div class="dashBox"><b>Θερμίδες στόχου</b><span id="dashGoalCalories">-</span></div>
-      <div class="dashBox"><b>Στόχος σε</b><span id="dashGoalTime">-</span></div>
-      <div class="dashBox"><b>Ρυθμός</b><span id="dashPace">Κανονικός</span></div>
+
+    <div class="dashWaterProgress">
+      <div class="dashWaterTop">
+        <b>Πρόοδος νερού</b>
+        <span id="dashWaterPercent">0%</span>
+      </div>
+      <div class="progressWrap waterProgressWrap">
+        <div id="dashWaterBar" class="progressBar waterBar"></div>
+      </div>
     </div>
-    <div class="progressWrap"><div id="dashCalBar" class="progressBar"></div></div>
-    <p class="small" id="dashMessage" style="text-align:center;margin-top:8px">Καλή αρχή για σήμερα.</p><div class="dashGoalNote" id="dashGoalNote">Συμπλήρωσε τον στόχο βάρους για να εμφανιστεί εκτίμηση.</div>
+
+    <div class="progressWrap"><div id="dashProgressBar" class="progressBar"></div></div>
+    <p class="small" id="dashMessage" style="text-align:center;margin-top:8px">Καλή αρχή για σήμερα.</p>
+    <div class="dashGoalNote" id="dashGoalNote">Συμπλήρωσε τον στόχο βάρους για να εμφανιστεί εκτίμηση.</div>
+
     <div class="quickActions">
       <button onclick="showPage('foods')">+ Φαγητό</button>
       <button onclick="showPage('diary')">Ημερήσιο</button>
       <button onclick="showPage('fasting')">Νηστεία</button>
       <button onclick="showPage('weight')">Βάρος</button>
     </div>
-  </div>
+  </div></div>
 
 <div class="homeMenuGrid">
     <button onclick="showPage('photoMeal')">📷 Φωτογραφία</button>
