@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V87-1.2.7">
+<meta name="app-version" content="V88-1.2.8">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V87</title>
+<title>Greek Cal AI V88</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -3987,6 +3987,123 @@ html, body{
   color:#166534;
 }
 
+
+/* V88 Free/Premium value table */
+.v88PremiumValueBox{
+  background:#ffffff;
+  border:1px solid #d7e8f8;
+  border-radius:24px;
+  padding:16px;
+  margin:14px 0;
+  box-shadow:0 12px 28px rgba(15,23,42,.06);
+}
+.v88PriceHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  background:linear-gradient(135deg,#0d47a1,#1e88e5);
+  color:white;
+  border-radius:22px;
+  padding:16px;
+  margin-bottom:14px;
+}
+.v88PriceHeader span,
+.v88PriceHeader small{
+  display:block;
+  font-weight:850;
+  opacity:.95;
+  line-height:1.35;
+}
+.v88PriceHeader b{
+  display:block;
+  font-size:22px;
+  margin:4px 0;
+}
+.v88PriceHeader strong{
+  font-size:38px;
+  white-space:nowrap;
+}
+.v88PremiumValueBox h3{
+  color:#0d47a1;
+  font-size:24px;
+  margin:0 0 12px;
+}
+.v88PlanGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.v88Plan{
+  border-radius:20px;
+  padding:14px;
+  border:1px solid #d7e8f8;
+  background:#f8fbff;
+}
+.v88Plan.premium{
+  background:#fff7ed;
+  border-color:#fed7aa;
+}
+.v88Plan h4{
+  font-size:20px;
+  margin:0 0 10px;
+  color:#0d47a1;
+}
+.v88Plan.premium h4{
+  color:#c2410c;
+}
+.v88Plan ul{
+  margin:0;
+  padding-left:20px;
+  color:#53627a;
+  font-weight:850;
+  line-height:1.55;
+}
+.v88Plan li{
+  margin:4px 0;
+}
+.v88SmallNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534!important;
+  border-radius:16px;
+  padding:10px;
+  margin:12px 0 0!important;
+  font-weight:900!important;
+  line-height:1.35;
+}
+.v88FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v88FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v88FinalNote span{
+  color:#166534;
+}
+@media(max-width:560px){
+  .v88PlanGrid{
+    grid-template-columns:1fr;
+  }
+  .v88PriceHeader{
+    display:block;
+    text-align:center;
+  }
+  .v88PriceHeader strong{
+    display:block;
+    margin-top:8px;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -4154,7 +4271,7 @@ html, body{
     <button class="v86PremiumFeature" data-free-label="🔒 Φωτογραφία" data-premium-label="📷 Φωτογραφία" onclick="v86OpenFeature('photoMeal')">🔒 Φωτογραφία</button>
     <button class="v86PremiumFeature" data-free-label="🔒 Barcode" data-premium-label="📦 Barcode" onclick="v86OpenFeature('barcode')">🔒 Barcode</button>
     <button class="v86PremiumFeature" data-free-label="🔒 Αναφορά" data-premium-label="📊 Αναφορά" onclick="v86OpenFeature('reports')">🔒 Αναφορά</button>
-    <button onclick="showPage('activities')">🏃 Δραστηριότητες</button>
+    <button class="v86PremiumFeature" data-free-label="🔒 Δραστηριότητες" data-premium-label="🏃 Δραστηριότητες" onclick="v86OpenFeature('activities')">🔒 Δραστηριότητες</button>
     <button onclick="showPage('progressCalendar')">📅 Ημερολόγιο</button>
     <button onclick="showPage('custom')">➕ Δικό μου</button>
     <button onclick="showPage('fasting')">⏱ Νηστεία</button>
@@ -4184,7 +4301,7 @@ html, body{
     <h2>🆕 Τι νέο υπάρχει</h2>
 
     <div class="v84InfoBox green">
-      <h3>V87 / 1.2.7</h3>
+      <h3>V88 / 1.2.8</h3>
       <p>Το Απόρρητο δεν εμφανίζεται πλέον με λουκέτο, για να μη μπερδεύεται με Premium λειτουργία. Ο Coach κλειδώθηκε στη δωρεάν έκδοση και ανοίγει με Premium.</p>
     </div>
 
@@ -4213,7 +4330,7 @@ html, body{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V87 / 1.2.7</p>
+      <p><b>Έκδοση:</b> V88 / 1.2.8</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> greekcalai.support@gmail.com</p>
@@ -4245,24 +4362,30 @@ html, body{
 
     
     <div class="v85FinalNote">
-      <b>✅ V87 / 1.2.7</b>
+      <b>✅ V88 / 1.2.8</b>
       <span>Καθαρή ροή αγοράς Premium: αίτηση με κωδικό συσκευής, οδηγίες πληρωμής, αποστολή Premium κωδικού μετά την πληρωμή.</span>
     </div>
 
 
     <div class="v86FinalNote">
-      <b>✅ V87 / 1.2.7</b>
+      <b>✅ V88 / 1.2.8</b>
       <span>Καθαρή διάκριση Δωρεάν / Premium: ο πελάτης ξεκινά δωρεάν και βλέπει ένα μόνο βασικό σημείο αναβάθμισης.</span>
     </div>
 
 
     <div class="v87FinalNote">
-      <b>✅ V87 / 1.2.7</b>
+      <b>✅ V88 / 1.2.8</b>
       <span>Το Απόρρητο φαίνεται ως δημόσια ενημερωτική σελίδα και ο Coach έγινε Premium λειτουργία.</span>
     </div>
 
+
+    <div class="v88FinalNote">
+      <b>✅ V88 / 1.2.8</b>
+      <span>Προστέθηκε καθαρός πίνακας αξίας Premium με Δωρεάν έκδοση και Premium ξεκλειδώματα.</span>
+    </div>
+
 <div class="v84UpdateHero">
-      <b>Τρέχουσα έκδοση: V87 / 1.2.7</b>
+      <b>Τρέχουσα έκδοση: V88 / 1.2.8</b>
       <span>Χρησιμοποίησε αυτό το κουμπί όταν θέλεις να φορτώσει η πιο πρόσφατη έκδοση της εφαρμογής.</span>
     </div>
 
@@ -4471,8 +4594,50 @@ html, body{
       <p>Ο νέος χρήστης βλέπει πρώτα τη <b>Δωρεάν έκδοση</b>. Μπορεί να χρησιμοποιήσει βασικές λειτουργίες και, όταν θέλει, να κάνει αναβάθμιση σε Premium.</p>
       <div class="v86CompareMini">
         <div><b>Δωρεάν</b><span>Φαγητά, ημερήσιο, νερό, άσκηση, βάρος.</span></div>
-        <div><b>Premium</b><span>Coach, φωτογραφία, barcode, αναφορές, backup και επιπλέον εργαλεία.</span></div>
+        <div><b>Premium</b><span>Coach, φωτογραφία, barcode, αναφορές, backup, προχωρημένο νερό και άσκηση.</span></div>
       </div>
+    </div>
+
+
+    <div class="v88PremiumValueBox">
+      <div class="v88PriceHeader">
+        <div>
+          <span>Εισαγωγική τιμή</span>
+          <b>Greek Cal AI Premium</b>
+          <small>4,99€ εφάπαξ για την αρχική Premium έκδοση.</small>
+        </div>
+        <strong>4,99€</strong>
+      </div>
+
+      <h3>Τι περιλαμβάνει κάθε έκδοση</h3>
+      <div class="v88PlanGrid">
+        <div class="v88Plan free">
+          <h4>🔓 Δωρεάν έκδοση</h4>
+          <ul>
+            <li>Βασική καταχώρηση φαγητών</li>
+            <li>Ημερήσιες θερμίδες</li>
+            <li>Βάρος και στόχος κιλών</li>
+            <li>Απλή καταχώρηση νερού</li>
+            <li>Απλή καταχώρηση άσκησης</li>
+            <li>Ημερήσιο γευμάτων</li>
+          </ul>
+        </div>
+
+        <div class="v88Plan premium">
+          <h4>⭐ Premium ξεκλειδώνει</h4>
+          <ul>
+            <li>Coach</li>
+            <li>Φωτογραφία γεύματος</li>
+            <li>Barcode / προϊόντα</li>
+            <li>Αναφορές προόδου</li>
+            <li>Backup και επαναφορά</li>
+            <li>Προχωρημένη άσκηση</li>
+            <li>Προχωρημένο νερό</li>
+            <li>Αγαπημένα και δικά μου φαγητά</li>
+          </ul>
+        </div>
+      </div>
+      <p class="v88SmallNote">Η τιμή είναι εισαγωγική και μπορεί να αλλάξει για νέους χρήστες στο μέλλον.</p>
     </div>
 
     <div class="v62PremiumGrid">
@@ -4526,8 +4691,8 @@ html, body{
     </div>
 
     <div class="v62InfoBox">
-      <b>Τιμή Premium</b>
-      <p><b>4,99€ εφάπαξ</b><br>Με προσωπικό κωδικό ενεργοποίησης για τη συσκευή σου.</p>
+      <b>Εισαγωγική τιμή Premium</b>
+      <p><b>4,99€ εφάπαξ</b><br>Για την αρχική Premium έκδοση με προσωπικό κωδικό ενεργοποίησης.</p>
     </div>
 
     <div class="v58BottomSpace"></div>
@@ -7876,7 +8041,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=87").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=88").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -7899,7 +8064,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V87 / 1.2.7\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V88 / 1.2.8\n\nΠεριγραφή:");
   location.href = "mailto:greekcalai.support@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -7955,7 +8120,7 @@ window.addEventListener("load", ()=>{
 <script>
 /* V84 one-time προσωρινής μνήμης refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V87-1.2.7";
+  const wanted = "V88-1.2.8";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -8275,7 +8440,7 @@ function v82OpenPremiumEmail(){
 
 Θέλω να αγοράσω το Greek Cal AI Premium.
 
-Έκδοση: V87 / 1.2.7
+Έκδοση: V88 / 1.2.8
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Παρακαλώ στείλτε μου οδηγίες πληρωμής.
@@ -8295,7 +8460,7 @@ function v64OpenEmail(){
 
 Θέλω βοήθεια για το Greek Cal AI.
 
-Έκδοση: V87 / 1.2.7
+Έκδοση: V88 / 1.2.8
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Περιγραφή:`
@@ -8493,6 +8658,36 @@ v86UpdatePlanUI = function(){
 window.addEventListener("load", ()=>{
   setTimeout(v87UpdateCoachNav, 150);
   setTimeout(v87UpdateCoachNav, 600);
+});
+</script>
+
+
+<script>
+/* V88: Premium αξία - έξτρα κλειδώματα προχωρημένων εργαλείων */
+function v88UpdatePremiumLabels(){
+  const premium = localStorage.getItem("gca_premium") === "1";
+  document.querySelectorAll(".v86PremiumFeature").forEach(btn=>{
+    const freeLabel = btn.getAttribute("data-free-label");
+    const premiumLabel = btn.getAttribute("data-premium-label");
+    if(freeLabel && premiumLabel){
+      btn.textContent = premium ? premiumLabel : freeLabel;
+      btn.classList.toggle("locked", !premium);
+    }
+  });
+}
+const oldShowPageV88 = typeof showPage === "function" ? showPage : null;
+if(oldShowPageV88 && !oldShowPageV88.__v88Wrapped){
+  const wrappedShowPageV88 = function(id){
+    const result = oldShowPageV88.apply(this, arguments);
+    setTimeout(v88UpdatePremiumLabels, 80);
+    return result;
+  };
+  wrappedShowPageV88.__v88Wrapped = true;
+  showPage = wrappedShowPageV88;
+}
+window.addEventListener("load", ()=>{
+  setTimeout(v88UpdatePremiumLabels, 160);
+  setTimeout(v88UpdatePremiumLabels, 700);
 });
 </script>
 
