@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V84-1.2.4">
+<meta name="app-version" content="V85-1.2.5">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V84</title>
+<title>Greek Cal AI V85</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -3809,6 +3809,54 @@ html, body{
   }
 }
 
+
+/* V85 clear Premium purchase flow */
+.v85PurchaseFlowBox{
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  border-radius:22px;
+  padding:15px;
+  margin:14px 0;
+}
+.v85PurchaseFlowBox h3{
+  color:#c2410c;
+  font-size:23px;
+  margin:0 0 8px;
+}
+.v85PurchaseFlowBox p{
+  color:#7c2d12;
+  font-weight:900;
+  line-height:1.45;
+  margin:0 0 10px;
+}
+.v85PaymentMethods{
+  background:#ffffff;
+  border:1px solid #fed7aa;
+  border-radius:16px;
+  padding:12px;
+  color:#0d47a1;
+  font-weight:1000;
+  text-align:center;
+}
+.v85FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v85FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v85FinalNote span{
+  color:#166534;
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -3863,7 +3911,7 @@ html, body{
 <div class="v73InfoCard v73StatusCard">
   <div class="v73CardIcon shield">✓</div>
   <div class="v73StatusText">
-    <b>Έκδοση 1.2.4</b>
+    <b>Έκδοση 1.2.5</b>
     <span>Έτοιμο για εγκατάσταση από Chrome όταν βρίσκεσαι σε HTTPS.</span>
   </div>
   <em>Νέο</em>
@@ -4008,8 +4056,8 @@ html, body{
     <h2>🆕 Τι νέο υπάρχει</h2>
 
     <div class="v84InfoBox green">
-      <h3>V84 / 1.2.4</h3>
-      <p>Καθαρίστηκαν οι ενημερωτικές σελίδες ώστε να εμφανίζονται μόνο χρήσιμες πληροφορίες για τον χρήστη.</p>
+      <h3>V85 / 1.2.5</h3>
+      <p>Η διαδικασία αγοράς Premium έγινε πιο καθαρή: πρώτα στέλνεις αίτηση αγοράς με κωδικό συσκευής, μετά λαμβάνεις οδηγίες πληρωμής και στο τέλος Premium κωδικό.</p>
     </div>
 
     <div class="v84WhatsNewGrid">
@@ -4037,7 +4085,7 @@ html, body{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V84 / 1.2.4</p>
+      <p><b>Έκδοση:</b> V85 / 1.2.5</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> greekcalai.support@gmail.com</p>
@@ -4067,8 +4115,14 @@ html, body{
   <div class="card v84CustomerUpdate">
     <h2>🔄 Ενημέρωση εφαρμογής</h2>
 
-    <div class="v84UpdateHero">
-      <b>Τρέχουσα έκδοση: V84 / 1.2.4</b>
+    
+    <div class="v85FinalNote">
+      <b>✅ V85 / 1.2.5</b>
+      <span>Καθαρή ροή αγοράς Premium: αίτηση με κωδικό συσκευής, οδηγίες πληρωμής, αποστολή Premium κωδικού μετά την πληρωμή.</span>
+    </div>
+
+<div class="v84UpdateHero">
+      <b>Τρέχουσα έκδοση: V85 / 1.2.5</b>
       <span>Χρησιμοποίησε αυτό το κουμπί όταν θέλεις να φορτώσει η πιο πρόσφατη έκδοση της εφαρμογής.</span>
     </div>
 
@@ -4106,10 +4160,10 @@ html, body{
       <h2>Έξυπνος Ελληνικός Οδηγός Διατροφής</h2>
       <p>Παρακολούθησε θερμίδες, ελληνικά φαγητά, ποτά με ml, νερό, άσκηση και βάρος σε μία απλή εφαρμογή.</p>
       <div class="v80HeroActions">
-        <button class="btnGreen" onclick="showPage('support')">🛒 Ζήτα Premium κωδικό</button>
+        <button class="btnGreen" onclick="showPage('support')">🛒 Αίτηση αγοράς Premium</button>
         <button onclick="showPage('premium')">⭐ Ενεργοποίηση Premium</button>
       </div>
-      <small>Premium έκδοση • Άμεση ενεργοποίηση με κωδικό</small>
+      <small>Premium έκδοση • Αγορά με αίτηση μέσω email</small>
     </div>
 
     <div class="v80ScreenShowcase">
@@ -4174,15 +4228,15 @@ html, body{
     </div>
 
     <div class="v80HowBuy">
-      <h3>Πώς αγοράζεις εκτός Play Store</h3>
+      <h3>Πώς αγοράζω Premium</h3>
       <ol>
-        <li>Πατάς <b>Ζήτα Premium κωδικό</b>.</li>
-        <li>Στέλνεις email με θέμα <b>Greek Cal AI Premium</b>.</li>
-        <li>Γίνεται πληρωμή με IRIS / τράπεζα / Revolut / PayPal.</li>
-        <li>Λαμβάνεις προσωπικό κωδικό ενεργοποίησης.</li>
+        <li>Πατάς <b>Αίτηση αγοράς Premium</b>.</li>
+        <li>Στέλνεται email με τον κωδικό συσκευής σου.</li>
+        <li>Λαμβάνεις οδηγίες πληρωμής με IRIS / τράπεζα / Revolut / PayPal.</li>
+        <li>Μετά την πληρωμή λαμβάνεις προσωπικό κωδικό ενεργοποίησης.</li>
         <li>Τον βάζεις στη σελίδα <b>Premium</b> και ξεκλειδώνει η εφαρμογή.</li>
       </ol>
-      <button class="btnGreen" onclick="showPage('support')">📞 Επικοινωνία / Αγορά</button>
+      <button class="btnGreen" onclick="showPage('support')">🛒 Αίτηση αγοράς Premium</button>
     </div>
 
     <div class="v80TrustGrid">
@@ -4195,7 +4249,7 @@ html, body{
     <div class="v80FinalCta">
       <h3>Ξεκίνα σήμερα</h3>
       <p>Μια απλή ελληνική εφαρμογή για καθημερινή παρακολούθηση διατροφής.</p>
-      <button class="btnGreen" onclick="showPage('support')">🛒 Θέλω Premium κωδικό</button>
+      <button class="btnGreen" onclick="showPage('support')">🛒 Αίτηση αγοράς Premium</button>
       <button onclick="showPage('terms')">📄 Όροι χρήσης</button>
     </div>
 
@@ -4210,8 +4264,8 @@ html, body{
     <h2>📞 Υποστήριξη</h2>
 
     <div class="v64SupportHero">
-      <b>Χρειάζεσαι βοήθεια ή Premium κωδικό;</b>
-      <span>Στείλε μήνυμα με το θέμα σου, την έκδοση της εφαρμογής και τον κωδικό συσκευής για Premium.</span>
+      <b>Χρειάζεσαι βοήθεια ή θέλεις να αγοράσεις Premium;</b>
+      <span>Για αγορά Premium στείλε αίτηση με τον κωδικό συσκευής. Θα λάβεις οδηγίες πληρωμής και μετά τον Premium κωδικό.</span>
     </div>
 
     <div class="v64ContactCard">
@@ -4231,7 +4285,7 @@ html, body{
 
       <details>
         <summary>Πώς ενεργοποιώ Premium;</summary>
-        <p>Πηγαίνεις στη σελίδα Premium, αντιγράφεις τον Κωδικό συσκευής και τον στέλνεις με email. Μετά την πληρωμή λαμβάνεις προσωπικό Premium κωδικό, τον βάζεις στην εφαρμογή και πατάς Ενεργοποίηση Premium.</p>
+        <p>Πηγαίνεις στη σελίδα Premium και πατάς Αίτηση αγοράς Premium. Στέλνεται email με τον Κωδικό συσκευής σου. Η υποστήριξη σου στέλνει οδηγίες πληρωμής και μετά την πληρωμή λαμβάνεις προσωπικό Premium κωδικό.</p>
       </details>
 
       <details>
@@ -4269,7 +4323,7 @@ html, body{
 
     <div class="v62PremiumHero">
       <b id="premiumStatusText">Τρέχουσα έκδοση: Δωρεάν</b>
-      <span>Η Premium ενεργοποίηση είναι έτοιμη για εμπορική δοκιμή.</span>
+      <span>Αγόρασε Premium με αίτηση μέσω email και ενεργοποίησε την εφαρμογή με προσωπικό κωδικό.</span>
     </div>
 
     <div class="v62PremiumGrid">
@@ -4283,28 +4337,35 @@ html, body{
 
     <div class="v82DeviceBox">
       <h3>📱 Κωδικός συσκευής</h3>
-      <p>Αυτός ο κωδικός είναι μοναδικός για αυτή τη συσκευή. Τον στέλνει ο χρήστης μετά την πληρωμή για να λάβει Premium κωδικό που δουλεύει μόνο εδώ.</p>
+      <p>Αυτός ο κωδικός είναι μοναδικός για αυτή τη συσκευή. Χρειάζεται στην αίτηση αγοράς, ώστε μετά την πληρωμή να εκδοθεί Premium κωδικός που δουλεύει μόνο εδώ.</p>
       <div class="v82DeviceCode" id="v82DeviceCodeText">DEV-----</div>
       <div class="v82DeviceActions">
         <button type="button" onclick="v82CopyDeviceCode()">📋 Αντιγραφή κωδικού συσκευής</button>
-        <button type="button" class="btnGreen" onclick="v82OpenPremiumEmail()">✉️ Αποστολή για Premium</button>
+        <button type="button" class="btnGreen" onclick="v82OpenPremiumEmail()">🛒 Αίτηση αγοράς Premium</button>
       </div>
     </div>
 
     <div class="v82PremiumSteps">
       <h3>📘 Οδηγίες Premium</h3>
       <ol>
-        <li>Αντέγραψε ή στείλε τον <b>Κωδικό συσκευής</b>.</li>
+        <li>Πάτησε <b>Αίτηση αγοράς Premium</b>.</li>
+        <li>Στέλνεται email με τον <b>Κωδικό συσκευής</b>.</li>
+        <li>Θα λάβεις οδηγίες πληρωμής από την υποστήριξη.</li>
         <li>Μετά την πληρωμή θα λάβεις προσωπικό <b>Premium κωδικό ενεργοποίησης</b>.</li>
-        <li>Ο Premium κωδικός δουλεύει μόνο σε αυτή τη συσκευή.</li>
         <li>Βάλε τον κωδικό παρακάτω και πάτα <b>Ενεργοποίηση Premium</b>.</li>
       </ol>
       <small>Αν αλλάξεις κινητό ή καθαρίσεις όλα τα δεδομένα του browser, μπορεί να αλλάξει ο κωδικός συσκευής.</small>
     </div>
 
+    <div class="v85PurchaseFlowBox">
+      <h3>🛒 Πώς γίνεται η αγορά</h3>
+      <p><b>Η αγορά δεν γίνεται αυτόματα μέσα στην εφαρμογή.</b> Στέλνεις αίτηση αγοράς με τον κωδικό συσκευής και η υποστήριξη σου απαντά με οδηγίες πληρωμής.</p>
+      <div class="v85PaymentMethods">IRIS • Τραπεζική μεταφορά • Revolut • PayPal</div>
+    </div>
+
     <div class="v62ActivationBox v82ActivationBox">
       <h3>🔑 Premium κωδικός ενεργοποίησης</h3>
-      <p>Βάλε τον κωδικό που έλαβες μετά την πληρωμή. Ο κωδικός ελέγχεται με τον κωδικό συσκευής.</p>
+      <p>Βάλε εδώ τον Premium κωδικό που θα λάβεις από την υποστήριξη μετά την πληρωμή. Ο κωδικός δουλεύει μόνο με τον κωδικό συσκευής σου.</p>
       <input id="premiumCodeInput" placeholder="π.χ. GCAI-AB12-CD34-EF56">
       <button class="btnGreen" onclick="activatePremiumCode()">Ενεργοποίηση Premium</button>
       <button class="btnLight" onclick="deactivatePremium()">Επαναφορά σε δωρεάν</button>
@@ -4312,12 +4373,12 @@ html, body{
 
     <div class="v64PremiumCommercialBtns">
       <button onclick="showPage('landing')">💼 Πληροφορίες Premium</button>
-      <button onclick="showPage('support')">📞 Αγορά Premium / Υποστήριξη</button>
+      <button onclick="v82OpenPremiumEmail()">🛒 Αίτηση αγοράς Premium</button>
     </div>
 
     <div class="v62InfoBox">
-      <b>Προτεινόμενη πρώτη εμπορική τιμή</b>
-      <p><b>4,99€ εφάπαξ</b><br>Εφάπαξ ενεργοποίηση Premium με προσωπικό κωδικό.</p>
+      <b>Τιμή Premium</b>
+      <p><b>4,99€ εφάπαξ</b><br>Με προσωπικό κωδικό ενεργοποίησης για τη συσκευή σου.</p>
     </div>
 
     <div class="v58BottomSpace"></div>
@@ -7666,7 +7727,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=84").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=85").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -7688,8 +7749,8 @@ function v64CopyEmail(){
   }
 }
 function v64OpenEmail(){
-  const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V84 / 1.2.4\n\nΠεριγραφή:");
+  const subject = encodeURIComponent("Greek Cal AI υποστήριξη");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V85 / 1.2.5\n\nΠεριγραφή:");
   location.href = "mailto:greekcalai.support@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -7745,7 +7806,7 @@ window.addEventListener("load", ()=>{
 <script>
 /* V84 one-time προσωρινής μνήμης refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V84-1.2.4";
+  const wanted = "V85-1.2.5";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -8059,28 +8120,33 @@ function v82CopyDeviceCode(){
 }
 
 function v82OpenPremiumEmail(){
-  const subject = encodeURIComponent("Greek Cal AI Premium");
+  const subject = encodeURIComponent("Αίτηση αγοράς Greek Cal AI Premium");
   const body = encodeURIComponent(
 `Γεια σας,
 
-Θέλω Premium για το Greek Cal AI.
+Θέλω να αγοράσω το Greek Cal AI Premium.
 
-Έκδοση: V84 / 1.2.4
+Έκδοση: V85 / 1.2.5
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
-Περιγραφή: Θέλω premium`
+Παρακαλώ στείλτε μου οδηγίες πληρωμής.
+
+Τρόποι πληρωμής που με εξυπηρετούν:
+IRIS / Τραπεζική μεταφορά / Revolut / PayPal
+
+Σχόλιο:`
   );
   location.href = "mailto:greekcalai.support@gmail.com?subject=" + subject + "&body=" + body;
 }
 
 function v64OpenEmail(){
-  const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
+  const subject = encodeURIComponent("Greek Cal AI υποστήριξη");
   const body = encodeURIComponent(
 `Γεια σας,
 
 Θέλω βοήθεια για το Greek Cal AI.
 
-Έκδοση: V84 / 1.2.4
+Έκδοση: V85 / 1.2.5
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Περιγραφή:`
