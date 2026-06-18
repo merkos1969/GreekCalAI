@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V79-1.1.6">
+<meta name="app-version" content="V80-1.2.0">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V79</title>
+<title>Greek Cal AI V80</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -3361,6 +3361,232 @@ body.v65NoFab #fabOverlay{
 .v79FinalNote b{display:block;font-size:18px;margin-bottom:4px;}
 .v79FinalNote span{color:#166534;}
 
+
+/* V80 professional sales page */
+.v80SalesPage{
+  background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%)!important;
+}
+.v80SalesHero{
+  background:linear-gradient(180deg,#ffffff,#f0f8ff);
+  border:1px solid #cfe0ef;
+  border-radius:30px;
+  padding:24px 16px;
+  text-align:center;
+  box-shadow:0 18px 42px rgba(30,108,199,.12);
+}
+.v80SalesLogo{
+  width:92px;
+  height:92px;
+  border-radius:28px;
+  margin:0 auto 12px;
+  background:linear-gradient(135deg,#0d47a1,#1e9bff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:52px;
+  box-shadow:0 16px 36px rgba(30,108,199,.24);
+}
+.v80SalesBadge{
+  display:inline-flex;
+  background:#e8f1ff;
+  color:#0d47a1;
+  border-radius:999px;
+  padding:8px 14px;
+  font-weight:1000;
+  margin-bottom:10px;
+}
+.v80SalesHero h2{
+  color:#17202c;
+  font-size:31px;
+  line-height:1.12;
+  margin:6px 0;
+}
+.v80SalesHero p{
+  color:#53627a;
+  font-weight:900;
+  line-height:1.4;
+  margin:10px auto;
+  max-width:560px;
+}
+.v80HeroActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px;
+}
+.v80HeroActions button{
+  margin:0!important;
+  border-radius:999px!important;
+}
+.v80SalesHero small{
+  display:block;
+  color:#667085;
+  font-weight:900;
+  margin-top:10px;
+}
+.v80ScreenShowcase,
+.v80FeatureGrid,
+.v80TrustGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+  margin:14px 0;
+}
+.v80ScreenShowcase div,
+.v80FeatureGrid div,
+.v80TrustGrid div,
+.v80SalesCard,
+.v80Compare,
+.v80HowBuy,
+.v80FinalCta{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:22px;
+  padding:15px;
+  box-shadow:0 10px 26px rgba(15,23,42,.05);
+}
+.v80ScreenShowcase b,
+.v80FeatureGrid b,
+.v80TrustGrid b{
+  display:block;
+  color:#0d47a1;
+  font-size:17px;
+  margin-bottom:5px;
+}
+.v80ScreenShowcase span,
+.v80FeatureGrid span,
+.v80TrustGrid span{
+  color:#667085;
+  font-weight:800;
+  line-height:1.35;
+  display:block;
+}
+.v80FeatureGrid i{
+  width:46px;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:16px;
+  background:#e8f1ff;
+  font-style:normal;
+  font-size:24px;
+  margin-bottom:8px;
+}
+.v80SalesCard h3,
+.v80Compare h3,
+.v80HowBuy h3,
+.v80FinalCta h3{
+  color:#0d47a1;
+  margin:0 0 12px;
+  font-size:24px;
+}
+.v80PriceBox{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  background:linear-gradient(135deg,#0d47a1,#1e88e5);
+  color:white;
+  border-radius:26px;
+  padding:20px;
+  margin:14px 0;
+  box-shadow:0 16px 34px rgba(30,108,199,.22);
+}
+.v80PriceBox span,
+.v80PriceBox small{
+  display:block;
+  opacity:.95;
+  font-weight:900;
+}
+.v80PriceBox b{
+  display:block;
+  font-size:22px;
+  margin:4px 0;
+}
+.v80PriceBox strong{
+  font-size:42px;
+  line-height:1;
+}
+.v80CompareGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.v80Plan{
+  border:1px solid #d7e8f8;
+  border-radius:20px;
+  padding:14px;
+  background:#f8fbff;
+}
+.v80Plan.premium{
+  background:#ecfdf5;
+  border-color:#bbf7d0;
+}
+.v80Plan h4{
+  color:#0d47a1;
+  font-size:20px;
+  margin:0 0 8px;
+}
+.v80Plan.premium h4{
+  color:#166534;
+}
+.v80Plan ul,
+.v80HowBuy ol{
+  margin:0;
+  padding-left:22px;
+  color:#53627a;
+  font-weight:850;
+  line-height:1.55;
+}
+.v80HowBuy button,
+.v80FinalCta button{
+  margin-top:12px!important;
+}
+.v80FinalCta{
+  text-align:center;
+  margin-top:14px;
+}
+.v80FinalCta p{
+  color:#667085;
+  font-weight:900;
+}
+.v80FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v80FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v80FinalNote span{
+  color:#166534;
+}
+@media(max-width:560px){
+  .v80HeroActions,
+  .v80ScreenShowcase,
+  .v80FeatureGrid,
+  .v80TrustGrid,
+  .v80CompareGrid{
+    grid-template-columns:1fr;
+  }
+  .v80PriceBox{
+    display:block;
+    text-align:center;
+  }
+  .v80PriceBox strong{
+    display:block;
+    margin-top:10px;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -3415,7 +3641,7 @@ body.v65NoFab #fabOverlay{
 <div class="v73InfoCard v73StatusCard">
   <div class="v73CardIcon shield">✓</div>
   <div class="v73StatusText">
-    <b>Έκδοση 1.1.6 • PWA Ready</b>
+    <b>Έκδοση 1.2.0 • PWA Ready</b>
     <span>Έτοιμο για εγκατάσταση από Chrome όταν βρίσκεσαι σε HTTPS.</span>
   </div>
   <em>Νέο</em>
@@ -3559,29 +3785,29 @@ body.v65NoFab #fabOverlay{
     <h2>📌 Ιστορικό Εκδόσεων</h2>
 
     <div class="v71ChangeHero">
-      <b>Τρέχουσα έκδοση: V79 / 1.1.6</b>
+      <b>Τρέχουσα έκδοση: V80 / 1.2.0</b>
       <span>Σταθερή εμπορική PWA βάση με καθαρή αρχική και πλήρη ενημερωτικές σελίδες.</span>
     </div>
 
     <div class="v71VersionList">
       <div class="v71VersionItem current">
-        <b>V79 / 1.1.6</b>
+        <b>V80 / 1.2.0</b>
         <span>Τελικό polish με περισσότερο κάτω κενό στις ενημερωτικές σελίδες και καθαρότερη προβολή κουμπιών.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V79 / 1.1.6</b>
+        <b>V80 / 1.2.0</b>
         <span>Τελικό polish, σελίδα Σχετικά, ελληνικό κουμπί Ενημέρωση και καθαρότερη εμπορική βάση.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V79 / 1.1.6</b>
+        <b>V80 / 1.2.0</b>
         <span>Αφαιρέθηκαν οριστικά τα διπλά κουμπιά από την κάρτα Σήμερα.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V79 / 1.1.6</b>
+        <b>V80 / 1.2.0</b>
         <span>Προστέθηκε σελίδα Ενημέρωση Εφαρμογής για καθαρισμό cache / service worker.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V79 / 1.1.6</b>
+        <b>V80 / 1.2.0</b>
         <span>Προστέθηκαν σελίδες Πώληση και Υποστήριξη για εμπορική χρήση εκτός Play Store.</span>
       </div>
       <div class="v71VersionItem">
@@ -3614,7 +3840,7 @@ body.v65NoFab #fabOverlay{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V79 / 1.1.6</p>
+      <p><b>Έκδοση:</b> V80 / 1.2.0</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> merkos1969@gmail.com</p>
@@ -3652,53 +3878,59 @@ body.v65NoFab #fabOverlay{
     
     
     
+    
+    <div class="v80FinalNote">
+      <b>✅ V80 / 1.2.0</b>
+      <span>Νέα επαγγελματική σελίδα πώλησης Premium και ξεχωριστή sales.html για εξωτερική προώθηση εκτός εφαρμογής.</span>
+    </div>
+
     <div class="v79FinalNote">
-      <b>✅ V79 / 1.1.6</b>
+      <b>✅ V80 / 1.2.0</b>
       <span>Εμπλουτίστηκαν οι κατηγορίες με περισσότερα αρτοποιήματα, γαλακτοκομικά, πίτες, ρύζι, συνοδευτικά, σούπες, ξηρούς καρπούς, φρούτα, όσπρια και σαλάτες.</span>
     </div>
 
     <div class="v78FinalNote">
-      <b>✅ V79 / 1.1.6</b>
+      <b>✅ V80 / 1.2.0</b>
       <span>Διόρθωση κατηγοριών: οι καφέδες, οι χυμοί και τα αναψυκτικά βγήκαν από το γενικό «Ποτά» και εμφανίζονται ξεχωριστά.</span>
     </div>
 
     <div class="v77FinalNote">
-      <b>✅ V79 / 1.1.6</b>
+      <b>✅ V80 / 1.2.0</b>
       <span>Ζωντανός υπολογισμός: όταν αλλάζεις ml, γραμμάρια ή μερίδες, ενημερώνονται αμέσως θερμίδες, πρωτεΐνη, υδατάνθρακες και λιπαρά.</span>
     </div>
 
     <div class="v76FinalNote">
-      <b>✅ V79 / 1.1.6</b>
+      <b>✅ V80 / 1.2.0</b>
       <span>Έξυπνες προεπιλογές ml στα ποτά: μπύρα 330ml, κρασί/ρετσίνα 150ml, σφηνάκια 50ml, νερό 500ml, αναψυκτικά 330ml.</span>
     </div>
 
     <div class="v75FinalNote">
-      <b>✅ V79 / 1.1.6</b>
+      <b>✅ V80 / 1.2.0</b>
       <span>Περισσότερα φαγητά, ποτά και αλκοολούχα. Η επιλογή κατηγορίας στα φαγητά έγινε dropdown και τα ποτά μετρώνται σε ml.</span>
     </div>
 
     <div class="v74FinalNote">
-      <b>✅ V79 / 1.1.6</b>
+      <b>✅ V80 / 1.2.0</b>
       <span>Διόρθωση κάρτας θερμίδων: το κυκλικό ποσοστό εμφανίζεται δεξιά και η πρόοδος είναι πιο καθαρή στο κινητό.</span>
     </div>
 
     <div class="v73FinalNote">
-      <b>✅ V79 / 1.1.6</b>
+      <b>✅ V80 / 1.2.0</b>
       <span>Νέο ελληνικό premium header και πιο όμορφη πρόοδος θερμίδων στην αρχική.</span>
     </div>
 
     <div class="v72FinalNote">
-      <b>✅ V79 / 1.1.6</b>
+      <b>✅ V80 / 1.2.0</b>
       <span>Τελικό polish: περισσότερο κενό κάτω στις ενημερωτικές σελίδες, για να μη σκεπάζει η κάτω μπάρα τα κουμπιά.</span>
     </div>
 
     <div class="v70ReleaseNote">
-      <b>✅ V79 / 1.1.6</b>
+      <b>✅ V80 / 1.2.0</b>
       <span>Σταθερή εμπορική βάση: καθαρή αρχική, Premium, υποστήριξη, απόρρητο, όροι, backup και ενημέρωση PWA.</span>
     </div>
 
     <div class="v67UpdateHero">
-      <b>Έκδοση εφαρμογής: V79 / 1.1.6</b>
+      <b>Έκδοση εφαρμογής: V80 / 1.2.0</b>
       <span>Χρήσιμο όταν το κινητό κρατάει παλιά έκδοση λόγω cache / service worker.</span>
     </div>
 
@@ -3728,76 +3960,116 @@ body.v65NoFab #fabOverlay{
 </section>
 
 
+
 <section id="landing" class="hidden">
   <button class="back" onclick="showPage('home')">← Πίσω</button>
-  <div class="card v64LandingPage">
-    <div class="v64LandingHero">
-      <div class="v64HeroLogo">🇬🇷</div>
-      <h2>Greek Cal AI</h2>
-      <p>Ελληνικός βοηθός διατροφής για θερμίδες, ελληνικά φαγητά, νερό, άσκηση και στόχο βάρους.</p>
-      <button class="btnGreen" onclick="showPage('premium')">⭐ Δες Premium</button>
+  <div class="card v80SalesPage">
+
+    <div class="v80SalesHero">
+      <div class="v80SalesLogo">🇬🇷</div>
+      <div class="v80SalesBadge">Greek Cal AI Premium</div>
+      <h2>Έξυπνος Ελληνικός Οδηγός Διατροφής</h2>
+      <p>Παρακολούθησε θερμίδες, ελληνικά φαγητά, ποτά με ml, νερό, άσκηση και βάρος σε μία απλή εφαρμογή.</p>
+      <div class="v80HeroActions">
+        <button class="btnGreen" onclick="showPage('support')">🛒 Ζήτα Premium κωδικό</button>
+        <button onclick="showPage('premium')">⭐ Ενεργοποίηση Premium</button>
+      </div>
+      <small>Πρώτη εμπορική δοκιμή • Άμεση ενεργοποίηση με κωδικό</small>
     </div>
 
-    <div class="v64SalesCard">
-      <h3>Γιατί αξίζει</h3>
-      <div class="v64BenefitGrid">
-        <div>🍽 <b>Ελληνικά φαγητά</b><span>Γρήγορη καταχώρηση καθημερινών γευμάτων.</span></div>
-        <div>📊 <b>Καθαρή εικόνα ημέρας</b><span>Θερμίδες, νερό, άσκηση και μακροθρεπτικά.</span></div>
-        <div>⚖️ <b>Στόχος βάρους</b><span>Υπολογισμός θερμίδων και χρόνου στόχου.</span></div>
-        <div>💾 <b>Backup</b><span>Εξαγωγή και επαναφορά δεδομένων.</span></div>
+    <div class="v80ScreenShowcase">
+      <div>
+        <b>📊 Καθαρή αρχική</b>
+        <span>Θερμίδες, υπόλοιπο ημέρας, άσκηση, βάρος και στόχος.</span>
+      </div>
+      <div>
+        <b>🍽 Ελληνικά φαγητά</b>
+        <span>Μερίδες, γραμμάρια, μακροθρεπτικά και ζωντανός υπολογισμός.</span>
+      </div>
+      <div>
+        <b>🥤 Ποτά με ml</b>
+        <span>Καφέδες, χυμοί, αναψυκτικά, νερό και αλκοολούχα.</span>
       </div>
     </div>
 
-    <div class="v64PriceCard">
+    <div class="v80SalesCard">
+      <h3>Τι κερδίζεις</h3>
+      <div class="v80FeatureGrid">
+        <div><i>🔥</i><b>Θερμίδες ημέρας</b><span>Βλέπεις αμέσως πόσες έχεις φάει και πόσες απομένουν.</span></div>
+        <div><i>🥩</i><b>Πρωτεΐνη / Υδατ. / Λιπαρά</b><span>Παρακολούθηση μακροθρεπτικών με μπάρες προόδου.</span></div>
+        <div><i>☕</i><b>Καφέδες & ποτά</b><span>Μετρήσεις σε ml με σωστές προεπιλογές ανά ποτό.</span></div>
+        <div><i>⚖️</i><b>Στόχος βάρους</b><span>Εκτίμηση χρόνου και πρόοδος απώλειας κιλών.</span></div>
+        <div><i>🏃</i><b>Άσκηση</b><span>Οι θερμίδες άσκησης προστίθενται στον ημερήσιο στόχο.</span></div>
+        <div><i>💾</i><b>Backup</b><span>Εξαγωγή και επαναφορά δεδομένων για ασφάλεια.</span></div>
+      </div>
+    </div>
+
+    <div class="v80PriceBox">
       <div>
-        <b>Πρώτη εμπορική δοκιμή</b>
-        <span>Premium εφάπαξ</span>
+        <span>Εισαγωγική τιμή</span>
+        <b>Greek Cal AI Premium</b>
+        <small>Ιδανικό για πρώτους χρήστες και δοκιμή στην αγορά.</small>
       </div>
       <strong>4,99€</strong>
     </div>
 
-    <div class="v64PlanGrid">
-      <div class="v64Plan">
-        <h3>Δωρεάν</h3>
-        <ul>
-          <li>Βασική καταγραφή φαγητού</li>
-          <li>Βάρος / στόχος</li>
-          <li>Νερό και άσκηση</li>
-          <li>Ημερήσια εικόνα</li>
-        </ul>
-      </div>
-      <div class="v64Plan premium">
-        <h3>Premium</h3>
-        <ul>
-          <li>Barcode / προϊόντα</li>
-          <li>Φωτογραφία γεύματος</li>
-          <li>Backup / επαναφορά</li>
-          <li>Αναφορές και AI Coach</li>
-        </ul>
+    <div class="v80Compare">
+      <h3>Δωρεάν ή Premium;</h3>
+      <div class="v80CompareGrid">
+        <div class="v80Plan free">
+          <h4>Δωρεάν</h4>
+          <ul>
+            <li>Βασική καταχώρηση φαγητών</li>
+            <li>Νερό, άσκηση και βάρος</li>
+            <li>Ημερήσια εικόνα θερμίδων</li>
+            <li>Βασικός στόχος βάρους</li>
+          </ul>
+        </div>
+        <div class="v80Plan premium">
+          <h4>⭐ Premium</h4>
+          <ul>
+            <li>Πλήρης βάση ελληνικών φαγητών</li>
+            <li>Ποτά / αλκοολούχα με ml</li>
+            <li>Backup και επαναφορά</li>
+            <li>Αναφορές, φωτογραφία, barcode</li>
+            <li>AI Coach και νεότερες λειτουργίες</li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div class="v64HowToBuy">
-      <h3>Πώς γίνεται η αγορά εκτός Play Store</h3>
+    <div class="v80HowBuy">
+      <h3>Πώς αγοράζεις εκτός Play Store</h3>
       <ol>
-        <li>Ο χρήστης ζητά Premium κωδικό.</li>
-        <li>Γίνεται πληρωμή με IRIS / τράπεζα / Viva / PayPal ή άλλο τρόπο.</li>
-        <li>Στέλνεται προσωπικός κωδικός ενεργοποίησης.</li>
-        <li>Ο χρήστης τον βάζει στη σελίδα Premium.</li>
+        <li>Πατάς <b>Ζήτα Premium κωδικό</b>.</li>
+        <li>Στέλνεις email με θέμα <b>Greek Cal AI Premium</b>.</li>
+        <li>Γίνεται πληρωμή με IRIS / τράπεζα / Revolut / PayPal.</li>
+        <li>Λαμβάνεις προσωπικό κωδικό ενεργοποίησης.</li>
+        <li>Τον βάζεις στη σελίδα <b>Premium</b> και ξεκλειδώνει η εφαρμογή.</li>
       </ol>
-      <button onclick="showPage('support')">📞 Ζήτα κωδικό / Υποστήριξη</button>
+      <button class="btnGreen" onclick="showPage('support')">📞 Επικοινωνία / Αγορά</button>
     </div>
 
-    <div class="v63MedicalWarning">
-      <h3>⚕️ Σημαντικό</h3>
-      <p><b>Η εφαρμογή δεν αντικαθιστά γιατρό ή διαιτολόγο.</b> Οι υπολογισμοί είναι ενδεικτικοί.</p>
+    <div class="v80TrustGrid">
+      <div>🔒 <b>Απόρρητο</b><span>Τα δεδομένα αποθηκεύονται τοπικά στη συσκευή.</span></div>
+      <div>⚕️ <b>Σημαντικό</b><span>Δεν αντικαθιστά γιατρό ή διαιτολόγο.</span></div>
+      <div>📲 <b>PWA</b><span>Εγκατάσταση από Chrome σαν εφαρμογή.</span></div>
+      <div>✉️ <b>Υποστήριξη</b><span>Επικοινωνία στο merkos1969@gmail.com.</span></div>
+    </div>
+
+    <div class="v80FinalCta">
+      <h3>Ξεκίνα σήμερα</h3>
+      <p>Μια απλή ελληνική εφαρμογή για καθημερινή παρακολούθηση διατροφής.</p>
+      <button class="btnGreen" onclick="showPage('support')">🛒 Θέλω Premium κωδικό</button>
+      <button onclick="showPage('terms')">📄 Όροι χρήσης</button>
     </div>
 
     <div class="v58BottomSpace"></div>
   </div>
 </section>
 
-<section id="support" class="hidden">
+<section id="support"
+ class="hidden">
   <button class="back" onclick="showPage('home')">← Πίσω</button>
   <div class="card v64SupportPage">
     <h2>📞 Υποστήριξη</h2>
@@ -3834,7 +4106,7 @@ body.v65NoFab #fabOverlay{
 
       <details>
         <summary>Τι να στείλω όταν έχω πρόβλημα;</summary>
-        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V79 / 1.1.6.</p>
+        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V80 / 1.2.0.</p>
       </details>
     </div>
 
@@ -7233,7 +7505,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=79").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=80").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -7256,7 +7528,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V79 / 1.1.6\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V80 / 1.2.0\n\nΠεριγραφή:");
   location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -7310,9 +7582,9 @@ window.addEventListener("load", ()=>{
 
 
 <script>
-/* V79 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
+/* V80 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V79-1.1.6";
+  const wanted = "V80-1.2.0";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
