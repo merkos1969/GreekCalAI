@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V71-1.0.9">
+<meta name="app-version" content="V72-1.0.10">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V71</title>
+<title>Greek Cal AI V72</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -2540,6 +2540,69 @@ body.v65NoFab #fabOverlay{
   }
 }
 
+
+/* V72 final polish: extra bottom safety for fixed bottom navigation */
+.v58BottomSpace{
+  height:calc(230px + env(safe-area-inset-bottom))!important;
+}
+#support .card,
+#landing .card,
+#premium .card,
+#privacy .card,
+#terms .card,
+#backup .card,
+#updates .card,
+#about .card,
+#changelog .card{
+  padding-bottom:34px!important;
+  margin-bottom:calc(130px + env(safe-area-inset-bottom))!important;
+}
+#support,
+#landing,
+#premium,
+#privacy,
+#terms,
+#backup,
+#updates,
+#about,
+#changelog{
+  padding-bottom:calc(230px + env(safe-area-inset-bottom))!important;
+}
+.v72FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v72FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v72FinalNote span{
+  color:#166534;
+}
+@media(max-width:560px){
+  .v58BottomSpace{
+    height:calc(260px + env(safe-area-inset-bottom))!important;
+  }
+  #support .card,
+  #landing .card,
+  #premium .card,
+  #privacy .card,
+  #terms .card,
+  #backup .card,
+  #updates .card,
+  #about .card,
+  #changelog .card{
+    margin-bottom:calc(155px + env(safe-area-inset-bottom))!important;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -2580,7 +2643,7 @@ body.v65NoFab #fabOverlay{
 
 <div class="v62StatusCard">
   <div>
-    <b>✅ Έκδοση 1.0.9 • PWA Ready</b>
+    <b>✅ Έκδοση 1.0.10 • PWA Ready</b>
     <span>Εγκατάσταση από Chrome: ⋮ → Εγκατάσταση εφαρμογής.</span>
   </div>
   <div class="v67StatusBtns"><button type="button" onclick="showPage('premium')">⭐ Premium</button><button type="button" onclick="showPage('updates')">🔄 Ενημέρωση</button></div>
@@ -2710,29 +2773,29 @@ body.v65NoFab #fabOverlay{
     <h2>📌 Ιστορικό Εκδόσεων</h2>
 
     <div class="v71ChangeHero">
-      <b>Τρέχουσα έκδοση: V71 / 1.0.9</b>
+      <b>Τρέχουσα έκδοση: V72 / 1.0.10</b>
       <span>Σταθερή εμπορική PWA βάση με καθαρή αρχική και πλήρη ενημερωτικές σελίδες.</span>
     </div>
 
     <div class="v71VersionList">
       <div class="v71VersionItem current">
-        <b>V71 / 1.0.9</b>
-        <span>Προστέθηκε ιστορικό εκδόσεων, ώστε να φαίνεται καθαρά τι αλλάζει σε κάθε έκδοση.</span>
+        <b>V72 / 1.0.10</b>
+        <span>Τελικό polish με περισσότερο κάτω κενό στις ενημερωτικές σελίδες και καθαρότερη προβολή κουμπιών.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V70 / 1.0.8</b>
+        <b>V72 / 1.0.10</b>
         <span>Τελικό polish, σελίδα Σχετικά, ελληνικό κουμπί Ενημέρωση και καθαρότερη εμπορική βάση.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V69 / 1.0.7</b>
+        <b>V72 / 1.0.10</b>
         <span>Αφαιρέθηκαν οριστικά τα διπλά κουμπιά από την κάρτα Σήμερα.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V67 / 1.0.5</b>
+        <b>V72 / 1.0.10</b>
         <span>Προστέθηκε σελίδα Ενημέρωση Εφαρμογής για καθαρισμό cache / service worker.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V64 / 1.0.2</b>
+        <b>V72 / 1.0.10</b>
         <span>Προστέθηκαν σελίδες Πώληση και Υποστήριξη για εμπορική χρήση εκτός Play Store.</span>
       </div>
       <div class="v71VersionItem">
@@ -2765,7 +2828,7 @@ body.v65NoFab #fabOverlay{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V71 / 1.0.9</p>
+      <p><b>Έκδοση:</b> V72 / 1.0.10</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> merkos1969@gmail.com</p>
@@ -2795,13 +2858,19 @@ body.v65NoFab #fabOverlay{
     <h2>🔄 Ενημέρωση Εφαρμογής</h2>
 
     
+    
+    <div class="v72FinalNote">
+      <b>✅ V72 / 1.0.10</b>
+      <span>Τελικό polish: περισσότερο κενό κάτω στις ενημερωτικές σελίδες, για να μη σκεπάζει η κάτω μπάρα τα κουμπιά.</span>
+    </div>
+
     <div class="v70ReleaseNote">
-      <b>✅ V71 / 1.0.9</b>
+      <b>✅ V72 / 1.0.10</b>
       <span>Σταθερή εμπορική βάση: καθαρή αρχική, Premium, υποστήριξη, απόρρητο, όροι, backup και ενημέρωση PWA.</span>
     </div>
 
     <div class="v67UpdateHero">
-      <b>Έκδοση εφαρμογής: V71 / 1.0.9</b>
+      <b>Έκδοση εφαρμογής: V72 / 1.0.10</b>
       <span>Χρήσιμο όταν το κινητό κρατάει παλιά έκδοση λόγω cache / service worker.</span>
     </div>
 
@@ -2937,7 +3006,7 @@ body.v65NoFab #fabOverlay{
 
       <details>
         <summary>Τι να στείλω όταν έχω πρόβλημα;</summary>
-        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V71 / 1.0.9.</p>
+        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V72 / 1.0.10.</p>
       </details>
     </div>
 
@@ -6165,7 +6234,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=71").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=72").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -6188,7 +6257,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V71 / 1.0.9\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V72 / 1.0.10\n\nΠεριγραφή:");
   location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -6242,9 +6311,9 @@ window.addEventListener("load", ()=>{
 
 
 <script>
-/* V71 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
+/* V72 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V71-1.0.9";
+  const wanted = "V72-1.0.10";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
