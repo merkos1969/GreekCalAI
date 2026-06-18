@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V62</title>
+<title>Greek Cal AI V63</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -2026,6 +2026,29 @@ section{
   }
 }
 
+
+/* V63 visible medical disclaimer */
+.v63DisclaimerCard{
+  background:linear-gradient(135deg,#fff7ed,#fffaf0);
+  border:1px solid #fed7aa;
+  border-radius:20px;
+  padding:12px;
+  margin:10px 0 12px;
+  box-shadow:0 8px 20px rgba(15,23,42,.05);
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:center;
+}
+.v63DisclaimerCard b{color:#9a3412;font-size:17px;}
+.v63DisclaimerCard span{grid-column:1 / 2;color:#7c2d12;font-weight:800;line-height:1.35;font-size:13px;}
+.v63DisclaimerCard button{grid-row:1 / span 2;grid-column:2;width:auto!important;margin:0!important;padding:9px 12px!important;border-radius:999px!important;background:#ea580c!important;color:white!important;box-shadow:none!important;font-size:13px!important;}
+.v63GuideMedicalNote{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:16px;padding:10px;margin-top:10px;font-weight:900;line-height:1.35;}
+.v63MedicalWarning{background:#fff7ed;border:1px solid #fed7aa;border-radius:18px;padding:14px;margin:12px 0;}
+.v63MedicalWarning h3{margin:0 0 8px!important;color:#9a3412!important;}
+.v63MedicalWarning p{margin:0!important;color:#7c2d12!important;font-weight:800!important;line-height:1.45!important;}
+@media(max-width:560px){.v63DisclaimerCard{grid-template-columns:1fr}.v63DisclaimerCard span,.v63DisclaimerCard button{grid-column:auto;grid-row:auto}.v63DisclaimerCard button{width:100%!important}}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -2057,9 +2080,16 @@ section{
 <section id="home" class="card menu">
   <div class="brandTop"><div class="appLogo">🇬🇷</div><h1>Greek Cal AI</h1><div class="appSubTitle">Smart Greek Diet Coach</div></div>
 
+
+<div class="v63DisclaimerCard">
+  <b>⚕️ Σημαντική σημείωση</b>
+  <span>Η εφαρμογή δίνει ενδεικτικούς υπολογισμούς και δεν αντικαθιστά γιατρό ή διαιτολόγο.</span>
+  <button type="button" onclick="showPage('terms')">Δες όρους</button>
+</div>
+
 <div class="v62StatusCard">
   <div>
-    <b>✅ Έκδοση 1.0.0 • PWA Ready</b>
+    <b>✅ Έκδοση 1.0.1 • PWA Ready</b>
     <span>Έτοιμο για εγκατάσταση από Chrome όταν ανέβει σε HTTPS.</span>
   </div>
   <button type="button" onclick="showPage('premium')">⭐ Premium</button>
@@ -2081,6 +2111,11 @@ section{
       <div><b>2</b><span>Πρόσθεσε φαγητό από <b>Φαγητά</b>, <b>Φωτογραφία</b> ή <b>Barcode</b>.</span></div>
       <div><b>3</b><span>Με το πράσινο <b>+</b> κάνεις γρήγορη καταχώρηση.</span></div>
       <div><b>4</b><span>Στην Αρχική βλέπεις θερμίδες, νερό, άσκηση και μακροθρεπτικά.</span></div>
+    </div>
+
+    
+    <div class="v63GuideMedicalNote">
+      ⚕️ Οι θερμίδες, οι καύσεις άσκησης και οι στόχοι βάρους είναι ενδεικτικοί. Δεν αντικαθιστούν γιατρό ή διαιτολόγο.
     </div>
 
     <div class="v59GuideActions">
@@ -2212,6 +2247,12 @@ section{
   <div class="card v62LegalPage">
     <h2>🔒 Πολιτική Απορρήτου</h2>
 
+    <div class="v63MedicalWarning">
+      <h3>⚕️ Ιατρική αποποίηση</h3>
+      <p><b>Η εφαρμογή δεν παρέχει ιατρική διάγνωση ή θεραπεία και δεν αντικαθιστά γιατρό ή διαιτολόγο.</b> Για ειδικές ανάγκες υγείας, φάρμακα, εγκυμοσύνη ή παθήσεις, ζήτησε επαγγελματική συμβουλή.</p>
+    </div>
+
+
     <div class="v62InfoBox">
       <b>Σύντομη έκδοση</b>
       <p>Το Greek Cal AI αποθηκεύει τα δεδομένα σου τοπικά στη συσκευή σου, μέσω του browser. Δεν στέλνει τα στοιχεία σου σε server.</p>
@@ -2245,6 +2286,12 @@ section{
   <button class="back" onclick="showPage('home')">← Πίσω</button>
   <div class="card v62LegalPage">
     <h2>📄 Όροι Χρήσης</h2>
+
+    <div class="v63MedicalWarning">
+      <h3>⚕️ Ιατρική αποποίηση</h3>
+      <p><b>Το Greek Cal AI δεν αντικαθιστά γιατρό, διαιτολόγο ή άλλο επαγγελματία υγείας.</b> Οι υπολογισμοί θερμίδων, μακροθρεπτικών, καύσεων άσκησης και στόχου βάρους είναι ενδεικτικοί και βασίζονται στα στοιχεία που καταχωρεί ο χρήστης.</p>
+    </div>
+
 
     <div class="v62InfoBox">
       <b>Δεν είναι ιατρική υπηρεσία</b>
