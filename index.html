@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V88-1.2.8">
+<meta name="app-version" content="V89-1.2.9">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V88</title>
+<title>Greek Cal AI V89</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -4104,6 +4104,27 @@ html, body{
   }
 }
 
+
+/* V89 scroll fix note */
+.v89FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v89FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v89FinalNote span{
+  color:#166534;
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -4301,7 +4322,7 @@ html, body{
     <h2>🆕 Τι νέο υπάρχει</h2>
 
     <div class="v84InfoBox green">
-      <h3>V88 / 1.2.8</h3>
+      <h3>V89 / 1.2.9</h3>
       <p>Το Απόρρητο δεν εμφανίζεται πλέον με λουκέτο, για να μη μπερδεύεται με Premium λειτουργία. Ο Coach κλειδώθηκε στη δωρεάν έκδοση και ανοίγει με Premium.</p>
     </div>
 
@@ -4330,7 +4351,7 @@ html, body{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V88 / 1.2.8</p>
+      <p><b>Έκδοση:</b> V89 / 1.2.9</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> greekcalai.support@gmail.com</p>
@@ -4362,30 +4383,36 @@ html, body{
 
     
     <div class="v85FinalNote">
-      <b>✅ V88 / 1.2.8</b>
+      <b>✅ V89 / 1.2.9</b>
       <span>Καθαρή ροή αγοράς Premium: αίτηση με κωδικό συσκευής, οδηγίες πληρωμής, αποστολή Premium κωδικού μετά την πληρωμή.</span>
     </div>
 
 
     <div class="v86FinalNote">
-      <b>✅ V88 / 1.2.8</b>
+      <b>✅ V89 / 1.2.9</b>
       <span>Καθαρή διάκριση Δωρεάν / Premium: ο πελάτης ξεκινά δωρεάν και βλέπει ένα μόνο βασικό σημείο αναβάθμισης.</span>
     </div>
 
 
     <div class="v87FinalNote">
-      <b>✅ V88 / 1.2.8</b>
+      <b>✅ V89 / 1.2.9</b>
       <span>Το Απόρρητο φαίνεται ως δημόσια ενημερωτική σελίδα και ο Coach έγινε Premium λειτουργία.</span>
     </div>
 
 
     <div class="v88FinalNote">
-      <b>✅ V88 / 1.2.8</b>
+      <b>✅ V89 / 1.2.9</b>
       <span>Προστέθηκε καθαρός πίνακας αξίας Premium με Δωρεάν έκδοση και Premium ξεκλειδώματα.</span>
     </div>
 
+
+    <div class="v89FinalNote">
+      <b>✅ V89 / 1.2.9</b>
+      <span>Διόρθωση scroll: δεν πηγαίνει πλέον τέρμα πάνω με κάθε πάτημα κουμπιού.</span>
+    </div>
+
 <div class="v84UpdateHero">
-      <b>Τρέχουσα έκδοση: V88 / 1.2.8</b>
+      <b>Τρέχουσα έκδοση: V89 / 1.2.9</b>
       <span>Χρησιμοποίησε αυτό το κουμπί όταν θέλεις να φορτώσει η πιο πρόσφατη έκδοση της εφαρμογής.</span>
     </div>
 
@@ -8041,7 +8068,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=88").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=89").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -8064,7 +8091,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V88 / 1.2.8\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V89 / 1.2.9\n\nΠεριγραφή:");
   location.href = "mailto:greekcalai.support@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -8120,7 +8147,7 @@ window.addEventListener("load", ()=>{
 <script>
 /* V84 one-time προσωρινής μνήμης refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V88-1.2.8";
+  const wanted = "V89-1.2.9";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -8302,60 +8329,6 @@ setInterval(v74UpdateCalorieProgress, 1500);
 
 
 <script>
-/* V81: κάθε αλλαγή σελίδας ανοίγει από την κορυφή */
-(function(){
-  function v81ForceTop(){
-    try{
-      if(document.activeElement && typeof document.activeElement.blur === "function"){
-        document.activeElement.blur();
-      }
-      if("scrollRestoration" in history){
-        history.scrollRestoration = "manual";
-      }
-      document.documentElement.style.scrollBehavior = "auto";
-      document.body.style.scrollBehavior = "auto";
-
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-
-      const scrollers = document.querySelectorAll(".card, section, main, .app, .page, .menu");
-      scrollers.forEach(el=>{
-        try{ el.scrollTop = 0; }catch(e){}
-      });
-    }catch(e){}
-  }
-
-  window.v81ForceTop = v81ForceTop;
-
-  const originalShowPage = window.showPage;
-  if(typeof originalShowPage === "function" && !originalShowPage.__v81Wrapped){
-    const wrappedShowPage = function(pageId){
-      const result = originalShowPage.apply(this, arguments);
-      v81ForceTop();
-      requestAnimationFrame(v81ForceTop);
-      setTimeout(v81ForceTop, 60);
-      setTimeout(v81ForceTop, 180);
-      return result;
-    };
-    wrappedShowPage.__v81Wrapped = true;
-    window.showPage = wrappedShowPage;
-  }
-
-  document.addEventListener("click", function(e){
-    const el = e.target.closest("button,[onclick],.navItem,.bottomNav button,a[href^='#']");
-    if(!el) return;
-    setTimeout(v81ForceTop, 80);
-  }, true);
-
-  window.addEventListener("load", function(){
-    setTimeout(v81ForceTop, 120);
-  });
-})();
-</script>
-
-
-<script>
 /* V82: Premium κωδικός δεμένος με Κωδικό συσκευής */
 const GCAI_V82_LICENSE_SECRET = "GCAI-MERKOS-2026-V82-PREMIUM-LOCAL";
 
@@ -8440,7 +8413,7 @@ function v82OpenPremiumEmail(){
 
 Θέλω να αγοράσω το Greek Cal AI Premium.
 
-Έκδοση: V88 / 1.2.8
+Έκδοση: V89 / 1.2.9
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Παρακαλώ στείλτε μου οδηγίες πληρωμής.
@@ -8460,7 +8433,7 @@ function v64OpenEmail(){
 
 Θέλω βοήθεια για το Greek Cal AI.
 
-Έκδοση: V88 / 1.2.8
+Έκδοση: V89 / 1.2.9
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Περιγραφή:`
@@ -8689,6 +8662,58 @@ window.addEventListener("load", ()=>{
   setTimeout(v88UpdatePremiumLabels, 160);
   setTimeout(v88UpdatePremiumLabels, 700);
 });
+</script>
+
+
+<script>
+/* V89: σωστό scroll μόνο όταν αλλάζει σελίδα */
+(function(){
+  let v89LastPage = null;
+
+  function v89Top(){
+    try{
+      if("scrollRestoration" in history) history.scrollRestoration = "manual";
+      document.documentElement.style.scrollBehavior = "auto";
+      document.body.style.scrollBehavior = "auto";
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      const activePage = document.querySelector("section:not(.hidden), .page:not(.hidden)");
+      if(activePage) activePage.scrollTop = 0;
+    }catch(e){}
+  }
+
+  function v89ScheduleTop(){
+    v89Top();
+    requestAnimationFrame(v89Top);
+    setTimeout(v89Top, 80);
+  }
+
+  const previousShowPage = typeof showPage === "function" ? showPage : null;
+  if(previousShowPage && !previousShowPage.__v89Wrapped){
+    const wrappedShowPage = function(pageId){
+      const result = previousShowPage.apply(this, arguments);
+
+      // Scroll only when a new page/section is requested.
+      // Do not scroll on normal buttons inside the same page.
+      if(pageId && pageId !== v89LastPage){
+        v89LastPage = pageId;
+        v89ScheduleTop();
+      }
+
+      return result;
+    };
+    wrappedShowPage.__v89Wrapped = true;
+    showPage = wrappedShowPage;
+  }
+
+  window.addEventListener("load", function(){
+    setTimeout(function(){
+      const visible = document.querySelector("section:not(.hidden)");
+      if(visible && visible.id) v89LastPage = visible.id;
+    }, 150);
+  });
+})();
 </script>
 
 </body>
