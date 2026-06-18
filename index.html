@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V85-1.2.5">
+<meta name="app-version" content="V86-1.2.6">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V85</title>
+<title>Greek Cal AI V86</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -3857,6 +3857,107 @@ html, body{
   color:#166534;
 }
 
+
+/* V86 Free/Premium customer polish */
+.v86PlanCard{
+  border-color:#bfdbfe!important;
+  background:linear-gradient(135deg,#f8fbff,#ffffff)!important;
+}
+.v86PlanCard em{
+  background:#e8f1ff!important;
+  color:#0d47a1!important;
+  border-radius:999px!important;
+  padding:6px 10px!important;
+  font-style:normal!important;
+  font-weight:1000!important;
+}
+.v86PlanCard.premiumActive{
+  border-color:#bbf7d0!important;
+  background:linear-gradient(135deg,#ecfdf5,#ffffff)!important;
+}
+.v86PlanCard.premiumActive em{
+  background:#dcfce7!important;
+  color:#166534!important;
+}
+.v86PremiumFeature{
+  position:relative;
+}
+.v86PremiumFeature.locked{
+  background:linear-gradient(135deg,#334155,#64748b)!important;
+  color:#fff!important;
+}
+.v86FreePremiumBox{
+  background:#f8fbff;
+  border:1px solid #d7e8f8;
+  border-radius:22px;
+  padding:15px;
+  margin:14px 0;
+}
+.v86FreePremiumBox h3{
+  color:#0d47a1;
+  margin:0 0 8px;
+  font-size:23px;
+}
+.v86FreePremiumBox p{
+  color:#53627a;
+  font-weight:850;
+  line-height:1.45;
+  margin:0 0 12px;
+}
+.v86CompareMini{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.v86CompareMini div{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:16px;
+  padding:12px;
+}
+.v86CompareMini div:nth-child(2){
+  background:#fff7ed;
+  border-color:#fed7aa;
+}
+.v86CompareMini b{
+  display:block;
+  color:#0d47a1;
+  margin-bottom:5px;
+  font-size:17px;
+}
+.v86CompareMini div:nth-child(2) b{
+  color:#c2410c;
+}
+.v86CompareMini span{
+  display:block;
+  color:#667085;
+  font-weight:850;
+  line-height:1.35;
+}
+.v86FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v86FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v86FinalNote span{
+  color:#166534;
+}
+@media(max-width:560px){
+  .v86CompareMini{
+    grid-template-columns:1fr;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -3908,15 +4009,15 @@ html, body{
   </div>
 </div>
 
-<div class="v73InfoCard v73StatusCard">
-  <div class="v73CardIcon shield">✓</div>
+<div class="v73InfoCard v73StatusCard v86PlanCard">
+  <div class="v73CardIcon shield" id="v86PlanIcon">🔓</div>
   <div class="v73StatusText">
-    <b>Έκδοση 1.2.5</b>
-    <span>Έτοιμο για εγκατάσταση από Chrome όταν βρίσκεσαι σε HTTPS.</span>
+    <b id="v86PlanTitle">Δωρεάν έκδοση</b>
+    <span id="v86PlanSub">Βασική παρακολούθηση θερμίδων, νερού, άσκησης και βάρους.</span>
   </div>
-  <em>Νέο</em>
+  <em id="v86PlanBadge">Free</em>
   <div class="v73StatusActions">
-    <button type="button" onclick="showPage('premium')">⭐ Premium</button>
+    <button type="button" id="v86PremiumCta" onclick="showPage('premium')">⭐ Αναβάθμιση</button>
     <button type="button" onclick="showPage('updates')">🔄 Ενημέρωση</button>
   </div>
 </div>
@@ -3948,8 +4049,7 @@ html, body{
       <button type="button" onclick="showPage('weight')">⚖️ Στοιχεία / Στόχος</button>
       <button type="button" onclick="showPage('backup')">💾 Backup</button>
       <button type="button" onclick="showPage('updates')">🔄 Ενημέρωση</button>
-      <button type="button" onclick="showPage('premium')">⭐ Premium</button>
-      <button type="button" onclick="showPage('landing')">💼 Premium</button>
+      <button type="button" onclick="showPage('premium')">⭐ Premium / Αγορά</button>
       <button type="button" onclick="showPage('support')">📞 Υποστήριξη</button>
       <button type="button" onclick="showPage('privacy')">🔒 Απόρρητο</button>
       <button type="button" onclick="showPage('about')">ℹ️ Σχετικά</button>
@@ -4022,19 +4122,18 @@ html, body{
   </div>
 
   <div class="homeMenuGrid">
-    <button onclick="showPage('photoMeal')">📷 Φωτογραφία</button>
-    <button onclick="showPage('barcode')">📦 Barcode</button>
-    <button onclick="showPage('reports')">📊 Αναφορά</button>
+    <button class="v86PremiumFeature" data-free-label="🔒 Φωτογραφία" data-premium-label="📷 Φωτογραφία" onclick="v86OpenFeature('photoMeal')">🔒 Φωτογραφία</button>
+    <button class="v86PremiumFeature" data-free-label="🔒 Barcode" data-premium-label="📦 Barcode" onclick="v86OpenFeature('barcode')">🔒 Barcode</button>
+    <button class="v86PremiumFeature" data-free-label="🔒 Αναφορά" data-premium-label="📊 Αναφορά" onclick="v86OpenFeature('reports')">🔒 Αναφορά</button>
     <button onclick="showPage('activities')">🏃 Δραστηριότητες</button>
     <button onclick="showPage('progressCalendar')">📅 Ημερολόγιο</button>
     <button onclick="showPage('custom')">➕ Δικό μου</button>
     <button onclick="showPage('fasting')">⏱ Νηστεία</button>
-    <button onclick="showPage('backup')">💾 Backup</button>
+    <button class="v86PremiumFeature" data-free-label="🔒 Backup" data-premium-label="💾 Backup" onclick="v86OpenFeature('backup')">🔒 Backup</button>
       <button onclick="showPage('updates')">🔄 Ενημέρωση</button>
       <button onclick="showPage('changelog')">📌 Εκδόσεις</button>
-    <button onclick="showPage('premium')">⭐ Premium</button>
+    <button onclick="showPage('premium')">⭐ Premium / Αγορά</button>
     <button onclick="showPage('privacy')">🔒 Απόρρητο</button>
-      <button onclick="showPage('landing')">💼 Premium</button>
     <button onclick="showPage('support')">📞 Υποστήριξη</button>
   </div>
   <p class="small" style="text-align:center;margin-top:10px">Καθημερινή παρακολούθηση θερμίδων, νερού, άσκησης και στόχου βάρους.</p>
@@ -4056,7 +4155,7 @@ html, body{
     <h2>🆕 Τι νέο υπάρχει</h2>
 
     <div class="v84InfoBox green">
-      <h3>V85 / 1.2.5</h3>
+      <h3>V86 / 1.2.6</h3>
       <p>Η διαδικασία αγοράς Premium έγινε πιο καθαρή: πρώτα στέλνεις αίτηση αγοράς με κωδικό συσκευής, μετά λαμβάνεις οδηγίες πληρωμής και στο τέλος Premium κωδικό.</p>
     </div>
 
@@ -4085,7 +4184,7 @@ html, body{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V85 / 1.2.5</p>
+      <p><b>Έκδοση:</b> V86 / 1.2.6</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> greekcalai.support@gmail.com</p>
@@ -4117,12 +4216,18 @@ html, body{
 
     
     <div class="v85FinalNote">
-      <b>✅ V85 / 1.2.5</b>
+      <b>✅ V86 / 1.2.6</b>
       <span>Καθαρή ροή αγοράς Premium: αίτηση με κωδικό συσκευής, οδηγίες πληρωμής, αποστολή Premium κωδικού μετά την πληρωμή.</span>
     </div>
 
+
+    <div class="v86FinalNote">
+      <b>✅ V86 / 1.2.6</b>
+      <span>Καθαρή διάκριση Δωρεάν / Premium: ο πελάτης ξεκινά δωρεάν και βλέπει ένα μόνο βασικό σημείο αναβάθμισης.</span>
+    </div>
+
 <div class="v84UpdateHero">
-      <b>Τρέχουσα έκδοση: V85 / 1.2.5</b>
+      <b>Τρέχουσα έκδοση: V86 / 1.2.6</b>
       <span>Χρησιμοποίησε αυτό το κουμπί όταν θέλεις να φορτώσει η πιο πρόσφατη έκδοση της εφαρμογής.</span>
     </div>
 
@@ -4163,7 +4268,7 @@ html, body{
         <button class="btnGreen" onclick="showPage('support')">🛒 Αίτηση αγοράς Premium</button>
         <button onclick="showPage('premium')">⭐ Ενεργοποίηση Premium</button>
       </div>
-      <small>Premium έκδοση • Αγορά με αίτηση μέσω email</small>
+      <small>Δωρεάν αρχή • Premium με προσωπικό κωδικό</small>
     </div>
 
     <div class="v80ScreenShowcase">
@@ -4197,7 +4302,7 @@ html, body{
       <div>
         <span>Εισαγωγική τιμή</span>
         <b>Greek Cal AI Premium</b>
-        <small>Ενεργοποίηση με προσωπικό κωδικό.</small>
+        <small>Ξεκινάς δωρεάν και αναβαθμίζεις όποτε θέλεις.</small>
       </div>
       <strong>4,99€</strong>
     </div>
@@ -4305,8 +4410,8 @@ html, body{
     </div>
 
     <div class="v64SupportActions">
-      <button onclick="showPage('backup')">💾 Backup</button>
-      <button onclick="showPage('premium')">⭐ Premium</button>
+      <button class="v86PremiumFeature" data-free-label="🔒 Backup" data-premium-label="💾 Backup" onclick="v86OpenFeature('backup')">🔒 Backup</button>
+      <button onclick="showPage('premium')">⭐ Premium / Αγορά</button>
       <button onclick="showPage('privacy')">🔒 Απόρρητο</button>
       <button onclick="showPage('terms')">📄 Όροι</button>
     </div>
@@ -4323,7 +4428,16 @@ html, body{
 
     <div class="v62PremiumHero">
       <b id="premiumStatusText">Τρέχουσα έκδοση: Δωρεάν</b>
-      <span>Αγόρασε Premium με αίτηση μέσω email και ενεργοποίησε την εφαρμογή με προσωπικό κωδικό.</span>
+      <span>Η εφαρμογή ξεκινά πάντα στη δωρεάν έκδοση. Με Premium ξεκλειδώνεις επιπλέον δυνατότητες.</span>
+    </div>
+
+    <div class="v86FreePremiumBox">
+      <h3>🔓 Δωρεάν στην αρχή</h3>
+      <p>Ο νέος χρήστης βλέπει πρώτα τη <b>Δωρεάν έκδοση</b>. Μπορεί να χρησιμοποιήσει βασικές λειτουργίες και, όταν θέλει, να κάνει αναβάθμιση σε Premium.</p>
+      <div class="v86CompareMini">
+        <div><b>Δωρεάν</b><span>Φαγητά, ημερήσιο, νερό, άσκηση, βάρος.</span></div>
+        <div><b>Premium</b><span>Φωτογραφία, barcode, αναφορές, backup και επιπλέον εργαλεία.</span></div>
+      </div>
     </div>
 
     <div class="v62PremiumGrid">
@@ -4418,7 +4532,7 @@ html, body{
 
     <div class="v62LegalActions">
       <button onclick="showPage('terms')">📄 Όροι χρήσης</button>
-      <button onclick="showPage('backup')">💾 Backup</button>
+      <button class="v86PremiumFeature" data-free-label="🔒 Backup" data-premium-label="💾 Backup" onclick="v86OpenFeature('backup')">🔒 Backup</button>
     </div>
 
     <div class="v58BottomSpace"></div>
@@ -4455,7 +4569,7 @@ html, body{
 
     <div class="v62LegalActions">
       <button onclick="showPage('privacy')">🔒 Πολιτική απορρήτου</button>
-      <button onclick="showPage('premium')">⭐ Premium</button>
+      <button onclick="showPage('premium')">⭐ Premium / Αγορά</button>
     </div>
 
     <div class="v58BottomSpace"></div>
@@ -7727,7 +7841,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=85").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=86").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -7750,7 +7864,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V85 / 1.2.5\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V86 / 1.2.6\n\nΠεριγραφή:");
   location.href = "mailto:greekcalai.support@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -7806,7 +7920,7 @@ window.addEventListener("load", ()=>{
 <script>
 /* V84 one-time προσωρινής μνήμης refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V85-1.2.5";
+  const wanted = "V86-1.2.6";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -8126,7 +8240,7 @@ function v82OpenPremiumEmail(){
 
 Θέλω να αγοράσω το Greek Cal AI Premium.
 
-Έκδοση: V85 / 1.2.5
+Έκδοση: V86 / 1.2.6
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Παρακαλώ στείλτε μου οδηγίες πληρωμής.
@@ -8146,7 +8260,7 @@ function v64OpenEmail(){
 
 Θέλω βοήθεια για το Greek Cal AI.
 
-Έκδοση: V85 / 1.2.5
+Έκδοση: V86 / 1.2.6
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Περιγραφή:`
@@ -8194,6 +8308,80 @@ if(oldShowPageV82 && !oldShowPageV82.__v82Wrapped){
 window.addEventListener("load", ()=>{
   v82GetDeviceCode();
   setTimeout(()=>{ updatePremiumStatus(); v82RefreshDeviceUI(); }, 200);
+});
+</script>
+
+
+<script>
+/* V86: καθαρή δωρεάν αρχή και ένα Premium σημείο αναβάθμισης */
+function v86IsPremium(){
+  return localStorage.getItem("gca_premium") === "1";
+}
+
+function v86UpdatePlanUI(){
+  const premium = v86IsPremium();
+
+  const title = document.getElementById("v86PlanTitle");
+  const sub = document.getElementById("v86PlanSub");
+  const badge = document.getElementById("v86PlanBadge");
+  const icon = document.getElementById("v86PlanIcon");
+  const cta = document.getElementById("v86PremiumCta");
+  const card = document.querySelector(".v86PlanCard");
+
+  if(title) title.textContent = premium ? "Premium ενεργό" : "Δωρεάν έκδοση";
+  if(sub) sub.textContent = premium
+    ? "Έχεις ενεργές όλες τις Premium δυνατότητες της εφαρμογής."
+    : "Βασική παρακολούθηση θερμίδων, νερού, άσκησης και βάρους.";
+  if(badge) badge.textContent = premium ? "Premium" : "Free";
+  if(icon) icon.textContent = premium ? "⭐" : "🔓";
+  if(cta) cta.textContent = premium ? "⭐ Premium" : "⭐ Αναβάθμιση";
+  if(card) card.classList.toggle("premiumActive", premium);
+
+  document.querySelectorAll(".v86PremiumFeature").forEach(btn=>{
+    const freeLabel = btn.getAttribute("data-free-label") || btn.textContent;
+    const premiumLabel = btn.getAttribute("data-premium-label") || btn.textContent;
+    btn.textContent = premium ? premiumLabel : freeLabel;
+    btn.classList.toggle("locked", !premium);
+    btn.title = premium ? "" : "Premium λειτουργία";
+  });
+
+  const premiumStatus = document.getElementById("premiumStatusText");
+  if(premiumStatus){
+    premiumStatus.textContent = premium ? "Τρέχουσα έκδοση: Premium ενεργό ✅" : "Τρέχουσα έκδοση: Δωρεάν";
+  }
+}
+
+function v86OpenFeature(pageId){
+  if(v86IsPremium()){
+    showPage(pageId);
+    return;
+  }
+  alert("Αυτή είναι Premium λειτουργία. Μπορείς πρώτα να χρησιμοποιήσεις τη δωρεάν έκδοση και, όταν θέλεις, να κάνεις αναβάθμιση.");
+  showPage("premium");
+}
+
+const oldShowPageV86 = typeof showPage === "function" ? showPage : null;
+if(oldShowPageV86 && !oldShowPageV86.__v86Wrapped){
+  const wrappedShowPageV86 = function(id){
+    const result = oldShowPageV86.apply(this, arguments);
+    setTimeout(v86UpdatePlanUI, 80);
+    return result;
+  };
+  wrappedShowPageV86.__v86Wrapped = true;
+  showPage = wrappedShowPageV86;
+}
+
+const oldUpdatePremiumStatusV86 = typeof updatePremiumStatus === "function" ? updatePremiumStatus : null;
+updatePremiumStatus = function(){
+  if(oldUpdatePremiumStatusV86){
+    try{ oldUpdatePremiumStatusV86(); }catch(e){}
+  }
+  v86UpdatePlanUI();
+};
+
+window.addEventListener("load", ()=>{
+  setTimeout(v86UpdatePlanUI, 150);
+  setTimeout(v86UpdatePlanUI, 600);
 });
 </script>
 
