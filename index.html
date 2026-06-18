@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V72-1.0.10">
+<meta name="app-version" content="V73-1.1.0">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V72</title>
+<title>Greek Cal AI V73</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -2603,6 +2603,498 @@ body.v65NoFab #fabOverlay{
   }
 }
 
+
+/* V73 premium Greek home redesign */
+#home.card.menu{
+  background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%);
+}
+.v73Brand{
+  padding:8px 0 14px!important;
+}
+.v73Brand .v73Logo{
+  width:104px;
+  height:104px;
+  border-radius:30px;
+  margin-bottom:12px;
+  font-size:0;
+  box-shadow:0 18px 44px rgba(30,108,199,.24), 0 0 0 10px rgba(30,136,229,.06);
+  position:relative;
+  overflow:hidden;
+}
+.v73Logo::after{
+  content:"";
+  position:absolute;
+  inset:-25%;
+  background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.55),transparent 35%);
+}
+.v73Flag{
+  position:relative;
+  width:62px;
+  height:42px;
+  background:#fff;
+  border-radius:5px;
+  overflow:hidden;
+  box-shadow:0 6px 12px rgba(0,0,0,.12);
+  transform:skewY(-4deg);
+}
+.v73Flag span{
+  display:block;
+  height:6px;
+  background:#0d5eaf;
+  margin-bottom:4px;
+}
+.v73Flag i{
+  position:absolute;
+  left:0;
+  top:0;
+  width:26px;
+  height:24px;
+  background:
+    linear-gradient(90deg, transparent 0 10px, #fff 10px 16px, transparent 16px 100%),
+    linear-gradient(0deg, transparent 0 9px, #fff 9px 15px, transparent 15px 100%),
+    #0d5eaf;
+}
+.v73Brand h1{
+  font-size:42px!important;
+  line-height:1.02!important;
+  margin:4px 0 8px!important;
+  letter-spacing:-1.1px;
+  background:linear-gradient(135deg,#0d47a1,#1e88e5);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent!important;
+}
+.v73SubTitle{
+  margin:0!important;
+  color:#143b76!important;
+  font-size:20px!important;
+  font-weight:1000!important;
+  letter-spacing:-.2px;
+}
+.v73Olive{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin:7px 0 4px;
+  color:#1e88e5;
+}
+.v73Olive span{
+  width:42px;
+  height:3px;
+  border-radius:999px;
+  background:#bfdbfe;
+}
+.v73Olive b{
+  font-size:18px;
+  line-height:1;
+}
+.v73Slogan{
+  color:#53627a;
+  font-weight:800;
+  font-size:14px;
+  line-height:1.35;
+  max-width:460px;
+  margin:0 auto;
+}
+
+.v73InfoCard{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:20px;
+  padding:13px;
+  margin:11px 0;
+  box-shadow:0 10px 26px rgba(15,23,42,.06);
+}
+.v73InfoCard .v73CardIcon{
+  width:56px;
+  height:56px;
+  border-radius:18px;
+  flex:0 0 56px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#eaf3ff;
+  color:#1e6cc7;
+  font-size:25px;
+  font-weight:1000;
+}
+.v73InfoCard b{
+  display:block;
+  color:#17202c;
+  font-size:18px;
+  font-weight:1000;
+  margin-bottom:4px;
+}
+.v73InfoCard span{
+  display:block;
+  color:#53627a;
+  font-size:14px;
+  line-height:1.35;
+  font-weight:800;
+}
+.v73MedicalCard{
+  cursor:pointer;
+  background:linear-gradient(135deg,#ffffff,#f8fbff);
+}
+.v73MedicalCard .v73CardIcon{
+  background:#e8f1ff;
+}
+.v73StatusCard{
+  display:grid;
+  grid-template-columns:56px 1fr auto;
+  align-items:center;
+}
+.v73StatusCard .shield{
+  background:linear-gradient(135deg,#1e6cc7,#1e88e5);
+  color:white;
+}
+.v73StatusCard em{
+  font-style:normal;
+  background:#dcfce7;
+  color:#166534;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:1000;
+}
+.v73StatusActions{
+  grid-column:1 / -1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:10px;
+}
+.v73StatusActions button{
+  margin:0!important;
+  border-radius:999px!important;
+  min-height:42px!important;
+  box-shadow:none!important;
+}
+.v59GuideCard{
+  border-radius:20px!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.06)!important;
+}
+.v59GuideHead{
+  padding:13px!important;
+}
+.v59GuideHead b{
+  font-size:19px!important;
+}
+.v59GuideHead button{
+  border-radius:16px!important;
+  min-height:44px!important;
+}
+.v73InstallMini{
+  display:grid!important;
+  grid-template-columns:56px 1fr auto;
+  align-items:center;
+  gap:12px;
+  border-radius:20px!important;
+  padding:13px!important;
+  background:#fff!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.06);
+  color:#17202c!important;
+  font-size:inherit!important;
+}
+.v73InstallMini b{
+  display:block;
+  color:#17202c;
+  font-size:18px;
+  font-weight:1000;
+}
+.v73InstallMini span{
+  display:block!important;
+  color:#667085!important;
+  font-size:14px!important;
+  margin:2px 0 0!important;
+  font-weight:900;
+}
+.v73InstallMini strong{
+  color:#64748b;
+  font-size:34px;
+  line-height:1;
+}
+.v73CardIcon.phone{
+  font-size:24px;
+}
+
+.compactHome{
+  border-radius:24px!important;
+  padding:18px!important;
+  background:#ffffff!important;
+  box-shadow:0 12px 34px rgba(15,23,42,.07)!important;
+}
+.compactHome h2{
+  font-size:28px!important;
+  margin:2px 0 14px!important;
+  position:relative;
+}
+.compactHome h2::after{
+  content:"";
+  display:block;
+  width:44px;
+  height:4px;
+  background:#1e88e5;
+  border-radius:999px;
+  margin-top:6px;
+}
+.v73HeroCalBox{
+  display:grid!important;
+  grid-template-columns:58px 1fr 84px;
+  gap:14px;
+  align-items:center;
+  min-height:154px!important;
+  border-radius:24px!important;
+  padding:18px!important;
+  background:linear-gradient(135deg,#0b57d0,#1e9bff)!important;
+  box-shadow:0 18px 36px rgba(30,108,199,.26);
+  position:relative;
+  overflow:hidden;
+}
+.v73HeroCalBox::after{
+  content:"";
+  position:absolute;
+  right:-45px;
+  top:-60px;
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+}
+.v73CalIcon{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:rgba(255,255,255,.24);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  position:relative;
+  z-index:1;
+}
+.v73CalMain{
+  min-width:0;
+  position:relative;
+  z-index:1;
+}
+.v73CalMain b{
+  font-size:16px!important;
+  opacity:.95;
+}
+.v73CalMain span{
+  display:block;
+  font-size:34px!important;
+  line-height:1.05!important;
+  letter-spacing:-.6px;
+  margin:3px 0 8px;
+  white-space:nowrap;
+}
+.v73CalMain small{
+  margin-top:8px!important;
+  font-size:14px!important;
+}
+.v73CalProgress{
+  height:9px;
+  background:rgba(255,255,255,.32);
+  border-radius:999px;
+  overflow:hidden;
+}
+.v73CalProgress .progressBar{
+  height:100%;
+  background:rgba(255,255,255,.92)!important;
+  border-radius:999px;
+  width:0%;
+}
+.v73CalCircle{
+  width:78px;
+  height:78px;
+  border-radius:50%;
+  background:conic-gradient(#fff 0deg, rgba(255,255,255,.22) 0deg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  z-index:1;
+}
+.v73CalCircle::before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#0b57d0,#1e9bff);
+}
+.v73CalCircle div{
+  position:relative;
+  z-index:1;
+  text-align:center;
+  color:#fff;
+}
+.v73CalCircle strong{
+  display:block;
+  font-size:22px;
+  line-height:1;
+}
+.v73CalCircle small{
+  display:block;
+  margin-top:4px;
+  font-size:10px!important;
+  opacity:.95;
+}
+.compactStats{
+  margin-top:12px;
+}
+.compactStats .dashBox{
+  border-radius:18px!important;
+  box-shadow:0 8px 20px rgba(15,23,42,.05);
+}
+.v73MacroPanel{
+  border:none!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:0!important;
+}
+.v73MacroPanel .homePanelTitle{
+  margin:12px 0 8px;
+}
+.v73MacroCards{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+}
+.v73MacroCard{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:18px;
+  padding:12px;
+  display:flex;
+  gap:9px;
+  align-items:flex-start;
+  box-shadow:0 8px 20px rgba(15,23,42,.05);
+  min-width:0;
+}
+.v73MacroCard i{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-style:normal;
+  flex:0 0 34px;
+}
+.v73MacroCard.protein i{background:#dcfce7}
+.v73MacroCard.fat i{background:#fef3c7}
+.v73MacroCard.carbs i{background:#f3e8ff}
+.v73MacroCard div{min-width:0;width:100%}
+.v73MacroCard b{
+  display:block;
+  color:#53627a;
+  font-size:12px;
+  line-height:1.1;
+}
+.v73MacroCard span{
+  display:block;
+  color:#0d47a1;
+  font-weight:1000;
+  font-size:14px;
+  margin:4px 0 7px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.v73MacroCard .macroMiniWrap{
+  height:6px!important;
+  background:#e5e7eb!important;
+}
+.v73FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v73FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v73FinalNote span{
+  color:#166534;
+}
+@media(max-width:560px){
+  .v73Brand .v73Logo{
+    width:92px;
+    height:92px;
+    border-radius:28px;
+  }
+  .v73Flag{
+    width:56px;
+    height:38px;
+  }
+  .v73Brand h1{
+    font-size:38px!important;
+  }
+  .v73SubTitle{
+    font-size:18px!important;
+  }
+  .v73Slogan{
+    font-size:13px;
+    padding:0 8px;
+  }
+  .v73InfoCard{
+    padding:12px;
+    gap:10px;
+  }
+  .v73StatusCard{
+    grid-template-columns:50px 1fr auto;
+  }
+  .v73InfoCard .v73CardIcon{
+    width:50px;
+    height:50px;
+    flex-basis:50px;
+  }
+  .v73HeroCalBox{
+    grid-template-columns:48px 1fr 70px;
+    gap:10px;
+    padding:16px!important;
+    min-height:142px!important;
+  }
+  .v73CalIcon{
+    width:48px;
+    height:48px;
+    font-size:24px;
+  }
+  .v73CalMain span{
+    font-size:28px!important;
+  }
+  .v73CalCircle{
+    width:68px;
+    height:68px;
+  }
+  .v73CalCircle strong{
+    font-size:19px;
+  }
+  .v73MacroCards{
+    grid-template-columns:1fr;
+  }
+}
+@media(max-width:390px){
+  .v73HeroCalBox{
+    grid-template-columns:1fr 68px;
+  }
+  .v73CalIcon{
+    display:none;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -2624,7 +3116,7 @@ body.v65NoFab #fabOverlay{
   <div class="splashCard">
     <div class="splashIcon">🇬🇷</div>
     <div class="splashTitle">Greek Cal AI</div>
-    <div class="splashText">Θερμίδες • Νερό • Άσκηση • Βάρος • AI Coach</div>
+    <div class="splashText">Έξυπνος Ελληνικός Οδηγός Διατροφής</div>
     <div class="splashLoader"><div></div></div>
   </div>
 </div>
@@ -2632,21 +3124,39 @@ body.v65NoFab #fabOverlay{
 <div class="app">
 
 <section id="home" class="card menu">
-  <div class="brandTop"><div class="appLogo">🇬🇷</div><h1>Greek Cal AI</h1><div class="appSubTitle">Smart Greek Diet Coach</div></div>
+  <div class="brandTop v73Brand">
+    <div class="appLogo v73Logo" aria-label="Greek Cal AI logo">
+      <div class="v73Flag">
+        <span></span><span></span><span></span><span></span><span></span>
+        <i></i>
+      </div>
+    </div>
+    <h1>Greek Cal AI</h1>
+    <div class="appSubTitle v73SubTitle">Έξυπνος Ελληνικός Οδηγός Διατροφής</div>
+    <div class="v73Olive"><span></span><b>🌿</b><span></span></div>
+    <div class="v73Slogan">Ο προσωπικός σου βοηθός για θερμίδες, στόχους και σωστή διατροφή</div>
+  </div>
 
 
-<div class="v63DisclaimerCard">
-  <b>⚕️ Σημαντική σημείωση</b>
-  <span>Η εφαρμογή δίνει ενδεικτικούς υπολογισμούς και δεν αντικαθιστά γιατρό ή διαιτολόγο.</span>
-  <button type="button" onclick="showPage('terms')">Δες όρους</button>
+<div class="v73InfoCard v73MedicalCard" onclick="showPage('terms')">
+  <div class="v73CardIcon">ℹ️</div>
+  <div>
+    <b>Σημαντική σημείωση</b>
+    <span>Οι υπολογισμοί της εφαρμογής είναι ενδεικτικοί και δεν αντικαθιστούν ιατρική ή διαιτολογική συμβουλή.</span>
+  </div>
 </div>
 
-<div class="v62StatusCard">
-  <div>
-    <b>✅ Έκδοση 1.0.10 • PWA Ready</b>
-    <span>Εγκατάσταση από Chrome: ⋮ → Εγκατάσταση εφαρμογής.</span>
+<div class="v73InfoCard v73StatusCard">
+  <div class="v73CardIcon shield">✓</div>
+  <div class="v73StatusText">
+    <b>Έκδοση 1.1.0 • PWA Ready</b>
+    <span>Έτοιμο για εγκατάσταση από Chrome όταν βρίσκεσαι σε HTTPS.</span>
   </div>
-  <div class="v67StatusBtns"><button type="button" onclick="showPage('premium')">⭐ Premium</button><button type="button" onclick="showPage('updates')">🔄 Ενημέρωση</button></div>
+  <em>Νέο</em>
+  <div class="v73StatusActions">
+    <button type="button" onclick="showPage('premium')">⭐ Premium</button>
+    <button type="button" onclick="showPage('updates')">🔄 Ενημέρωση</button>
+  </div>
 </div>
 
 
@@ -2654,7 +3164,7 @@ body.v65NoFab #fabOverlay{
   <div class="v59GuideHead" onclick="toggleUsageGuide()">
     <div>
       <b>📘 Οδηγίες χρήσης</b>
-      <span>Ξεκίνα σωστά την εφαρμογή</span>
+      <span>Μάθε πώς να αξιοποιήσεις όλες τις δυνατότητες.</span>
     </div>
     <button type="button" id="usageGuideToggleBtn">Άνοιγμα</button>
   </div>
@@ -2686,9 +3196,10 @@ body.v65NoFab #fabOverlay{
 </div>
 
 
-<div class="installMini" onclick="toggleInstallHelp()">
-  📲 Εγκατάσταση στο κινητό
-  <span>πάτησε για οδηγίες</span>
+<div class="installMini v73InstallMini" onclick="toggleInstallHelp()">
+  <div class="v73CardIcon phone">📲</div>
+  <div><b>Εγκατάσταση στο κινητό</b><span>πάτησε για οδηγίες</span></div>
+  <strong>›</strong>
 </div>
 <div id="installHelp" class="installHelp hidden">
   Από Chrome πάτα ⋮ → <b>Εγκατάσταση εφαρμογής</b> ή <b>Προσθήκη στην αρχική οθόνη</b>. Για κανονική εγκατάσταση άνοιξέ το από το HTTPS link του GitHub Pages.
@@ -2697,10 +3208,20 @@ body.v65NoFab #fabOverlay{
   <div class="dashboardCard compactHome">
     <h2>📊 Σήμερα</h2>
 
-    <div class="dashBox heroCalBox">
-      <b>Θερμίδες</b>
-      <span id="dashCalories">0 / 1800</span>
-      <small id="dashRemainingMini">Υπόλοιπο 1800 kcal</small>
+    <div class="dashBox heroCalBox v73HeroCalBox">
+      <div class="v73CalIcon">🔥</div>
+      <div class="v73CalMain">
+        <b>Θερμίδες</b>
+        <span id="dashCalories">0 / 1800</span>
+        <div class="v73CalProgress"><div id="dashProgressBar" class="progressBar"></div></div>
+        <small id="dashRemainingMini">Υπόλοιπο 1800 kcal</small>
+      </div>
+      <div class="v73CalCircle" id="dashCalCircle">
+        <div>
+          <strong id="dashCalPercent">0%</strong>
+          <small>του στόχου</small>
+        </div>
+      </div>
     </div>
 
     <div class="compactStats">
@@ -2710,15 +3231,15 @@ body.v65NoFab #fabOverlay{
       <div class="dashBox"><b>Στόχος</b><span id="dashGoalTime">-</span></div>
     </div>
 
-    <div class="homeMacroPanel">
+    <div class="homeMacroPanel v73MacroPanel">
       <div class="homePanelTitle">
         <b>Μακροθρεπτικά σήμερα</b>
         <span id="homeMacroSplitText">Π/Υ/Λ</span>
       </div>
-      <div class="macroBars">
-        <div class="macroBarLine"><span>Πρωτεΐνη</span><div class="macroMiniWrap"><div id="homeProteinBar" class="macroMini macroProtein"></div></div><span id="homeProteinText">0g</span></div>
-        <div class="macroBarLine"><span>Υδατάνθ.</span><div class="macroMiniWrap"><div id="homeCarbsBar" class="macroMini macroCarbs"></div></div><span id="homeCarbsText">0g</span></div>
-        <div class="macroBarLine"><span>Λιπαρά</span><div class="macroMiniWrap"><div id="homeFatBar" class="macroMini macroFat"></div></div><span id="homeFatText">0g</span></div>
+      <div class="v73MacroCards">
+        <div class="v73MacroCard protein"><i>🌿</i><div><b>Πρωτεΐνη</b><span id="homeProteinText">0g</span><div class="macroMiniWrap"><div id="homeProteinBar" class="macroMini macroProtein"></div></div></div></div>
+        <div class="v73MacroCard fat"><i>💧</i><div><b>Λιπαρά</b><span id="homeFatText">0g</span><div class="macroMiniWrap"><div id="homeFatBar" class="macroMini macroFat"></div></div></div></div>
+        <div class="v73MacroCard carbs"><i>🌾</i><div><b>Υδατ/κες</b><span id="homeCarbsText">0g</span><div class="macroMiniWrap"><div id="homeCarbsBar" class="macroMini macroCarbs"></div></div></div></div>
       </div>
     </div>
 
@@ -2732,7 +3253,6 @@ body.v65NoFab #fabOverlay{
       </div>
     </div>
 
-    <div class="progressWrap"><div id="dashProgressBar" class="progressBar"></div></div>
     <p class="small" id="dashMessage" style="text-align:center;margin-top:8px">Καλή αρχή για σήμερα.</p>
     <div class="dashGoalNote" id="dashGoalNote">Συμπλήρωσε τον στόχο βάρους για να εμφανιστεί εκτίμηση.</div>
     <div class="v69CleanHomeHint">Για γρήγορη καταχώρηση πάτα το πράσινο + ή χρησιμοποίησε την κάτω μπάρα.</div>
@@ -2773,29 +3293,29 @@ body.v65NoFab #fabOverlay{
     <h2>📌 Ιστορικό Εκδόσεων</h2>
 
     <div class="v71ChangeHero">
-      <b>Τρέχουσα έκδοση: V72 / 1.0.10</b>
+      <b>Τρέχουσα έκδοση: V73 / 1.1.0</b>
       <span>Σταθερή εμπορική PWA βάση με καθαρή αρχική και πλήρη ενημερωτικές σελίδες.</span>
     </div>
 
     <div class="v71VersionList">
       <div class="v71VersionItem current">
-        <b>V72 / 1.0.10</b>
+        <b>V73 / 1.1.0</b>
         <span>Τελικό polish με περισσότερο κάτω κενό στις ενημερωτικές σελίδες και καθαρότερη προβολή κουμπιών.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V72 / 1.0.10</b>
+        <b>V73 / 1.1.0</b>
         <span>Τελικό polish, σελίδα Σχετικά, ελληνικό κουμπί Ενημέρωση και καθαρότερη εμπορική βάση.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V72 / 1.0.10</b>
+        <b>V73 / 1.1.0</b>
         <span>Αφαιρέθηκαν οριστικά τα διπλά κουμπιά από την κάρτα Σήμερα.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V72 / 1.0.10</b>
+        <b>V73 / 1.1.0</b>
         <span>Προστέθηκε σελίδα Ενημέρωση Εφαρμογής για καθαρισμό cache / service worker.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V72 / 1.0.10</b>
+        <b>V73 / 1.1.0</b>
         <span>Προστέθηκαν σελίδες Πώληση και Υποστήριξη για εμπορική χρήση εκτός Play Store.</span>
       </div>
       <div class="v71VersionItem">
@@ -2828,7 +3348,7 @@ body.v65NoFab #fabOverlay{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V72 / 1.0.10</p>
+      <p><b>Έκδοση:</b> V73 / 1.1.0</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> merkos1969@gmail.com</p>
@@ -2859,18 +3379,24 @@ body.v65NoFab #fabOverlay{
 
     
     
+    
+    <div class="v73FinalNote">
+      <b>✅ V73 / 1.1.0</b>
+      <span>Νέο ελληνικό premium header και πιο όμορφη πρόοδος θερμίδων στην αρχική.</span>
+    </div>
+
     <div class="v72FinalNote">
-      <b>✅ V72 / 1.0.10</b>
+      <b>✅ V73 / 1.1.0</b>
       <span>Τελικό polish: περισσότερο κενό κάτω στις ενημερωτικές σελίδες, για να μη σκεπάζει η κάτω μπάρα τα κουμπιά.</span>
     </div>
 
     <div class="v70ReleaseNote">
-      <b>✅ V72 / 1.0.10</b>
+      <b>✅ V73 / 1.1.0</b>
       <span>Σταθερή εμπορική βάση: καθαρή αρχική, Premium, υποστήριξη, απόρρητο, όροι, backup και ενημέρωση PWA.</span>
     </div>
 
     <div class="v67UpdateHero">
-      <b>Έκδοση εφαρμογής: V72 / 1.0.10</b>
+      <b>Έκδοση εφαρμογής: V73 / 1.1.0</b>
       <span>Χρήσιμο όταν το κινητό κρατάει παλιά έκδοση λόγω cache / service worker.</span>
     </div>
 
@@ -3006,7 +3532,7 @@ body.v65NoFab #fabOverlay{
 
       <details>
         <summary>Τι να στείλω όταν έχω πρόβλημα;</summary>
-        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V72 / 1.0.10.</p>
+        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V73 / 1.1.0.</p>
       </details>
     </div>
 
@@ -6234,7 +6760,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=72").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=73").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -6257,7 +6783,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V72 / 1.0.10\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V73 / 1.1.0\n\nΠεριγραφή:");
   location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -6311,9 +6837,9 @@ window.addEventListener("load", ()=>{
 
 
 <script>
-/* V72 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
+/* V73 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V72-1.0.10";
+  const wanted = "V73-1.1.0";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -6427,6 +6953,35 @@ v65UpdateFabVisibility = function(pageId){
     }
   }
 };
+</script>
+
+
+<script>
+/* V73 calorie circle progress */
+function v73UpdateCalorieCircle(){
+  try{
+    const txt = (document.getElementById("dashCalories")?.textContent || "0 / 1800").replace(/\./g,"");
+    const nums = txt.match(/\d+/g) || [];
+    const current = Number(nums[0] || 0);
+    const goal = Number(nums[1] || 1);
+    const pctRaw = Math.round((current / Math.max(1, goal)) * 100);
+    const pct = Math.max(0, Math.min(100, pctRaw));
+    const deg = Math.round(pct * 3.6);
+    const c = document.getElementById("dashCalCircle");
+    const p = document.getElementById("dashCalPercent");
+    if(c) c.style.background = "conic-gradient(#ffffff " + deg + "deg, rgba(255,255,255,.22) " + deg + "deg)";
+    if(p) p.textContent = pct + "%";
+  }catch(e){}
+}
+const oldUpdateDashboardV73 = typeof updateDashboard === "function" ? updateDashboard : null;
+if(oldUpdateDashboardV73){
+  updateDashboard = function(){
+    oldUpdateDashboardV73();
+    v73UpdateCalorieCircle();
+  };
+}
+window.addEventListener("load", ()=>setTimeout(v73UpdateCalorieCircle, 350));
+setInterval(v73UpdateCalorieCircle, 1500);
 </script>
 
 </body>
