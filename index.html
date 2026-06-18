@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V86-1.2.6">
+<meta name="app-version" content="V87-1.2.7">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V86</title>
+<title>Greek Cal AI V87</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -3958,6 +3958,35 @@ html, body{
   }
 }
 
+
+/* V87 Coach premium lock + privacy icon cleanup */
+.v87CoachLocked{
+  opacity:.72;
+  filter:grayscale(.1);
+}
+.bottomNav button.v87CoachLocked,
+.nav button.v87CoachLocked{
+  color:#64748b!important;
+}
+.v87FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v87FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v87FinalNote span{
+  color:#166534;
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -4051,7 +4080,7 @@ html, body{
       <button type="button" onclick="showPage('updates')">🔄 Ενημέρωση</button>
       <button type="button" onclick="showPage('premium')">⭐ Premium / Αγορά</button>
       <button type="button" onclick="showPage('support')">📞 Υποστήριξη</button>
-      <button type="button" onclick="showPage('privacy')">🔒 Απόρρητο</button>
+      <button type="button" onclick="showPage('privacy')">🛡️ Απόρρητο</button>
       <button type="button" onclick="showPage('about')">ℹ️ Σχετικά</button>
     </div>
   </div>
@@ -4133,7 +4162,7 @@ html, body{
       <button onclick="showPage('updates')">🔄 Ενημέρωση</button>
       <button onclick="showPage('changelog')">📌 Εκδόσεις</button>
     <button onclick="showPage('premium')">⭐ Premium / Αγορά</button>
-    <button onclick="showPage('privacy')">🔒 Απόρρητο</button>
+    <button onclick="showPage('privacy')">🛡️ Απόρρητο</button>
     <button onclick="showPage('support')">📞 Υποστήριξη</button>
   </div>
   <p class="small" style="text-align:center;margin-top:10px">Καθημερινή παρακολούθηση θερμίδων, νερού, άσκησης και στόχου βάρους.</p>
@@ -4155,14 +4184,14 @@ html, body{
     <h2>🆕 Τι νέο υπάρχει</h2>
 
     <div class="v84InfoBox green">
-      <h3>V86 / 1.2.6</h3>
-      <p>Η διαδικασία αγοράς Premium έγινε πιο καθαρή: πρώτα στέλνεις αίτηση αγοράς με κωδικό συσκευής, μετά λαμβάνεις οδηγίες πληρωμής και στο τέλος Premium κωδικό.</p>
+      <h3>V87 / 1.2.7</h3>
+      <p>Το Απόρρητο δεν εμφανίζεται πλέον με λουκέτο, για να μη μπερδεύεται με Premium λειτουργία. Ο Coach κλειδώθηκε στη δωρεάν έκδοση και ανοίγει με Premium.</p>
     </div>
 
     <div class="v84WhatsNewGrid">
       <div><b>🍽 Περισσότερα φαγητά</b><span>Εμπλουτισμένες ελληνικές κατηγορίες τροφίμων.</span></div>
       <div><b>🥤 Ποτά με ml</b><span>Καφέδες, χυμοί, αναψυκτικά και αλκοολούχα με ζωντανό υπολογισμό.</span></div>
-      <div><b>🔑 Premium</b><span>Ενεργοποίηση με προσωπικό κωδικό δεμένο με τη συσκευή.</span></div>
+      <div><b>🔑 Premium</b><span>Coach και έξτρα εργαλεία με προσωπικό κωδικό δεμένο με τη συσκευή.</span></div>
       <div><b>💾 Backup</b><span>Εξαγωγή και επαναφορά δεδομένων.</span></div>
     </div>
 
@@ -4184,7 +4213,7 @@ html, body{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V86 / 1.2.6</p>
+      <p><b>Έκδοση:</b> V87 / 1.2.7</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> greekcalai.support@gmail.com</p>
@@ -4196,7 +4225,7 @@ html, body{
     </div>
 
     <div class="v70AboutActions">
-      <button onclick="showPage('privacy')">🔒 Απόρρητο</button>
+      <button onclick="showPage('privacy')">🛡️ Απόρρητο</button>
       <button onclick="showPage('terms')">📄 Όροι</button>
       <button onclick="showPage('about')">ℹ️ Σχετικά</button>
       <button onclick="showPage('support')">📞 Υποστήριξη</button>
@@ -4216,18 +4245,24 @@ html, body{
 
     
     <div class="v85FinalNote">
-      <b>✅ V86 / 1.2.6</b>
+      <b>✅ V87 / 1.2.7</b>
       <span>Καθαρή ροή αγοράς Premium: αίτηση με κωδικό συσκευής, οδηγίες πληρωμής, αποστολή Premium κωδικού μετά την πληρωμή.</span>
     </div>
 
 
     <div class="v86FinalNote">
-      <b>✅ V86 / 1.2.6</b>
+      <b>✅ V87 / 1.2.7</b>
       <span>Καθαρή διάκριση Δωρεάν / Premium: ο πελάτης ξεκινά δωρεάν και βλέπει ένα μόνο βασικό σημείο αναβάθμισης.</span>
     </div>
 
+
+    <div class="v87FinalNote">
+      <b>✅ V87 / 1.2.7</b>
+      <span>Το Απόρρητο φαίνεται ως δημόσια ενημερωτική σελίδα και ο Coach έγινε Premium λειτουργία.</span>
+    </div>
+
 <div class="v84UpdateHero">
-      <b>Τρέχουσα έκδοση: V86 / 1.2.6</b>
+      <b>Τρέχουσα έκδοση: V87 / 1.2.7</b>
       <span>Χρησιμοποίησε αυτό το κουμπί όταν θέλεις να φορτώσει η πιο πρόσφατη έκδοση της εφαρμογής.</span>
     </div>
 
@@ -4412,7 +4447,7 @@ html, body{
     <div class="v64SupportActions">
       <button class="v86PremiumFeature" data-free-label="🔒 Backup" data-premium-label="💾 Backup" onclick="v86OpenFeature('backup')">🔒 Backup</button>
       <button onclick="showPage('premium')">⭐ Premium / Αγορά</button>
-      <button onclick="showPage('privacy')">🔒 Απόρρητο</button>
+      <button onclick="showPage('privacy')">🛡️ Απόρρητο</button>
       <button onclick="showPage('terms')">📄 Όροι</button>
     </div>
 
@@ -4436,7 +4471,7 @@ html, body{
       <p>Ο νέος χρήστης βλέπει πρώτα τη <b>Δωρεάν έκδοση</b>. Μπορεί να χρησιμοποιήσει βασικές λειτουργίες και, όταν θέλει, να κάνει αναβάθμιση σε Premium.</p>
       <div class="v86CompareMini">
         <div><b>Δωρεάν</b><span>Φαγητά, ημερήσιο, νερό, άσκηση, βάρος.</span></div>
-        <div><b>Premium</b><span>Φωτογραφία, barcode, αναφορές, backup και επιπλέον εργαλεία.</span></div>
+        <div><b>Premium</b><span>Coach, φωτογραφία, barcode, αναφορές, backup και επιπλέον εργαλεία.</span></div>
       </div>
     </div>
 
@@ -4568,7 +4603,7 @@ html, body{
     <p>Η εφαρμογή αποθηκεύει δεδομένα τοπικά στη συσκευή. Ο χρήστης πρέπει να κάνει backup αν θέλει να τα διατηρήσει.</p>
 
     <div class="v62LegalActions">
-      <button onclick="showPage('privacy')">🔒 Πολιτική απορρήτου</button>
+      <button onclick="showPage('privacy')">🛡️ Πολιτική απορρήτου</button>
       <button onclick="showPage('premium')">⭐ Premium / Αγορά</button>
     </div>
 
@@ -5149,7 +5184,7 @@ html, body{
   <button onclick="showPage('home')"><b>🏠</b>Αρχική</button>
   <button onclick="showPage('foods')"><b>🍽</b>Φαγητά</button>
   <button onclick="showPage('diary')"><b>📝</b>Ημερήσιο</button>
-  <button onclick="showPage('coach')"><b>🤖</b>Coach</button>
+  <button onclick="v87OpenCoach()"><b>🤖</b>Coach</button>
   <button onclick="showPage('weight')"><b>⚖️</b>Βάρος</button>
 </nav>
 
@@ -7841,7 +7876,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=86").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=87").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -7864,7 +7899,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V86 / 1.2.6\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V87 / 1.2.7\n\nΠεριγραφή:");
   location.href = "mailto:greekcalai.support@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -7920,7 +7955,7 @@ window.addEventListener("load", ()=>{
 <script>
 /* V84 one-time προσωρινής μνήμης refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V86-1.2.6";
+  const wanted = "V87-1.2.7";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -8240,7 +8275,7 @@ function v82OpenPremiumEmail(){
 
 Θέλω να αγοράσω το Greek Cal AI Premium.
 
-Έκδοση: V86 / 1.2.6
+Έκδοση: V87 / 1.2.7
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Παρακαλώ στείλτε μου οδηγίες πληρωμής.
@@ -8260,7 +8295,7 @@ function v64OpenEmail(){
 
 Θέλω βοήθεια για το Greek Cal AI.
 
-Έκδοση: V86 / 1.2.6
+Έκδοση: V87 / 1.2.7
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Περιγραφή:`
@@ -8382,6 +8417,82 @@ updatePremiumStatus = function(){
 window.addEventListener("load", ()=>{
   setTimeout(v86UpdatePlanUI, 150);
   setTimeout(v86UpdatePlanUI, 600);
+});
+</script>
+
+
+<script>
+/* V87: Coach Premium, Απόρρητο χωρίς λουκέτο */
+function v87IsPremium(){
+  return localStorage.getItem("gca_premium") === "1";
+}
+
+function v87OpenCoach(){
+  if(v87IsPremium()){
+    showPage("coach");
+    return;
+  }
+  alert("Ο Coach είναι Premium λειτουργία. Μπορείς να χρησιμοποιήσεις πρώτα τη δωρεάν έκδοση και, όταν θέλεις, να κάνεις αναβάθμιση.");
+  showPage("premium");
+}
+
+function v87UpdateCoachNav(){
+  const premium = v87IsPremium();
+
+  document.querySelectorAll("button").forEach(btn=>{
+    const attr = btn.getAttribute("onclick") || "";
+    const text = (btn.textContent || "").trim();
+
+    if(attr.includes("v87OpenCoach") || attr.includes("showPage('coach')") || attr.includes('showPage("coach")')){
+      if(attr.includes("showPage")){
+        btn.setAttribute("onclick", "v87OpenCoach()");
+      }
+      btn.classList.toggle("v87CoachLocked", !premium);
+      if(text.includes("Coach")){
+        if(btn.innerHTML.includes("<br>")){
+          btn.innerHTML = premium ? "🤖<br>Coach" : "🔒<br>Coach";
+        }else{
+          btn.textContent = premium ? "🤖 Coach" : "🔒 Coach";
+        }
+      }
+    }
+  });
+
+  // Privacy is public: never show it as locked.
+  document.querySelectorAll("button").forEach(btn=>{
+    if((btn.textContent || "").includes("Απόρρητο")){
+      btn.textContent = (btn.textContent || "").replace("🔒", "🛡️");
+      btn.classList.remove("locked","v86PremiumFeature","v87CoachLocked");
+    }
+  });
+}
+
+const oldShowPageV87 = typeof showPage === "function" ? showPage : null;
+if(oldShowPageV87 && !oldShowPageV87.__v87Wrapped){
+  const wrappedShowPageV87 = function(id){
+    if(id === "coach" && !v87IsPremium()){
+      alert("Ο Coach είναι Premium λειτουργία. Μπορείς να χρησιμοποιήσεις πρώτα τη δωρεάν έκδοση και, όταν θέλεις, να κάνεις αναβάθμιση.");
+      id = "premium";
+    }
+    const result = oldShowPageV87.apply(this, [id]);
+    setTimeout(v87UpdateCoachNav, 80);
+    return result;
+  };
+  wrappedShowPageV87.__v87Wrapped = true;
+  showPage = wrappedShowPageV87;
+}
+
+const oldV86UpdatePlanUIV87 = typeof v86UpdatePlanUI === "function" ? v86UpdatePlanUI : null;
+v86UpdatePlanUI = function(){
+  if(oldV86UpdatePlanUIV87){
+    try{ oldV86UpdatePlanUIV87(); }catch(e){}
+  }
+  v87UpdateCoachNav();
+};
+
+window.addEventListener("load", ()=>{
+  setTimeout(v87UpdateCoachNav, 150);
+  setTimeout(v87UpdateCoachNav, 600);
 });
 </script>
 
