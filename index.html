@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V73-1.1.0">
+<meta name="app-version" content="V74-1.1.1">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V73</title>
+<title>Greek Cal AI V74</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -3095,6 +3095,125 @@ body.v65NoFab #fabOverlay{
   }
 }
 
+
+/* V74: fixed calorie progress card layout on mobile */
+.v73HeroCalBox{
+  grid-template-columns:1fr 82px!important;
+  grid-template-areas:"main circle"!important;
+  align-items:center!important;
+  min-height:148px!important;
+}
+.v73HeroCalBox .v73CalIcon{
+  position:absolute!important;
+  left:18px!important;
+  top:18px!important;
+  width:48px!important;
+  height:48px!important;
+  opacity:.95;
+  z-index:1;
+  pointer-events:none;
+}
+.v73HeroCalBox .v73CalMain{
+  grid-area:main!important;
+  padding-left:64px!important;
+  position:relative!important;
+  z-index:2!important;
+}
+.v73HeroCalBox .v73CalCircle{
+  grid-area:circle!important;
+  align-self:center!important;
+  justify-self:end!important;
+  position:relative!important;
+  z-index:3!important;
+  margin:0!important;
+}
+.v73CalMain span{
+  white-space:normal!important;
+  word-break:normal!important;
+}
+.v73CalMain small{
+  display:block!important;
+  color:#fff!important;
+  opacity:.96!important;
+  font-weight:1000!important;
+}
+.v73CalProgress{
+  margin:8px 0 8px!important;
+  width:100%!important;
+}
+.v74FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v74FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v74FinalNote span{
+  color:#166534;
+}
+@media(max-width:560px){
+  .v73HeroCalBox{
+    grid-template-columns:1fr 72px!important;
+    min-height:144px!important;
+    padding:16px!important;
+  }
+  .v73HeroCalBox .v73CalIcon{
+    left:16px!important;
+    top:16px!important;
+    width:44px!important;
+    height:44px!important;
+    font-size:22px!important;
+    display:flex!important;
+  }
+  .v73HeroCalBox .v73CalMain{
+    padding-left:56px!important;
+  }
+  .v73CalMain span{
+    font-size:29px!important;
+    line-height:1.05!important;
+  }
+  .v73CalCircle{
+    width:68px!important;
+    height:68px!important;
+  }
+}
+@media(max-width:390px){
+  .v73HeroCalBox{
+    grid-template-columns:1fr 66px!important;
+    min-height:142px!important;
+  }
+  .v73HeroCalBox .v73CalIcon{
+    width:40px!important;
+    height:40px!important;
+    font-size:20px!important;
+    display:flex!important;
+  }
+  .v73HeroCalBox .v73CalMain{
+    padding-left:50px!important;
+  }
+  .v73CalMain span{
+    font-size:26px!important;
+  }
+  .v73CalCircle{
+    width:62px!important;
+    height:62px!important;
+  }
+  .v73CalCircle strong{
+    font-size:18px!important;
+  }
+  .v73CalCircle small{
+    font-size:9px!important;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -3149,7 +3268,7 @@ body.v65NoFab #fabOverlay{
 <div class="v73InfoCard v73StatusCard">
   <div class="v73CardIcon shield">✓</div>
   <div class="v73StatusText">
-    <b>Έκδοση 1.1.0 • PWA Ready</b>
+    <b>Έκδοση 1.1.1 • PWA Ready</b>
     <span>Έτοιμο για εγκατάσταση από Chrome όταν βρίσκεσαι σε HTTPS.</span>
   </div>
   <em>Νέο</em>
@@ -3293,29 +3412,29 @@ body.v65NoFab #fabOverlay{
     <h2>📌 Ιστορικό Εκδόσεων</h2>
 
     <div class="v71ChangeHero">
-      <b>Τρέχουσα έκδοση: V73 / 1.1.0</b>
+      <b>Τρέχουσα έκδοση: V74 / 1.1.1</b>
       <span>Σταθερή εμπορική PWA βάση με καθαρή αρχική και πλήρη ενημερωτικές σελίδες.</span>
     </div>
 
     <div class="v71VersionList">
       <div class="v71VersionItem current">
-        <b>V73 / 1.1.0</b>
+        <b>V74 / 1.1.1</b>
         <span>Τελικό polish με περισσότερο κάτω κενό στις ενημερωτικές σελίδες και καθαρότερη προβολή κουμπιών.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V73 / 1.1.0</b>
+        <b>V74 / 1.1.1</b>
         <span>Τελικό polish, σελίδα Σχετικά, ελληνικό κουμπί Ενημέρωση και καθαρότερη εμπορική βάση.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V73 / 1.1.0</b>
+        <b>V74 / 1.1.1</b>
         <span>Αφαιρέθηκαν οριστικά τα διπλά κουμπιά από την κάρτα Σήμερα.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V73 / 1.1.0</b>
+        <b>V74 / 1.1.1</b>
         <span>Προστέθηκε σελίδα Ενημέρωση Εφαρμογής για καθαρισμό cache / service worker.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V73 / 1.1.0</b>
+        <b>V74 / 1.1.1</b>
         <span>Προστέθηκαν σελίδες Πώληση και Υποστήριξη για εμπορική χρήση εκτός Play Store.</span>
       </div>
       <div class="v71VersionItem">
@@ -3348,7 +3467,7 @@ body.v65NoFab #fabOverlay{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V73 / 1.1.0</p>
+      <p><b>Έκδοση:</b> V74 / 1.1.1</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> merkos1969@gmail.com</p>
@@ -3380,23 +3499,29 @@ body.v65NoFab #fabOverlay{
     
     
     
+    
+    <div class="v74FinalNote">
+      <b>✅ V74 / 1.1.1</b>
+      <span>Διόρθωση κάρτας θερμίδων: το κυκλικό ποσοστό εμφανίζεται δεξιά και η πρόοδος είναι πιο καθαρή στο κινητό.</span>
+    </div>
+
     <div class="v73FinalNote">
-      <b>✅ V73 / 1.1.0</b>
+      <b>✅ V74 / 1.1.1</b>
       <span>Νέο ελληνικό premium header και πιο όμορφη πρόοδος θερμίδων στην αρχική.</span>
     </div>
 
     <div class="v72FinalNote">
-      <b>✅ V73 / 1.1.0</b>
+      <b>✅ V74 / 1.1.1</b>
       <span>Τελικό polish: περισσότερο κενό κάτω στις ενημερωτικές σελίδες, για να μη σκεπάζει η κάτω μπάρα τα κουμπιά.</span>
     </div>
 
     <div class="v70ReleaseNote">
-      <b>✅ V73 / 1.1.0</b>
+      <b>✅ V74 / 1.1.1</b>
       <span>Σταθερή εμπορική βάση: καθαρή αρχική, Premium, υποστήριξη, απόρρητο, όροι, backup και ενημέρωση PWA.</span>
     </div>
 
     <div class="v67UpdateHero">
-      <b>Έκδοση εφαρμογής: V73 / 1.1.0</b>
+      <b>Έκδοση εφαρμογής: V74 / 1.1.1</b>
       <span>Χρήσιμο όταν το κινητό κρατάει παλιά έκδοση λόγω cache / service worker.</span>
     </div>
 
@@ -3532,7 +3657,7 @@ body.v65NoFab #fabOverlay{
 
       <details>
         <summary>Τι να στείλω όταν έχω πρόβλημα;</summary>
-        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V73 / 1.1.0.</p>
+        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V74 / 1.1.1.</p>
       </details>
     </div>
 
@@ -6760,7 +6885,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=73").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=74").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -6783,7 +6908,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V73 / 1.1.0\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V74 / 1.1.1\n\nΠεριγραφή:");
   location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -6837,9 +6962,9 @@ window.addEventListener("load", ()=>{
 
 
 <script>
-/* V73 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
+/* V74 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V73-1.1.0";
+  const wanted = "V74-1.1.1";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -6982,6 +7107,41 @@ if(oldUpdateDashboardV73){
 }
 window.addEventListener("load", ()=>setTimeout(v73UpdateCalorieCircle, 350));
 setInterval(v73UpdateCalorieCircle, 1500);
+</script>
+
+
+<script>
+/* V74: safer calorie circle + progress calculation */
+function v74UpdateCalorieProgress(){
+  try{
+    const txt = (document.getElementById("dashCalories")?.textContent || "0 / 1800")
+      .replace(/\./g,"")
+      .replace(/,/g,"");
+    const nums = txt.match(/\d+/g) || [];
+    const current = Number(nums[0] || 0);
+    const goal = Number(nums[1] || 1);
+    const pctRaw = Math.round((current / Math.max(1, goal)) * 100);
+    const pct = Math.max(0, Math.min(100, pctRaw));
+    const deg = Math.round(pct * 3.6);
+
+    const c = document.getElementById("dashCalCircle");
+    const p = document.getElementById("dashCalPercent");
+    const bar = document.getElementById("dashProgressBar");
+
+    if(c) c.style.background = "conic-gradient(#ffffff " + deg + "deg, rgba(255,255,255,.22) " + deg + "deg)";
+    if(p) p.textContent = pct + "%";
+    if(bar) bar.style.width = pct + "%";
+  }catch(e){}
+}
+const oldUpdateDashboardV74 = typeof updateDashboard === "function" ? updateDashboard : null;
+if(oldUpdateDashboardV74){
+  updateDashboard = function(){
+    oldUpdateDashboardV74();
+    v74UpdateCalorieProgress();
+  };
+}
+window.addEventListener("load", ()=>setTimeout(v74UpdateCalorieProgress, 450));
+setInterval(v74UpdateCalorieProgress, 1500);
 </script>
 
 </body>

@@ -1,7 +1,7 @@
 {
   "name": "Greek Cal AI",
   "short_name": "Greek Cal AI",
-  "description": "Greek Cal AI V73 / 1.1.0 - Έξυπνος Ελληνικός Οδηγός Διατροφής με νέο premium header, πρόοδο θερμίδων, στόχο βάρους, νερό, άσκηση, Premium και backup.",
+  "description": "Greek Cal AI V74 / 1.1.1 - Έξυπνος Ελληνικός Οδηγός Διατροφής με βελτιωμένη κάρτα προόδου θερμίδων, στόχο βάρους, νερό, άσκηση, Premium και backup.",
   "lang": "el-GR",
   "start_url": "./",
   "scope": "./",
