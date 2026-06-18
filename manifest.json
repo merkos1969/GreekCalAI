@@ -1,7 +1,7 @@
 {
   "name": "Greek Cal AI",
   "short_name": "Greek Cal AI",
-  "description": "Smart Greek Diet Coach - ενδεικτικός βοηθός διατροφής, θερμίδες, ελληνικά φαγητά, νερό, άσκηση και στόχος βάρους.",
+  "description": "Smart Greek Diet Coach - ελληνικός βοηθός διατροφής με θερμίδες, στόχο βάρους, νερό, άσκηση, Premium και backup.",
   "lang": "el-GR",
   "start_url": "./",
   "scope": "./",

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V63</title>
+<title>Greek Cal AI V64</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -2049,6 +2049,226 @@ section{
 .v63MedicalWarning p{margin:0!important;color:#7c2d12!important;font-weight:800!important;line-height:1.45!important;}
 @media(max-width:560px){.v63DisclaimerCard{grid-template-columns:1fr}.v63DisclaimerCard span,.v63DisclaimerCard button{grid-column:auto;grid-row:auto}.v63DisclaimerCard button{width:100%!important}}
 
+
+/* V64 commercial landing + support pages */
+.v64PremiumCommercialBtns{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:12px 0;
+}
+.v64PremiumCommercialBtns button{margin:0!important}
+.v64LandingHero{
+  background:linear-gradient(135deg,#0d47a1,#1e88e5);
+  color:white;
+  border-radius:28px;
+  padding:22px;
+  text-align:center;
+  box-shadow:0 18px 40px rgba(30,108,199,.24);
+}
+.v64HeroLogo{
+  width:86px;
+  height:86px;
+  border-radius:24px;
+  background:rgba(255,255,255,.16);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:48px;
+  margin:0 auto 12px;
+}
+.v64LandingHero h2{
+  color:white!important;
+  margin:0;
+  font-size:36px;
+}
+.v64LandingHero p{
+  color:white;
+  opacity:.95;
+  font-weight:800;
+  line-height:1.4;
+}
+.v64LandingHero button{
+  margin-top:10px!important;
+  background:#16a34a!important;
+}
+.v64SalesCard,.v64HowToBuy{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:22px;
+  padding:14px;
+  margin:14px 0;
+}
+.v64SalesCard h3,.v64HowToBuy h3{
+  color:#0d47a1;
+  margin:0 0 12px;
+}
+.v64BenefitGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.v64BenefitGrid div{
+  background:#f8fbff;
+  border:1px solid #d7e8f8;
+  border-radius:18px;
+  padding:12px;
+}
+.v64BenefitGrid b{
+  display:block;
+  margin:6px 0 4px;
+  color:#17202c;
+}
+.v64BenefitGrid span{
+  color:#667085;
+  font-weight:800;
+  font-size:13px;
+}
+.v64PriceCard{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  background:linear-gradient(135deg,#ecfdf5,#f0fdf4);
+  border:1px solid #bbf7d0;
+  border-radius:22px;
+  padding:16px;
+  margin:14px 0;
+}
+.v64PriceCard b{
+  display:block;
+  color:#166534;
+  font-size:20px;
+}
+.v64PriceCard span{
+  color:#667085;
+  font-weight:900;
+}
+.v64PriceCard strong{
+  color:#15803d;
+  font-size:38px;
+}
+.v64PlanGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.v64Plan{
+  background:#f8fbff;
+  border:1px solid #d7e8f8;
+  border-radius:22px;
+  padding:14px;
+}
+.v64Plan.premium{
+  background:#fff7ed;
+  border-color:#fed7aa;
+}
+.v64Plan h3{
+  margin:0 0 10px;
+  color:#0d47a1;
+}
+.v64Plan.premium h3{
+  color:#c2410c;
+}
+.v64Plan ul{
+  margin:0;
+  padding-left:20px;
+  color:#475467;
+  font-weight:800;
+  line-height:1.55;
+}
+.v64HowToBuy ol{
+  margin:0 0 12px;
+  padding-left:22px;
+  color:#475467;
+  font-weight:800;
+  line-height:1.55;
+}
+.v64SupportHero{
+  background:linear-gradient(135deg,#eff6ff,#f8fbff);
+  border:1px solid #bfdbfe;
+  border-radius:22px;
+  padding:14px;
+  margin:12px 0;
+}
+.v64SupportHero b{
+  display:block;
+  color:#0d47a1;
+  font-size:19px;
+}
+.v64SupportHero span{
+  display:block;
+  color:#667085;
+  font-weight:800;
+  margin-top:5px;
+}
+.v64ContactCard{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:22px;
+  padding:14px;
+  margin:14px 0;
+}
+.v64EmailBox{
+  background:#f8fbff;
+  border:1px solid #d7e8f8;
+  border-radius:16px;
+  padding:13px;
+  font-weight:1000;
+  color:#0d47a1;
+  margin:8px 0 10px;
+}
+.v64ContactCard button{
+  margin:6px 0!important;
+}
+.v64FAQ{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:22px;
+  padding:14px;
+}
+.v64FAQ h3{
+  margin:0 0 10px;
+  color:#0d47a1;
+}
+.v64FAQ details{
+  background:#f8fbff;
+  border:1px solid #d7e8f8;
+  border-radius:16px;
+  padding:10px;
+  margin:8px 0;
+}
+.v64FAQ summary{
+  font-weight:1000;
+  color:#17202c;
+}
+.v64FAQ p{
+  color:#667085;
+  font-weight:800;
+  line-height:1.4;
+}
+.v64SupportActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px;
+}
+.v64SupportActions button{
+  margin:0!important;
+}
+@media(max-width:560px){
+  .v64PremiumCommercialBtns,
+  .v64BenefitGrid,
+  .v64PlanGrid,
+  .v64SupportActions{
+    grid-template-columns:1fr;
+  }
+  .v64PriceCard{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -2089,7 +2309,7 @@ section{
 
 <div class="v62StatusCard">
   <div>
-    <b>✅ Έκδοση 1.0.1 • PWA Ready</b>
+    <b>✅ Έκδοση 1.0.2 • PWA Ready</b>
     <span>Έτοιμο για εγκατάσταση από Chrome όταν ανέβει σε HTTPS.</span>
   </div>
   <button type="button" onclick="showPage('premium')">⭐ Premium</button>
@@ -2122,6 +2342,8 @@ section{
       <button type="button" onclick="showPage('weight')">⚖️ Στοιχεία / Στόχος</button>
       <button type="button" onclick="showPage('backup')">💾 Backup</button>
       <button type="button" onclick="showPage('premium')">⭐ Premium</button>
+      <button type="button" onclick="showPage('landing')">💼 Πώληση</button>
+      <button type="button" onclick="showPage('support')">📞 Υποστήριξη</button>
       <button type="button" onclick="showPage('privacy')">🔒 Απόρρητο</button>
     </div>
   </div>
@@ -2197,6 +2419,8 @@ section{
     <button onclick="showPage('backup')">💾 Backup</button>
     <button onclick="showPage('premium')">⭐ Premium</button>
     <button onclick="showPage('privacy')">🔒 Απόρρητο</button>
+      <button onclick="showPage('landing')">💼 Πώληση</button>
+    <button onclick="showPage('support')">📞 Υποστήριξη</button>
   </div>
   <p class="small" style="text-align:center;margin-top:10px">Καθημερινή παρακολούθηση θερμίδων, νερού, άσκησης και στόχου βάρους.</p>
 </section>
@@ -2204,6 +2428,129 @@ section{
 
 
 
+
+
+
+<section id="landing" class="hidden">
+  <button class="back" onclick="showPage('home')">← Πίσω</button>
+  <div class="card v64LandingPage">
+    <div class="v64LandingHero">
+      <div class="v64HeroLogo">🇬🇷</div>
+      <h2>Greek Cal AI</h2>
+      <p>Ελληνικός βοηθός διατροφής για θερμίδες, ελληνικά φαγητά, νερό, άσκηση και στόχο βάρους.</p>
+      <button class="btnGreen" onclick="showPage('premium')">⭐ Δες Premium</button>
+    </div>
+
+    <div class="v64SalesCard">
+      <h3>Γιατί αξίζει</h3>
+      <div class="v64BenefitGrid">
+        <div>🍽 <b>Ελληνικά φαγητά</b><span>Γρήγορη καταχώρηση καθημερινών γευμάτων.</span></div>
+        <div>📊 <b>Καθαρή εικόνα ημέρας</b><span>Θερμίδες, νερό, άσκηση και μακροθρεπτικά.</span></div>
+        <div>⚖️ <b>Στόχος βάρους</b><span>Υπολογισμός θερμίδων και χρόνου στόχου.</span></div>
+        <div>💾 <b>Backup</b><span>Εξαγωγή και επαναφορά δεδομένων.</span></div>
+      </div>
+    </div>
+
+    <div class="v64PriceCard">
+      <div>
+        <b>Πρώτη εμπορική δοκιμή</b>
+        <span>Premium εφάπαξ</span>
+      </div>
+      <strong>4,99€</strong>
+    </div>
+
+    <div class="v64PlanGrid">
+      <div class="v64Plan">
+        <h3>Δωρεάν</h3>
+        <ul>
+          <li>Βασική καταγραφή φαγητού</li>
+          <li>Βάρος / στόχος</li>
+          <li>Νερό και άσκηση</li>
+          <li>Ημερήσια εικόνα</li>
+        </ul>
+      </div>
+      <div class="v64Plan premium">
+        <h3>Premium</h3>
+        <ul>
+          <li>Barcode / προϊόντα</li>
+          <li>Φωτογραφία γεύματος</li>
+          <li>Backup / επαναφορά</li>
+          <li>Αναφορές και AI Coach</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="v64HowToBuy">
+      <h3>Πώς γίνεται η αγορά εκτός Play Store</h3>
+      <ol>
+        <li>Ο χρήστης ζητά Premium κωδικό.</li>
+        <li>Γίνεται πληρωμή με IRIS / τράπεζα / Viva / PayPal ή άλλο τρόπο.</li>
+        <li>Στέλνεται προσωπικός κωδικός ενεργοποίησης.</li>
+        <li>Ο χρήστης τον βάζει στη σελίδα Premium.</li>
+      </ol>
+      <button onclick="showPage('support')">📞 Ζήτα κωδικό / Υποστήριξη</button>
+    </div>
+
+    <div class="v63MedicalWarning">
+      <h3>⚕️ Σημαντικό</h3>
+      <p><b>Η εφαρμογή δεν αντικαθιστά γιατρό ή διαιτολόγο.</b> Οι υπολογισμοί είναι ενδεικτικοί.</p>
+    </div>
+
+    <div class="v58BottomSpace"></div>
+  </div>
+</section>
+
+<section id="support" class="hidden">
+  <button class="back" onclick="showPage('home')">← Πίσω</button>
+  <div class="card v64SupportPage">
+    <h2>📞 Υποστήριξη</h2>
+
+    <div class="v64SupportHero">
+      <b>Χρειάζεσαι βοήθεια ή Premium κωδικό;</b>
+      <span>Στείλε μήνυμα με το θέμα σου και την έκδοση της εφαρμογής.</span>
+    </div>
+
+    <div class="v64ContactCard">
+      <label>Email υποστήριξης</label>
+      <div class="v64EmailBox">merkos1969@gmail.com</div>
+      <button onclick="v64CopyEmail()">📋 Αντιγραφή email</button>
+      <button class="btnGreen" onclick="v64OpenEmail()">✉️ Άνοιγμα email</button>
+    </div>
+
+    <div class="v64FAQ">
+      <h3>Συχνές οδηγίες</h3>
+
+      <details open>
+        <summary>Πώς εγκαθίσταται στο κινητό;</summary>
+        <p>Άνοιξε το HTTPS link από Chrome και πάτα ⋮ → Εγκατάσταση εφαρμογής ή Προσθήκη στην αρχική οθόνη.</p>
+      </details>
+
+      <details>
+        <summary>Πώς ενεργοποιώ Premium;</summary>
+        <p>Πηγαίνεις στη σελίδα Premium, βάζεις τον κωδικό ενεργοποίησης και πατάς Ενεργοποίηση Premium.</p>
+      </details>
+
+      <details>
+        <summary>Πώς δεν χάνω τα δεδομένα μου;</summary>
+        <p>Πήγαινε στο Backup / Επαναφορά και πάτησε Κατέβασμα backup. Φύλαξε το αρχείο σε ασφαλές σημείο.</p>
+      </details>
+
+      <details>
+        <summary>Τι να στείλω όταν έχω πρόβλημα;</summary>
+        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V64 / 1.0.2.</p>
+      </details>
+    </div>
+
+    <div class="v64SupportActions">
+      <button onclick="showPage('backup')">💾 Backup</button>
+      <button onclick="showPage('premium')">⭐ Premium</button>
+      <button onclick="showPage('privacy')">🔒 Απόρρητο</button>
+      <button onclick="showPage('terms')">📄 Όροι</button>
+    </div>
+
+    <div class="v58BottomSpace"></div>
+  </div>
+</section>
 
 
 <section id="premium" class="hidden">
@@ -2231,6 +2578,11 @@ section{
       <input id="premiumCodeInput" placeholder="π.χ. GCAI-2026-MERKOS-001">
       <button class="btnGreen" onclick="activatePremiumCode()">Ενεργοποίηση Premium</button>
       <button class="btnLight" onclick="deactivatePremium()">Επαναφορά σε δωρεάν</button>
+    </div>
+
+    <div class="v64PremiumCommercialBtns">
+      <button onclick="showPage('landing')">💼 Σελίδα πώλησης</button>
+      <button onclick="showPage('support')">📞 Υποστήριξη / αγορά</button>
     </div>
 
     <div class="v62InfoBox">
@@ -5421,6 +5773,24 @@ if("serviceWorker" in navigator){
 window.addEventListener("load", ()=>{
   setTimeout(updatePremiumStatus,150);
 });
+</script>
+
+
+<script>
+/* V64 support helpers */
+function v64CopyEmail(){
+  const email = "merkos1969@gmail.com";
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(email).then(()=>alert("Το email αντιγράφηκε.")).catch(()=>alert(email));
+  }else{
+    alert(email);
+  }
+}
+function v64OpenEmail(){
+  const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V64 / 1.0.2\n\nΠεριγραφή:");
+  location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
+}
 </script>
 
 </body>
