@@ -1893,6 +1893,139 @@ section{
   }
 }
 
+
+/* V62 PWA commercial-ready additions */
+.v62StatusCard{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(135deg,#ecfdf5,#f0f9ff);
+  border:1px solid #bbf7d0;
+  border-radius:20px;
+  padding:12px;
+  margin:10px 0 12px;
+  box-shadow:0 8px 20px rgba(15,23,42,.05);
+}
+.v62StatusCard b{
+  display:block;
+  color:#166534;
+  font-size:16px;
+}
+.v62StatusCard span{
+  display:block;
+  color:#667085;
+  font-weight:800;
+  font-size:12px;
+  margin-top:2px;
+}
+.v62StatusCard button{
+  width:auto!important;
+  margin:0!important;
+  border-radius:999px!important;
+  padding:9px 13px!important;
+  background:#1e6cc7!important;
+  color:#fff!important;
+  box-shadow:none!important;
+  font-size:14px!important;
+}
+.v62LegalPage h3{
+  color:#0d47a1;
+  margin:18px 0 8px;
+}
+.v62LegalPage p{
+  color:#475467;
+  font-weight:700;
+  line-height:1.45;
+}
+.v62InfoBox{
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  border-radius:18px;
+  padding:14px;
+  margin:12px 0;
+}
+.v62InfoBox b{
+  display:block;
+  color:#0d47a1;
+  font-size:17px;
+  margin-bottom:6px;
+}
+.v62PremiumHero{
+  background:linear-gradient(135deg,#0d47a1,#1e88e5);
+  color:#fff;
+  border-radius:22px;
+  padding:18px;
+  margin:12px 0;
+  box-shadow:0 14px 28px rgba(30,108,199,.20);
+}
+.v62PremiumHero b{
+  display:block;
+  font-size:22px;
+}
+.v62PremiumHero span{
+  display:block;
+  margin-top:6px;
+  opacity:.95;
+  font-weight:800;
+}
+.v62PremiumGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:14px 0;
+}
+.v62PremiumGrid div{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:18px;
+  padding:12px;
+  min-height:102px;
+  box-shadow:0 6px 16px rgba(15,23,42,.04);
+}
+.v62PremiumGrid b{
+  display:block;
+  color:#17202c;
+  margin:6px 0 4px;
+}
+.v62PremiumGrid span{
+  color:#667085;
+  font-weight:800;
+  font-size:13px;
+}
+.v62ActivationBox{
+  background:#f8fbff;
+  border:1px solid #d7e8f8;
+  border-radius:20px;
+  padding:14px;
+  margin:14px 0;
+}
+.v62ActivationBox h3{
+  margin-top:0;
+}
+.v62LegalActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px;
+}
+.v62LegalActions button{
+  margin:0!important;
+}
+@media(max-width:560px){
+  .v62StatusCard{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .v62StatusCard button{
+    width:100%!important;
+  }
+  .v62PremiumGrid,
+  .v62LegalActions{
+    grid-template-columns:1fr;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -1900,6 +2033,12 @@ section{
 <meta name="apple-mobile-web-app-title" content="Greek Cal AI">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
+
+<meta name="application-name" content="Greek Cal AI">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="icon-192.png">
+
 
 </head>
 <body>
@@ -1917,6 +2056,15 @@ section{
 
 <section id="home" class="card menu">
   <div class="brandTop"><div class="appLogo">🇬🇷</div><h1>Greek Cal AI</h1><div class="appSubTitle">Smart Greek Diet Coach</div></div>
+
+<div class="v62StatusCard">
+  <div>
+    <b>✅ Έκδοση 1.0.0 • PWA Ready</b>
+    <span>Έτοιμο για εγκατάσταση από Chrome όταν ανέβει σε HTTPS.</span>
+  </div>
+  <button type="button" onclick="showPage('premium')">⭐ Premium</button>
+</div>
+
 
 <div class="v59GuideCard">
   <div class="v59GuideHead" onclick="toggleUsageGuide()">
@@ -1938,6 +2086,8 @@ section{
     <div class="v59GuideActions">
       <button type="button" onclick="showPage('weight')">⚖️ Στοιχεία / Στόχος</button>
       <button type="button" onclick="showPage('backup')">💾 Backup</button>
+      <button type="button" onclick="showPage('premium')">⭐ Premium</button>
+      <button type="button" onclick="showPage('privacy')">🔒 Απόρρητο</button>
     </div>
   </div>
 </div>
@@ -1948,7 +2098,7 @@ section{
   <span>πάτησε για οδηγίες</span>
 </div>
 <div id="installHelp" class="installHelp hidden">
-  Από Chrome πάτα ⋮ → <b>Προσθήκη στην αρχική οθόνη</b>.
+  Από Chrome πάτα ⋮ → <b>Εγκατάσταση εφαρμογής</b> ή <b>Προσθήκη στην αρχική οθόνη</b>. Για κανονική εγκατάσταση άνοιξέ το από το HTTPS link του GitHub Pages.
 </div>
 
   <div class="dashboardCard compactHome">
@@ -2009,12 +2159,118 @@ section{
     <button onclick="showPage('progressCalendar')">📅 Ημερολόγιο</button>
     <button onclick="showPage('custom')">➕ Δικό μου</button>
     <button onclick="showPage('fasting')">⏱ Νηστεία</button>
+    <button onclick="showPage('backup')">💾 Backup</button>
+    <button onclick="showPage('premium')">⭐ Premium</button>
+    <button onclick="showPage('privacy')">🔒 Απόρρητο</button>
   </div>
   <p class="small" style="text-align:center;margin-top:10px">Καθημερινή παρακολούθηση θερμίδων, νερού, άσκησης και στόχου βάρους.</p>
 </section>
 
 
 
+
+
+
+<section id="premium" class="hidden">
+  <button class="back" onclick="showPage('home')">← Πίσω</button>
+  <div class="card v62LegalPage">
+    <h2>⭐ Greek Cal AI Premium</h2>
+
+    <div class="v62PremiumHero">
+      <b id="premiumStatusText">Τρέχουσα έκδοση: Δωρεάν</b>
+      <span>Η Premium ενεργοποίηση είναι έτοιμη για εμπορική δοκιμή.</span>
+    </div>
+
+    <div class="v62PremiumGrid">
+      <div>💾 <b>Backup / Επαναφορά</b><span>Ασφαλής αποθήκευση δεδομένων.</span></div>
+      <div>📦 <b>Barcode προϊόντων</b><span>Καταχώρηση προϊόντων με κωδικό.</span></div>
+      <div>📷 <b>Φωτογραφία γεύματος</b><span>Φωτογραφία + χειροκίνητη επιβεβαίωση.</span></div>
+      <div>📊 <b>Αναφορές</b><span>Παρακολούθηση εβδομάδας και μήνα.</span></div>
+      <div>🤖 <b>AI Coach</b><span>Προτάσεις γευμάτων και πλάνα ημέρας.</span></div>
+      <div>➕ <b>Δικά μου φαγητά</b><span>Προσωπική λίστα τροφίμων.</span></div>
+    </div>
+
+    <div class="v62ActivationBox">
+      <h3>🔑 Κωδικός ενεργοποίησης</h3>
+      <p>Για πρώτη εμπορική δοκιμή μπορείς να δίνεις κωδικό μετά την πληρωμή.</p>
+      <input id="premiumCodeInput" placeholder="π.χ. GCAI-2026-MERKOS-001">
+      <button class="btnGreen" onclick="activatePremiumCode()">Ενεργοποίηση Premium</button>
+      <button class="btnLight" onclick="deactivatePremium()">Επαναφορά σε δωρεάν</button>
+    </div>
+
+    <div class="v62InfoBox">
+      <b>Προτεινόμενη πρώτη εμπορική τιμή</b>
+      <p>4,99€ εφάπαξ για αρχική Premium έκδοση, με χειροκίνητη αποστολή κωδικού. Μετά μπορεί να συνδεθεί Stripe / Paddle.</p>
+    </div>
+
+    <div class="v58BottomSpace"></div>
+  </div>
+</section>
+
+<section id="privacy" class="hidden">
+  <button class="back" onclick="showPage('home')">← Πίσω</button>
+  <div class="card v62LegalPage">
+    <h2>🔒 Πολιτική Απορρήτου</h2>
+
+    <div class="v62InfoBox">
+      <b>Σύντομη έκδοση</b>
+      <p>Το Greek Cal AI αποθηκεύει τα δεδομένα σου τοπικά στη συσκευή σου, μέσω του browser. Δεν στέλνει τα στοιχεία σου σε server.</p>
+    </div>
+
+    <h3>Τι δεδομένα καταχωρείς</h3>
+    <p>Η εφαρμογή μπορεί να αποθηκεύει τοπικά βάρος, ηλικία, ύψος, στόχο βάρους, γεύματα, θερμίδες, μακροθρεπτικά, νερό, άσκηση, barcode προϊόντα, φωτογραφίες προεπισκόπησης και προσωπικά φαγητά.</p>
+
+    <h3>Πού αποθηκεύονται</h3>
+    <p>Τα δεδομένα αποθηκεύονται στο localStorage του browser στη συσκευή σου. Αν καθαρίσεις τα δεδομένα του browser ή αλλάξεις συσκευή, μπορεί να χαθούν, εκτός αν έχεις πάρει backup.</p>
+
+    <h3>Backup</h3>
+    <p>Το backup δημιουργείται από εσένα και περιέχει τα δεδομένα που υπάρχουν στην εφαρμογή. Φύλαξέ το σε ασφαλές σημείο.</p>
+
+    <h3>Ιατρική αποποίηση</h3>
+    <p>Η εφαρμογή δίνει ενδεικτικούς υπολογισμούς και δεν αντικαθιστά γιατρό, διαιτολόγο ή άλλο επαγγελματία υγείας.</p>
+
+    <h3>Επικοινωνία</h3>
+    <p>Email υποστήριξης: merkos1969@gmail.com</p>
+
+    <div class="v62LegalActions">
+      <button onclick="showPage('terms')">📄 Όροι χρήσης</button>
+      <button onclick="showPage('backup')">💾 Backup</button>
+    </div>
+
+    <div class="v58BottomSpace"></div>
+  </div>
+</section>
+
+<section id="terms" class="hidden">
+  <button class="back" onclick="showPage('home')">← Πίσω</button>
+  <div class="card v62LegalPage">
+    <h2>📄 Όροι Χρήσης</h2>
+
+    <div class="v62InfoBox">
+      <b>Δεν είναι ιατρική υπηρεσία</b>
+      <p>Το Greek Cal AI είναι βοηθητικό εργαλείο καταγραφής διατροφής και στόχου βάρους. Δεν αντικαθιστά ιατρική ή διατροφική συμβουλή.</p>
+    </div>
+
+    <h3>Χρήση εφαρμογής</h3>
+    <p>Ο χρήστης είναι υπεύθυνος για την ακρίβεια των στοιχείων που καταχωρεί. Οι θερμίδες, οι καύσεις άσκησης και οι στόχοι είναι ενδεικτικοί.</p>
+
+    <h3>Υγεία και ασφάλεια</h3>
+    <p>Αν έχεις πρόβλημα υγείας, λαμβάνεις φάρμακα, είσαι έγκυος ή έχεις ειδικές διατροφικές ανάγκες, συμβουλέψου γιατρό ή διαιτολόγο πριν ακολουθήσεις οποιοδήποτε πλάνο.</p>
+
+    <h3>Premium</h3>
+    <p>Οι Premium λειτουργίες μπορούν να ενεργοποιούνται με κωδικό. Η εμπορική πολιτική, τιμή και διάρκεια μπορούν να αλλάξουν σε επόμενες εκδόσεις.</p>
+
+    <h3>Δεδομένα</h3>
+    <p>Η εφαρμογή αποθηκεύει δεδομένα τοπικά στη συσκευή. Ο χρήστης πρέπει να κάνει backup αν θέλει να τα διατηρήσει.</p>
+
+    <div class="v62LegalActions">
+      <button onclick="showPage('privacy')">🔒 Πολιτική απορρήτου</button>
+      <button onclick="showPage('premium')">⭐ Premium</button>
+    </div>
+
+    <div class="v58BottomSpace"></div>
+  </div>
+</section>
 
 
 <section id="backup" class="hidden">
@@ -2518,7 +2774,7 @@ section{
     <label>Αρχικό βάρος (kg)</label><input id="startWeight" type="number" step="0.1" value="90">
     <label>Τωρινό βάρος (kg)</label><input id="currentWeight" type="number" step="0.1" value="90">
     <label>Στόχος βάρους (kg)</label><input id="targetWeight" type="number" step="0.1" value="80">
-    <label>Ύψος π.χ. 1.75</label><input id="height" type="text" inputmode="decimal" value="1.75">
+    <label>Ύψος π.χ. 1.75</label><input id="height" type="number" step="0.01" value="1.75">
     <label>Ηλικία</label><input id="age" type="number" step="1" value="40">
     <label>Φύλο</label><select id="gender"><option value="male">Άνδρας</option><option value="female">Γυναίκα</option></select>
 
@@ -4914,7 +5170,7 @@ function v59CollectBackup(){
   }
   return {
     app:"Greek Cal AI",
-    version:"V63",
+    version:"V59",
     createdAt:new Date().toISOString(),
     localStorage:data
   };
@@ -5073,420 +5329,51 @@ if(oldClearHistoryV61){
 
 
 <script>
-/* V62: Το τωρινό βάρος στο προφίλ είναι η πηγή για την Αρχική */
-function v62Num(v){
-  const n = Number(String(v ?? "").replace(",", "."));
-  return isNaN(n) ? 0 : n;
+/* V62 PWA + Premium helpers */
+function updatePremiumStatus(){
+  const enabled = localStorage.getItem("gca_premium") === "1";
+  const el = document.getElementById("premiumStatusText");
+  if(el) el.textContent = enabled ? "Τρέχουσα έκδοση: Premium ενεργό ✅" : "Τρέχουσα έκδοση: Δωρεάν";
 }
-function v62ReadWeightData(){
-  try{
-    return JSON.parse(localStorage.getItem("gca_weight_data") || "{}");
-  }catch(e){
-    return {};
-  }
-}
-function v62GreekDate(ts){
-  try{
-    return new Date(ts || Date.now()).toLocaleDateString("el-GR");
-  }catch(e){
-    return new Date().toLocaleDateString("el-GR");
-  }
-}
-function v62CollectWeightForm(){
-  return {
-    profileName: val("profileName"),
-    startWeight: val("startWeight"),
-    currentWeight: val("currentWeight"),
-    targetWeight: val("targetWeight"),
-    height: val("height"),
-    age: val("age"),
-    gender: val("gender"),
-    activity: val("activity"),
-    goalPace: val("goalPace") || "500",
-    updatedAt: Date.now(),
-    updatedDate: new Date().toLocaleDateString("el-GR")
-  };
-}
-function v62WriteWeightData(){
-  const data = v62CollectWeightForm();
-  localStorage.setItem("gca_weight_data", JSON.stringify(data));
-  return data;
-}
-function v62SyncTodayWeightHistory(weight, note){
-  weight = v62Num(weight);
-  if(weight <= 0) return;
-
-  let h = [];
-  try{ h = JSON.parse(localStorage.getItem("gca_weight_history") || "[]"); }catch(e){ h = []; }
-  if(!Array.isArray(h)) h = [];
-
-  const now = new Date();
-  const today = now.toLocaleDateString("el-GR");
-  const existingToday = h.find(x => x && x.date === today);
-
-  if(existingToday){
-    existingToday.weight = weight;
-    existingToday.time = now.toLocaleTimeString("el-GR", {hour:"2-digit", minute:"2-digit"});
-    if(!existingToday.note || existingToday.source === "profile") existingToday.note = note || "Στοιχεία προφίλ";
-    existingToday.ts = Date.now();
-    existingToday.source = existingToday.source || "profile";
+function activatePremiumCode(){
+  const code = (document.getElementById("premiumCodeInput")?.value || "").trim().toUpperCase();
+  const allowed = [
+    "GCAI-2026-MERKOS-001",
+    "GCAI-PREMIUM-2026",
+    "MERKOS-GREEKCALAI"
+  ];
+  if(allowed.includes(code)){
+    localStorage.setItem("gca_premium","1");
+    localStorage.setItem("gca_premium_code",code);
+    updatePremiumStatus();
+    alert("Το Premium ενεργοποιήθηκε.");
   }else{
-    h.unshift({
-      date: today,
-      time: now.toLocaleTimeString("el-GR", {hour:"2-digit", minute:"2-digit"}),
-      ts: Date.now(),
-      weight,
-      note: note || "Στοιχεία προφίλ",
-      source: "profile"
-    });
+    alert("Ο κωδικός δεν αναγνωρίστηκε.");
   }
-
-  h.sort((a,b)=>(Number(b.ts)||0)-(Number(a.ts)||0));
-  localStorage.setItem("gca_weight_history", JSON.stringify(h));
 }
-
-/* Η Αρχική να δείχνει πρώτα το Τωρινό βάρος από τα Στοιχεία, όχι παλιά μέτρηση. */
-getLastWeightText = function(){
-  const d = v62ReadWeightData();
-  const current = v62Num(d.currentWeight);
-  if(current > 0){
-    const date = d.updatedDate || v62GreekDate(d.updatedAt || Date.now());
-    return current.toFixed(1) + " kg • " + date;
-  }
-
-  try{
-    const h = getHistory();
-    if(h && h.length > 0) return Number(h[0].weight).toFixed(1) + " kg • " + h[0].date;
-  }catch(e){}
-  return "Δεν υπάρχει μέτρηση";
-};
-
-/* Αποθήκευση Στοιχείων: ενημερώνει αμέσως και την Αρχική και το σημερινό ιστορικό. */
-saveWeightData = function(){
-  const data = v62WriteWeightData();
-  v62SyncTodayWeightHistory(data.currentWeight, val("note").trim() || "Στοιχεία προφίλ");
-  try{ calculateWeight(); }catch(e){}
-  try{ loadDailyGoal(); }catch(e){}
-  try{ renderHistory(); }catch(e){}
-  try{ renderChart(); }catch(e){}
-  try{ updateDashboard(); }catch(e){}
-  alert("Τα στοιχεία αποθηκεύτηκαν και η Αρχική ενημερώθηκε.");
-};
-
-/* Χωρίς μήνυμα, για εσωτερική χρήση μετά από καταχώρηση μέτρησης. */
-saveWeightDataNoAlert = function(){
-  v62WriteWeightData();
-  try{ loadDailyGoal(); }catch(e){}
-  try{ updateDashboard(); }catch(e){}
-};
-
-/* Όταν αλλάζει το τωρινό βάρος στα στοιχεία, γίνεται γρήγορη προεπισκόπηση στην Αρχική μετά την αποθήκευση. */
-window.addEventListener("load", ()=>{
-  setTimeout(()=>{
-    try{ updateDashboard(); }catch(e){}
-  }, 250);
-});
-</script>
-
-
-<script>
-/* V63: Σταθερή σύνδεση Στοιχείων -> Αρχική -> Θερμίδες στόχου
-   - Αν αλλάξεις βάρος/στόχο/ύψος/ηλικία, σώζεται αθόρυβα.
-   - Η Αρχική παίρνει θερμίδες από τα στοιχεία βάρους, όχι από παλιό 1800.
-   - Διαβάζει σωστά και ελληνικό κόμμα, π.χ. 1,77.
-*/
-(function(){
-  const WKEY = "gca_weight_data";
-  const HKEY = "gca_weight_history";
-
-  function n(v){
-    const x = Number(String(v ?? "").trim().replace(",", "."));
-    return Number.isFinite(x) ? x : 0;
-  }
-  function byId(id){ return document.getElementById(id); }
-  function getVal(id){ const el = byId(id); return el ? String(el.value ?? "").trim() : ""; }
-  function setVal(id, value){ const el = byId(id); if(el && value !== undefined && value !== null && String(value) !== "") el.value = value; }
-  function safeJson(key, fallback){
-    try{ return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); }
-    catch(e){ return fallback; }
-  }
-  function readStoredProfile(){
-    const d = safeJson(WKEY, {});
-    return (d && typeof d === "object" && !Array.isArray(d)) ? d : {};
-  }
-  function readFormProfile(){
-    return {
-      profileName: getVal("profileName"),
-      startWeight: getVal("startWeight"),
-      currentWeight: getVal("currentWeight"),
-      targetWeight: getVal("targetWeight"),
-      height: getVal("height"),
-      age: getVal("age"),
-      gender: getVal("gender"),
-      activity: getVal("activity"),
-      goalPace: getVal("goalPace") || "500"
-    };
-  }
-  function mergeProfile(preferForm){
-    const s = readStoredProfile();
-    const f = readFormProfile();
-    const keys = ["profileName","startWeight","currentWeight","targetWeight","height","age","gender","activity","goalPace"];
-    const out = {};
-    keys.forEach(k=>{
-      const fv = f[k];
-      const sv = s[k];
-      if(preferForm && fv !== undefined && fv !== null && String(fv).trim() !== "") out[k] = fv;
-      else if(sv !== undefined && sv !== null && String(sv).trim() !== "") out[k] = sv;
-      else if(fv !== undefined && fv !== null && String(fv).trim() !== "") out[k] = fv;
-      else out[k] = "";
-    });
-    if(!out.gender) out.gender = "male";
-    if(!out.activity) out.activity = "1.2";
-    if(!out.goalPace) out.goalPace = "500";
-    return out;
-  }
-  function writeProfileFromForm(){
-    const old = readStoredProfile();
-    const form = readFormProfile();
-    const data = Object.assign({}, old, form, {
-      updatedAt: Date.now(),
-      updatedDate: new Date().toLocaleDateString("el-GR")
-    });
-    localStorage.setItem(WKEY, JSON.stringify(data));
-    return data;
-  }
-  function fillFormFromProfile(){
-    const p = readStoredProfile();
-    ["profileName","startWeight","currentWeight","targetWeight","height","age","gender","activity"].forEach(k=>setVal(k, p[k]));
-    if(p.goalPace && typeof setGoalPace === "function"){
-      try{ setGoalPace(parseInt(p.goalPace,10) || 500, true); }catch(e){}
-    }else{
-      setVal("goalPace", "500");
-    }
-  }
-  function syncTodayHistory(weight, note){
-    weight = n(weight);
-    if(weight <= 0) return;
-    let h = safeJson(HKEY, []);
-    if(!Array.isArray(h)) h = [];
-    const now = new Date();
-    const today = now.toLocaleDateString("el-GR");
-    const item = h.find(x => x && x.date === today && (x.source === "profile" || !x.source));
-    if(item){
-      item.weight = weight;
-      item.time = now.toLocaleTimeString("el-GR", {hour:"2-digit", minute:"2-digit"});
-      item.ts = Date.now();
-      item.note = item.note || note || "Στοιχεία προφίλ";
-      item.source = "profile";
-    }else{
-      h.unshift({date:today, time:now.toLocaleTimeString("el-GR", {hour:"2-digit", minute:"2-digit"}), ts:Date.now(), weight, note:note || "Στοιχεία προφίλ", source:"profile"});
-    }
-    h.sort((a,b)=>(Number(b.ts)||0)-(Number(a.ts)||0));
-    localStorage.setItem(HKEY, JSON.stringify(h));
-  }
-  function calcFromProfile(profile){
-    const current = n(profile.currentWeight);
-    const target = n(profile.targetWeight);
-    const height = n(profile.height);
-    const age = n(profile.age);
-    const activity = n(profile.activity) || 1.2;
-    const gender = profile.gender || "male";
-    if(current <= 0 || target <= 0 || height <= 0 || age <= 0) return null;
-
-    const bmr = gender === "male"
-      ? 10*current + 6.25*height*100 - 5*age + 5
-      : 10*current + 6.25*height*100 - 5*age - 161;
-    const maintenance = Math.round(bmr * activity);
-    let calories = maintenance;
-    let mode = "Συντήρηση";
-    let timeline = "Τώρα";
-    let note = `Είσαι στον στόχο. Ενδεικτικές θερμίδες συντήρησης: ${maintenance} kcal/ημέρα.`;
-
-    if(current > target){
-      const deficit = (typeof getGoalPaceDeficit === "function") ? getGoalPaceDeficit() : (parseInt(profile.goalPace || "500",10) || 500);
-      calories = Math.max(1200, maintenance - deficit);
-      mode = "Απώλεια βάρους";
-      const weeklyLoss = (deficit * 7) / 7700;
-      const kgLeft = current - target;
-      const weeks = weeklyLoss > 0 ? Math.ceil(kgLeft / weeklyLoss) : 0;
-      const months = weeks / 4.345;
-      timeline = weeks < 8 ? weeks + " εβδομ." : months.toFixed(1) + " μήνες";
-      note = `Απομένουν ${kgLeft.toFixed(1)} kg. Ενδεικτικά ${calories} kcal/ημέρα για στόχο σε ${timeline}.`;
-    }else if(current < target){
-      const surplus = 300;
-      calories = maintenance + surplus;
-      mode = "Αύξηση/επιστροφή στον στόχο";
-      const weeklyGain = (surplus * 7) / 7700;
-      const kgLeft = target - current;
-      const weeks = weeklyGain > 0 ? Math.ceil(kgLeft / weeklyGain) : 0;
-      const months = weeks / 4.345;
-      timeline = weeks < 8 ? weeks + " εβδομ." : months.toFixed(1) + " μήνες";
-      note = `Το τωρινό βάρος είναι κάτω από τον στόχο. Ενδεικτικά ${calories} kcal/ημέρα για αύξηση προς στόχο.`;
-    }
-    return {calories, maintenance, mode, timeline, note};
-  }
-  function currentProfileForDashboard(){
-    return mergeProfile(false);
-  }
-  function targetCalories(){
-    const calc = calcFromProfile(currentProfileForDashboard());
-    return calc ? calc : null;
-  }
-
-  /* Ξαναγράφουμε τις κρίσιμες συναρτήσεις που έδειχναν 1800 ή '-'. */
-  window.getWeightTargetCalories = function(){
-    const c = targetCalories();
-    if(!c) return null;
-    localStorage.setItem("gca_daily_goal", String(c.calories));
-    return {calories:c.calories, maintenance:c.maintenance, mode:c.mode};
+function deactivatePremium(){
+  if(!confirm("Να γίνει επαναφορά σε δωρεάν έκδοση;")) return;
+  localStorage.removeItem("gca_premium");
+  localStorage.removeItem("gca_premium_code");
+  updatePremiumStatus();
+}
+const oldShowPageV62 = typeof showPage === "function" ? showPage : null;
+if(oldShowPageV62){
+  showPage = function(id){
+    oldShowPageV62(id);
+    if(id === "premium") setTimeout(updatePremiumStatus,80);
   };
-
-  window.computeWeightGoalDashboard = function(){
-    const p = currentProfileForDashboard();
-    const current = n(p.currentWeight), target = n(p.targetWeight), height = n(p.height), age = n(p.age);
-    if(current <= 0 || target <= 0){
-      return {cal:"-", time:"-", note:"Συμπλήρωσε τωρινό βάρος και στόχο βάρους."};
-    }
-    if(height <= 0 || age <= 0){
-      return {cal:"-", time:"-", note:"Συμπλήρωσε ύψος και ηλικία στα Στοιχεία για να βγει σωστός στόχος θερμίδων."};
-    }
-    const c = calcFromProfile(p);
-    const paceVal = (typeof getGoalPaceDeficit === "function") ? getGoalPaceDeficit() : (parseInt(p.goalPace || "500",10) || 500);
-    const paceLabel = paceVal === 300 ? "Ήπιος" : (paceVal === 700 ? "Γρήγορος" : "Κανονικός");
-    return {cal:c.calories + " kcal", time:c.timeline, note:c.note, pace:paceLabel};
-  };
-
-  window.getLastWeightText = function(){
-    const p = currentProfileForDashboard();
-    const current = n(p.currentWeight);
-    if(current > 0){
-      const stored = readStoredProfile();
-      const date = stored.updatedDate || new Date(Number(stored.updatedAt)||Date.now()).toLocaleDateString("el-GR");
-      return current.toFixed(1) + " kg • " + date;
-    }
-    try{
-      const h = (typeof getHistory === "function") ? getHistory() : safeJson(HKEY, []);
-      if(h && h.length) return Number(h[0].weight).toFixed(1) + " kg • " + h[0].date;
-    }catch(e){}
-    return "Δεν υπάρχει μέτρηση";
-  };
-
-  window.v55BaseGoal = function(){
-    const c = targetCalories();
-    if(c && c.calories){
-      localStorage.setItem("gca_daily_goal", String(c.calories));
-      return c.calories;
-    }
-    return parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
-  };
-  window.getDailyGoalBase = window.v55BaseGoal;
-
-  const oldLoadWeightData = typeof window.loadWeightData === "function" ? window.loadWeightData : null;
-  window.loadWeightData = function(){
-    if(oldLoadWeightData) oldLoadWeightData();
-    fillFormFromProfile();
-  };
-
-  const oldCalc = typeof window.calculateWeight === "function" ? window.calculateWeight : null;
-  window.calculateWeight = function(){
-    /* Όταν πατάς απλώς Υπολογισμό, τα στοιχεία κρατιούνται για την Αρχική. */
-    writeProfileFromForm();
-    if(oldCalc) oldCalc();
-    try{ loadDailyGoal(); }catch(e){}
-    try{ updateDashboard(); }catch(e){}
-  };
-
-  window.saveWeightData = function(){
-    const data = writeProfileFromForm();
-    syncTodayHistory(data.currentWeight, getVal("note") || "Στοιχεία προφίλ");
-    try{ if(oldCalc) oldCalc(); }catch(e){}
-    try{ loadDailyGoal(); }catch(e){}
-    try{ renderHistory(); }catch(e){}
-    try{ renderChart(); }catch(e){}
-    try{ updateDashboard(); }catch(e){}
-    alert("Τα στοιχεία αποθηκεύτηκαν και η Αρχική ενημερώθηκε.");
-  };
-
-  window.saveWeightDataNoAlert = function(){
-    const data = writeProfileFromForm();
-    syncTodayHistory(data.currentWeight, getVal("note") || "Στοιχεία προφίλ");
-    try{ loadDailyGoal(); }catch(e){}
-    try{ updateDashboard(); }catch(e){}
-  };
-
-  const oldAddMeasurement = typeof window.addMeasurement === "function" ? window.addMeasurement : null;
-  window.addMeasurement = function(){
-    writeProfileFromForm();
-    if(oldAddMeasurement) oldAddMeasurement();
-    try{ updateDashboard(); }catch(e){}
-  };
-
-  function attachAutoSave(){
-    ["profileName","startWeight","currentWeight","targetWeight","height","age","gender","activity","goalPace"].forEach(id=>{
-      const el = byId(id);
-      if(!el || el.dataset.v63Autosave === "1") return;
-      el.dataset.v63Autosave = "1";
-      const handler = function(){
-        clearTimeout(window.__gcaV63Timer);
-        window.__gcaV63Timer = setTimeout(()=>{
-          writeProfileFromForm();
-          try{ loadDailyGoal(); }catch(e){}
-          try{ updateDashboard(); }catch(e){}
-          try{ v57UpdateMacroInfo(); }catch(e){}
-        }, 180);
-      };
-      el.addEventListener("input", handler);
-      el.addEventListener("change", handler);
-    });
-  }
-
-  const oldShowPage = typeof window.showPage === "function" ? window.showPage : null;
-  if(oldShowPage){
-    window.showPage = function(id){
-      if(id === "home"){
-        try{ writeProfileFromForm(); }catch(e){}
-      }
-      oldShowPage(id);
-      setTimeout(()=>{
-        if(id === "weight"){
-          fillFormFromProfile();
-          attachAutoSave();
-        }
-        try{ loadDailyGoal(); }catch(e){}
-        try{ updateDashboard(); }catch(e){}
-      }, 80);
-    };
-  }
-
-  const oldUpdate = typeof window.updateDashboard === "function" ? window.updateDashboard : null;
-  if(oldUpdate){
-    window.updateDashboard = function(){
-      oldUpdate();
-      const c = targetCalories();
-      if(c && c.calories){
-        const t = (typeof v55Totals === "function") ? v55Totals() : {total:0, prot:0, carbs:0, fat:0, count:0};
-        const ex = (typeof v56ExerciseToday === "function") ? v56ExerciseToday() : 0;
-        const goal = c.calories + ex;
-        const remaining = Math.max(0, goal - (Number(t.total)||0));
-        if(typeof v55SafeText === "function"){
-          v55SafeText("dashCalories", (Number(t.total)||0) + " / " + goal);
-          v55SafeText("dashRemainingMini", "Υπόλοιπο " + remaining + " kcal" + (ex > 0 ? " • +" + ex + " από άσκηση" : ""));
-        }
-        if(typeof v55Width === "function") v55Width("dashProgressBar", Math.round(((Number(t.total)||0) / Math.max(1, goal))*100));
-        if(typeof v57UpdateMacroTextsRemaining === "function") v57UpdateMacroTextsRemaining();
-      }
-    };
-  }
-
+}
+if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    setTimeout(()=>{
-      fillFormFromProfile();
-      attachAutoSave();
-      try{ loadDailyGoal(); }catch(e){}
-      try{ updateDashboard(); }catch(e){}
-    }, 350);
+    navigator.serviceWorker.register("./service-worker.js").catch(err=>{
+      console.log("Service worker registration failed:", err);
+    });
   });
-})();
+}
+window.addEventListener("load", ()=>{
+  setTimeout(updatePremiumStatus,150);
+});
 </script>
 
 </body>

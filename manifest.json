@@ -1,17 +1,78 @@
 {
   "name": "Greek Cal AI",
-  "short_name": "GreekCalAI",
-  "start_url": "./index.html",
+  "short_name": "Greek Cal AI",
+  "description": "Smart Greek Diet Coach - θερμίδες, ελληνικά φαγητά, νερό, άσκηση και στόχος βάρους.",
+  "lang": "el-GR",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#eef5fb",
+  "orientation": "portrait",
+  "background_color": "#f0f7ff",
   "theme_color": "#1767c2",
-  "description": "Greek Cal AI - διατροφή, θερμίδες, νερό, άσκηση, βάρος και AI Coach.",
+  "categories": [
+    "health",
+    "fitness",
+    "food"
+  ],
   "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
     {
       "src": "icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Προσθήκη φαγητού",
+      "short_name": "Φαγητό",
+      "url": "./?page=foods",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Ημερήσιο",
+      "short_name": "Ημερήσιο",
+      "url": "./?page=diary",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Βάρος",
+      "short_name": "Βάρος",
+      "url": "./?page=weight",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }
