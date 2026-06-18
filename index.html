@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V83-1.2.3">
+<meta name="app-version" content="V84-1.2.4">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V83</title>
+<title>Greek Cal AI V84</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -3728,6 +3728,87 @@ html, body{
   color:#166534;
 }
 
+
+/* V84 customer-facing cleanup */
+.v84CustomerUpdate h2,
+.v84WhatsNew h2{
+  color:#0d47a1;
+  font-size:30px;
+  margin:0 0 14px;
+}
+.v84UpdateHero{
+  background:linear-gradient(135deg,#0d47a1,#1e88e5);
+  color:white;
+  border-radius:24px;
+  padding:18px;
+  margin:12px 0;
+  box-shadow:0 14px 30px rgba(30,108,199,.22);
+}
+.v84UpdateHero b{
+  display:block;
+  font-size:22px;
+  margin-bottom:6px;
+}
+.v84UpdateHero span{
+  display:block;
+  font-weight:850;
+  line-height:1.4;
+}
+.v84InfoBox{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:20px;
+  padding:15px;
+  margin:12px 0;
+}
+.v84InfoBox.green{
+  background:#ecfdf5;
+  border-color:#bbf7d0;
+}
+.v84InfoBox h3{
+  color:#0d47a1;
+  margin:0 0 6px;
+  font-size:22px;
+}
+.v84InfoBox.green h3{
+  color:#166534;
+}
+.v84InfoBox p{
+  color:#53627a;
+  font-weight:850;
+  line-height:1.45;
+  margin:0;
+}
+.v84WhatsNewGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:12px 0;
+}
+.v84WhatsNewGrid div{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:18px;
+  padding:13px;
+}
+.v84WhatsNewGrid b{
+  display:block;
+  color:#0d47a1;
+  font-size:18px;
+  margin-bottom:5px;
+}
+.v84WhatsNewGrid span{
+  display:block;
+  color:#667085;
+  font-weight:850;
+  line-height:1.35;
+}
+@media(max-width:560px){
+  .v84WhatsNewGrid{
+    grid-template-columns:1fr;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -3782,7 +3863,7 @@ html, body{
 <div class="v73InfoCard v73StatusCard">
   <div class="v73CardIcon shield">✓</div>
   <div class="v73StatusText">
-    <b>Έκδοση 1.2.3 • PWA Ready</b>
+    <b>Έκδοση 1.2.4</b>
     <span>Έτοιμο για εγκατάσταση από Chrome όταν βρίσκεσαι σε HTTPS.</span>
   </div>
   <em>Νέο</em>
@@ -3820,7 +3901,7 @@ html, body{
       <button type="button" onclick="showPage('backup')">💾 Backup</button>
       <button type="button" onclick="showPage('updates')">🔄 Ενημέρωση</button>
       <button type="button" onclick="showPage('premium')">⭐ Premium</button>
-      <button type="button" onclick="showPage('landing')">💼 Πώληση</button>
+      <button type="button" onclick="showPage('landing')">💼 Premium</button>
       <button type="button" onclick="showPage('support')">📞 Υποστήριξη</button>
       <button type="button" onclick="showPage('privacy')">🔒 Απόρρητο</button>
       <button type="button" onclick="showPage('about')">ℹ️ Σχετικά</button>
@@ -3835,7 +3916,7 @@ html, body{
   <strong>›</strong>
 </div>
 <div id="installHelp" class="installHelp hidden">
-  Από Chrome πάτα ⋮ → <b>Εγκατάσταση εφαρμογής</b> ή <b>Προσθήκη στην αρχική οθόνη</b>. Για κανονική εγκατάσταση άνοιξέ το από το HTTPS link του GitHub Pages.
+  Από Chrome πάτα ⋮ → <b>Εγκατάσταση εφαρμογής</b> ή <b>Προσθήκη στην αρχική οθόνη</b>. Για κανονική εγκατάσταση άνοιξέ το από το HTTPS link του την εφαρμογή.
 </div>
 
   <div class="dashboardCard compactHome">
@@ -3905,7 +3986,7 @@ html, body{
       <button onclick="showPage('changelog')">📌 Εκδόσεις</button>
     <button onclick="showPage('premium')">⭐ Premium</button>
     <button onclick="showPage('privacy')">🔒 Απόρρητο</button>
-      <button onclick="showPage('landing')">💼 Πώληση</button>
+      <button onclick="showPage('landing')">💼 Premium</button>
     <button onclick="showPage('support')">📞 Υποστήριξη</button>
   </div>
   <p class="small" style="text-align:center;margin-top:10px">Καθημερινή παρακολούθηση θερμίδων, νερού, άσκησης και στόχου βάρους.</p>
@@ -3920,50 +4001,25 @@ html, body{
 
 
 
+
 <section id="changelog" class="hidden">
   <button class="back" onclick="showPage('home')">← Πίσω</button>
-  <div class="card v71ChangePage">
-    <h2>📌 Ιστορικό Εκδόσεων</h2>
+  <div class="card v84WhatsNew">
+    <h2>🆕 Τι νέο υπάρχει</h2>
 
-    <div class="v71ChangeHero">
-      <b>Τρέχουσα έκδοση: V83 / 1.2.3</b>
-      <span>Σταθερή εμπορική PWA βάση με καθαρή αρχική και πλήρη ενημερωτικές σελίδες.</span>
+    <div class="v84InfoBox green">
+      <h3>V84 / 1.2.4</h3>
+      <p>Καθαρίστηκαν οι ενημερωτικές σελίδες ώστε να εμφανίζονται μόνο χρήσιμες πληροφορίες για τον χρήστη.</p>
     </div>
 
-    <div class="v71VersionList">
-      <div class="v71VersionItem current">
-        <b>V83 / 1.2.3</b>
-        <span>Τελικό polish με περισσότερο κάτω κενό στις ενημερωτικές σελίδες και καθαρότερη προβολή κουμπιών.</span>
-      </div>
-      <div class="v71VersionItem">
-        <b>V83 / 1.2.3</b>
-        <span>Τελικό polish, σελίδα Σχετικά, ελληνικό κουμπί Ενημέρωση και καθαρότερη εμπορική βάση.</span>
-      </div>
-      <div class="v71VersionItem">
-        <b>V83 / 1.2.3</b>
-        <span>Αφαιρέθηκαν οριστικά τα διπλά κουμπιά από την κάρτα Σήμερα.</span>
-      </div>
-      <div class="v71VersionItem">
-        <b>V83 / 1.2.3</b>
-        <span>Προστέθηκε σελίδα Ενημέρωση Εφαρμογής για καθαρισμό cache / service worker.</span>
-      </div>
-      <div class="v71VersionItem">
-        <b>V83 / 1.2.3</b>
-        <span>Προστέθηκαν σελίδες Πώληση και Υποστήριξη για εμπορική χρήση εκτός Play Store.</span>
-      </div>
-      <div class="v71VersionItem">
-        <b>V62 / 1.0.0</b>
-        <span>Πρώτη PWA Commercial Ready έκδοση με manifest, service worker, icons, Premium, Απόρρητο και Όρους.</span>
-      </div>
+    <div class="v84WhatsNewGrid">
+      <div><b>🍽 Περισσότερα φαγητά</b><span>Εμπλουτισμένες ελληνικές κατηγορίες τροφίμων.</span></div>
+      <div><b>🥤 Ποτά με ml</b><span>Καφέδες, χυμοί, αναψυκτικά και αλκοολούχα με ζωντανό υπολογισμό.</span></div>
+      <div><b>🔑 Premium</b><span>Ενεργοποίηση με προσωπικό κωδικό δεμένο με τη συσκευή.</span></div>
+      <div><b>💾 Backup</b><span>Εξαγωγή και επαναφορά δεδομένων.</span></div>
     </div>
 
-    <div class="v71ChangeActions">
-      <button onclick="showPage('updates')">🔄 Ενημέρωση</button>
-      <button onclick="showPage('about')">ℹ️ Σχετικά</button>
-      <button onclick="showPage('support')">📞 Υποστήριξη</button>
-      <button onclick="showPage('backup')">💾 Backup</button>
-    </div>
-
+    <button class="btnGreen" onclick="showPage('support')">📞 Υποστήριξη</button>
     <div class="v58BottomSpace"></div>
   </div>
 </section>
@@ -3981,7 +4037,7 @@ html, body{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V83 / 1.2.3</p>
+      <p><b>Έκδοση:</b> V84 / 1.2.4</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> greekcalai.support@gmail.com</p>
@@ -4005,113 +4061,33 @@ html, body{
 </section>
 
 
+
 <section id="updates" class="hidden">
   <button class="back" onclick="showPage('home')">← Πίσω</button>
-  <div class="card v67UpdatePage">
-    <h2>🔄 Ενημέρωση Εφαρμογής</h2>
+  <div class="card v84CustomerUpdate">
+    <h2>🔄 Ενημέρωση εφαρμογής</h2>
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="v83FinalNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Το προσωπικό email αντικαταστάθηκε παντού με εμπορικό email υποστήριξης: greekcalai.support@gmail.com.</span>
+    <div class="v84UpdateHero">
+      <b>Τρέχουσα έκδοση: V84 / 1.2.4</b>
+      <span>Χρησιμοποίησε αυτό το κουμπί όταν θέλεις να φορτώσει η πιο πρόσφατη έκδοση της εφαρμογής.</span>
     </div>
 
-    <div class="v82FinalNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Προστέθηκε κωδικός συσκευής και ενεργοποίηση Premium δεμένη με συσκευή, ώστε ο κωδικός να μη μοιράζεται εύκολα σε άλλα κινητά.</span>
+    <button class="btnGreen" onclick="hardRefreshApp()">🔄 Έλεγχος / φόρτωση νέας έκδοσης</button>
+
+    <div class="v84InfoBox">
+      <h3>Πότε το πατάω;</h3>
+      <p>Όταν η εφαρμογή φαίνεται να κρατά παλιά έκδοση ή όταν σου ζητηθεί από την υποστήριξη.</p>
     </div>
 
-    <div class="v81FinalNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Διόρθωση scroll: όταν πατάς οποιοδήποτε κουμπί ή αλλάζεις σελίδα, η νέα σελίδα ανοίγει αυτόματα από πάνω.</span>
+    <div class="v84InfoBox green">
+      <h3>Δεν χάνεις δεδομένα</h3>
+      <p>Η ενέργεια αυτή δεν διαγράφει φαγητά, βάρος, νερό, στόχους ή backup. Ανανεώνει μόνο τα αρχεία της εφαρμογής.</p>
     </div>
 
-    <div class="v80FinalNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Νέα επαγγελματική σελίδα πώλησης Premium και ξεχωριστή sales.html για εξωτερική προώθηση εκτός εφαρμογής.</span>
-    </div>
-
-    <div class="v79FinalNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Εμπλουτίστηκαν οι κατηγορίες με περισσότερα αρτοποιήματα, γαλακτοκομικά, πίτες, ρύζι, συνοδευτικά, σούπες, ξηρούς καρπούς, φρούτα, όσπρια και σαλάτες.</span>
-    </div>
-
-    <div class="v78FinalNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Διόρθωση κατηγοριών: οι καφέδες, οι χυμοί και τα αναψυκτικά βγήκαν από το γενικό «Ποτά» και εμφανίζονται ξεχωριστά.</span>
-    </div>
-
-    <div class="v77FinalNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Ζωντανός υπολογισμός: όταν αλλάζεις ml, γραμμάρια ή μερίδες, ενημερώνονται αμέσως θερμίδες, πρωτεΐνη, υδατάνθρακες και λιπαρά.</span>
-    </div>
-
-    <div class="v76FinalNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Έξυπνες προεπιλογές ml στα ποτά: μπύρα 330ml, κρασί/ρετσίνα 150ml, σφηνάκια 50ml, νερό 500ml, αναψυκτικά 330ml.</span>
-    </div>
-
-    <div class="v75FinalNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Περισσότερα φαγητά, ποτά και αλκοολούχα. Η επιλογή κατηγορίας στα φαγητά έγινε dropdown και τα ποτά μετρώνται σε ml.</span>
-    </div>
-
-    <div class="v74FinalNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Διόρθωση κάρτας θερμίδων: το κυκλικό ποσοστό εμφανίζεται δεξιά και η πρόοδος είναι πιο καθαρή στο κινητό.</span>
-    </div>
-
-    <div class="v73FinalNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Νέο ελληνικό premium header και πιο όμορφη πρόοδος θερμίδων στην αρχική.</span>
-    </div>
-
-    <div class="v72FinalNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Τελικό polish: περισσότερο κενό κάτω στις ενημερωτικές σελίδες, για να μη σκεπάζει η κάτω μπάρα τα κουμπιά.</span>
-    </div>
-
-    <div class="v70ReleaseNote">
-      <b>✅ V83 / 1.2.3</b>
-      <span>Σταθερή εμπορική βάση: καθαρή αρχική, Premium, υποστήριξη, απόρρητο, όροι, backup και ενημέρωση PWA.</span>
-    </div>
-
-    <div class="v67UpdateHero">
-      <b>Έκδοση εφαρμογής: V83 / 1.2.3</b>
-      <span>Χρήσιμο όταν το κινητό κρατάει παλιά έκδοση λόγω cache / service worker.</span>
-    </div>
-
-    <div class="v67UpdateCard">
-      <h3>Πότε το χρησιμοποιώ;</h3>
-      <p>Αν ανέβηκε νέα έκδοση στο GitHub Pages αλλά στο κινητό συνεχίζει να φαίνεται παλιά έκδοση, πάτησε το κουμπί καθαρισμού.</p>
-    </div>
-
-    <button class="btnGreen v67BigUpdateBtn" onclick="v67ForceUpdate()">🔄 Καθαρισμός cache & φόρτωση νέας έκδοσης</button>
-
-    <div class="v67UpdateCard">
-      <h3>Χειροκίνητα βήματα</h3>
-      <ol>
-        <li>Ανέβασε όλα τα νέα αρχεία στο GitHub Pages.</li>
-        <li>Άνοιξε την εφαρμογή από Chrome.</li>
-        <li>Πάτησε το κουμπί ενημέρωσης.</li>
-        <li>Περίμενε να ξαναφορτώσει η εφαρμογή.</li>
-      </ol>
-    </div>
-
-    <div class="v67UpdateNote">
-      Δεν διαγράφει φαγητά, βάρος, νερό, στόχους ή backup. Καθαρίζει μόνο την προσωρινή μνήμη της εφαρμογής.
+    <div class="v84InfoBox">
+      <h3>Χρειάζεσαι βοήθεια;</h3>
+      <p>Στείλε μήνυμα στην υποστήριξη: greekcalai.support@gmail.com</p>
+      <button onclick="showPage('support')">📞 Υποστήριξη</button>
     </div>
 
     <div class="v58BottomSpace"></div>
@@ -4133,7 +4109,7 @@ html, body{
         <button class="btnGreen" onclick="showPage('support')">🛒 Ζήτα Premium κωδικό</button>
         <button onclick="showPage('premium')">⭐ Ενεργοποίηση Premium</button>
       </div>
-      <small>Πρώτη εμπορική δοκιμή • Άμεση ενεργοποίηση με κωδικό</small>
+      <small>Premium έκδοση • Άμεση ενεργοποίηση με κωδικό</small>
     </div>
 
     <div class="v80ScreenShowcase">
@@ -4167,7 +4143,7 @@ html, body{
       <div>
         <span>Εισαγωγική τιμή</span>
         <b>Greek Cal AI Premium</b>
-        <small>Ιδανικό για πρώτους χρήστες και δοκιμή στην αγορά.</small>
+        <small>Ενεργοποίηση με προσωπικό κωδικό.</small>
       </div>
       <strong>4,99€</strong>
     </div>
@@ -4335,13 +4311,13 @@ html, body{
     </div>
 
     <div class="v64PremiumCommercialBtns">
-      <button onclick="showPage('landing')">💼 Σελίδα πώλησης</button>
-      <button onclick="showPage('support')">📞 Αγορά / Υποστήριξη</button>
+      <button onclick="showPage('landing')">💼 Πληροφορίες Premium</button>
+      <button onclick="showPage('support')">📞 Αγορά Premium / Υποστήριξη</button>
     </div>
 
     <div class="v62InfoBox">
       <b>Προτεινόμενη πρώτη εμπορική τιμή</b>
-      <p><b>4,99€ εφάπαξ</b><br>Για την αρχική Premium έκδοση με χειροκίνητη αποστολή προσωπικού κωδικού ενεργοποίησης.</p>
+      <p><b>4,99€ εφάπαξ</b><br>Εφάπαξ ενεργοποίηση Premium με προσωπικό κωδικό.</p>
     </div>
 
     <div class="v58BottomSpace"></div>
@@ -7690,7 +7666,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=83").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=84").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -7713,7 +7689,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V83 / 1.2.3\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V84 / 1.2.4\n\nΠεριγραφή:");
   location.href = "mailto:greekcalai.support@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -7767,9 +7743,9 @@ window.addEventListener("load", ()=>{
 
 
 <script>
-/* V83 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
+/* V84 one-time προσωρινής μνήμης refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V83-1.2.3";
+  const wanted = "V84-1.2.4";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -7777,13 +7753,13 @@ window.addEventListener("load", ()=>{
       try{
         const regs = await navigator.serviceWorker.getRegistrations();
         await Promise.all(regs.map(r => r.unregister()));
-        if(window.caches){
-          const keys = await caches.keys();
-          await Promise.all(keys.filter(k => k.startsWith("greek-cal-ai")).map(k => caches.delete(k)));
+        if(window.προσωρινής μνήμηςs){
+          const keys = await προσωρινής μνήμηςs.keys();
+          await Promise.all(keys.filter(k => k.startsWith("greek-cal-ai")).map(k => προσωρινής μνήμηςs.delete(k)));
         }
         setTimeout(()=>location.reload(), 500);
       }catch(e){
-        console.log("V66 cache refresh skipped", e);
+        console.log("V66 προσωρινής μνήμης refresh skipped", e);
       }
     });
   }
@@ -7792,7 +7768,7 @@ window.addEventListener("load", ()=>{
 
 
 <script>
-/* V67 update/cache tools */
+/* V67 update/προσωρινής μνήμης tools */
 async function v67ForceUpdate(){
   if(!confirm("Να καθαρίσει η προσωρινή μνήμη της εφαρμογής και να ξαναφορτώσει; Τα δεδομένα σου δεν θα διαγραφούν.")) return;
 
@@ -7802,13 +7778,13 @@ async function v67ForceUpdate(){
       await Promise.all(regs.map(r => r.unregister()));
     }
 
-    if(window.caches){
-      const keys = await caches.keys();
-      await Promise.all(keys.filter(k => k.startsWith("greek-cal-ai")).map(k => caches.delete(k)));
+    if(window.προσωρινής μνήμηςs){
+      const keys = await προσωρινής μνήμηςs.keys();
+      await Promise.all(keys.filter(k => k.startsWith("greek-cal-ai")).map(k => προσωρινής μνήμηςs.delete(k)));
     }
 
     localStorage.setItem("gca_loaded_version", "V67-1.0.5");
-    alert("Έγινε καθαρισμός cache. Η εφαρμογή θα ξαναφορτώσει.");
+    alert("Έγινε καθαρισμός προσωρινής μνήμης. Η εφαρμογή θα ξαναφορτώσει.");
     location.reload();
   }catch(e){
     alert("Δεν ολοκληρώθηκε αυτόματα. Κλείσε και άνοιξε ξανά την εφαρμογή.");
@@ -8089,7 +8065,7 @@ function v82OpenPremiumEmail(){
 
 Θέλω Premium για το Greek Cal AI.
 
-Έκδοση: V83 / 1.2.3
+Έκδοση: V84 / 1.2.4
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Περιγραφή: Θέλω premium`
@@ -8104,7 +8080,7 @@ function v64OpenEmail(){
 
 Θέλω βοήθεια για το Greek Cal AI.
 
-Έκδοση: V83 / 1.2.3
+Έκδοση: V84 / 1.2.4
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Περιγραφή:`
