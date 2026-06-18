@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V74-1.1.1">
+<meta name="app-version" content="V75-1.1.2">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V74</title>
+<title>Greek Cal AI V75</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -3214,6 +3214,60 @@ body.v65NoFab #fabOverlay{
   }
 }
 
+
+/* V75 foods/dropdown/drinks */
+.v75FoodFilter{
+  margin:12px 0 8px;
+}
+.v75FoodFilter label{
+  margin-bottom:6px!important;
+}
+.v75CatSelect{
+  width:100%;
+  padding:15px 16px;
+  border:1px solid #cfe0ef;
+  border-radius:18px;
+  background:#fff;
+  color:#0d47a1;
+  font-size:18px;
+  font-weight:1000;
+  box-shadow:0 8px 18px rgba(15,23,42,.04);
+}
+#foodTabs{
+  display:block!important;
+  overflow:visible!important;
+  white-space:normal!important;
+  margin:0!important;
+}
+.v75DrinkCard{
+  border-color:#bfdbfe!important;
+  background:linear-gradient(135deg,#ffffff,#f8fbff)!important;
+}
+.v75DrinkCard .foodName{
+  color:#0d47a1;
+}
+.v75DrinkCard .foodCal{
+  color:#0891b2!important;
+}
+.v75FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v75FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v75FinalNote span{
+  color:#166534;
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -3268,7 +3322,7 @@ body.v65NoFab #fabOverlay{
 <div class="v73InfoCard v73StatusCard">
   <div class="v73CardIcon shield">✓</div>
   <div class="v73StatusText">
-    <b>Έκδοση 1.1.1 • PWA Ready</b>
+    <b>Έκδοση 1.1.2 • PWA Ready</b>
     <span>Έτοιμο για εγκατάσταση από Chrome όταν βρίσκεσαι σε HTTPS.</span>
   </div>
   <em>Νέο</em>
@@ -3412,29 +3466,29 @@ body.v65NoFab #fabOverlay{
     <h2>📌 Ιστορικό Εκδόσεων</h2>
 
     <div class="v71ChangeHero">
-      <b>Τρέχουσα έκδοση: V74 / 1.1.1</b>
+      <b>Τρέχουσα έκδοση: V75 / 1.1.2</b>
       <span>Σταθερή εμπορική PWA βάση με καθαρή αρχική και πλήρη ενημερωτικές σελίδες.</span>
     </div>
 
     <div class="v71VersionList">
       <div class="v71VersionItem current">
-        <b>V74 / 1.1.1</b>
+        <b>V75 / 1.1.2</b>
         <span>Τελικό polish με περισσότερο κάτω κενό στις ενημερωτικές σελίδες και καθαρότερη προβολή κουμπιών.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V74 / 1.1.1</b>
+        <b>V75 / 1.1.2</b>
         <span>Τελικό polish, σελίδα Σχετικά, ελληνικό κουμπί Ενημέρωση και καθαρότερη εμπορική βάση.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V74 / 1.1.1</b>
+        <b>V75 / 1.1.2</b>
         <span>Αφαιρέθηκαν οριστικά τα διπλά κουμπιά από την κάρτα Σήμερα.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V74 / 1.1.1</b>
+        <b>V75 / 1.1.2</b>
         <span>Προστέθηκε σελίδα Ενημέρωση Εφαρμογής για καθαρισμό cache / service worker.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V74 / 1.1.1</b>
+        <b>V75 / 1.1.2</b>
         <span>Προστέθηκαν σελίδες Πώληση και Υποστήριξη για εμπορική χρήση εκτός Play Store.</span>
       </div>
       <div class="v71VersionItem">
@@ -3467,7 +3521,7 @@ body.v65NoFab #fabOverlay{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V74 / 1.1.1</p>
+      <p><b>Έκδοση:</b> V75 / 1.1.2</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> merkos1969@gmail.com</p>
@@ -3500,28 +3554,34 @@ body.v65NoFab #fabOverlay{
     
     
     
+    
+    <div class="v75FinalNote">
+      <b>✅ V75 / 1.1.2</b>
+      <span>Περισσότερα φαγητά, ποτά και αλκοολούχα. Η επιλογή κατηγορίας στα φαγητά έγινε dropdown και τα ποτά μετρώνται σε ml.</span>
+    </div>
+
     <div class="v74FinalNote">
-      <b>✅ V74 / 1.1.1</b>
+      <b>✅ V75 / 1.1.2</b>
       <span>Διόρθωση κάρτας θερμίδων: το κυκλικό ποσοστό εμφανίζεται δεξιά και η πρόοδος είναι πιο καθαρή στο κινητό.</span>
     </div>
 
     <div class="v73FinalNote">
-      <b>✅ V74 / 1.1.1</b>
+      <b>✅ V75 / 1.1.2</b>
       <span>Νέο ελληνικό premium header και πιο όμορφη πρόοδος θερμίδων στην αρχική.</span>
     </div>
 
     <div class="v72FinalNote">
-      <b>✅ V74 / 1.1.1</b>
+      <b>✅ V75 / 1.1.2</b>
       <span>Τελικό polish: περισσότερο κενό κάτω στις ενημερωτικές σελίδες, για να μη σκεπάζει η κάτω μπάρα τα κουμπιά.</span>
     </div>
 
     <div class="v70ReleaseNote">
-      <b>✅ V74 / 1.1.1</b>
+      <b>✅ V75 / 1.1.2</b>
       <span>Σταθερή εμπορική βάση: καθαρή αρχική, Premium, υποστήριξη, απόρρητο, όροι, backup και ενημέρωση PWA.</span>
     </div>
 
     <div class="v67UpdateHero">
-      <b>Έκδοση εφαρμογής: V74 / 1.1.1</b>
+      <b>Έκδοση εφαρμογής: V75 / 1.1.2</b>
       <span>Χρήσιμο όταν το κινητό κρατάει παλιά έκδοση λόγω cache / service worker.</span>
     </div>
 
@@ -3657,7 +3717,7 @@ body.v65NoFab #fabOverlay{
 
       <details>
         <summary>Τι να στείλω όταν έχω πρόβλημα;</summary>
-        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V74 / 1.1.1.</p>
+        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V75 / 1.1.2.</p>
       </details>
     </div>
 
@@ -4034,9 +4094,12 @@ body.v65NoFab #fabOverlay{
     Θα προστεθεί στο: <span id="foodMealTargetText">Σνακ</span>
     <button class="btnLight mealSmallBtn" onclick="cycleFoodMeal()">Αλλαγή γεύματος</button>
   </div>
-    <input id="foodSearch" placeholder="Αναζήτηση π.χ. σουβλάκι, φακές, γιαούρτι" oninput="renderFoods()">
-    <div class="tabs" id="foodTabs"></div>
-    <p class="small"><b id="foodCount"></b> τρόφιμα / γεύματα. Θερμίδες και μακροθρεπτικά είναι ενδεικτικά ανά μερίδα.</p>
+    <input id="foodSearch" placeholder="Αναζήτηση π.χ. σουβλάκι, φακές, καφές, μπύρα, ρετσίνα" oninput="renderFoods()">
+    <div class="v75FoodFilter">
+      <label>Κατηγορία</label>
+      <div id="foodTabs"></div>
+    </div>
+    <p class="small"><b id="foodCount"></b> τρόφιμα / ποτά. Οι θερμίδες είναι ενδεικτικές ανά μερίδα ή ανά 100ml.</p>
     <div id="foodList"></div>
   </div>
 </section>
@@ -4412,7 +4475,7 @@ body.v65NoFab #fabOverlay{
 </div>
 
 <script>
-const baseFoods = [{"name": "Χωριάτικη σαλάτα", "cat": "Σαλάτες", "cal": 320, "portion": "μερίδα", "tag": "Μεσογειακό", "protein": 10, "carbs": 36, "fat": 15}, {"name": "Ντάκος", "cat": "Σαλάτες", "cal": 360, "portion": "μερίδα", "tag": "Κρητικό", "protein": 11, "carbs": 40, "fat": 17}, {"name": "Πράσινη σαλάτα", "cat": "Σαλάτες", "cal": 120, "portion": "μερίδα", "tag": "Light", "protein": 4, "carbs": 14, "fat": 6}, {"name": "Σαλάτα του Καίσαρα", "cat": "Σαλάτες", "cal": 520, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 16, "carbs": 58, "fat": 25}, {"name": "Τονοσαλάτα", "cat": "Σαλάτες", "cal": 390, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 12, "carbs": 44, "fat": 19}, {"name": "Φασολάδα", "cat": "Όσπρια", "cal": 430, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 17, "carbs": 58, "fat": 14}, {"name": "Φακές σούπα", "cat": "Όσπρια", "cal": 390, "portion": "πιάτο", "tag": "Φυτική πρωτεΐνη", "protein": 16, "carbs": 53, "fat": 13}, {"name": "Ρεβύθια", "cat": "Όσπρια", "cal": 410, "portion": "πιάτο", "tag": "Φυτικές ίνες", "protein": 16, "carbs": 55, "fat": 14}, {"name": "Γίγαντες πλακί", "cat": "Όσπρια", "cal": 480, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 19, "carbs": 65, "fat": 16}, {"name": "Φάβα", "cat": "Όσπρια", "cal": 330, "portion": "μερίδα", "tag": "Σαντορίνη", "protein": 13, "carbs": 45, "fat": 11}, {"name": "Μπριάμ", "cat": "Λαδερά", "cal": 420, "portion": "πιάτο", "tag": "Λαδερό", "protein": 17, "carbs": 57, "fat": 14}, {"name": "Γεμιστά", "cat": "Λαδερά", "cal": 520, "portion": "2 τεμάχια", "tag": "Παραδοσιακό", "protein": 21, "carbs": 70, "fat": 17}, {"name": "Ιμάμ μπαϊλντί", "cat": "Λαδερά", "cal": 460, "portion": "μερίδα", "tag": "Λαδερό", "protein": 18, "carbs": 62, "fat": 15}, {"name": "Σπανακόρυζο", "cat": "Λαδερά", "cal": 380, "portion": "πιάτο", "tag": "Light", "protein": 15, "carbs": 51, "fat": 13}, {"name": "Λαχανόρυζο", "cat": "Λαδερά", "cal": 350, "portion": "πιάτο", "tag": "Light", "protein": 14, "carbs": 47, "fat": 12}, {"name": "Αρακάς λαδερός", "cat": "Λαδερά", "cal": 410, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 16, "carbs": 55, "fat": 14}, {"name": "Μπάμιες", "cat": "Λαδερά", "cal": 360, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 14, "carbs": 49, "fat": 12}, {"name": "Φασολάκια λαδερά", "cat": "Λαδερά", "cal": 390, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 16, "carbs": 53, "fat": 13}, {"name": "Λαχανοντολμάδες", "cat": "Παραδοσιακά", "cal": 520, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 21, "carbs": 70, "fat": 17}, {"name": "Ντολμαδάκια", "cat": "Παραδοσιακά", "cal": 330, "portion": "μερίδα", "tag": "Μεσογειακό", "protein": 13, "carbs": 45, "fat": 11}, {"name": "Σουβλάκι χοιρινό καλαμάκι", "cat": "Κρέατα", "cal": 190, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 14, "carbs": 7, "fat": 12}, {"name": "Σουβλάκι κοτόπουλο καλαμάκι", "cat": "Κρέατα", "cal": 160, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 12, "carbs": 6, "fat": 10}, {"name": "Πίτα γύρος χοιρινός", "cat": "Fast Food", "cal": 760, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 19, "carbs": 95, "fat": 34}, {"name": "Πίτα γύρος κοτόπουλο", "cat": "Fast Food", "cal": 680, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 17, "carbs": 85, "fat": 30}, {"name": "Πίτα καλαμάκι κοτόπουλο", "cat": "Fast Food", "cal": 560, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 14, "carbs": 70, "fat": 25}, {"name": "Μπιφτέκι μοσχαρίσιο", "cat": "Κρέατα", "cal": 290, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 22, "carbs": 11, "fat": 18}, {"name": "Μπιφτέκια με πατάτες", "cat": "Κρέατα", "cal": 780, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 58, "carbs": 29, "fat": 48}, {"name": "Κοτόπουλο σχάρας", "cat": "Κρέατα", "cal": 320, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 24, "carbs": 12, "fat": 20}, {"name": "Κοτόπουλο φούρνου με πατάτες", "cat": "Κρέατα", "cal": 690, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 52, "carbs": 26, "fat": 42}, {"name": "Μοσχάρι κοκκινιστό", "cat": "Κρέατα", "cal": 560, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 42, "carbs": 21, "fat": 34}, {"name": "Μοσχάρι λεμονάτο", "cat": "Κρέατα", "cal": 520, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 39, "carbs": 20, "fat": 32}, {"name": "Χοιρινή μπριζόλα", "cat": "Κρέατα", "cal": 520, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 39, "carbs": 20, "fat": 32}, {"name": "Μπριζόλα μοσχαρίσια", "cat": "Κρέατα", "cal": 610, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 46, "carbs": 23, "fat": 37}, {"name": "Αρνί ψητό", "cat": "Κρέατα", "cal": 680, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 51, "carbs": 26, "fat": 42}, {"name": "Κεφτεδάκια", "cat": "Κρέατα", "cal": 450, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 34, "carbs": 17, "fat": 28}, {"name": "Σουτζουκάκια", "cat": "Κρέατα", "cal": 540, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 40, "carbs": 20, "fat": 33}, {"name": "Κοκκινιστό με μακαρόνια", "cat": "Κρέατα", "cal": 820, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 62, "carbs": 31, "fat": 50}, {"name": "Τσιπούρα ψητή", "cat": "Ψάρια", "cal": 360, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 27, "carbs": 14, "fat": 22}, {"name": "Λαβράκι ψητό", "cat": "Ψάρια", "cal": 330, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 25, "carbs": 12, "fat": 20}, {"name": "Σαρδέλες ψητές", "cat": "Ψάρια", "cal": 310, "portion": "μερίδα", "tag": "Ωμέγα-3", "protein": 23, "carbs": 12, "fat": 19}, {"name": "Γαύρος τηγανητός", "cat": "Ψάρια", "cal": 480, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 36, "carbs": 18, "fat": 29}, {"name": "Μπακαλιάρος σκορδαλιά", "cat": "Ψάρια", "cal": 690, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 52, "carbs": 26, "fat": 42}, {"name": "Σολομός ψητός", "cat": "Ψάρια", "cal": 420, "portion": "μερίδα", "tag": "Ωμέγα-3", "protein": 32, "carbs": 16, "fat": 26}, {"name": "Τόνος κονσέρβα σε νερό", "cat": "Ψάρια", "cal": 140, "portion": "κονσέρβα", "tag": "Πρωτεΐνη", "protein": 10, "carbs": 5, "fat": 9}, {"name": "Καλαμάρι ψητό", "cat": "Θαλασσινά", "cal": 240, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 18, "carbs": 9, "fat": 15}, {"name": "Καλαμαράκια τηγανητά", "cat": "Θαλασσινά", "cal": 590, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 44, "carbs": 22, "fat": 36}, {"name": "Γαρίδες ψητές", "cat": "Θαλασσινά", "cal": 220, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 16, "carbs": 8, "fat": 13}, {"name": "Χταπόδι ξυδάτο", "cat": "Θαλασσινά", "cal": 230, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 17, "carbs": 9, "fat": 14}, {"name": "Μακαρόνια με κιμά", "cat": "Ζυμαρικά", "cal": 760, "portion": "μερίδα", "tag": "Κλασικό", "protein": 27, "carbs": 110, "fat": 24}, {"name": "Παστίτσιο", "cat": "Ζυμαρικά", "cal": 780, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 27, "carbs": 113, "fat": 24}, {"name": "Μουσακάς", "cat": "Παραδοσιακά", "cal": 820, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 33, "carbs": 111, "fat": 27}, {"name": "Λαζάνια", "cat": "Ζυμαρικά", "cal": 740, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 26, "carbs": 107, "fat": 23}, {"name": "Σπαγγέτι ναπολιτέν", "cat": "Ζυμαρικά", "cal": 520, "portion": "μερίδα", "tag": "Κλασικό", "protein": 18, "carbs": 75, "fat": 16}, {"name": "Κριθαράκι με κοτόπουλο", "cat": "Ζυμαρικά", "cal": 650, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 23, "carbs": 94, "fat": 20}, {"name": "Γιουβέτσι μοσχάρι", "cat": "Ζυμαρικά", "cal": 760, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 27, "carbs": 110, "fat": 24}, {"name": "Ριζότο λαχανικών", "cat": "Ρύζι", "cal": 480, "portion": "μερίδα", "tag": "Μεσογειακό", "protein": 17, "carbs": 70, "fat": 15}, {"name": "Ρύζι βραστό", "cat": "Ρύζι", "cal": 210, "portion": "μερίδα", "tag": "Βάση", "protein": 7, "carbs": 30, "fat": 7}, {"name": "Πατάτες φούρνου", "cat": "Συνοδευτικά", "cal": 330, "portion": "μερίδα", "tag": "Συνοδευτικό", "protein": 10, "carbs": 37, "fat": 16}, {"name": "Πατάτες τηγανητές", "cat": "Συνοδευτικά", "cal": 520, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 16, "carbs": 58, "fat": 25}, {"name": "Σπανακόπιτα", "cat": "Πίτες", "cal": 420, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 15, "carbs": 61, "fat": 13}, {"name": "Τυρόπιτα", "cat": "Πίτες", "cal": 460, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 16, "carbs": 67, "fat": 14}, {"name": "Πρασόπιτα", "cat": "Πίτες", "cal": 390, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 14, "carbs": 57, "fat": 12}, {"name": "Κοτόπιτα", "cat": "Πίτες", "cal": 520, "portion": "κομμάτι", "tag": "Πρωτεΐνη", "protein": 18, "carbs": 75, "fat": 16}, {"name": "Κρεατόπιτα", "cat": "Πίτες", "cal": 570, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 20, "carbs": 83, "fat": 18}, {"name": "Κουλούρι Θεσσαλονίκης", "cat": "Πρωινό", "cal": 260, "portion": "τεμάχιο", "tag": "Πρωινό", "protein": 16, "carbs": 23, "fat": 12}, {"name": "Ψωμί λευκό", "cat": "Αρτοποιήματα", "cal": 80, "portion": "φέτα", "tag": "Υδατάνθρακες", "protein": 3, "carbs": 12, "fat": 2}, {"name": "Ψωμί ολικής", "cat": "Αρτοποιήματα", "cal": 75, "portion": "φέτα", "tag": "Ολικής", "protein": 3, "carbs": 11, "fat": 2}, {"name": "Παξιμάδι κρίθινο", "cat": "Αρτοποιήματα", "cal": 120, "portion": "τεμάχιο", "tag": "Κρητικό", "protein": 4, "carbs": 17, "fat": 4}, {"name": "Γιαούρτι στραγγιστό 2%", "cat": "Πρωινό", "cal": 150, "portion": "200g", "tag": "Πρωτεΐνη", "protein": 9, "carbs": 13, "fat": 7}, {"name": "Γιαούρτι στραγγιστό 10%", "cat": "Πρωινό", "cal": 240, "portion": "200g", "tag": "Πρωτεΐνη", "protein": 15, "carbs": 21, "fat": 11}, {"name": "Γιαούρτι με μέλι", "cat": "Πρωινό", "cal": 310, "portion": "μπολ", "tag": "Πρωινό", "protein": 19, "carbs": 27, "fat": 14}, {"name": "Βρώμη με γάλα", "cat": "Πρωινό", "cal": 380, "portion": "μπολ", "tag": "Πρωινό", "protein": 24, "carbs": 33, "fat": 17}, {"name": "Αυγό βραστό", "cat": "Πρωινό", "cal": 78, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 5, "carbs": 7, "fat": 3}, {"name": "Ομελέτα 2 αυγών", "cat": "Πρωινό", "cal": 260, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 16, "carbs": 23, "fat": 12}, {"name": "Τοστ γαλοπούλα τυρί", "cat": "Πρωινό", "cal": 330, "portion": "τεμάχιο", "tag": "Γρήγορο", "protein": 21, "carbs": 29, "fat": 15}, {"name": "Φέτα", "cat": "Γαλακτοκομικά", "cal": 270, "portion": "100g", "tag": "Παραδοσιακό", "protein": 17, "carbs": 24, "fat": 12}, {"name": "Ανθότυρο", "cat": "Γαλακτοκομικά", "cal": 170, "portion": "100g", "tag": "Light", "protein": 11, "carbs": 15, "fat": 8}, {"name": "Γραβιέρα", "cat": "Γαλακτοκομικά", "cal": 390, "portion": "100g", "tag": "Υψηλές θερμίδες", "protein": 24, "carbs": 34, "fat": 17}, {"name": "Γάλα 1.5%", "cat": "Γαλακτοκομικά", "cal": 120, "portion": "ποτήρι", "tag": "Πρωινό", "protein": 8, "carbs": 10, "fat": 5}, {"name": "Burger απλό", "cat": "Fast Food", "cal": 620, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 16, "carbs": 78, "fat": 28}, {"name": "Cheeseburger", "cat": "Fast Food", "cal": 700, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 18, "carbs": 88, "fat": 31}, {"name": "Club sandwich", "cat": "Fast Food", "cal": 850, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 21, "carbs": 106, "fat": 38}, {"name": "Pizza μαργαρίτα", "cat": "Fast Food", "cal": 270, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 7, "carbs": 34, "fat": 12}, {"name": "Pizza σπέσιαλ", "cat": "Fast Food", "cal": 340, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 8, "carbs": 42, "fat": 15}, {"name": "Hot dog", "cat": "Fast Food", "cal": 430, "portion": "τεμάχιο", "tag": "Fast", "protein": 11, "carbs": 54, "fat": 19}, {"name": "Κρέπα πραλίνα", "cat": "Fast Food", "cal": 780, "portion": "τεμάχιο", "tag": "Γλυκό", "protein": 20, "carbs": 98, "fat": 35}, {"name": "Κρέπα γαλοπούλα τυρί", "cat": "Fast Food", "cal": 620, "portion": "τεμάχιο", "tag": "Fast", "protein": 16, "carbs": 78, "fat": 28}, {"name": "Ποπ κορν", "cat": "Σνακ", "cal": 380, "portion": "μερίδα", "tag": "Σνακ", "protein": 10, "carbs": 48, "fat": 17}, {"name": "Πατατάκια", "cat": "Σνακ", "cal": 530, "portion": "100g", "tag": "Σνακ", "protein": 13, "carbs": 66, "fat": 24}, {"name": "Ξηροί καρποί", "cat": "Σνακ", "cal": 600, "portion": "100g", "tag": "Ενέργεια", "protein": 15, "carbs": 75, "fat": 27}, {"name": "Μπακλαβάς", "cat": "Γλυκά", "cal": 430, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 11, "carbs": 54, "fat": 19}, {"name": "Γαλακτομπούρεκο", "cat": "Γλυκά", "cal": 410, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 10, "carbs": 51, "fat": 18}, {"name": "Καρυδόπιτα", "cat": "Γλυκά", "cal": 390, "portion": "κομμάτι", "tag": "Γλυκό", "protein": 10, "carbs": 49, "fat": 17}, {"name": "Ρυζόγαλο", "cat": "Γλυκά", "cal": 250, "portion": "μπολ", "tag": "Παραδοσιακό", "protein": 6, "carbs": 31, "fat": 11}, {"name": "Παγωτό βανίλια", "cat": "Γλυκά", "cal": 210, "portion": "μπάλα", "tag": "Γλυκό", "protein": 5, "carbs": 26, "fat": 9}, {"name": "Σοκολάτα γάλακτος", "cat": "Γλυκά", "cal": 540, "portion": "100g", "tag": "Γλυκό", "protein": 14, "carbs": 68, "fat": 24}, {"name": "Μπουγάτσα κρέμα", "cat": "Γλυκά", "cal": 520, "portion": "κομμάτι", "tag": "Θεσσαλονίκη", "protein": 13, "carbs": 65, "fat": 23}, {"name": "Λουκουμάδες", "cat": "Γλυκά", "cal": 560, "portion": "μερίδα", "tag": "Γλυκό", "protein": 14, "carbs": 70, "fat": 25}, {"name": "Μήλο", "cat": "Φρούτα", "cal": 95, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 1, "carbs": 21, "fat": 1}, {"name": "Μπανάνα", "cat": "Φρούτα", "cal": 110, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 1, "carbs": 25, "fat": 1}, {"name": "Πορτοκάλι", "cat": "Φρούτα", "cal": 70, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 1, "carbs": 16, "fat": 1}, {"name": "Καρπούζι", "cat": "Φρούτα", "cal": 90, "portion": "μερίδα", "tag": "Φρούτο", "protein": 1, "carbs": 20, "fat": 1}, {"name": "Πεπόνι", "cat": "Φρούτα", "cal": 85, "portion": "μερίδα", "tag": "Φρούτο", "protein": 1, "carbs": 19, "fat": 1}, {"name": "Ροδάκινο", "cat": "Φρούτα", "cal": 60, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 0, "carbs": 14, "fat": 0}, {"name": "Σταφύλια", "cat": "Φρούτα", "cal": 140, "portion": "μερίδα", "tag": "Φρούτο", "protein": 1, "carbs": 32, "fat": 1}, {"name": "Ελληνικός καφές", "cat": "Ροφήματα", "cal": 5, "portion": "σκέτος", "tag": "Ρόφημα", "protein": 0, "carbs": 1, "fat": 0}, {"name": "Φραπέ σκέτος", "cat": "Ροφήματα", "cal": 5, "portion": "ποτήρι", "tag": "Ρόφημα", "protein": 0, "carbs": 1, "fat": 0}, {"name": "Freddo espresso σκέτος", "cat": "Ροφήματα", "cal": 5, "portion": "ποτήρι", "tag": "Ρόφημα", "protein": 0, "carbs": 1, "fat": 0}, {"name": "Freddo cappuccino", "cat": "Ροφήματα", "cal": 120, "portion": "ποτήρι", "tag": "Ρόφημα", "protein": 1, "carbs": 27, "fat": 1}, {"name": "Χυμός πορτοκάλι", "cat": "Ροφήματα", "cal": 120, "portion": "ποτήρι", "tag": "Ρόφημα", "protein": 1, "carbs": 27, "fat": 1}, {"name": "Αναψυκτικό ζάχαρη", "cat": "Ροφήματα", "cal": 140, "portion": "κουτάκι", "tag": "Ζάχαρη", "protein": 1, "carbs": 32, "fat": 1}, {"name": "Μπύρα", "cat": "Ροφήματα", "cal": 150, "portion": "330ml", "tag": "Αλκοόλ", "protein": 1, "carbs": 34, "fat": 1}, {"name": "Κρασί κόκκινο", "cat": "Ροφήματα", "cal": 125, "portion": "ποτήρι", "tag": "Αλκοόλ", "protein": 1, "carbs": 28, "fat": 1}];
+const baseFoods = [{"name": "Χωριάτικη σαλάτα", "cat": "Σαλάτες", "cal": 320, "portion": "μερίδα", "tag": "Μεσογειακό", "protein": 10, "carbs": 36, "fat": 15}, {"name": "Ντάκος", "cat": "Σαλάτες", "cal": 360, "portion": "μερίδα", "tag": "Κρητικό", "protein": 11, "carbs": 40, "fat": 17}, {"name": "Πράσινη σαλάτα", "cat": "Σαλάτες", "cal": 120, "portion": "μερίδα", "tag": "Light", "protein": 4, "carbs": 14, "fat": 6}, {"name": "Σαλάτα του Καίσαρα", "cat": "Σαλάτες", "cal": 520, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 16, "carbs": 58, "fat": 25}, {"name": "Τονοσαλάτα", "cat": "Σαλάτες", "cal": 390, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 12, "carbs": 44, "fat": 19}, {"name": "Φασολάδα", "cat": "Όσπρια", "cal": 430, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 17, "carbs": 58, "fat": 14}, {"name": "Φακές σούπα", "cat": "Όσπρια", "cal": 390, "portion": "πιάτο", "tag": "Φυτική πρωτεΐνη", "protein": 16, "carbs": 53, "fat": 13}, {"name": "Ρεβύθια", "cat": "Όσπρια", "cal": 410, "portion": "πιάτο", "tag": "Φυτικές ίνες", "protein": 16, "carbs": 55, "fat": 14}, {"name": "Γίγαντες πλακί", "cat": "Όσπρια", "cal": 480, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 19, "carbs": 65, "fat": 16}, {"name": "Φάβα", "cat": "Όσπρια", "cal": 330, "portion": "μερίδα", "tag": "Σαντορίνη", "protein": 13, "carbs": 45, "fat": 11}, {"name": "Μπριάμ", "cat": "Λαδερά", "cal": 420, "portion": "πιάτο", "tag": "Λαδερό", "protein": 17, "carbs": 57, "fat": 14}, {"name": "Γεμιστά", "cat": "Λαδερά", "cal": 520, "portion": "2 τεμάχια", "tag": "Παραδοσιακό", "protein": 21, "carbs": 70, "fat": 17}, {"name": "Ιμάμ μπαϊλντί", "cat": "Λαδερά", "cal": 460, "portion": "μερίδα", "tag": "Λαδερό", "protein": 18, "carbs": 62, "fat": 15}, {"name": "Σπανακόρυζο", "cat": "Λαδερά", "cal": 380, "portion": "πιάτο", "tag": "Light", "protein": 15, "carbs": 51, "fat": 13}, {"name": "Λαχανόρυζο", "cat": "Λαδερά", "cal": 350, "portion": "πιάτο", "tag": "Light", "protein": 14, "carbs": 47, "fat": 12}, {"name": "Αρακάς λαδερός", "cat": "Λαδερά", "cal": 410, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 16, "carbs": 55, "fat": 14}, {"name": "Μπάμιες", "cat": "Λαδερά", "cal": 360, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 14, "carbs": 49, "fat": 12}, {"name": "Φασολάκια λαδερά", "cat": "Λαδερά", "cal": 390, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 16, "carbs": 53, "fat": 13}, {"name": "Λαχανοντολμάδες", "cat": "Παραδοσιακά", "cal": 520, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 21, "carbs": 70, "fat": 17}, {"name": "Ντολμαδάκια", "cat": "Παραδοσιακά", "cal": 330, "portion": "μερίδα", "tag": "Μεσογειακό", "protein": 13, "carbs": 45, "fat": 11}, {"name": "Σουβλάκι χοιρινό καλαμάκι", "cat": "Κρέατα", "cal": 190, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 14, "carbs": 7, "fat": 12}, {"name": "Σουβλάκι κοτόπουλο καλαμάκι", "cat": "Κρέατα", "cal": 160, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 12, "carbs": 6, "fat": 10}, {"name": "Πίτα γύρος χοιρινός", "cat": "Fast Food", "cal": 760, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 19, "carbs": 95, "fat": 34}, {"name": "Πίτα γύρος κοτόπουλο", "cat": "Fast Food", "cal": 680, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 17, "carbs": 85, "fat": 30}, {"name": "Πίτα καλαμάκι κοτόπουλο", "cat": "Fast Food", "cal": 560, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 14, "carbs": 70, "fat": 25}, {"name": "Μπιφτέκι μοσχαρίσιο", "cat": "Κρέατα", "cal": 290, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 22, "carbs": 11, "fat": 18}, {"name": "Μπιφτέκια με πατάτες", "cat": "Κρέατα", "cal": 780, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 58, "carbs": 29, "fat": 48}, {"name": "Κοτόπουλο σχάρας", "cat": "Κρέατα", "cal": 320, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 24, "carbs": 12, "fat": 20}, {"name": "Κοτόπουλο φούρνου με πατάτες", "cat": "Κρέατα", "cal": 690, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 52, "carbs": 26, "fat": 42}, {"name": "Μοσχάρι κοκκινιστό", "cat": "Κρέατα", "cal": 560, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 42, "carbs": 21, "fat": 34}, {"name": "Μοσχάρι λεμονάτο", "cat": "Κρέατα", "cal": 520, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 39, "carbs": 20, "fat": 32}, {"name": "Χοιρινή μπριζόλα", "cat": "Κρέατα", "cal": 520, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 39, "carbs": 20, "fat": 32}, {"name": "Μπριζόλα μοσχαρίσια", "cat": "Κρέατα", "cal": 610, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 46, "carbs": 23, "fat": 37}, {"name": "Αρνί ψητό", "cat": "Κρέατα", "cal": 680, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 51, "carbs": 26, "fat": 42}, {"name": "Κεφτεδάκια", "cat": "Κρέατα", "cal": 450, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 34, "carbs": 17, "fat": 28}, {"name": "Σουτζουκάκια", "cat": "Κρέατα", "cal": 540, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 40, "carbs": 20, "fat": 33}, {"name": "Κοκκινιστό με μακαρόνια", "cat": "Κρέατα", "cal": 820, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 62, "carbs": 31, "fat": 50}, {"name": "Τσιπούρα ψητή", "cat": "Ψάρια", "cal": 360, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 27, "carbs": 14, "fat": 22}, {"name": "Λαβράκι ψητό", "cat": "Ψάρια", "cal": 330, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 25, "carbs": 12, "fat": 20}, {"name": "Σαρδέλες ψητές", "cat": "Ψάρια", "cal": 310, "portion": "μερίδα", "tag": "Ωμέγα-3", "protein": 23, "carbs": 12, "fat": 19}, {"name": "Γαύρος τηγανητός", "cat": "Ψάρια", "cal": 480, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 36, "carbs": 18, "fat": 29}, {"name": "Μπακαλιάρος σκορδαλιά", "cat": "Ψάρια", "cal": 690, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 52, "carbs": 26, "fat": 42}, {"name": "Σολομός ψητός", "cat": "Ψάρια", "cal": 420, "portion": "μερίδα", "tag": "Ωμέγα-3", "protein": 32, "carbs": 16, "fat": 26}, {"name": "Τόνος κονσέρβα σε νερό", "cat": "Ψάρια", "cal": 140, "portion": "κονσέρβα", "tag": "Πρωτεΐνη", "protein": 10, "carbs": 5, "fat": 9}, {"name": "Καλαμάρι ψητό", "cat": "Θαλασσινά", "cal": 240, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 18, "carbs": 9, "fat": 15}, {"name": "Καλαμαράκια τηγανητά", "cat": "Θαλασσινά", "cal": 590, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 44, "carbs": 22, "fat": 36}, {"name": "Γαρίδες ψητές", "cat": "Θαλασσινά", "cal": 220, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 16, "carbs": 8, "fat": 13}, {"name": "Χταπόδι ξυδάτο", "cat": "Θαλασσινά", "cal": 230, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 17, "carbs": 9, "fat": 14}, {"name": "Μακαρόνια με κιμά", "cat": "Ζυμαρικά", "cal": 760, "portion": "μερίδα", "tag": "Κλασικό", "protein": 27, "carbs": 110, "fat": 24}, {"name": "Παστίτσιο", "cat": "Ζυμαρικά", "cal": 780, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 27, "carbs": 113, "fat": 24}, {"name": "Μουσακάς", "cat": "Παραδοσιακά", "cal": 820, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 33, "carbs": 111, "fat": 27}, {"name": "Λαζάνια", "cat": "Ζυμαρικά", "cal": 740, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 26, "carbs": 107, "fat": 23}, {"name": "Σπαγγέτι ναπολιτέν", "cat": "Ζυμαρικά", "cal": 520, "portion": "μερίδα", "tag": "Κλασικό", "protein": 18, "carbs": 75, "fat": 16}, {"name": "Κριθαράκι με κοτόπουλο", "cat": "Ζυμαρικά", "cal": 650, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 23, "carbs": 94, "fat": 20}, {"name": "Γιουβέτσι μοσχάρι", "cat": "Ζυμαρικά", "cal": 760, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 27, "carbs": 110, "fat": 24}, {"name": "Ριζότο λαχανικών", "cat": "Ρύζι", "cal": 480, "portion": "μερίδα", "tag": "Μεσογειακό", "protein": 17, "carbs": 70, "fat": 15}, {"name": "Ρύζι βραστό", "cat": "Ρύζι", "cal": 210, "portion": "μερίδα", "tag": "Βάση", "protein": 7, "carbs": 30, "fat": 7}, {"name": "Πατάτες φούρνου", "cat": "Συνοδευτικά", "cal": 330, "portion": "μερίδα", "tag": "Συνοδευτικό", "protein": 10, "carbs": 37, "fat": 16}, {"name": "Πατάτες τηγανητές", "cat": "Συνοδευτικά", "cal": 520, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 16, "carbs": 58, "fat": 25}, {"name": "Σπανακόπιτα", "cat": "Πίτες", "cal": 420, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 15, "carbs": 61, "fat": 13}, {"name": "Τυρόπιτα", "cat": "Πίτες", "cal": 460, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 16, "carbs": 67, "fat": 14}, {"name": "Πρασόπιτα", "cat": "Πίτες", "cal": 390, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 14, "carbs": 57, "fat": 12}, {"name": "Κοτόπιτα", "cat": "Πίτες", "cal": 520, "portion": "κομμάτι", "tag": "Πρωτεΐνη", "protein": 18, "carbs": 75, "fat": 16}, {"name": "Κρεατόπιτα", "cat": "Πίτες", "cal": 570, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 20, "carbs": 83, "fat": 18}, {"name": "Κουλούρι Θεσσαλονίκης", "cat": "Πρωινό", "cal": 260, "portion": "τεμάχιο", "tag": "Πρωινό", "protein": 16, "carbs": 23, "fat": 12}, {"name": "Ψωμί λευκό", "cat": "Αρτοποιήματα", "cal": 80, "portion": "φέτα", "tag": "Υδατάνθρακες", "protein": 3, "carbs": 12, "fat": 2}, {"name": "Ψωμί ολικής", "cat": "Αρτοποιήματα", "cal": 75, "portion": "φέτα", "tag": "Ολικής", "protein": 3, "carbs": 11, "fat": 2}, {"name": "Παξιμάδι κρίθινο", "cat": "Αρτοποιήματα", "cal": 120, "portion": "τεμάχιο", "tag": "Κρητικό", "protein": 4, "carbs": 17, "fat": 4}, {"name": "Γιαούρτι στραγγιστό 2%", "cat": "Πρωινό", "cal": 150, "portion": "200g", "tag": "Πρωτεΐνη", "protein": 9, "carbs": 13, "fat": 7}, {"name": "Γιαούρτι στραγγιστό 10%", "cat": "Πρωινό", "cal": 240, "portion": "200g", "tag": "Πρωτεΐνη", "protein": 15, "carbs": 21, "fat": 11}, {"name": "Γιαούρτι με μέλι", "cat": "Πρωινό", "cal": 310, "portion": "μπολ", "tag": "Πρωινό", "protein": 19, "carbs": 27, "fat": 14}, {"name": "Βρώμη με γάλα", "cat": "Πρωινό", "cal": 380, "portion": "μπολ", "tag": "Πρωινό", "protein": 24, "carbs": 33, "fat": 17}, {"name": "Αυγό βραστό", "cat": "Πρωινό", "cal": 78, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 5, "carbs": 7, "fat": 3}, {"name": "Ομελέτα 2 αυγών", "cat": "Πρωινό", "cal": 260, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 16, "carbs": 23, "fat": 12}, {"name": "Τοστ γαλοπούλα τυρί", "cat": "Πρωινό", "cal": 330, "portion": "τεμάχιο", "tag": "Γρήγορο", "protein": 21, "carbs": 29, "fat": 15}, {"name": "Φέτα", "cat": "Γαλακτοκομικά", "cal": 270, "portion": "100g", "tag": "Παραδοσιακό", "protein": 17, "carbs": 24, "fat": 12}, {"name": "Ανθότυρο", "cat": "Γαλακτοκομικά", "cal": 170, "portion": "100g", "tag": "Light", "protein": 11, "carbs": 15, "fat": 8}, {"name": "Γραβιέρα", "cat": "Γαλακτοκομικά", "cal": 390, "portion": "100g", "tag": "Υψηλές θερμίδες", "protein": 24, "carbs": 34, "fat": 17}, {"name": "Γάλα 1.5%", "cat": "Γαλακτοκομικά", "cal": 120, "portion": "ποτήρι", "tag": "Πρωινό", "protein": 8, "carbs": 10, "fat": 5}, {"name": "Burger απλό", "cat": "Fast Food", "cal": 620, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 16, "carbs": 78, "fat": 28}, {"name": "Cheeseburger", "cat": "Fast Food", "cal": 700, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 18, "carbs": 88, "fat": 31}, {"name": "Club sandwich", "cat": "Fast Food", "cal": 850, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 21, "carbs": 106, "fat": 38}, {"name": "Pizza μαργαρίτα", "cat": "Fast Food", "cal": 270, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 7, "carbs": 34, "fat": 12}, {"name": "Pizza σπέσιαλ", "cat": "Fast Food", "cal": 340, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 8, "carbs": 42, "fat": 15}, {"name": "Hot dog", "cat": "Fast Food", "cal": 430, "portion": "τεμάχιο", "tag": "Fast", "protein": 11, "carbs": 54, "fat": 19}, {"name": "Κρέπα πραλίνα", "cat": "Fast Food", "cal": 780, "portion": "τεμάχιο", "tag": "Γλυκό", "protein": 20, "carbs": 98, "fat": 35}, {"name": "Κρέπα γαλοπούλα τυρί", "cat": "Fast Food", "cal": 620, "portion": "τεμάχιο", "tag": "Fast", "protein": 16, "carbs": 78, "fat": 28}, {"name": "Ποπ κορν", "cat": "Σνακ", "cal": 380, "portion": "μερίδα", "tag": "Σνακ", "protein": 10, "carbs": 48, "fat": 17}, {"name": "Πατατάκια", "cat": "Σνακ", "cal": 530, "portion": "100g", "tag": "Σνακ", "protein": 13, "carbs": 66, "fat": 24}, {"name": "Ξηροί καρποί", "cat": "Σνακ", "cal": 600, "portion": "100g", "tag": "Ενέργεια", "protein": 15, "carbs": 75, "fat": 27}, {"name": "Μπακλαβάς", "cat": "Γλυκά", "cal": 430, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 11, "carbs": 54, "fat": 19}, {"name": "Γαλακτομπούρεκο", "cat": "Γλυκά", "cal": 410, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 10, "carbs": 51, "fat": 18}, {"name": "Καρυδόπιτα", "cat": "Γλυκά", "cal": 390, "portion": "κομμάτι", "tag": "Γλυκό", "protein": 10, "carbs": 49, "fat": 17}, {"name": "Ρυζόγαλο", "cat": "Γλυκά", "cal": 250, "portion": "μπολ", "tag": "Παραδοσιακό", "protein": 6, "carbs": 31, "fat": 11}, {"name": "Παγωτό βανίλια", "cat": "Γλυκά", "cal": 210, "portion": "μπάλα", "tag": "Γλυκό", "protein": 5, "carbs": 26, "fat": 9}, {"name": "Σοκολάτα γάλακτος", "cat": "Γλυκά", "cal": 540, "portion": "100g", "tag": "Γλυκό", "protein": 14, "carbs": 68, "fat": 24}, {"name": "Μπουγάτσα κρέμα", "cat": "Γλυκά", "cal": 520, "portion": "κομμάτι", "tag": "Θεσσαλονίκη", "protein": 13, "carbs": 65, "fat": 23}, {"name": "Λουκουμάδες", "cat": "Γλυκά", "cal": 560, "portion": "μερίδα", "tag": "Γλυκό", "protein": 14, "carbs": 70, "fat": 25}, {"name": "Μήλο", "cat": "Φρούτα", "cal": 95, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 1, "carbs": 21, "fat": 1}, {"name": "Μπανάνα", "cat": "Φρούτα", "cal": 110, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 1, "carbs": 25, "fat": 1}, {"name": "Πορτοκάλι", "cat": "Φρούτα", "cal": 70, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 1, "carbs": 16, "fat": 1}, {"name": "Καρπούζι", "cat": "Φρούτα", "cal": 90, "portion": "μερίδα", "tag": "Φρούτο", "protein": 1, "carbs": 20, "fat": 1}, {"name": "Πεπόνι", "cat": "Φρούτα", "cal": 85, "portion": "μερίδα", "tag": "Φρούτο", "protein": 1, "carbs": 19, "fat": 1}, {"name": "Ροδάκινο", "cat": "Φρούτα", "cal": 60, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 0, "carbs": 14, "fat": 0}, {"name": "Σταφύλια", "cat": "Φρούτα", "cal": 140, "portion": "μερίδα", "tag": "Φρούτο", "protein": 1, "carbs": 32, "fat": 1}, {"name": "Ελληνικός καφές", "cat": "Ποτά", "cal": 2, "portion": "100ml", "tag": "Ρόφημα", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Φραπέ σκέτος", "cat": "Ποτά", "cal": 2, "portion": "100ml", "tag": "Ρόφημα", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Freddo espresso σκέτος", "cat": "Ποτά", "cal": 2, "portion": "100ml", "tag": "Ρόφημα", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Freddo cappuccino", "cat": "Ποτά", "cal": 40, "portion": "100ml", "tag": "Ρόφημα", "protein": 2, "carbs": 4, "fat": 2}, {"name": "Χυμός πορτοκάλι", "cat": "Ποτά", "cal": 45, "portion": "100ml", "tag": "Ρόφημα", "protein": 1, "carbs": 10, "fat": 0}, {"name": "Αναψυκτικό με ζάχαρη", "cat": "Ποτά", "cal": 42, "portion": "100ml", "tag": "Ζάχαρη", "protein": 0, "carbs": 11, "fat": 0}, {"name": "Μπύρα lager", "cat": "Αλκοολούχα", "cal": 43, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 4, "fat": 0}, {"name": "Κρασί κόκκινο", "cat": "Αλκοολούχα", "cal": 85, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 3, "fat": 0}, {"name": "Ομελέτα 2 αυγά", "cat": "Πρωινό", "cal": 260, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 18, "carbs": 3, "fat": 20}, {"name": "Ομελέτα με τυρί", "cat": "Πρωινό", "cal": 380, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 24, "carbs": 4, "fat": 30}, {"name": "Γιαούρτι 2% με μέλι", "cat": "Πρωινό", "cal": 260, "portion": "μπολ", "tag": "Πρωινό", "protein": 18, "carbs": 28, "fat": 8}, {"name": "Κριτσίνια", "cat": "Σνακ", "cal": 420, "portion": "100g", "tag": "Σνακ", "protein": 10, "carbs": 70, "fat": 12}, {"name": "Μπάρα δημητριακών", "cat": "Σνακ", "cal": 160, "portion": "τεμάχιο", "tag": "Σνακ", "protein": 4, "carbs": 25, "fat": 5}, {"name": "Σάντουιτς γαλοπούλα", "cat": "Σνακ", "cal": 420, "portion": "τεμάχιο", "tag": "Γρήγορο", "protein": 24, "carbs": 48, "fat": 14}, {"name": "Σάντουιτς τόνος", "cat": "Σνακ", "cal": 460, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 30, "carbs": 48, "fat": 15}, {"name": "Σαλάτα με κοτόπουλο", "cat": "Σαλάτες", "cal": 430, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 34, "carbs": 22, "fat": 22}, {"name": "Σαλάτα με τόνο", "cat": "Σαλάτες", "cal": 360, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 28, "carbs": 18, "fat": 18}, {"name": "Σαλάτα ζυμαρικών", "cat": "Σαλάτες", "cal": 520, "portion": "μερίδα", "tag": "Υδατάνθρακες", "protein": 18, "carbs": 72, "fat": 18}, {"name": "Σπανακόρυζο με φέτα", "cat": "Λαδερά", "cal": 470, "portion": "πιάτο", "tag": "Μεσογειακό", "protein": 18, "carbs": 58, "fat": 18}, {"name": "Κολοκυθάκια γεμιστά", "cat": "Παραδοσιακά", "cal": 520, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 24, "carbs": 55, "fat": 22}, {"name": "Παπουτσάκια", "cat": "Παραδοσιακά", "cal": 680, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 32, "carbs": 58, "fat": 34}, {"name": "Σνίτσελ κοτόπουλο", "cat": "Κρέατα", "cal": 620, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 42, "carbs": 42, "fat": 30}, {"name": "Γαλοπούλα φιλέτο", "cat": "Κρέατα", "cal": 260, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 45, "carbs": 3, "fat": 7}, {"name": "Μπιφτέκια γαλοπούλας", "cat": "Κρέατα", "cal": 360, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 38, "carbs": 10, "fat": 18}, {"name": "Μοσχάρι βραστό", "cat": "Κρέατα", "cal": 420, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 45, "carbs": 8, "fat": 24}, {"name": "Χοιρινό κοντοσούβλι", "cat": "Κρέατα", "cal": 650, "portion": "μερίδα", "tag": "Ψητό", "protein": 45, "carbs": 12, "fat": 48}, {"name": "Πανσέτα ψητή", "cat": "Κρέατα", "cal": 720, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 42, "carbs": 4, "fat": 60}, {"name": "Συκώτι μοσχαρίσιο", "cat": "Κρέατα", "cal": 330, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 36, "carbs": 8, "fat": 16}, {"name": "Τόνος σαλάτα με ρύζι", "cat": "Ψάρια", "cal": 520, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 35, "carbs": 55, "fat": 18}, {"name": "Σαρδέλες κονσέρβα", "cat": "Ψάρια", "cal": 240, "portion": "κονσέρβα", "tag": "Ωμέγα-3", "protein": 24, "carbs": 0, "fat": 16}, {"name": "Μύδια αχνιστά", "cat": "Θαλασσινά", "cal": 260, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 28, "carbs": 10, "fat": 10}, {"name": "Γαριδομακαρονάδα", "cat": "Ζυμαρικά", "cal": 760, "portion": "μερίδα", "tag": "Θαλασσινά", "protein": 32, "carbs": 95, "fat": 26}, {"name": "Καρμπονάρα", "cat": "Ζυμαρικά", "cal": 900, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 32, "carbs": 92, "fat": 44}, {"name": "Πένες με κοτόπουλο", "cat": "Ζυμαρικά", "cal": 740, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 38, "carbs": 88, "fat": 24}, {"name": "Πίτσα μαργαρίτα", "cat": "Fast Food", "cal": 280, "portion": "κομμάτι", "tag": "Fast food", "protein": 11, "carbs": 34, "fat": 10}, {"name": "Πίτσα σπέσιαλ", "cat": "Fast Food", "cal": 340, "portion": "κομμάτι", "tag": "Fast food", "protein": 14, "carbs": 36, "fat": 16}, {"name": "Κρέπα αλμυρή", "cat": "Fast Food", "cal": 680, "portion": "τεμάχιο", "tag": "Γρήγορο", "protein": 28, "carbs": 70, "fat": 30}, {"name": "Κρέπα γλυκιά", "cat": "Γλυκά", "cal": 820, "portion": "τεμάχιο", "tag": "Γλυκό", "protein": 16, "carbs": 110, "fat": 34}, {"name": "Προφιτερόλ", "cat": "Γλυκά", "cal": 420, "portion": "μπολ", "tag": "Γλυκό", "protein": 8, "carbs": 58, "fat": 18}, {"name": "Πάστα σοκολάτα", "cat": "Γλυκά", "cal": 480, "portion": "κομμάτι", "tag": "Γλυκό", "protein": 7, "carbs": 62, "fat": 22}, {"name": "Τσουρέκι", "cat": "Γλυκά", "cal": 360, "portion": "φέτα", "tag": "Γλυκό", "protein": 8, "carbs": 58, "fat": 10}, {"name": "Μελομακάρονο", "cat": "Γλυκά", "cal": 180, "portion": "τεμάχιο", "tag": "Γλυκό", "protein": 2, "carbs": 24, "fat": 8}, {"name": "Κουραμπιές", "cat": "Γλυκά", "cal": 210, "portion": "τεμάχιο", "tag": "Γλυκό", "protein": 3, "carbs": 22, "fat": 12}, {"name": "Νερό", "cat": "Ποτά", "cal": 0, "portion": "100ml", "tag": "Χωρίς θερμίδες", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Ανθρακούχο νερό", "cat": "Ποτά", "cal": 0, "portion": "100ml", "tag": "Χωρίς θερμίδες", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Τσάι σκέτο", "cat": "Ποτά", "cal": 1, "portion": "100ml", "tag": "Ρόφημα", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Τσάι με ζάχαρη", "cat": "Ποτά", "cal": 25, "portion": "100ml", "tag": "Ζάχαρη", "protein": 0, "carbs": 6, "fat": 0}, {"name": "Καφές φίλτρου σκέτος", "cat": "Ποτά", "cal": 2, "portion": "100ml", "tag": "Καφές", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Cappuccino", "cat": "Ποτά", "cal": 45, "portion": "100ml", "tag": "Καφές", "protein": 2, "carbs": 5, "fat": 2}, {"name": "Latte", "cat": "Ποτά", "cal": 55, "portion": "100ml", "tag": "Καφές", "protein": 3, "carbs": 6, "fat": 2}, {"name": "Κακάο με γάλα", "cat": "Ποτά", "cal": 80, "portion": "100ml", "tag": "Ρόφημα", "protein": 3, "carbs": 12, "fat": 2}, {"name": "Γάλα πλήρες", "cat": "Ποτά", "cal": 62, "portion": "100ml", "tag": "Γαλακτοκομικό", "protein": 3, "carbs": 5, "fat": 4}, {"name": "Γάλα σοκολατούχο", "cat": "Ποτά", "cal": 78, "portion": "100ml", "tag": "Γαλακτοκομικό", "protein": 3, "carbs": 12, "fat": 2}, {"name": "Κεφίρ", "cat": "Ποτά", "cal": 55, "portion": "100ml", "tag": "Γαλακτοκομικό", "protein": 3, "carbs": 5, "fat": 3}, {"name": "Ayran", "cat": "Ποτά", "cal": 35, "portion": "100ml", "tag": "Γαλακτοκομικό", "protein": 2, "carbs": 3, "fat": 2}, {"name": "Χυμός μήλο", "cat": "Ποτά", "cal": 46, "portion": "100ml", "tag": "Χυμός", "protein": 0, "carbs": 11, "fat": 0}, {"name": "Χυμός ανάμεικτος", "cat": "Ποτά", "cal": 50, "portion": "100ml", "tag": "Χυμός", "protein": 0, "carbs": 12, "fat": 0}, {"name": "Λεμονάδα με ζάχαρη", "cat": "Ποτά", "cal": 42, "portion": "100ml", "tag": "Ζάχαρη", "protein": 0, "carbs": 10, "fat": 0}, {"name": "Πορτοκαλάδα με ζάχαρη", "cat": "Ποτά", "cal": 45, "portion": "100ml", "tag": "Ζάχαρη", "protein": 0, "carbs": 11, "fat": 0}, {"name": "Cola zero", "cat": "Ποτά", "cal": 0, "portion": "100ml", "tag": "Zero", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Σόδα", "cat": "Ποτά", "cal": 0, "portion": "100ml", "tag": "Zero", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Παγωμένο τσάι", "cat": "Ποτά", "cal": 30, "portion": "100ml", "tag": "Ζάχαρη", "protein": 0, "carbs": 7, "fat": 0}, {"name": "Ισοτονικό ποτό", "cat": "Ποτά", "cal": 25, "portion": "100ml", "tag": "Άσκηση", "protein": 0, "carbs": 6, "fat": 0}, {"name": "Ενεργειακό ποτό", "cat": "Ποτά", "cal": 45, "portion": "100ml", "tag": "Ενέργεια", "protein": 0, "carbs": 11, "fat": 0}, {"name": "Μπύρα χωρίς αλκοόλ", "cat": "Ποτά", "cal": 22, "portion": "100ml", "tag": "Χωρίς αλκοόλ", "protein": 0, "carbs": 5, "fat": 0}, {"name": "Ρετσίνα", "cat": "Αλκοολούχα", "cal": 80, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 3, "fat": 0}, {"name": "Μπύρα pilsner", "cat": "Αλκοολούχα", "cal": 42, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 4, "fat": 0}, {"name": "Μπύρα μαύρη", "cat": "Αλκοολούχα", "cal": 50, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 5, "fat": 0}, {"name": "Μπύρα IPA", "cat": "Αλκοολούχα", "cal": 60, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 6, "fat": 0}, {"name": "Κρασί λευκό", "cat": "Αλκοολούχα", "cal": 82, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 3, "fat": 0}, {"name": "Κρασί ροζέ", "cat": "Αλκοολούχα", "cal": 83, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 3, "fat": 0}, {"name": "Ούζο", "cat": "Αλκοολούχα", "cal": 220, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Τσίπουρο", "cat": "Αλκοολούχα", "cal": 240, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Ρακή", "cat": "Αλκοολούχα", "cal": 240, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Whisky", "cat": "Αλκοολούχα", "cal": 250, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Vodka", "cat": "Αλκοολούχα", "cal": 230, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Gin", "cat": "Αλκοολούχα", "cal": 263, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Rum", "cat": "Αλκοολούχα", "cal": 231, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 0, "fat": 0}, {"name": "Λικέρ", "cat": "Αλκοολούχα", "cal": 300, "portion": "100ml", "tag": "Αλκοόλ", "protein": 0, "carbs": 35, "fat": 0}, {"name": "Aperol Spritz", "cat": "Αλκοολούχα", "cal": 85, "portion": "100ml", "tag": "Κοκτέιλ", "protein": 0, "carbs": 8, "fat": 0}, {"name": "Mojito", "cat": "Αλκοολούχα", "cal": 75, "portion": "100ml", "tag": "Κοκτέιλ", "protein": 0, "carbs": 9, "fat": 0}, {"name": "Κοκτέιλ γλυκό", "cat": "Αλκοολούχα", "cal": 120, "portion": "100ml", "tag": "Κοκτέιλ", "protein": 0, "carbs": 15, "fat": 0}];
 let activeCat="Όλα", weightChart=null, fastingInterval=null;
 
 function showPage(id){ updateDashboard(); 
@@ -4424,8 +4487,50 @@ function soon(){alert("Η λειτουργία θα προστεθεί σε επ
 function num(id){return parseFloat(String(document.getElementById(id).value).replace(",","."))||0;} function val(id){return document.getElementById(id).value;} function setText(id,t){document.getElementById(id).textContent=t;}
 function allFoods(){return [...baseFoods, ...getCustomFoods()];}
 
-function renderFoodTabs(){const cats=["Όλα","⭐ Αγαπημένα",...Array.from(new Set(allFoods().map(f=>f.cat)))];document.getElementById("foodTabs").innerHTML=cats.map(c=>`<button class="tab ${activeCat===c?"active":""}" onclick="activeCat='${c}';renderFoodTabs();renderFoods();">${c}</button>`).join("");}
-function renderFoods(){const q=(document.getElementById("foodSearch")?.value||"").toLowerCase();const favs=getFavs();let list=allFoods().filter(f=>(activeCat==="Όλα"||f.cat===activeCat||(activeCat==="⭐ Αγαπημένα"&&favs.includes(f.name)))&&(f.name.toLowerCase().includes(q)||f.cat.toLowerCase().includes(q)||f.tag.toLowerCase().includes(q)));document.getElementById("foodCount").textContent=list.length;document.getElementById("foodList").innerHTML=list.map((f,i)=>`<div class="foodCard"><div class="foodTop"><div><div class="foodName">${f.name}</div><div class="foodMeta">Κατηγορία: ${f.cat} | Μερίδα: ${f.portion} <span class="badge">${f.tag}</span></div><div class="foodMeta">Π: ${f.protein||0}g • Υ: ${f.carbs||0}g • Λ: ${f.fat||0}g</div></div><div class="foodCal">${f.cal} kcal</div></div><button class="mealBtn btnLight" onclick='toggleFav("${encodeURIComponent(f.name)}")'>${favs.includes(f.name)?"★ Αγαπημένο":"☆ Αγαπημένο"}</button><div class="qtyRow singleQty"><select id="qty_${i}"><option value="0.25">0.25 μερίδα</option><option value="0.5">0.5 μερίδα</option><option value="1" selected>1 μερίδα</option><option value="1.5">1.5 μερίδα</option><option value="2">2 μερίδες</option><option value="3">3 μερίδες</option></select></div><button class="mealBtn btnGreen" onclick='addFoodToDiarySelectedMeal(${JSON.stringify(f)}, "qty_${i}")'>+ Προσθήκη στο ${selectedFoodMeal}</button></div>`).join("")||"<p class='small'>Δεν βρέθηκε φαγητό.</p>";}
+function renderFoodTabs(){
+  const preferred=["Όλα","⭐ Αγαπημένα","Πρωινό","Σνακ","Σαλάτες","Όσπρια","Λαδερά","Παραδοσιακά","Κρέατα","Ψάρια","Θαλασσινά","Ζυμαρικά","Fast Food","Γλυκά","Φρούτα","Ποτά","Αλκοολούχα","Δικά μου"];
+  const existing=Array.from(new Set(allFoods().map(f=>f.cat))).filter(Boolean);
+  const cats=[...preferred, ...existing.filter(c=>!preferred.includes(c))];
+  if(!cats.includes(activeCat)) activeCat="Όλα";
+  const html=cats.map(c=>`<option value="${c}" ${activeCat===c?"selected":""}>${c}</option>`).join("");
+  document.getElementById("foodTabs").innerHTML=`<select id="foodCatSelect" class="v75CatSelect" onchange="activeCat=this.value;renderFoods();">${html}</select>`;
+}
+function v75IsDrink(f){
+  return f && (f.cat==="Ποτά" || f.cat==="Αλκοολούχα" || String(f.portion||"").toLowerCase().includes("ml"));
+}
+function v75QtyOptions(f){
+  if(v75IsDrink(f)){
+    const sizes=[50,100,150,200,250,330,500,750,1000];
+    return sizes.map(ml=>`<option value="${ml/100}" ${ml===250?"selected":""}>${ml} ml</option>`).join("");
+  }
+  return `<option value="0.25">0.25 μερίδα</option><option value="0.5">0.5 μερίδα</option><option value="1" selected>1 μερίδα</option><option value="1.5">1.5 μερίδα</option><option value="2">2 μερίδες</option><option value="3">3 μερίδες</option>`;
+}
+function renderFoods(){
+  const q=(document.getElementById("foodSearch")?.value||"").toLowerCase();
+  const favs=getFavs();
+  let list=allFoods().filter(f=>
+    (activeCat==="Όλα"||f.cat===activeCat||(activeCat==="⭐ Αγαπημένα"&&favs.includes(f.name)))&&
+    (f.name.toLowerCase().includes(q)||f.cat.toLowerCase().includes(q)||String(f.tag||"").toLowerCase().includes(q))
+  );
+  document.getElementById("foodCount").textContent=list.length;
+  document.getElementById("foodList").innerHTML=list.map((f,i)=>{
+    const drink=v75IsDrink(f);
+    const unitText=drink ? "ανά 100ml" : "ανά " + (f.portion||"μερίδα");
+    return `<div class="foodCard ${drink?"v75DrinkCard":""}">
+      <div class="foodTop">
+        <div>
+          <div class="foodName">${drink?"🥤 ":""}${f.name}</div>
+          <div class="foodMeta">Κατηγορία: ${f.cat} | ${unitText} <span class="badge">${f.tag}</span></div>
+          <div class="foodMeta">Π: ${f.protein||0}g • Υ: ${f.carbs||0}g • Λ: ${f.fat||0}g</div>
+        </div>
+        <div class="foodCal">${f.cal} kcal</div>
+      </div>
+      <button class="mealBtn btnLight" onclick='toggleFav("${encodeURIComponent(f.name)}")'>${favs.includes(f.name)?"★ Αγαπημένο":"☆ Αγαπημένο"}</button>
+      <div class="qtyRow singleQty"><select id="qty_${i}">${v75QtyOptions(f)}</select></div>
+      <button class="mealBtn btnGreen" onclick='addFoodToDiarySelectedMeal(${JSON.stringify(f)}, "qty_${i}")'>+ Προσθήκη στο ${selectedFoodMeal}</button>
+    </div>`;
+  }).join("")||"<p class='small'>Δεν βρέθηκε φαγητό ή ποτό.</p>";
+}
 
 function getFavs(){return JSON.parse(localStorage.getItem("gca_favs")||"[]");}
 function setFavs(f){localStorage.setItem("gca_favs",JSON.stringify(f));}
@@ -6039,10 +6144,12 @@ function quickMeal(meal){
 }
 function addFoodToDiarySelectedMeal(food, qtyId){
   initDiaryDate();
-  const qty = parseFloat(document.getElementById(qtyId).value) || 1;
+  const sel = document.getElementById(qtyId);
+  const qty = parseFloat(sel.value) || 1;
+  const qtyLabel = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : "";
   const meal = selectedFoodMeal || "Σνακ";
   const item = {
-    name:food.name,
+    name:food.name + (qtyLabel && String(food.portion||"").toLowerCase().includes("ml") ? " (" + qtyLabel + ")" : ""),
     cat:food.cat,
     portion:food.portion,
     cal:food.cal,
@@ -6885,7 +6992,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=74").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=75").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -6908,7 +7015,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V74 / 1.1.1\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V75 / 1.1.2\n\nΠεριγραφή:");
   location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -6962,9 +7069,9 @@ window.addEventListener("load", ()=>{
 
 
 <script>
-/* V74 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
+/* V75 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V74-1.1.1";
+  const wanted = "V75-1.1.2";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
