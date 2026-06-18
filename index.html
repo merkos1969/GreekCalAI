@@ -3,67 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V49</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js">
-/* V47 safe refresh without breaking navigation */
-window.addEventListener("load", ()=>{
-  setTimeout(()=>{ try{ updateDashboard(); }catch(e){} }, 300);
-});
-
-
-/* V48 initial page */
-window.addEventListener("load", ()=>{
-  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-  const home=document.getElementById("home");
-  if(home) home.classList.add("active");
-  try{ updateDashboard(); }catch(e){}
-});
-
-
-/* V49 final FAB modal functions */
-function showQuickAdd(){
-  const o = document.getElementById("fabOverlay");
-  if(!o) return;
-  o.classList.remove("forceHide");
-  o.classList.add("show");
-  o.style.display = "flex";
-}
-
-function hideQuickAdd(){
-  const o = document.getElementById("fabOverlay");
-  if(!o) return;
-  o.classList.remove("show");
-  o.classList.add("forceHide");
-  o.style.display = "none";
-}
-
-function closeQuickAdd(e){
-  if(!e || e.target.id === "fabOverlay"){
-    hideQuickAdd();
-  }
-}
-
-function quickGo(id){
-  hideQuickAdd();
-  if(typeof showPage === "function") showPage(id);
-}
-
-/* Κλείσιμο και με το κουμπί Κλείσιμο, ακόμα κι αν το onclick δεν πιάσει */
-document.addEventListener("click", function(e){
-  const closeBtn = e.target.closest(".fabClose");
-  if(closeBtn){
-    e.preventDefault();
-    e.stopPropagation();
-    hideQuickAdd();
-  }
-});
-
-/* Κλείσιμο με Escape σε desktop */
-document.addEventListener("keydown", function(e){
-  if(e.key === "Escape") hideQuickAdd();
-});
-
-</script>
+<title>Greek Cal AI V61</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
 *{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);padding:10px}
@@ -1495,60 +1436,461 @@ label{
 }
 
 
-/* V47 safe rollback fix */
-#home .compactHome{
-  overflow:hidden;
+/* V55 stable + / overlay / bars */
+.quickAddToggle{
+  position:fixed;
+  opacity:0;
+  pointer-events:none;
 }
-#home .compactStats{
+.fab{
+  width:72px!important;
+  height:72px!important;
+  right:18px!important;
+  bottom:108px!important;
+  border-radius:50%!important;
+  background:linear-gradient(135deg,#22c55e,#15803d)!important;
+  color:#fff!important;
+  font-size:42px!important;
+  font-weight:1000!important;
+  border:4px solid #fff!important;
+  box-shadow:0 16px 34px rgba(21,128,61,.38),0 0 0 8px rgba(34,197,94,.12)!important;
+  z-index:10000!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-decoration:none!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  line-height:1!important;
+}
+.fab::after{
+  content:"Γρήγορη";
+  position:absolute;
+  right:-2px;
+  bottom:-23px;
+  background:white;
+  color:#15803d;
+  border:1px solid #bbf7d0;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:900;
+  padding:3px 8px;
+  box-shadow:0 6px 14px rgba(15,23,42,.10);
+  pointer-events:none;
+}
+#fabOverlay{
+  position:fixed!important;
+  inset:0!important;
+  background:rgba(15,23,42,.52)!important;
+  z-index:10001!important;
+  display:none!important;
+  align-items:flex-end!important;
+  justify-content:center!important;
+  padding:14px!important;
+  pointer-events:auto!important;
+}
+#quickAddToggle:checked ~ #fabOverlay{
+  display:flex!important;
+}
+#fabOverlay.show{
+  display:flex!important;
+}
+#fabOverlay .fabSheet{
+  width:100%!important;
+  max-width:650px!important;
+  background:white!important;
+  border-radius:28px!important;
+  padding:18px!important;
+  max-height:86vh!important;
+  overflow:auto!important;
+  box-shadow:0 -18px 50px rgba(15,23,42,.25)!important;
+  pointer-events:auto!important;
+}
+#fabOverlay .fabAction{
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+.progressBar,
+.macroMini,
+#dashWaterBar,
+#dashProgressBar,
+#homeProteinBar,
+#homeCarbsBar,
+#homeFatBar,
+#waterProgressBar{
+  transition:width .25s ease;
+  min-width:0;
+}
+
+
+/* V57 macro settings in weight profile */
+.macroSettingsBox{
+  background:#f8fbff;
+  border:1px solid #bfdbfe;
+  border-radius:22px;
+  padding:14px;
+  margin:14px 0;
+}
+.macroSettingsBox h3{
+  margin:0 0 6px;
+  color:#0d47a1;
+  font-size:22px;
+}
+.macroPresetGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin:10px 0;
+}
+.macroPresetGrid button{
+  background:#eaf3ff!important;
+  color:#0d47a1!important;
+  box-shadow:none!important;
+  border-radius:16px!important;
+  padding:10px!important;
+  font-size:14px!important;
+}
+.macroPresetGrid button small{
+  color:#667085;
+  font-weight:800;
+}
+.macroSplitGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+}
+.macroSplitGrid input{
+  text-align:center;
+  font-weight:900;
+}
+.macroSplitInfo{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:16px;
+  padding:10px;
+  font-weight:900;
+  line-height:1.35;
+  margin-top:10px;
+}
+.macroSplitInfo.warn{
+  background:#fff7ed;
+  border-color:#fed7aa;
+  color:#9a3412;
+}
+@media(max-width:560px){
+  .macroPresetGrid,.macroSplitGrid{
+    grid-template-columns:1fr;
+  }
+}
+
+
+/* V58: safer bottom spacing and cleaner Photo/Barcode pages */
+body{
+  padding-bottom:calc(150px + env(safe-area-inset-bottom))!important;
+}
+.app{
+  padding-bottom:calc(135px + env(safe-area-inset-bottom))!important;
+}
+section{
+  padding-bottom:calc(135px + env(safe-area-inset-bottom))!important;
+}
+.v58PageCard{
+  padding-bottom:26px!important;
+}
+.v58BottomSpace{
+  height:calc(130px + env(safe-area-inset-bottom));
+}
+.v58InfoCard{
+  background:linear-gradient(135deg,#eff6ff,#f8fbff);
+  border:1px solid #bfdbfe;
+  border-radius:18px;
+  padding:14px;
+  margin:10px 0 14px;
+  color:#174a8b;
+}
+.v58InfoCard b{
+  display:block;
+  font-size:18px;
+  margin-bottom:6px;
+}
+.v58InfoCard p{
+  margin:0;
+  color:#667085;
+  font-weight:700;
+  line-height:1.35;
+}
+.v58StepCard{
+  background:#ffffff;
+  border:1px solid #d7e8f8;
+  border-radius:20px;
+  padding:14px;
+  margin:14px 0;
+  box-shadow:0 6px 16px rgba(15,23,42,.04);
+}
+.v58StepTitle{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#0d47a1;
+  font-size:18px;
+  font-weight:1000;
+  margin-bottom:10px;
+}
+.v58StepTitle span{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#1e6cc7;
+  color:#fff;
+  font-size:15px;
+  box-shadow:0 5px 12px rgba(30,108,199,.25);
+}
+.v58PreviewBox{
+  margin-top:12px;
+}
+.v58QtyBox{
+  margin-top:12px;
+}
+.v58BigBtn{
+  font-size:20px!important;
+  padding:16px!important;
+  border-radius:18px!important;
+}
+.v58ActionGrid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
+  margin-top:10px;
 }
-#home .compactStats .dashBox{
-  min-height:78px;
+.v58ActionGrid button{
+  margin:0!important;
+  min-height:62px;
 }
-#home .compactHome .heroCalBox{
-  margin-bottom:12px;
+.v58VideoBox{
+  margin-top:8px;
 }
-#home .homeMacroPanel,
-#home .dashWaterProgress{
-  margin-top:12px;
+#barcodeResult.v58StepCard{
+  background:#f8fbff;
 }
-#home .quickActions{
-  margin-top:12px;
+@media(max-width:560px){
+  body{padding-bottom:165px!important}
+  .app,section{padding-bottom:155px!important}
+  .v58BottomSpace{height:150px}
+  .v58ActionGrid{
+    grid-template-columns:1fr;
+  }
+  .v58StepCard{
+    padding:12px;
+  }
 }
 
 
-/* V48 critical navigation fix */
-section{
-  display:none;
+/* V59 usage guide + backup */
+.v59GuideCard{
+  background:linear-gradient(135deg,#ffffff,#f0f7ff);
+  border:1px solid #bfdbfe;
+  border-radius:22px;
+  padding:12px;
+  margin:10px 0 12px;
+  box-shadow:0 8px 20px rgba(15,23,42,.06);
 }
-section.active{
+.v59GuideHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+}
+.v59GuideHead b{
   display:block;
+  color:#0d47a1;
+  font-size:19px;
 }
-#fabOverlay{
-  display:none;
+.v59GuideHead span{
+  display:block;
+  color:#667085;
+  font-weight:800;
+  font-size:13px;
+  margin-top:2px;
 }
-#fabOverlay.show{
+.v59GuideHead button{
+  width:auto!important;
+  min-width:96px;
+  margin:0!important;
+  padding:9px 12px!important;
+  border-radius:999px!important;
+  background:#eaf3ff!important;
+  color:#0d47a1!important;
+  box-shadow:none!important;
+  font-size:14px!important;
+  font-weight:900!important;
+}
+.v59GuideBody{
+  margin-top:12px;
+  border-top:1px solid #d7e8f8;
+  padding-top:12px;
+}
+.v59GuideSteps{
+  display:grid;
+  gap:8px;
+}
+.v59GuideSteps div{
+  display:grid;
+  grid-template-columns:30px 1fr;
+  gap:8px;
+  align-items:start;
+  color:#344054;
+  font-weight:800;
+  line-height:1.35;
+}
+.v59GuideSteps div>b{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:#1e6cc7;
+  color:white;
   display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
 }
-.bottomNav.cleanNav{
-  z-index:9000;
+.v59GuideActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px;
 }
-.fab{
-  z-index:9100;
+.v59GuideActions button{
+  margin:0!important;
+  min-height:52px;
+  font-size:15px!important;
+}
+.v59BackupPage{
+  padding-bottom:28px!important;
+}
+.v59InfoBox{
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  border-radius:18px;
+  padding:14px;
+  color:#174a8b;
+  margin:10px 0 14px;
+}
+.v59InfoBox b{
+  display:block;
+  font-size:18px;
+  margin-bottom:6px;
+}
+.v59InfoBox p{
+  margin:0;
+  color:#667085;
+  font-weight:800;
+  line-height:1.35;
+}
+.v59BackupGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:10px 0;
+}
+.v59BackupGrid button{
+  margin:0!important;
+  min-height:58px;
+}
+.v59BackupText{
+  min-height:180px!important;
+  font-size:13px!important;
+  font-family:monospace!important;
+}
+.v59ImportBox{
+  background:#f8fbff;
+  border:1px solid #d7e8f8;
+  border-radius:18px;
+  padding:14px;
+  margin:14px 0;
+}
+.v59Warning{
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#9a3412;
+  border-radius:16px;
+  padding:12px;
+  font-weight:900;
+  line-height:1.35;
+}
+@media(max-width:560px){
+  .v59GuideActions,.v59BackupGrid{
+    grid-template-columns:1fr;
+  }
 }
 
 
-/* V49 modal close fix */
-#fabOverlay{
-  display:none;
+.v60WeightActions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}.v60WeightActions button{margin:0!important}.v60WeightActions .btnGreen,.v60WeightActions .btnRed{width:100%}.v60WeightActions .btnLight{grid-column:span 2}@media(max-width:560px){.v60WeightActions{grid-template-columns:1fr}.v60WeightActions .btnLight{grid-column:auto}}
+
+
+/* V61 better weight actions + danger zone */
+.v61WeightActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
 }
-#fabOverlay.show{
-  display:flex;
+.v61WeightActions button{
+  margin:0!important;
+  min-height:58px;
 }
-#fabOverlay.forceHide{
-  display:none!important;
+.v61WeightActions .mainAction{
+  min-height:66px;
+  font-size:18px!important;
+}
+.v61WeightActions .btnLight{
+  grid-column:span 2;
+}
+.v61WeightActions .softDanger{
+  background:linear-gradient(135deg,#f97316,#dc2626)!important;
+}
+.v61HistoryActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:12px 0;
+}
+.v61HistoryActions button{
+  margin:0!important;
+}
+.v61DangerZone{
+  background:#fff1f2;
+  border:1px solid #fecdd3;
+  border-radius:18px;
+  padding:14px;
+  margin:16px 0;
+}
+.v61DangerZone h3{
+  margin:0 0 6px;
+  color:#991b1b;
+}
+.v61DangerZone p{
+  margin:0 0 12px;
+  color:#7f1d1d;
+  font-weight:800;
+  line-height:1.35;
+}
+.v61DangerZone button{
+  margin:0!important;
+  width:100%;
+}
+@media(max-width:560px){
+  .v61WeightActions,
+  .v61HistoryActions{
+    grid-template-columns:1fr;
+  }
+  .v61WeightActions .btnLight{
+    grid-column:auto;
+  }
 }
 
 </style>
@@ -1573,8 +1915,33 @@ section.active{
 
 <div class="app">
 
-<section id="home" class="card menu active">
+<section id="home" class="card menu">
   <div class="brandTop"><div class="appLogo">🇬🇷</div><h1>Greek Cal AI</h1><div class="appSubTitle">Smart Greek Diet Coach</div></div>
+
+<div class="v59GuideCard">
+  <div class="v59GuideHead" onclick="toggleUsageGuide()">
+    <div>
+      <b>📘 Οδηγίες χρήσης</b>
+      <span>Ξεκίνα σωστά την εφαρμογή</span>
+    </div>
+    <button type="button" id="usageGuideToggleBtn">Άνοιγμα</button>
+  </div>
+
+  <div id="usageGuideBody" class="v59GuideBody hidden">
+    <div class="v59GuideSteps">
+      <div><b>1</b><span>Συμπλήρωσε πρώτα <b>Βάρος / Στόχο</b>.</span></div>
+      <div><b>2</b><span>Πρόσθεσε φαγητό από <b>Φαγητά</b>, <b>Φωτογραφία</b> ή <b>Barcode</b>.</span></div>
+      <div><b>3</b><span>Με το πράσινο <b>+</b> κάνεις γρήγορη καταχώρηση.</span></div>
+      <div><b>4</b><span>Στην Αρχική βλέπεις θερμίδες, νερό, άσκηση και μακροθρεπτικά.</span></div>
+    </div>
+
+    <div class="v59GuideActions">
+      <button type="button" onclick="showPage('weight')">⚖️ Στοιχεία / Στόχος</button>
+      <button type="button" onclick="showPage('backup')">💾 Backup</button>
+    </div>
+  </div>
+</div>
+
 
 <div class="installMini" onclick="toggleInstallHelp()">
   📲 Εγκατάσταση στο κινητό
@@ -1649,96 +2016,173 @@ section.active{
 
 
 
+
+<section id="backup" class="hidden">
+  <button class="back" onclick="showPage('home')">← Πίσω</button>
+  <div class="card v59BackupPage">
+    <h2>💾 Backup / Επαναφορά</h2>
+
+    <div class="v59InfoBox">
+      <b>Για να μη χαθούν τα δεδομένα σου</b>
+      <p>Κάνε συχνά backup. Αποθηκεύει φαγητά, νερό, βάρος, στόχους, άσκηση, barcode προϊόντα και ρυθμίσεις δίαιτας.</p>
+    </div>
+
+    <div class="v59BackupGrid">
+      <button class="btnGreen" onclick="v59DownloadBackup()">⬇️ Κατέβασμα backup</button>
+      <button onclick="v59CreateBackupText()">📋 Εμφάνιση backup</button>
+    </div>
+
+    <label>Backup JSON</label>
+    <textarea id="v59BackupText" class="v59BackupText" placeholder="Εδώ θα εμφανιστεί το backup ή κάνε επικόλληση για επαναφορά."></textarea>
+
+    <div class="v59BackupGrid">
+      <button class="btnLight" onclick="v59CopyBackup()">📄 Αντιγραφή</button>
+      <button class="btnRed" onclick="v59RestoreFromText()">⬆️ Επαναφορά από κείμενο</button>
+    </div>
+
+    <div class="v59ImportBox">
+      <label>Επαναφορά από αρχείο backup</label>
+      <input id="v59BackupFile" type="file" accept=".json,application/json" onchange="v59RestoreFromFile(event)">
+    </div>
+
+    
+    <div class="v61DangerZone">
+      <h3>⚠️ Επικίνδυνη ζώνη</h3>
+      <p>Χρησιμοποίησέ το μόνο αν θέλεις να ξεκινήσεις από την αρχή. Πριν το κάνεις, πάρε backup.</p>
+      <button class="btnRed" onclick="v61FullReset()">🧨 Διαγραφή όλων των δεδομένων εφαρμογής</button>
+    </div>
+
+    <div class="v59Warning">
+      ⚠️ Η επαναφορά θα αντικαταστήσει τα δεδομένα της εφαρμογής με αυτά του backup.
+    </div>
+
+    <div class="v58BottomSpace"></div>
+  </div>
+</section>
+
+
 <section id="photoMeal" class="hidden">
   <button class="back" onclick="showPage('home')">← Πίσω</button>
-  <div class="card">
+  <div class="card v58PageCard">
     <h2>📷 Φωτογραφία Γεύματος</h2>
-    <p class="small">Πρώτη λειτουργική έκδοση: ανεβάζεις/τραβάς φωτογραφία, βλέπεις προεπισκόπηση και μετά διαλέγεις χειροκίνητα το φαγητό που αντιστοιχεί.</p>
 
-    <label>Φωτογραφία γεύματος</label>
-    <input id="mealPhotoInput" type="file" accept="image/*" capture="environment" onchange="previewMealPhoto(event)">
-
-    <div id="mealPhotoBox" class="hidden">
-      <img id="mealPhotoPreview" class="photoPreview">
-      <div class="photoNote">Η AI αναγνώριση φαγητού θα μπει αργότερα. Προς το παρόν διάλεξε φαγητό από τη λίστα ή καταχώρησέ το χειροκίνητα.</div>
+    <div class="v58InfoCard">
+      <b>Φωτογραφία + χειροκίνητη επιβεβαίωση</b>
+      <p>Ανεβάζεις ή τραβάς φωτογραφία, βλέπεις προεπισκόπηση και μετά επιλέγεις το σωστό φαγητό από τη λίστα. Έτσι η καταχώρηση μένει σίγουρη και σωστή.</p>
     </div>
 
-    <label>Γρήγορη επιλογή φαγητού</label>
-    <select id="photoFoodSelect" onchange="updatePhotoPreviewCalories()"></select>
+    <div class="v58StepCard">
+      <div class="v58StepTitle"><span>1</span> Φωτογραφία</div>
+      <label>Φωτογραφία γεύματος</label>
+      <input id="mealPhotoInput" type="file" accept="image/*" capture="environment" onchange="previewMealPhoto(event)">
+      <div id="mealPhotoBox" class="hidden v58PreviewBox">
+        <img id="mealPhotoPreview" class="photoPreview">
+        <div class="photoNote">Η φωτογραφία φαίνεται μόνο για βοήθεια. Διάλεξε από κάτω το φαγητό που αντιστοιχεί.</div>
+      </div>
+    </div>
 
-    <div class="qtyModeBox">
-      <label>Τρόπος ποσότητας</label>
-      <select id="photoQtyMode" onchange="updatePhotoQtyMode();updatePhotoPreviewCalories()">
-        <option value="portion">Μερίδες</option>
-        <option value="grams">Γραμμάρια</option>
+    <div class="v58StepCard">
+      <div class="v58StepTitle"><span>2</span> Επιλογή φαγητού</div>
+
+      <label>Γρήγορη επιλογή φαγητού</label>
+      <select id="photoFoodSelect" onchange="updatePhotoPreviewCalories()"></select>
+
+      <div class="qtyModeBox v58QtyBox">
+        <label>Τρόπος ποσότητας</label>
+        <select id="photoQtyMode" onchange="updatePhotoQtyMode();updatePhotoPreviewCalories()">
+          <option value="portion">Μερίδες</option>
+          <option value="grams">Γραμμάρια</option>
+        </select>
+
+        <div id="photoPortionBox">
+          <label>Μερίδες</label>
+          <select id="photoFoodQty" onchange="updatePhotoPreviewCalories()">
+            <option value="0.25">0.25 μερίδα</option>
+            <option value="0.5">0.5 μερίδα</option>
+            <option value="1" selected>1 μερίδα</option>
+            <option value="1.5">1.5 μερίδα</option>
+            <option value="2">2 μερίδες</option>
+            <option value="3">3 μερίδες</option>
+          </select>
+        </div>
+
+        <div id="photoGramsBox" class="hidden">
+          <label>Γραμμάρια</label>
+          <input id="photoFoodGrams" type="number" value="100" oninput="updatePhotoPreviewCalories()">
+          <div class="inlineSmall">Υπολογισμός με βάση εκτίμηση ότι 1 μερίδα ≈ 200g.</div>
+        </div>
+
+        <div id="photoCalcPreview" class="calcPreview">Σύνολο: 320 kcal</div>
+      </div>
+    </div>
+
+    <div class="v58StepCard">
+      <div class="v58StepTitle"><span>3</span> Προσθήκη στο ημερήσιο</div>
+
+      <label>Γεύμα</label>
+      <select id="photoMealType">
+        <option>Πρωινό</option>
+        <option>Σνακ</option>
+        <option>Μεσημεριανό</option>
+        <option>Βραδινό</option>
+        <option selected>Σνακ</option>
       </select>
 
-      <div id="photoPortionBox">
-        <label>Μερίδες</label>
-        <select id="photoFoodQty" onchange="updatePhotoPreviewCalories()">
-          <option value="0.25">0.25 μερίδα</option>
-          <option value="0.5">0.5 μερίδα</option>
-          <option value="1" selected>1 μερίδα</option>
-          <option value="1.5">1.5 μερίδα</option>
-          <option value="2">2 μερίδες</option>
-          <option value="3">3 μερίδες</option>
-        </select>
-      </div>
+      <button class="btnGreen v58BigBtn" onclick="addPhotoFoodToDiary()">➕ Προσθήκη στο ημερήσιο</button>
 
-      <div id="photoGramsBox" class="hidden">
-        <label>Γραμμάρια</label>
-        <input id="photoFoodGrams" type="number" value="100" oninput="updatePhotoPreviewCalories()">
-        <div class="inlineSmall">Υπολογισμός με βάση εκτίμηση ότι 1 μερίδα ≈ 200g.</div>
+      <div class="v58ActionGrid">
+        <button onclick="showPage('foods')">🍽 Ελληνικά Φαγητά</button>
+        <button class="btnLight" onclick="showPage('custom')">➕ Δικό μου φαγητό</button>
       </div>
-
-      <div id="photoCalcPreview" class="calcPreview">Σύνολο: 320 kcal</div>
     </div>
 
-    <label>Γεύμα</label>
-    <select id="photoMealType">
-      <option>Πρωινό</option>
-      <option>Σνακ</option>
-      <option>Μεσημεριανό</option>
-      <option>Βραδινό</option>
-      <option selected>Σνακ</option>
-    </select>
-
-    <button class="btnGreen" onclick="addPhotoFoodToDiary()">➕ Προσθήκη στο ημερήσιο</button>
-    <button onclick="showPage('foods')">🍽 Άνοιγμα Ελληνικών Φαγητών</button>
-    <button class="btnLight" onclick="showPage('custom')">➕ Δικό μου φαγητό</button>
+    <div class="v58BottomSpace"></div>
   </div>
 </section>
 
 <section id="barcode" class="hidden">
   <button class="back" onclick="showPage('home')">← Πίσω</button>
-  <div class="card">
+  <div class="card v58PageCard">
     <h2>📦 Barcode / Προϊόν</h2>
-    <p class="small">Η κάμερα από browser δεν δουλεύει σε όλα τα κινητά. Γι’ αυτό η χειροκίνητη καταχώρηση είναι πλέον πάντα διαθέσιμη.</p>
 
-    <div class="videoBox">
-      <video id="barcodeVideo" autoplay playsinline></video>
-      <div id="barcodePlaceholder">📷 Προαιρετική σάρωση με κάμερα</div>
+    <div class="v58InfoCard">
+      <b>Σάρωση ή χειροκίνητη καταχώρηση</b>
+      <p>Η κάμερα από browser δεν δουλεύει πάντα σε όλα τα κινητά. Αν δεν ανοίξει ή δεν διαβάσει το barcode, βάλε τον κωδικό χειροκίνητα και συνέχισε κανονικά.</p>
     </div>
 
-    <div id="scanStatus" class="scanStatus">Βάλε barcode χειροκίνητα ή άνοιξε την κάμερα.</div>
+    <div class="v58StepCard">
+      <div class="v58StepTitle"><span>1</span> Barcode ή φωτογραφία προϊόντος</div>
 
-    <div class="rowBtns">
-      <button class="btnGreen" onclick="startBarcodeScan()">▶️ Κάμερα</button>
-      <button class="btnRed" onclick="stopBarcodeScan()">⏹ Διακοπή</button>
+      <label>Barcode / Κωδικός προϊόντος</label>
+      <input id="manualBarcode" placeholder="π.χ. 5201234567890">
+      <button onclick="useManualBarcode()">🔎 Άνοιγμα φόρμας προϊόντος</button>
+
+      <label>Φωτογραφία προϊόντος / barcode</label>
+      <input id="barcodePhoto" type="file" accept="image/*" onchange="previewBarcodePhoto(event)">
+      <div id="photoPreviewBox" class="productCard hidden">
+        <img id="barcodePhotoPreview" style="width:100%;border-radius:14px;max-height:240px;object-fit:contain;background:#f8fafc">
+        <p class="small">Η φωτογραφία αποθηκεύεται μόνο για προβολή. Η αναγνώριση με AI θα μπει σε επόμενη έκδοση.</p>
+      </div>
     </div>
 
-    <label>Φωτογραφία προϊόντος / barcode</label>
-    <input id="barcodePhoto" type="file" accept="image/*" onchange="previewBarcodePhoto(event)">
-    <div id="photoPreviewBox" class="productCard hidden">
-      <img id="barcodePhotoPreview" style="width:100%;border-radius:14px;max-height:240px;object-fit:contain;background:#f8fafc">
-      <p class="small">Η φωτογραφία αποθηκεύεται μόνο για προβολή. Η αναγνώριση με AI θα μπει σε επόμενη έκδοση.</p>
+    <div class="v58StepCard">
+      <div class="v58StepTitle"><span>2</span> Προαιρετική κάμερα</div>
+
+      <div class="videoBox v58VideoBox">
+        <video id="barcodeVideo" autoplay playsinline></video>
+        <div id="barcodePlaceholder">📷 Προαιρετική σάρωση με κάμερα</div>
+      </div>
+
+      <div id="scanStatus" class="scanStatus">Βάλε barcode χειροκίνητα ή άνοιξε την κάμερα.</div>
+
+      <div class="rowBtns">
+        <button class="btnGreen" onclick="startBarcodeScan()">▶️ Κάμερα</button>
+        <button class="btnRed" onclick="stopBarcodeScan()">⏹ Διακοπή</button>
+      </div>
     </div>
 
-    <label>Barcode / Κωδικός προϊόντος</label>
-    <input id="manualBarcode" placeholder="π.χ. 5201234567890">
-    <button onclick="useManualBarcode()">🔎 Άνοιγμα φόρμας προϊόντος</button>
-
-    <div id="barcodeResult" class="productCard">
+    <div id="barcodeResult" class="productCard v58StepCard">
+      <div class="v58StepTitle"><span>3</span> Στοιχεία προϊόντος</div>
       <div class="productTitle" id="barcodeProductTitle">Χειροκίνητη καταχώρηση προϊόντος</div>
       <div class="productMeta" id="barcodeProductMeta">Βάλε στοιχεία και αποθήκευσέ το στα Δικά μου ή στο ημερήσιο.</div>
 
@@ -1757,7 +2201,7 @@ section.active{
       <label>Μερίδα</label>
       <input id="barcodePortion" value="μερίδα">
 
-      <div class="qtyModeBox">
+      <div class="qtyModeBox v58QtyBox">
         <label>Τρόπος ποσότητας</label>
         <select id="barcodeQtyMode" onchange="updateBarcodeQtyMode();updateBarcodePreviewCalories()">
           <option value="portion">Μερίδες</option>
@@ -1796,11 +2240,13 @@ section.active{
         <option selected>Σνακ</option>
       </select>
 
-      <div class="rowBtns">
-        <button class="btnGreen" onclick="saveBarcodeProduct()">💾 Αποθήκευση</button>
-        <button onclick="addBarcodeToDiary()">➕ Στο ημερήσιο</button>
+      <div class="v58ActionGrid">
+        <button class="btnGreen" onclick="saveBarcodeProduct()">💾 Αποθήκευση στα Δικά μου</button>
+        <button onclick="addBarcodeToDiary()">➕ Προσθήκη στο ημερήσιο</button>
       </div>
     </div>
+
+    <div class="v58BottomSpace"></div>
   </div>
 </section>
 
@@ -2075,6 +2521,36 @@ section.active{
     <label>Ύψος π.χ. 1.75</label><input id="height" type="number" step="0.01" value="1.75">
     <label>Ηλικία</label><input id="age" type="number" step="1" value="40">
     <label>Φύλο</label><select id="gender"><option value="male">Άνδρας</option><option value="female">Γυναίκα</option></select>
+
+    <div class="macroSettingsBox">
+      <h3>🥗 Ποσοστά δίαιτας</h3>
+      <p class="small">Διάλεξε πώς θα μοιράζονται οι ημερήσιες θερμίδες σου σε πρωτεΐνη, υδατάνθρακες και λιπαρά.</p>
+
+      <div class="macroPresetGrid">
+        <button type="button" onclick="v57SetMacroPreset(30,40,30)">Ισορροπημένο<br><small>30% / 40% / 30%</small></button>
+        <button type="button" onclick="v57SetMacroPreset(35,25,40)">Low carb<br><small>35% / 25% / 40%</small></button>
+        <button type="button" onclick="v57SetMacroPreset(40,30,30)">Υψηλή πρωτεΐνη<br><small>40% / 30% / 30%</small></button>
+        <button type="button" onclick="v57SetMacroPreset(25,50,25)">Μεσογειακό<br><small>25% / 50% / 25%</small></button>
+      </div>
+
+      <div class="macroSplitGrid">
+        <div>
+          <label>Πρωτεΐνη %</label>
+          <input id="weightMacroProteinPct" type="number" value="30" min="0" max="100" oninput="v57SaveMacroFromWeight()">
+        </div>
+        <div>
+          <label>Υδατάνθρακες %</label>
+          <input id="weightMacroCarbsPct" type="number" value="40" min="0" max="100" oninput="v57SaveMacroFromWeight()">
+        </div>
+        <div>
+          <label>Λιπαρά %</label>
+          <input id="weightMacroFatPct" type="number" value="30" min="0" max="100" oninput="v57SaveMacroFromWeight()">
+        </div>
+      </div>
+
+      <div id="weightMacroInfo" class="macroSplitInfo">Σύνολο 100%.</div>
+    </div>
+
     <label>Επίπεδο δραστηριότητας</label><select id="activity"><option value="1.2">Καθιστική ζωή</option><option value="1.375">Ελαφριά δραστηριότητα</option><option value="1.55">Μέτρια δραστηριότητα</option><option value="1.725">Υψηλή δραστηριότητα</option></select>
 
 <div class="paceBox">
@@ -2088,14 +2564,20 @@ section.active{
   <div id="paceInfo" class="paceInfo">Ο κανονικός ρυθμός είναι περίπου 0.45 kg/εβδομάδα.</div>
 </div>
     <label>Σημείωση μέτρησης</label><textarea id="note" placeholder="π.χ. περπάτημα / 16:8 / μεσογειακή διατροφή"></textarea>
-    <button class="btnGreen" onclick="saveWeightData()">💾 Αποθήκευση Στοιχείων</button><button onclick="addMeasurement()">➕ Καταχώρηση Μέτρησης</button><button class="btnLight" onclick="calculateWeight()">📊 Υπολογισμός Προόδου</button>
+    <div class="v61WeightActions">
+      <button class="btnGreen mainAction" onclick="saveWeightData()">💾 Αποθήκευση Στοιχείων</button>
+      <button class="mainAction" onclick="addMeasurement()">➕ Καταχώρηση Μέτρησης</button>
+      <button class="btnLight" onclick="calculateWeight()">📊 Υπολογισμός Προόδου</button>
+      <button class="btnRed" onclick="clearWeightData()">🗑 Διαγραφή Στοιχείων</button>
+      <button class="btnRed softDanger" onclick="clearHistory()">🧹 Διαγραφή μόνο ιστορικού</button>
+    </div>
   </div>
   <div class="card"><h2>Πρόοδος</h2><div class="progressWrap"><div id="weightProgressBar" class="progressBar"></div></div><p id="weightProgressText" class="bigCenter">0%</p>
     <div class="grid"><div class="stat"><b>Χαμένα κιλά</b><span id="lostKg">0 kg</span></div><div class="stat"><b>Κιλά που απομένουν</b><span id="remainingKg">0 kg</span></div><div class="stat"><b>BMI</b><span id="bmi">-</span></div><div class="stat"><b>Κατηγορία BMI</b><span id="bmiCategory">-</span></div><div class="stat"><b>Θερμίδες συντήρησης</b><span id="maintenanceCalories">-</span></div><div class="stat"><b>Ημ. θερμίδες στόχου</b><span id="cutCalories">-</span></div><div class="stat"><b>Εκτίμηση χρόνου</b><span id="goalTimeline">-</span></div><div class="stat"><b>Ρυθμός στόχου</b><span id="goalWeeklyLoss">-</span></div><div class="stat"><b>Μετρήσεις</b><span id="totalMeasurements">0</span></div><div class="stat"><b>Μέσος ρυθμός</b><span id="avgRate">-</span></div></div>
     <div class="goalMessage" id="goalMessage" style="margin-top:14px">Καταχώρησε στοιχεία για να εμφανιστεί αξιολόγηση.</div><div class="goalExplain" id="goalExplain">Η εκτίμηση χρόνου βασίζεται σε ενδεικτικό έλλειμμα θερμίδων και δεν αποτελεί ιατρική οδηγία.</div>
   </div>
   <div class="card"><h2>📈 Γράφημα Βάρους</h2><canvas id="weightChart"></canvas><p class="small" id="chartHelp">Το γράφημα ενημερώνεται από το ιστορικό μετρήσεων.</p></div>
-  <div class="card"><h2>📋 Ιστορικό Μετρήσεων</h2><div id="historyList"></div><div class="rowBtns"><button class="btnPurple" onclick="exportBackup()">⬇️ Export Backup</button><button class="btnRed" onclick="clearHistory()">🗑 Διαγραφή ιστορικού</button></div><textarea id="backupBox" placeholder="Εδώ εμφανίζεται το backup JSON ή κάνε επικόλληση για restore"></textarea><button class="btnLight" onclick="importBackup()">⬆️ Import Backup</button></div>
+  <div class="card"><h2>📋 Ιστορικό Μετρήσεων</h2><div id="historyList"></div><div class="v61HistoryActions"><button class="btnPurple" onclick="exportBackup()">⬇️ Export Backup</button><button class="btnRed" onclick="clearHistory()">🧹 Διαγραφή μόνο ιστορικού</button></div><textarea id="backupBox" placeholder="Εδώ εμφανίζεται το backup JSON ή κάνε επικόλληση για restore"></textarea><button class="btnLight" onclick="importBackup()">⬆️ Import Backup</button></div>
   <p class="small">Οι υπολογισμοί είναι ενδεικτικοί και δεν αποτελούν ιατρική συμβουλή.</p>
 </section>
 </div>
@@ -2108,45 +2590,46 @@ section.active{
   <button onclick="showPage('weight')"><b>⚖️</b>Βάρος</button>
 </nav>
 
-<button class="fab" onclick="openQuickAdd()">+</button>
+<input id="quickAddToggle" class="quickAddToggle" type="checkbox">
+<label for="quickAddToggle" class="fab" aria-label="Γρήγορη καταχώρηση">+</label>
 
-<div id="fabOverlay" class="fabOverlay" onclick="closeQuickAdd(event)">
+<div id="fabOverlay" class="fabOverlay" onclick="if(event.target.id==='fabOverlay') hideQuickAdd()">
   <div class="fabSheet" onclick="event.stopPropagation()">
     <h2>➕ Γρήγορη καταχώρηση</h2>
 
     <div class="quickMealGrid">
-      <button class="fabAction mealQuick" onclick="quickMeal('Πρωινό')">
+      <button type="button" class="fabAction mealQuick" onclick="v55Meal('Πρωινό')">
         <span>🌅</span>
         <div><b>Πρωινό</b><br><small>Προσθήκη φαγητού στο πρωινό</small></div>
       </button>
 
-      <button class="fabAction mealQuick" onclick="quickMeal('Σνακ')">
+      <button type="button" class="fabAction mealQuick" onclick="v55Meal('Σνακ')">
         <span>☕</span>
-        <div><b>Σνακ</b><br><small>Προσθήκη σνακ</small></div>
+        <div><b>Σνακ</b><br><small>Προσθήκη μικρού γεύματος</small></div>
       </button>
 
-      <button class="fabAction mealQuick" onclick="quickMeal('Μεσημεριανό')">
+      <button type="button" class="fabAction mealQuick" onclick="v55Meal('Μεσημεριανό')">
         <span>🍽</span>
         <div><b>Μεσημεριανό</b><br><small>Προσθήκη φαγητού στο μεσημεριανό</small></div>
       </button>
 
-      <button class="fabAction mealQuick" onclick="quickMeal('Βραδινό')">
+      <button type="button" class="fabAction mealQuick" onclick="v55Meal('Βραδινό')">
         <span>🌙</span>
         <div><b>Βραδινό</b><br><small>Προσθήκη φαγητού στο βραδινό</small></div>
       </button>
     </div>
 
-    <button class="fabAction" onclick="quickGo('water')">
-      <span>＋</span>
+    <button type="button" class="fabAction" onclick="v55Go('water')">
+      <span>💧</span>
       <div><b>Νερό</b><br><small>Άνοιγμα καταχώρησης νερού</small></div>
     </button>
 
-    <button class="fabAction" onclick="quickGo('activities')">
+    <button type="button" class="fabAction" onclick="v55Go('activities')">
       <span>🏃</span>
-      <div><b>Καταχώρηση άσκησης</b><br><small>Βάδισμα, τρέξιμο, ποδήλατο</small></div>
+      <div><b>Άσκηση</b><br><small>Βάδισμα, τρέξιμο, ποδήλατο</small></div>
     </button>
 
-    <button class="fabAction fabClose" onclick="hideQuickAdd()">
+    <button type="button" class="fabAction fabClose" onclick="hideQuickAdd()">
       <span>✖</span>
       <div><b>Κλείσιμο</b><br><small>Επιστροφή στην εφαρμογή</small></div>
     </button>
@@ -2157,26 +2640,43 @@ section.active{
 const baseFoods = [{"name": "Χωριάτικη σαλάτα", "cat": "Σαλάτες", "cal": 320, "portion": "μερίδα", "tag": "Μεσογειακό", "protein": 10, "carbs": 36, "fat": 15}, {"name": "Ντάκος", "cat": "Σαλάτες", "cal": 360, "portion": "μερίδα", "tag": "Κρητικό", "protein": 11, "carbs": 40, "fat": 17}, {"name": "Πράσινη σαλάτα", "cat": "Σαλάτες", "cal": 120, "portion": "μερίδα", "tag": "Light", "protein": 4, "carbs": 14, "fat": 6}, {"name": "Σαλάτα του Καίσαρα", "cat": "Σαλάτες", "cal": 520, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 16, "carbs": 58, "fat": 25}, {"name": "Τονοσαλάτα", "cat": "Σαλάτες", "cal": 390, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 12, "carbs": 44, "fat": 19}, {"name": "Φασολάδα", "cat": "Όσπρια", "cal": 430, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 17, "carbs": 58, "fat": 14}, {"name": "Φακές σούπα", "cat": "Όσπρια", "cal": 390, "portion": "πιάτο", "tag": "Φυτική πρωτεΐνη", "protein": 16, "carbs": 53, "fat": 13}, {"name": "Ρεβύθια", "cat": "Όσπρια", "cal": 410, "portion": "πιάτο", "tag": "Φυτικές ίνες", "protein": 16, "carbs": 55, "fat": 14}, {"name": "Γίγαντες πλακί", "cat": "Όσπρια", "cal": 480, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 19, "carbs": 65, "fat": 16}, {"name": "Φάβα", "cat": "Όσπρια", "cal": 330, "portion": "μερίδα", "tag": "Σαντορίνη", "protein": 13, "carbs": 45, "fat": 11}, {"name": "Μπριάμ", "cat": "Λαδερά", "cal": 420, "portion": "πιάτο", "tag": "Λαδερό", "protein": 17, "carbs": 57, "fat": 14}, {"name": "Γεμιστά", "cat": "Λαδερά", "cal": 520, "portion": "2 τεμάχια", "tag": "Παραδοσιακό", "protein": 21, "carbs": 70, "fat": 17}, {"name": "Ιμάμ μπαϊλντί", "cat": "Λαδερά", "cal": 460, "portion": "μερίδα", "tag": "Λαδερό", "protein": 18, "carbs": 62, "fat": 15}, {"name": "Σπανακόρυζο", "cat": "Λαδερά", "cal": 380, "portion": "πιάτο", "tag": "Light", "protein": 15, "carbs": 51, "fat": 13}, {"name": "Λαχανόρυζο", "cat": "Λαδερά", "cal": 350, "portion": "πιάτο", "tag": "Light", "protein": 14, "carbs": 47, "fat": 12}, {"name": "Αρακάς λαδερός", "cat": "Λαδερά", "cal": 410, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 16, "carbs": 55, "fat": 14}, {"name": "Μπάμιες", "cat": "Λαδερά", "cal": 360, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 14, "carbs": 49, "fat": 12}, {"name": "Φασολάκια λαδερά", "cat": "Λαδερά", "cal": 390, "portion": "πιάτο", "tag": "Παραδοσιακό", "protein": 16, "carbs": 53, "fat": 13}, {"name": "Λαχανοντολμάδες", "cat": "Παραδοσιακά", "cal": 520, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 21, "carbs": 70, "fat": 17}, {"name": "Ντολμαδάκια", "cat": "Παραδοσιακά", "cal": 330, "portion": "μερίδα", "tag": "Μεσογειακό", "protein": 13, "carbs": 45, "fat": 11}, {"name": "Σουβλάκι χοιρινό καλαμάκι", "cat": "Κρέατα", "cal": 190, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 14, "carbs": 7, "fat": 12}, {"name": "Σουβλάκι κοτόπουλο καλαμάκι", "cat": "Κρέατα", "cal": 160, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 12, "carbs": 6, "fat": 10}, {"name": "Πίτα γύρος χοιρινός", "cat": "Fast Food", "cal": 760, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 19, "carbs": 95, "fat": 34}, {"name": "Πίτα γύρος κοτόπουλο", "cat": "Fast Food", "cal": 680, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 17, "carbs": 85, "fat": 30}, {"name": "Πίτα καλαμάκι κοτόπουλο", "cat": "Fast Food", "cal": 560, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 14, "carbs": 70, "fat": 25}, {"name": "Μπιφτέκι μοσχαρίσιο", "cat": "Κρέατα", "cal": 290, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 22, "carbs": 11, "fat": 18}, {"name": "Μπιφτέκια με πατάτες", "cat": "Κρέατα", "cal": 780, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 58, "carbs": 29, "fat": 48}, {"name": "Κοτόπουλο σχάρας", "cat": "Κρέατα", "cal": 320, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 24, "carbs": 12, "fat": 20}, {"name": "Κοτόπουλο φούρνου με πατάτες", "cat": "Κρέατα", "cal": 690, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 52, "carbs": 26, "fat": 42}, {"name": "Μοσχάρι κοκκινιστό", "cat": "Κρέατα", "cal": 560, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 42, "carbs": 21, "fat": 34}, {"name": "Μοσχάρι λεμονάτο", "cat": "Κρέατα", "cal": 520, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 39, "carbs": 20, "fat": 32}, {"name": "Χοιρινή μπριζόλα", "cat": "Κρέατα", "cal": 520, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 39, "carbs": 20, "fat": 32}, {"name": "Μπριζόλα μοσχαρίσια", "cat": "Κρέατα", "cal": 610, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 46, "carbs": 23, "fat": 37}, {"name": "Αρνί ψητό", "cat": "Κρέατα", "cal": 680, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 51, "carbs": 26, "fat": 42}, {"name": "Κεφτεδάκια", "cat": "Κρέατα", "cal": 450, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 34, "carbs": 17, "fat": 28}, {"name": "Σουτζουκάκια", "cat": "Κρέατα", "cal": 540, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 40, "carbs": 20, "fat": 33}, {"name": "Κοκκινιστό με μακαρόνια", "cat": "Κρέατα", "cal": 820, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 62, "carbs": 31, "fat": 50}, {"name": "Τσιπούρα ψητή", "cat": "Ψάρια", "cal": 360, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 27, "carbs": 14, "fat": 22}, {"name": "Λαβράκι ψητό", "cat": "Ψάρια", "cal": 330, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 25, "carbs": 12, "fat": 20}, {"name": "Σαρδέλες ψητές", "cat": "Ψάρια", "cal": 310, "portion": "μερίδα", "tag": "Ωμέγα-3", "protein": 23, "carbs": 12, "fat": 19}, {"name": "Γαύρος τηγανητός", "cat": "Ψάρια", "cal": 480, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 36, "carbs": 18, "fat": 29}, {"name": "Μπακαλιάρος σκορδαλιά", "cat": "Ψάρια", "cal": 690, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 52, "carbs": 26, "fat": 42}, {"name": "Σολομός ψητός", "cat": "Ψάρια", "cal": 420, "portion": "μερίδα", "tag": "Ωμέγα-3", "protein": 32, "carbs": 16, "fat": 26}, {"name": "Τόνος κονσέρβα σε νερό", "cat": "Ψάρια", "cal": 140, "portion": "κονσέρβα", "tag": "Πρωτεΐνη", "protein": 10, "carbs": 5, "fat": 9}, {"name": "Καλαμάρι ψητό", "cat": "Θαλασσινά", "cal": 240, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 18, "carbs": 9, "fat": 15}, {"name": "Καλαμαράκια τηγανητά", "cat": "Θαλασσινά", "cal": 590, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 44, "carbs": 22, "fat": 36}, {"name": "Γαρίδες ψητές", "cat": "Θαλασσινά", "cal": 220, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 16, "carbs": 8, "fat": 13}, {"name": "Χταπόδι ξυδάτο", "cat": "Θαλασσινά", "cal": 230, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 17, "carbs": 9, "fat": 14}, {"name": "Μακαρόνια με κιμά", "cat": "Ζυμαρικά", "cal": 760, "portion": "μερίδα", "tag": "Κλασικό", "protein": 27, "carbs": 110, "fat": 24}, {"name": "Παστίτσιο", "cat": "Ζυμαρικά", "cal": 780, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 27, "carbs": 113, "fat": 24}, {"name": "Μουσακάς", "cat": "Παραδοσιακά", "cal": 820, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 33, "carbs": 111, "fat": 27}, {"name": "Λαζάνια", "cat": "Ζυμαρικά", "cal": 740, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 26, "carbs": 107, "fat": 23}, {"name": "Σπαγγέτι ναπολιτέν", "cat": "Ζυμαρικά", "cal": 520, "portion": "μερίδα", "tag": "Κλασικό", "protein": 18, "carbs": 75, "fat": 16}, {"name": "Κριθαράκι με κοτόπουλο", "cat": "Ζυμαρικά", "cal": 650, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 23, "carbs": 94, "fat": 20}, {"name": "Γιουβέτσι μοσχάρι", "cat": "Ζυμαρικά", "cal": 760, "portion": "μερίδα", "tag": "Παραδοσιακό", "protein": 27, "carbs": 110, "fat": 24}, {"name": "Ριζότο λαχανικών", "cat": "Ρύζι", "cal": 480, "portion": "μερίδα", "tag": "Μεσογειακό", "protein": 17, "carbs": 70, "fat": 15}, {"name": "Ρύζι βραστό", "cat": "Ρύζι", "cal": 210, "portion": "μερίδα", "tag": "Βάση", "protein": 7, "carbs": 30, "fat": 7}, {"name": "Πατάτες φούρνου", "cat": "Συνοδευτικά", "cal": 330, "portion": "μερίδα", "tag": "Συνοδευτικό", "protein": 10, "carbs": 37, "fat": 16}, {"name": "Πατάτες τηγανητές", "cat": "Συνοδευτικά", "cal": 520, "portion": "μερίδα", "tag": "Τηγανητό", "protein": 16, "carbs": 58, "fat": 25}, {"name": "Σπανακόπιτα", "cat": "Πίτες", "cal": 420, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 15, "carbs": 61, "fat": 13}, {"name": "Τυρόπιτα", "cat": "Πίτες", "cal": 460, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 16, "carbs": 67, "fat": 14}, {"name": "Πρασόπιτα", "cat": "Πίτες", "cal": 390, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 14, "carbs": 57, "fat": 12}, {"name": "Κοτόπιτα", "cat": "Πίτες", "cal": 520, "portion": "κομμάτι", "tag": "Πρωτεΐνη", "protein": 18, "carbs": 75, "fat": 16}, {"name": "Κρεατόπιτα", "cat": "Πίτες", "cal": 570, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 20, "carbs": 83, "fat": 18}, {"name": "Κουλούρι Θεσσαλονίκης", "cat": "Πρωινό", "cal": 260, "portion": "τεμάχιο", "tag": "Πρωινό", "protein": 16, "carbs": 23, "fat": 12}, {"name": "Ψωμί λευκό", "cat": "Αρτοποιήματα", "cal": 80, "portion": "φέτα", "tag": "Υδατάνθρακες", "protein": 3, "carbs": 12, "fat": 2}, {"name": "Ψωμί ολικής", "cat": "Αρτοποιήματα", "cal": 75, "portion": "φέτα", "tag": "Ολικής", "protein": 3, "carbs": 11, "fat": 2}, {"name": "Παξιμάδι κρίθινο", "cat": "Αρτοποιήματα", "cal": 120, "portion": "τεμάχιο", "tag": "Κρητικό", "protein": 4, "carbs": 17, "fat": 4}, {"name": "Γιαούρτι στραγγιστό 2%", "cat": "Πρωινό", "cal": 150, "portion": "200g", "tag": "Πρωτεΐνη", "protein": 9, "carbs": 13, "fat": 7}, {"name": "Γιαούρτι στραγγιστό 10%", "cat": "Πρωινό", "cal": 240, "portion": "200g", "tag": "Πρωτεΐνη", "protein": 15, "carbs": 21, "fat": 11}, {"name": "Γιαούρτι με μέλι", "cat": "Πρωινό", "cal": 310, "portion": "μπολ", "tag": "Πρωινό", "protein": 19, "carbs": 27, "fat": 14}, {"name": "Βρώμη με γάλα", "cat": "Πρωινό", "cal": 380, "portion": "μπολ", "tag": "Πρωινό", "protein": 24, "carbs": 33, "fat": 17}, {"name": "Αυγό βραστό", "cat": "Πρωινό", "cal": 78, "portion": "τεμάχιο", "tag": "Πρωτεΐνη", "protein": 5, "carbs": 7, "fat": 3}, {"name": "Ομελέτα 2 αυγών", "cat": "Πρωινό", "cal": 260, "portion": "μερίδα", "tag": "Πρωτεΐνη", "protein": 16, "carbs": 23, "fat": 12}, {"name": "Τοστ γαλοπούλα τυρί", "cat": "Πρωινό", "cal": 330, "portion": "τεμάχιο", "tag": "Γρήγορο", "protein": 21, "carbs": 29, "fat": 15}, {"name": "Φέτα", "cat": "Γαλακτοκομικά", "cal": 270, "portion": "100g", "tag": "Παραδοσιακό", "protein": 17, "carbs": 24, "fat": 12}, {"name": "Ανθότυρο", "cat": "Γαλακτοκομικά", "cal": 170, "portion": "100g", "tag": "Light", "protein": 11, "carbs": 15, "fat": 8}, {"name": "Γραβιέρα", "cat": "Γαλακτοκομικά", "cal": 390, "portion": "100g", "tag": "Υψηλές θερμίδες", "protein": 24, "carbs": 34, "fat": 17}, {"name": "Γάλα 1.5%", "cat": "Γαλακτοκομικά", "cal": 120, "portion": "ποτήρι", "tag": "Πρωινό", "protein": 8, "carbs": 10, "fat": 5}, {"name": "Burger απλό", "cat": "Fast Food", "cal": 620, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 16, "carbs": 78, "fat": 28}, {"name": "Cheeseburger", "cat": "Fast Food", "cal": 700, "portion": "τεμάχιο", "tag": "Υψηλές θερμίδες", "protein": 18, "carbs": 88, "fat": 31}, {"name": "Club sandwich", "cat": "Fast Food", "cal": 850, "portion": "μερίδα", "tag": "Υψηλές θερμίδες", "protein": 21, "carbs": 106, "fat": 38}, {"name": "Pizza μαργαρίτα", "cat": "Fast Food", "cal": 270, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 7, "carbs": 34, "fat": 12}, {"name": "Pizza σπέσιαλ", "cat": "Fast Food", "cal": 340, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 8, "carbs": 42, "fat": 15}, {"name": "Hot dog", "cat": "Fast Food", "cal": 430, "portion": "τεμάχιο", "tag": "Fast", "protein": 11, "carbs": 54, "fat": 19}, {"name": "Κρέπα πραλίνα", "cat": "Fast Food", "cal": 780, "portion": "τεμάχιο", "tag": "Γλυκό", "protein": 20, "carbs": 98, "fat": 35}, {"name": "Κρέπα γαλοπούλα τυρί", "cat": "Fast Food", "cal": 620, "portion": "τεμάχιο", "tag": "Fast", "protein": 16, "carbs": 78, "fat": 28}, {"name": "Ποπ κορν", "cat": "Σνακ", "cal": 380, "portion": "μερίδα", "tag": "Σνακ", "protein": 10, "carbs": 48, "fat": 17}, {"name": "Πατατάκια", "cat": "Σνακ", "cal": 530, "portion": "100g", "tag": "Σνακ", "protein": 13, "carbs": 66, "fat": 24}, {"name": "Ξηροί καρποί", "cat": "Σνακ", "cal": 600, "portion": "100g", "tag": "Ενέργεια", "protein": 15, "carbs": 75, "fat": 27}, {"name": "Μπακλαβάς", "cat": "Γλυκά", "cal": 430, "portion": "κομμάτι", "tag": "Υψηλές θερμίδες", "protein": 11, "carbs": 54, "fat": 19}, {"name": "Γαλακτομπούρεκο", "cat": "Γλυκά", "cal": 410, "portion": "κομμάτι", "tag": "Παραδοσιακό", "protein": 10, "carbs": 51, "fat": 18}, {"name": "Καρυδόπιτα", "cat": "Γλυκά", "cal": 390, "portion": "κομμάτι", "tag": "Γλυκό", "protein": 10, "carbs": 49, "fat": 17}, {"name": "Ρυζόγαλο", "cat": "Γλυκά", "cal": 250, "portion": "μπολ", "tag": "Παραδοσιακό", "protein": 6, "carbs": 31, "fat": 11}, {"name": "Παγωτό βανίλια", "cat": "Γλυκά", "cal": 210, "portion": "μπάλα", "tag": "Γλυκό", "protein": 5, "carbs": 26, "fat": 9}, {"name": "Σοκολάτα γάλακτος", "cat": "Γλυκά", "cal": 540, "portion": "100g", "tag": "Γλυκό", "protein": 14, "carbs": 68, "fat": 24}, {"name": "Μπουγάτσα κρέμα", "cat": "Γλυκά", "cal": 520, "portion": "κομμάτι", "tag": "Θεσσαλονίκη", "protein": 13, "carbs": 65, "fat": 23}, {"name": "Λουκουμάδες", "cat": "Γλυκά", "cal": 560, "portion": "μερίδα", "tag": "Γλυκό", "protein": 14, "carbs": 70, "fat": 25}, {"name": "Μήλο", "cat": "Φρούτα", "cal": 95, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 1, "carbs": 21, "fat": 1}, {"name": "Μπανάνα", "cat": "Φρούτα", "cal": 110, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 1, "carbs": 25, "fat": 1}, {"name": "Πορτοκάλι", "cat": "Φρούτα", "cal": 70, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 1, "carbs": 16, "fat": 1}, {"name": "Καρπούζι", "cat": "Φρούτα", "cal": 90, "portion": "μερίδα", "tag": "Φρούτο", "protein": 1, "carbs": 20, "fat": 1}, {"name": "Πεπόνι", "cat": "Φρούτα", "cal": 85, "portion": "μερίδα", "tag": "Φρούτο", "protein": 1, "carbs": 19, "fat": 1}, {"name": "Ροδάκινο", "cat": "Φρούτα", "cal": 60, "portion": "τεμάχιο", "tag": "Φρούτο", "protein": 0, "carbs": 14, "fat": 0}, {"name": "Σταφύλια", "cat": "Φρούτα", "cal": 140, "portion": "μερίδα", "tag": "Φρούτο", "protein": 1, "carbs": 32, "fat": 1}, {"name": "Ελληνικός καφές", "cat": "Ροφήματα", "cal": 5, "portion": "σκέτος", "tag": "Ρόφημα", "protein": 0, "carbs": 1, "fat": 0}, {"name": "Φραπέ σκέτος", "cat": "Ροφήματα", "cal": 5, "portion": "ποτήρι", "tag": "Ρόφημα", "protein": 0, "carbs": 1, "fat": 0}, {"name": "Freddo espresso σκέτος", "cat": "Ροφήματα", "cal": 5, "portion": "ποτήρι", "tag": "Ρόφημα", "protein": 0, "carbs": 1, "fat": 0}, {"name": "Freddo cappuccino", "cat": "Ροφήματα", "cal": 120, "portion": "ποτήρι", "tag": "Ρόφημα", "protein": 1, "carbs": 27, "fat": 1}, {"name": "Χυμός πορτοκάλι", "cat": "Ροφήματα", "cal": 120, "portion": "ποτήρι", "tag": "Ρόφημα", "protein": 1, "carbs": 27, "fat": 1}, {"name": "Αναψυκτικό ζάχαρη", "cat": "Ροφήματα", "cal": 140, "portion": "κουτάκι", "tag": "Ζάχαρη", "protein": 1, "carbs": 32, "fat": 1}, {"name": "Μπύρα", "cat": "Ροφήματα", "cal": 150, "portion": "330ml", "tag": "Αλκοόλ", "protein": 1, "carbs": 34, "fat": 1}, {"name": "Κρασί κόκκινο", "cat": "Ροφήματα", "cal": 125, "portion": "ποτήρι", "tag": "Αλκοόλ", "protein": 1, "carbs": 28, "fat": 1}];
 let activeCat="Όλα", weightChart=null, fastingInterval=null;
 
-function showPage(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-  const page = document.getElementById(id);
-  if(page) page.classList.add("active");
+function showPage(id){ updateDashboard(); 
+  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+  updateFabVisibility(id);
+if(id==="home"){updateDashboard();}if(id==="weight"){loadWeightData();calculateWeight();renderHistory();renderChart();}if(id==="fasting"){loadFasting();updateFastingTimer();}if(id==="foods"){renderFoodTabs();renderFoods();}if(id==="diary"){initDiaryDate();loadDailyGoal();renderDiary();}if(id==="custom"){renderCustomList();}if(id==="coach"){prepareCoach();}if(id==="barcode"){prepareBarcode();}if(id==="photoMeal"){preparePhotoMeal();}if(id==="reports"){renderWeeklyReport();}if(id==="activities"){initActivityDate();loadActivityWeight();renderActivities();}if(id==="water"){initWaterDate();loadWaterGoal();renderWater();}if(id==="progressCalendar"){renderProgressCalendar();}}
+function soon(){alert("Η λειτουργία θα προστεθεί σε επόμενη έκδοση.");}
+function num(id){return parseFloat(String(document.getElementById(id).value).replace(",","."))||0;} function val(id){return document.getElementById(id).value;} function setText(id,t){document.getElementById(id).textContent=t;}
+function allFoods(){return [...baseFoods, ...getCustomFoods()];}
 
-  try{
-    if(id==="foods") renderFoods();
-    if(id==="diary"){initDiaryDate();loadDailyGoal();renderDiary();}
-    if(id==="water") renderWater();
-    if(id==="activities") renderActivities();
-    if(id==="progressCalendar") renderProgressCalendar();
-    if(id==="reports") renderReports();
-    if(id==="weight"){loadWeightData();calculateWeight();}
-    if(id==="fasting") loadFasting();
-    updateDashboard();
-  }catch(e){
-    console.log("showPage error", e);
+function renderFoodTabs(){const cats=["Όλα","⭐ Αγαπημένα",...Array.from(new Set(allFoods().map(f=>f.cat)))];document.getElementById("foodTabs").innerHTML=cats.map(c=>`<button class="tab ${activeCat===c?"active":""}" onclick="activeCat='${c}';renderFoodTabs();renderFoods();">${c}</button>`).join("");}
+function renderFoods(){const q=(document.getElementById("foodSearch")?.value||"").toLowerCase();const favs=getFavs();let list=allFoods().filter(f=>(activeCat==="Όλα"||f.cat===activeCat||(activeCat==="⭐ Αγαπημένα"&&favs.includes(f.name)))&&(f.name.toLowerCase().includes(q)||f.cat.toLowerCase().includes(q)||f.tag.toLowerCase().includes(q)));document.getElementById("foodCount").textContent=list.length;document.getElementById("foodList").innerHTML=list.map((f,i)=>`<div class="foodCard"><div class="foodTop"><div><div class="foodName">${f.name}</div><div class="foodMeta">Κατηγορία: ${f.cat} | Μερίδα: ${f.portion} <span class="badge">${f.tag}</span></div><div class="foodMeta">Π: ${f.protein||0}g • Υ: ${f.carbs||0}g • Λ: ${f.fat||0}g</div></div><div class="foodCal">${f.cal} kcal</div></div><button class="mealBtn btnLight" onclick='toggleFav("${encodeURIComponent(f.name)}")'>${favs.includes(f.name)?"★ Αγαπημένο":"☆ Αγαπημένο"}</button><div class="qtyRow singleQty"><select id="qty_${i}"><option value="0.25">0.25 μερίδα</option><option value="0.5">0.5 μερίδα</option><option value="1" selected>1 μερίδα</option><option value="1.5">1.5 μερίδα</option><option value="2">2 μερίδες</option><option value="3">3 μερίδες</option></select></div><button class="mealBtn btnGreen" onclick='addFoodToDiarySelectedMeal(${JSON.stringify(f)}, "qty_${i}")'>+ Προσθήκη στο ${selectedFoodMeal}</button></div>`).join("")||"<p class='small'>Δεν βρέθηκε φαγητό.</p>";}
+
+function getFavs(){return JSON.parse(localStorage.getItem("gca_favs")||"[]");}
+function setFavs(f){localStorage.setItem("gca_favs",JSON.stringify(f));}
+function toggleFav(encodedName){const name=decodeURIComponent(encodedName);let favs=getFavs();if(favs.includes(name))favs=favs.filter(x=>x!==name);else favs.push(name);setFavs(favs);renderFoods();}
+
+function getCustomFoods(){return JSON.parse(localStorage.getItem("gca_custom_foods")||"[]");}
+function setCustomFoods(f){localStorage.setItem("gca_custom_foods",JSON.stringify(f));}
+function saveCustomFood(){const food={name:val("customName").trim(),cat:"Δικά μου",cal:num("customCal"),portion:val("customPortion")||"μερίδα",tag:"Custom",protein:num("customProtein"),carbs:num("customCarbs"),fat:num("customFat")};if(!food.name||food.cal<=0){alert("Βάλε όνομα και θερμίδες.");return;}const arr=getCustomFoods();arr.unshift(food);setCustomFoods(arr);["customName"].forEach(id=>document.getElementById(id).value="");renderCustomList();alert("Το φαγητό αποθηκεύτηκε.");}
+function renderCustomList(){const arr=getCustomFoods();const box=document.getElementById("customList");if(arr.length===0){box.innerHTML="<p class='small'>Δεν έχεις αποθηκεύσει δικά σου φαγητά.</p>";return;}box.innerHTML=arr.map((f,i)=>`<div class="historyItem"><div><b>${f.name}</b><br>${f.cal} kcal • Π:${f.protein}g Υ:${f.carbs}g Λ:${f.fat}g</div><button class="deleteBtn" onclick="deleteCustomFood(${i})">🗑</button></div>`).join("");}
+function deleteCustomFood(i){const arr=getCustomFoods();arr.splice(i,1);setCustomFoods(arr);renderCustomList();}
+
+/* ΗΜΕΡΗΣΙΟ ΓΕΥΜΑ */
+function todayKey(){return new Date().toISOString().slice(0,10);}
+function initDiaryDate(){if(!val("diaryDate"))document.getElementById("diaryDate").value=todayKey();}
+function diaryKey(){initDiaryDate();return "gca_diary_"+val("diaryDate");}
+function getDiary(){return JSON.parse(localStorage.getItem(diaryKey())||"[]");}
+function setDiary(items){localStorage.setItem(diaryKey(),JSON.stringify(items));}
+function saveDailyGoal(){
+  if(!isAutoDailyGoal()){
+    localStorage.setItem("gca_daily_goal", val("dailyGoal") || "1800");
+  }else{
+    const calc = getWeightTargetCalories();
+    if(calc) localStorage.setItem("gca_daily_goal", String(calc.calories));
   }
-
-  window.scrollTo({top:0,behavior:"smooth"});
+  saveMacroSplit();
+  updateMacroTargets();
 }
 function loadDailyGoal(){
   const auto = isAutoDailyGoal();
@@ -2292,6 +2792,27 @@ function deleteDiaryItem(i){const items=getDiary();items.splice(i,1);setDiary(it
 function clearDiaryDay(){if(!confirm("Να διαγραφούν όλα τα γεύματα της ημέρας;"))return;localStorage.removeItem(diaryKey());renderDiary();updateDashboard();}
 
 /* ΒΑΡΟΣ */
+
+function clearWeightData(){
+  if(!confirm("Να διαγραφούν τα αποθηκευμένα στοιχεία στόχου / προφίλ; Το ιστορικό μετρήσεων δεν θα διαγραφεί.")) return;
+  localStorage.removeItem("gca_weight_data");
+  localStorage.removeItem("gca_daily_goal");
+  ["profileName","startWeight","currentWeight","targetWeight","height","age","note"].forEach(id=>{const el=document.getElementById(id); if(el) el.value="";});
+  const gender=document.getElementById("gender"); if(gender) gender.value="male";
+  const activity=document.getElementById("activity"); if(activity) activity.value="1.2";
+  const p=document.getElementById("weightMacroProteinPct"), c=document.getElementById("weightMacroCarbsPct"), f=document.getElementById("weightMacroFatPct");
+  if(p) p.value="30"; if(c) c.value="40"; if(f) f.value="30";
+  localStorage.setItem("gca_macro_p","30");
+  localStorage.setItem("gca_macro_c","40");
+  localStorage.setItem("gca_macro_f","30");
+  if(typeof setGoalPace==="function") setGoalPace(500,true);
+  if(typeof v57SyncWeightMacroInputs==="function") v57SyncWeightMacroInputs();
+  if(typeof updateDashboard==="function") updateDashboard();
+  if(typeof loadDailyGoal==="function") loadDailyGoal();
+  if(typeof calculateWeight==="function") calculateWeight();
+  alert("Τα στοιχεία διαγράφηκαν.");
+}
+
 function saveWeightData(){const data={profileName:val("profileName"),startWeight:val("startWeight"),currentWeight:val("currentWeight"),targetWeight:val("targetWeight"),height:val("height"),age:val("age"),gender:val("gender"),activity:val("activity"),goalPace:val("goalPace")||"500"};localStorage.setItem("gca_weight_data",JSON.stringify(data));calculateWeight();loadDailyGoal();updateDashboard();alert("Τα στοιχεία αποθηκεύτηκαν.");}
 function loadWeightData(){const raw=localStorage.getItem("gca_weight_data");if(!raw){setGoalPace(500,true);return;}const d=JSON.parse(raw);["profileName","startWeight","currentWeight","targetWeight","height","age","gender","activity"].forEach(k=>{if(d[k])document.getElementById(k).value=d[k];});setGoalPace(parseInt(d.goalPace||"500",10),true);}
 function calculateWeight(){
@@ -3778,20 +4299,20 @@ function quickAddWater250(){
   alert("Προστέθηκαν 250 ml νερό για σήμερα.");
 }
 
-
-/* V48 fab fix */
-
-
-
-
-
 /* QUICK ADD FAB */
 function openQuickAdd(){
   document.getElementById("fabOverlay").style.display = "flex";
 }
-
-
-
+function hideQuickAdd(){
+  document.getElementById("fabOverlay").style.display = "none";
+}
+function closeQuickAdd(event){
+  if(event.target.id === "fabOverlay") hideQuickAdd();
+}
+function quickGo(page){
+  hideQuickAdd();
+  showPage(page);
+}
 function quickWeight(){
   hideQuickAdd();
   showPage("weight");
@@ -3827,5 +4348,728 @@ window.addEventListener("load", ()=>{
 
 loadWeightData();calculateWeight();loadFasting();updateDashboard();
 </script>
+
+<script>
+/* V55 final stable patch */
+function v55SafeText(id, text){
+  const el = document.getElementById(id);
+  if(el) el.textContent = text;
+}
+function v55Width(id, pct){
+  const el = document.getElementById(id);
+  if(el) el.style.width = Math.max(0, Math.min(100, Number(pct)||0)) + "%";
+}
+function v55Today(){
+  return (typeof todayKey === "function") ? todayKey() : new Date().toISOString().slice(0,10);
+}
+function v55ReadArray(key){
+  try{
+    const raw = localStorage.getItem(key);
+    if(!raw) return [];
+    const parsed = JSON.parse(raw);
+    if(Array.isArray(parsed)) return parsed;
+    if(typeof parsed === "number") return [{ml:parsed}];
+    return [];
+  }catch(e){
+    const n = parseInt(localStorage.getItem(key) || "0", 10);
+    return n ? [{ml:n}] : [];
+  }
+}
+function v55WaterGoalMl(){
+  const raw = localStorage.getItem("gca_water_goal") || "2.5";
+  const n = parseFloat(String(raw).replace(",", "."));
+  if(!n || isNaN(n)) return 2500;
+  return n <= 20 ? Math.round(n * 1000) : Math.round(n);
+}
+function v55WaterTodayMl(){
+  const key = "gca_water_" + v55Today();
+  return v55ReadArray(key).reduce((s,x)=>s+(Number(x.ml)||0),0);
+}
+function v55DiaryItems(){
+  const keys = ["gca_diary_"+v55Today(), "diary_"+v55Today(), "meals_"+v55Today()];
+  let items = [];
+  keys.forEach(k=>{ items = items.concat(v55ReadArray(k)); });
+  return items;
+}
+function v55Num(v){
+  const n = Number(String(v ?? 0).replace(",", "."));
+  return isNaN(n) ? 0 : n;
+}
+function v55Pick(o, keys){
+  for(const k of keys){
+    if(o && o[k] !== undefined && o[k] !== null && o[k] !== ""){
+      return v55Num(o[k]);
+    }
+  }
+  return 0;
+}
+function v55Totals(){
+  return v55DiaryItems().reduce((a,x)=>{
+    const qty = v55Pick(x,["qty","quantity"]) || 1;
+    let total = v55Pick(x,["total","totalCal","totalCalories","kcalTotal","caloriesTotal"]);
+    if(!total) total = v55Pick(x,["cal","kcal","calories"]) * qty;
+
+    let p = v55Pick(x,["p","protein","proteins","proteinG"]);
+    let c = v55Pick(x,["c","carbs","carbohydrates","carbsG"]);
+    let f = v55Pick(x,["f","fat","fats","fatG"]);
+
+    if(qty !== 1 && x.p === undefined && x.c === undefined && x.f === undefined){
+      p *= qty; c *= qty; f *= qty;
+    }
+
+    a.total += Math.round(total);
+    a.prot += Math.round(p);
+    a.carbs += Math.round(c);
+    a.fat += Math.round(f);
+    a.count += 1;
+    return a;
+  }, {total:0, prot:0, carbs:0, fat:0, count:0});
+}
+function v55Exercise(){
+  try{
+    if(typeof getActivityCalories === "function") return Math.round(getActivityCalories(v55Today()) || 0);
+  }catch(e){}
+  return 0;
+}
+function v55BaseGoal(){
+  try{
+    if(typeof getDailyGoalBase === "function"){
+      const n = Number(getDailyGoalBase());
+      if(n) return n;
+    }
+  }catch(e){}
+  return parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
+}
+function v55MacroTargets(goal){
+  const p = parseInt(localStorage.getItem("gca_macro_p") || "30", 10);
+  const c = parseInt(localStorage.getItem("gca_macro_c") || "40", 10);
+  const f = parseInt(localStorage.getItem("gca_macro_f") || "30", 10);
+  return {
+    pPct:p, cPct:c, fPct:f,
+    pG:Math.round((goal*p/100)/4),
+    cG:Math.round((goal*c/100)/4),
+    fG:Math.round((goal*f/100)/9)
+  };
+}
+function updateDashboard(){
+  const t = v55Totals();
+  const ex = v55Exercise();
+  const goal = v55BaseGoal() + ex;
+  const remaining = Math.max(0, goal - t.total);
+  const calPct = Math.round((t.total / Math.max(1, goal)) * 100);
+
+  v55SafeText("dashCalories", t.total + " / " + goal);
+  v55SafeText("dashRemainingMini", "Υπόλοιπο " + remaining + " kcal" + (ex>0 ? " • +" + ex + " από άσκηση" : ""));
+  v55SafeText("dashMeals", t.count);
+  v55SafeText("dashExercise", ex + " kcal");
+  v55Width("dashProgressBar", calPct);
+
+  try{
+    v55SafeText("dashWeight", typeof getLastWeightText === "function" ? getLastWeightText() : "Δεν υπάρχει");
+    if(typeof computeWeightGoalDashboard === "function"){
+      const gd = computeWeightGoalDashboard();
+      v55SafeText("dashGoalTime", gd.time || "-");
+      v55SafeText("dashPace", gd.pace || "-");
+      const note = document.getElementById("dashGoalNote");
+      if(note) note.textContent = gd.note || "";
+    }
+  }catch(e){}
+
+  const water = v55WaterTodayMl();
+  const waterGoal = v55WaterGoalMl();
+  const waterPct = Math.round((water / Math.max(1, waterGoal)) * 100);
+  v55Width("dashWaterBar", waterPct);
+  v55SafeText("dashWaterPercent", Math.min(100, waterPct) + "%");
+
+  const mt = v55MacroTargets(goal);
+  const pp = Math.round((t.prot / Math.max(1, mt.pG)) * 100);
+  const cp = Math.round((t.carbs / Math.max(1, mt.cG)) * 100);
+  const fp = Math.round((t.fat / Math.max(1, mt.fG)) * 100);
+  v55Width("homeProteinBar", pp);
+  v55Width("homeCarbsBar", cp);
+  v55Width("homeFatBar", fp);
+  v55SafeText("homeProteinText", t.prot + "/" + mt.pG + "g");
+  v55SafeText("homeCarbsText", t.carbs + "/" + mt.cG + "g");
+  v55SafeText("homeFatText", t.fat + "/" + mt.fG + "g");
+  v55SafeText("homeMacroSplitText", mt.pPct + "% / " + mt.cPct + "% / " + mt.fPct + "%");
+
+  v55SafeText("dashMessage", t.count ? "Έχεις " + t.count + " καταχώρηση/καταχωρήσεις σήμερα." : "Δεν έχεις καταχωρήσει ακόμα γεύμα σήμερα.");
+}
+
+/* Διορθωμένο νερό */
+function getWaterItems(){
+  const key = "gca_water_" + ((document.getElementById("waterDate") && document.getElementById("waterDate").value) || v55Today());
+  return v55ReadArray(key);
+}
+function setWaterItems(items){
+  const key = "gca_water_" + ((document.getElementById("waterDate") && document.getElementById("waterDate").value) || v55Today());
+  localStorage.setItem(key, JSON.stringify(items || []));
+}
+function addWater(ml){
+  if(typeof initWaterDate === "function") initWaterDate();
+  const items = getWaterItems();
+  items.unshift({ml:Number(ml)||0, time:new Date().toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"})});
+  setWaterItems(items);
+  if(typeof renderWater === "function") renderWater();
+  updateDashboard();
+}
+function quickAddWater250(){
+  hideQuickAdd();
+  addWater(250);
+}
+const oldRenderWaterV55 = typeof renderWater === "function" ? renderWater : null;
+renderWater = function(){
+  if(oldRenderWaterV55) oldRenderWaterV55();
+  const items = getWaterItems();
+  const totalMl = items.reduce((s,x)=>s+(Number(x.ml)||0),0);
+  const goalMl = v55WaterGoalMl();
+  const pct = Math.round((totalMl / Math.max(1, goalMl)) * 100);
+  v55Width("waterProgressBar", pct);
+  v55SafeText("waterTotal", (totalMl/1000).toFixed(2) + " L");
+  v55SafeText("waterRemaining", (Math.max(0,goalMl-totalMl)/1000).toFixed(2) + " L");
+  updateDashboard();
+};
+
+/* Σταθερό + */
+function showQuickAdd(){
+  const cb = document.getElementById("quickAddToggle");
+  const o = document.getElementById("fabOverlay");
+  if(cb) cb.checked = true;
+  if(o) o.classList.add("show");
+}
+function hideQuickAdd(){
+  const cb = document.getElementById("quickAddToggle");
+  const o = document.getElementById("fabOverlay");
+  if(cb) cb.checked = false;
+  if(o) o.classList.remove("show");
+}
+function openQuickAdd(){ showQuickAdd(); }
+function closeQuickAdd(e){ if(!e || e.target.id === "fabOverlay") hideQuickAdd(); }
+function v55Go(page){
+  hideQuickAdd();
+  setTimeout(()=>{ if(typeof showPage === "function") showPage(page); }, 50);
+}
+function v55Meal(meal){
+  hideQuickAdd();
+  try{
+    if(typeof setSelectedFoodMeal === "function") setSelectedFoodMeal(meal);
+    else localStorage.setItem("gca_selected_food_meal", meal);
+  }catch(e){}
+  setTimeout(()=>{
+    if(typeof showPage === "function") showPage("foods");
+    setTimeout(()=>{
+      try{
+        if(typeof renderFoodTabs === "function") renderFoodTabs();
+        if(typeof renderFoods === "function") renderFoods();
+      }catch(e){}
+    }, 80);
+  },50);
+}
+function quickGo(page){ v55Go(page); }
+function quickMeal(meal){ v55Meal(meal); }
+
+document.addEventListener("click", function(e){
+  const fab = e.target.closest && e.target.closest(".fab");
+  if(fab){
+    showQuickAdd();
+  }
+}, true);
+
+window.addEventListener("load", ()=>{
+  setTimeout(()=>{
+    try{
+      if(typeof renderFoodTabs === "function") renderFoodTabs();
+      if(typeof renderFoods === "function") renderFoods();
+      updateDashboard();
+    }catch(e){}
+  }, 300);
+});
+setInterval(()=>{ try{ updateDashboard(); }catch(e){} }, 1500);
+</script>
+
+
+<script>
+/* V56 exercise + target kg fix */
+function v56ReadArray(key){
+  try{
+    const v = JSON.parse(localStorage.getItem(key) || "[]");
+    return Array.isArray(v) ? v : [];
+  }catch(e){
+    return [];
+  }
+}
+function v56Today(){
+  return (typeof todayKey === "function") ? todayKey() : new Date().toISOString().slice(0,10);
+}
+function v56Num(v){
+  const n = Number(String(v ?? 0).replace(",", "."));
+  return isNaN(n) ? 0 : n;
+}
+function v56Pick(o, keys){
+  for(const k of keys){
+    if(o && o[k] !== undefined && o[k] !== null && o[k] !== ""){
+      return v56Num(o[k]);
+    }
+  }
+  return 0;
+}
+function v56ExerciseToday(){
+  const t = v56Today();
+  let sum = 0;
+
+  // Κανονική αποθήκευση από τη σελίδα Άσκηση
+  ["gca_activities_"+t, "activities_"+t, "gca_activity_"+t].forEach(k=>{
+    v56ReadArray(k).forEach(x=>{
+      sum += v56Pick(x, ["burned","kcal","cal","calories","total"]);
+    });
+  });
+
+  // Αν υπάρχει παλιά συνάρτηση, την κρατάμε μόνο αν δίνει μεγαλύτερο σωστό ποσό
+  try{
+    if(typeof getActivityCalories === "function"){
+      const old = Number(getActivityCalories(t)) || 0;
+      if(old > sum) sum = old;
+    }
+  }catch(e){}
+
+  return Math.round(sum);
+}
+function v56TargetKgText(){
+  try{
+    const d = JSON.parse(localStorage.getItem("gca_weight_data") || "{}");
+    const target = d.targetWeight ? String(d.targetWeight).replace(".", ",") + " kg" : "";
+    return target;
+  }catch(e){
+    return "";
+  }
+}
+
+/* Αντικαθιστούμε τη V55 άσκηση με σωστή ανάγνωση από gca_activities_ημερομηνία */
+v55Exercise = function(){
+  return v56ExerciseToday();
+};
+
+/* Τελικό dashboard: άσκηση προστίθεται στις θερμίδες και ο στόχος δείχνει και κιλά */
+updateDashboard = function(){
+  const t = (typeof v55Totals === "function") ? v55Totals() : {total:0, prot:0, carbs:0, fat:0, count:0};
+  const ex = v56ExerciseToday();
+  const base = (typeof v55BaseGoal === "function") ? v55BaseGoal() : parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
+  const goal = base + ex;
+  const remaining = Math.max(0, goal - t.total);
+  const calPct = Math.round((t.total / Math.max(1, goal)) * 100);
+
+  v55SafeText("dashCalories", t.total + " / " + goal);
+  v55SafeText("dashRemainingMini", "Υπόλοιπο " + remaining + " kcal" + (ex > 0 ? " • +" + ex + " από άσκηση" : ""));
+  v55SafeText("dashMeals", t.count);
+  v55SafeText("dashExercise", ex + " kcal");
+  v55Width("dashProgressBar", calPct);
+
+  try{
+    v55SafeText("dashWeight", typeof getLastWeightText === "function" ? getLastWeightText() : "Δεν υπάρχει");
+  }catch(e){}
+
+  try{
+    if(typeof computeWeightGoalDashboard === "function"){
+      const gd = computeWeightGoalDashboard();
+      const targetKg = v56TargetKgText();
+      const targetText = targetKg ? (targetKg + " • " + (gd.time || "-")) : (gd.time || "-");
+      v55SafeText("dashGoalTime", targetText);
+      v55SafeText("dashPace", gd.pace || "-");
+      const note = document.getElementById("dashGoalNote");
+      if(note) note.textContent = gd.note || "";
+    }
+  }catch(e){
+    const targetKg = v56TargetKgText();
+    if(targetKg) v55SafeText("dashGoalTime", targetKg);
+  }
+
+  const water = (typeof v55WaterTodayMl === "function") ? v55WaterTodayMl() : 0;
+  const waterGoal = (typeof v55WaterGoalMl === "function") ? v55WaterGoalMl() : 2500;
+  const waterPct = Math.round((water / Math.max(1, waterGoal)) * 100);
+  v55Width("dashWaterBar", waterPct);
+  v55SafeText("dashWaterPercent", Math.min(100, waterPct) + "%");
+
+  const mt = (typeof v55MacroTargets === "function") ? v55MacroTargets(goal) : {pG:120,cG:180,fG:60,pPct:30,cPct:40,fPct:30};
+  const pp = Math.round((t.prot / Math.max(1, mt.pG)) * 100);
+  const cp = Math.round((t.carbs / Math.max(1, mt.cG)) * 100);
+  const fp = Math.round((t.fat / Math.max(1, mt.fG)) * 100);
+
+  v55Width("homeProteinBar", pp);
+  v55Width("homeCarbsBar", cp);
+  v55Width("homeFatBar", fp);
+  v55SafeText("homeProteinText", t.prot + "/" + mt.pG + "g");
+  v55SafeText("homeCarbsText", t.carbs + "/" + mt.cG + "g");
+  v55SafeText("homeFatText", t.fat + "/" + mt.fG + "g");
+  v55SafeText("homeMacroSplitText", mt.pPct + "% / " + mt.cPct + "% / " + mt.fPct + "%");
+
+  v55SafeText("dashMessage", t.count ? "Έχεις " + t.count + " καταχώρηση/καταχωρήσεις σήμερα." : "Δεν έχεις καταχωρήσει ακόμα γεύμα σήμερα.");
+};
+
+/* Μετά από προσθήκη/διαγραφή άσκησης, ανανέωση άμεσα */
+const oldAddActivityV56 = typeof addActivity === "function" ? addActivity : null;
+if(oldAddActivityV56){
+  addActivity = function(){
+    oldAddActivityV56();
+    setTimeout(updateDashboard, 100);
+  };
+}
+const oldDeleteActivityV56 = typeof deleteActivity === "function" ? deleteActivity : null;
+if(oldDeleteActivityV56){
+  deleteActivity = function(i){
+    oldDeleteActivityV56(i);
+    setTimeout(updateDashboard, 100);
+  };
+}
+const oldClearActivitiesDayV56 = typeof clearActivitiesDay === "function" ? clearActivitiesDay : null;
+if(oldClearActivitiesDayV56){
+  clearActivitiesDay = function(){
+    oldClearActivitiesDayV56();
+    setTimeout(updateDashboard, 100);
+  };
+}
+
+window.addEventListener("load", ()=>setTimeout(updateDashboard, 300));
+setInterval(()=>{ try{ updateDashboard(); }catch(e){} }, 1500);
+</script>
+
+
+<script>
+/* V57 macro percentages in weight profile + remaining macros on home */
+function v57MacroSplit(){
+  return {
+    p: parseInt(localStorage.getItem("gca_macro_p") || "30", 10),
+    c: parseInt(localStorage.getItem("gca_macro_c") || "40", 10),
+    f: parseInt(localStorage.getItem("gca_macro_f") || "30", 10)
+  };
+}
+function v57LoadMacroToWeight(){
+  const m = v57MacroSplit();
+  const p = document.getElementById("weightMacroProteinPct");
+  const c = document.getElementById("weightMacroCarbsPct");
+  const f = document.getElementById("weightMacroFatPct");
+  if(p) p.value = m.p;
+  if(c) c.value = m.c;
+  if(f) f.value = m.f;
+  v57UpdateMacroInfo();
+}
+function v57SaveMacroFromWeight(){
+  const p = parseInt(document.getElementById("weightMacroProteinPct")?.value || "30", 10);
+  const c = parseInt(document.getElementById("weightMacroCarbsPct")?.value || "40", 10);
+  const f = parseInt(document.getElementById("weightMacroFatPct")?.value || "30", 10);
+  localStorage.setItem("gca_macro_p", String(isNaN(p)?30:p));
+  localStorage.setItem("gca_macro_c", String(isNaN(c)?40:c));
+  localStorage.setItem("gca_macro_f", String(isNaN(f)?30:f));
+  v57UpdateMacroInfo();
+  try{ updateDashboard(); }catch(e){}
+}
+function v57SetMacroPreset(p,c,f){
+  const pi = document.getElementById("weightMacroProteinPct");
+  const ci = document.getElementById("weightMacroCarbsPct");
+  const fi = document.getElementById("weightMacroFatPct");
+  if(pi) pi.value = p;
+  if(ci) ci.value = c;
+  if(fi) fi.value = f;
+  v57SaveMacroFromWeight();
+}
+function v57UpdateMacroInfo(){
+  const m = v57MacroSplit();
+  const total = m.p + m.c + m.f;
+  const info = document.getElementById("weightMacroInfo");
+  if(!info) return;
+
+  const goal = (typeof v55BaseGoal === "function" ? v55BaseGoal() : parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10)) +
+               (typeof v56ExerciseToday === "function" ? v56ExerciseToday() : 0);
+
+  const pg = Math.round((goal * m.p / 100) / 4);
+  const cg = Math.round((goal * m.c / 100) / 4);
+  const fg = Math.round((goal * m.f / 100) / 9);
+
+  info.classList.toggle("warn", total !== 100);
+  if(total !== 100){
+    info.textContent = "Προσοχή: το σύνολο είναι " + total + "%. Καλό είναι να είναι 100%.";
+  }else{
+    info.textContent = "Στόχοι ημέρας: Πρωτεΐνη " + pg + "g • Υδατάνθρακες " + cg + "g • Λιπαρά " + fg + "g";
+  }
+}
+
+/* Αντικατάσταση στόχων μακροθρεπτικών ώστε να παίρνουν τα ποσοστά από τα στοιχεία χρήστη */
+v55MacroTargets = function(goal){
+  const m = v57MacroSplit();
+  return {
+    pPct:m.p, cPct:m.c, fPct:m.f,
+    pG:Math.round((goal*m.p/100)/4),
+    cG:Math.round((goal*m.c/100)/4),
+    fG:Math.round((goal*m.f/100)/9)
+  };
+};
+
+/* Η αρχική να δείχνει πόσα απομένουν, όχι μόνο πόσα έφαγε */
+function v57UpdateMacroTextsRemaining(){
+  try{
+    const t = (typeof v55Totals === "function") ? v55Totals() : {prot:0, carbs:0, fat:0};
+    const ex = (typeof v56ExerciseToday === "function") ? v56ExerciseToday() : 0;
+    const base = (typeof v55BaseGoal === "function") ? v55BaseGoal() : parseInt(localStorage.getItem("gca_daily_goal") || "1800", 10);
+    const goal = base + ex;
+    const mt = v55MacroTargets(goal);
+
+    const protRemain = Math.max(0, mt.pG - t.prot);
+    const carbsRemain = Math.max(0, mt.cG - t.carbs);
+    const fatRemain = Math.max(0, mt.fG - t.fat);
+
+    v55SafeText("homeProteinText", "μένουν " + protRemain + "g");
+    v55SafeText("homeCarbsText", "μένουν " + carbsRemain + "g");
+    v55SafeText("homeFatText", "μένουν " + fatRemain + "g");
+    v55SafeText("homeMacroSplitText", mt.pPct + "% / " + mt.cPct + "% / " + mt.fPct + "%");
+
+    v55Width("homeProteinBar", Math.round((t.prot / Math.max(1, mt.pG)) * 100));
+    v55Width("homeCarbsBar", Math.round((t.carbs / Math.max(1, mt.cG)) * 100));
+    v55Width("homeFatBar", Math.round((t.fat / Math.max(1, mt.fG)) * 100));
+  }catch(e){}
+}
+
+/* Τυλίγουμε το dashboard για να ξαναγράφει τα macros ως "μένουν Χg" */
+const oldUpdateDashboardV57 = updateDashboard;
+updateDashboard = function(){
+  oldUpdateDashboardV57();
+  v57UpdateMacroTextsRemaining();
+  v57UpdateMacroInfo();
+};
+
+/* Όταν ανοίγει η σελίδα Βάρος, φόρτωσε τα ποσοστά */
+const oldShowPageV57 = showPage;
+showPage = function(id){
+  oldShowPageV57(id);
+  if(id === "weight"){
+    setTimeout(v57LoadMacroToWeight, 80);
+  }
+  if(id === "home"){
+    setTimeout(v57UpdateMacroTextsRemaining, 80);
+  }
+};
+
+window.addEventListener("load", ()=>{
+  setTimeout(()=>{
+    v57LoadMacroToWeight();
+    v57UpdateMacroTextsRemaining();
+  }, 300);
+});
+</script>
+
+
+<script>
+/* V58 safety init for Photo / Barcode only */
+function v58PreparePhotoAndBarcode(pageId){
+  try{
+    if(pageId === "photoMeal" && typeof preparePhotoMeal === "function"){
+      preparePhotoMeal();
+    }
+    if(pageId === "barcode" && typeof prepareBarcode === "function"){
+      prepareBarcode();
+    }
+  }catch(e){}
+}
+
+const oldShowPageV58 = typeof showPage === "function" ? showPage : null;
+if(oldShowPageV58){
+  showPage = function(id){
+    oldShowPageV58(id);
+    setTimeout(()=>v58PreparePhotoAndBarcode(id),80);
+  };
+}
+
+window.addEventListener("load", ()=>{
+  setTimeout(()=>{
+    try{
+      if(typeof preparePhotoMeal === "function") preparePhotoMeal();
+      if(typeof prepareBarcode === "function") prepareBarcode();
+    }catch(e){}
+  },300);
+});
+</script>
+
+
+<script>
+/* V59 usage guide + full localStorage backup */
+function toggleUsageGuide(){
+  const body = document.getElementById("usageGuideBody");
+  const btn = document.getElementById("usageGuideToggleBtn");
+  if(!body) return;
+  const willOpen = body.classList.contains("hidden");
+  body.classList.toggle("hidden", !willOpen);
+  if(btn) btn.textContent = willOpen ? "Απόκρυψη" : "Άνοιγμα";
+  localStorage.setItem("gca_usage_guide_open", willOpen ? "1" : "0");
+}
+function v59LoadUsageGuide(){
+  const open = localStorage.getItem("gca_usage_guide_open") === "1";
+  const body = document.getElementById("usageGuideBody");
+  const btn = document.getElementById("usageGuideToggleBtn");
+  if(body) body.classList.toggle("hidden", !open);
+  if(btn) btn.textContent = open ? "Απόκρυψη" : "Άνοιγμα";
+}
+function v59CollectBackup(){
+  const data = {};
+  for(let i=0;i<localStorage.length;i++){
+    const key = localStorage.key(i);
+    data[key] = localStorage.getItem(key);
+  }
+  return {
+    app:"Greek Cal AI",
+    version:"V59",
+    createdAt:new Date().toISOString(),
+    localStorage:data
+  };
+}
+function v59CreateBackupText(){
+  const box = document.getElementById("v59BackupText");
+  const backup = v59CollectBackup();
+  const text = JSON.stringify(backup,null,2);
+  if(box) box.value = text;
+  return text;
+}
+function v59DownloadBackup(){
+  const text = v59CreateBackupText();
+  const date = new Date().toISOString().slice(0,10);
+  const blob = new Blob([text], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "GreekCalAI_backup_" + date + ".json";
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{
+    URL.revokeObjectURL(url);
+    a.remove();
+  },500);
+}
+async function v59CopyBackup(){
+  const text = v59CreateBackupText();
+  try{
+    await navigator.clipboard.writeText(text);
+    alert("Το backup αντιγράφηκε.");
+  }catch(e){
+    alert("Το backup εμφανίστηκε στο πλαίσιο. Κάνε αντιγραφή χειροκίνητα.");
+  }
+}
+function v59ApplyBackupObject(obj){
+  if(!obj || !obj.localStorage){
+    alert("Λάθος αρχείο backup.");
+    return;
+  }
+  if(!confirm("Να γίνει επαναφορά; Θα αντικατασταθούν τα τωρινά δεδομένα της εφαρμογής.")) return;
+
+  Object.keys(localStorage).forEach(k=>{
+    if(k.startsWith("gca_") || k.startsWith("diary_") || k.startsWith("water_") || k.startsWith("activities_") || k.startsWith("meals_")){
+      localStorage.removeItem(k);
+    }
+  });
+
+  Object.entries(obj.localStorage).forEach(([k,v])=>{
+    localStorage.setItem(k, v);
+  });
+
+  alert("Η επαναφορά ολοκληρώθηκε.");
+  location.reload();
+}
+function v59RestoreFromText(){
+  const box = document.getElementById("v59BackupText");
+  if(!box || !box.value.trim()){
+    alert("Κάνε πρώτα επικόλληση backup JSON.");
+    return;
+  }
+  try{
+    const obj = JSON.parse(box.value);
+    v59ApplyBackupObject(obj);
+  }catch(e){
+    alert("Λάθος μορφή backup.");
+  }
+}
+function v59RestoreFromFile(event){
+  const file = event.target.files && event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(){
+    try{
+      const obj = JSON.parse(reader.result);
+      v59ApplyBackupObject(obj);
+    }catch(e){
+      alert("Λάθος αρχείο backup.");
+    }
+  };
+  reader.readAsText(file);
+}
+
+/* Hook showPage μόνο για backup/guide χωρίς να πειράζει την υπόλοιπη εφαρμογή */
+const oldShowPageV59 = typeof showPage === "function" ? showPage : null;
+if(oldShowPageV59){
+  showPage = function(id){
+    oldShowPageV59(id);
+    if(id === "backup"){
+      setTimeout(v59CreateBackupText,80);
+    }
+  };
+}
+window.addEventListener("load", ()=>{
+  setTimeout(v59LoadUsageGuide,150);
+});
+</script>
+
+
+<script>
+/* V61 full app reset, safe to this app only */
+function v61GreekCalKeys(){
+  const prefixes = [
+    "gca_",
+    "diary_",
+    "water_",
+    "activities_",
+    "activity_",
+    "meals_"
+  ];
+  const exact = [
+    "selectedFoodMeal",
+    "foodMealTarget",
+    "fasting_start",
+    "fasting_end",
+    "fasting_active"
+  ];
+  const keys = [];
+  for(let i=0;i<localStorage.length;i++){
+    const k = localStorage.key(i);
+    if(prefixes.some(p=>k.startsWith(p)) || exact.includes(k)){
+      keys.push(k);
+    }
+  }
+  return keys;
+}
+function v61FullReset(){
+  const count = v61GreekCalKeys().length;
+  if(!confirm("Πριν τη διαγραφή καλό είναι να πάρεις backup. Να συνεχίσω;")) return;
+  if(!confirm("ΟΡΙΣΤΙΚΗ ΔΙΑΓΡΑΦΗ: Θα σβηστούν φαγητά, νερό, βάρος, στόχοι, άσκηση, barcode προϊόντα και ρυθμίσεις. Συνέχεια;")) return;
+
+  const word = prompt("Για επιβεβαίωση γράψε: ΔΙΑΓΡΑΦΗ");
+  if((word || "").trim().toUpperCase() !== "ΔΙΑΓΡΑΦΗ"){
+    alert("Ακυρώθηκε η διαγραφή.");
+    return;
+  }
+
+  v61GreekCalKeys().forEach(k=>localStorage.removeItem(k));
+  alert("Διαγράφηκαν τα δεδομένα της εφαρμογής (" + count + " εγγραφές). Η εφαρμογή θα φορτώσει από την αρχή.");
+  location.reload();
+}
+
+/* Πιο σαφές μήνυμα στο clearHistory χωρίς να αλλάζει η λειτουργία του */
+const oldClearHistoryV61 = typeof clearHistory === "function" ? clearHistory : null;
+if(oldClearHistoryV61){
+  clearHistory = function(){
+    if(!confirm("Να διαγραφεί μόνο το ιστορικό μετρήσεων βάρους; Τα στοιχεία στόχου θα μείνουν.")) return;
+    localStorage.removeItem("gca_weight_history");
+    try{ renderHistory(); }catch(e){}
+    try{ renderChart(); }catch(e){}
+    try{ calculateWeight(); }catch(e){}
+    try{ updateDashboard(); }catch(e){}
+  };
+}
+</script>
+
 </body>
 </html>
