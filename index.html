@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V90-1.3.0">
+<meta name="app-version" content="V92-1.3.2">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V90</title>
+<title>Greek Cal AI V92</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -4411,6 +4411,139 @@ html, body{
   }
 }
 
+
+/* V91 measurement fix note + readability */
+.v91FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v91FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v91FinalNote span{
+  color:#166534;
+}
+.v90MiniCalStats{
+  background:#ffffff!important;
+}
+.v90MiniStat small{
+  color:#53627a!important;
+}
+.v90MiniStat b{
+  text-shadow:none!important;
+}
+.v90DailyGoal{
+  min-height:58px;
+}
+
+
+/* V92 intense colors + measurement polish */
+.v90HeroCalBox{
+  background:linear-gradient(180deg,#ffffff 0%,#eef8ff 100%)!important;
+  border:1px solid #b9ddff!important;
+  box-shadow:0 18px 48px rgba(0,97,255,.18)!important;
+}
+.v90HeroCalBox:before{
+  background:
+    radial-gradient(circle at 25% 25%, rgba(0,216,255,.24), transparent 48%),
+    radial-gradient(circle at 75% 35%, rgba(0,230,118,.20), transparent 48%)!important;
+  width:260px!important;
+  height:260px!important;
+  inset:-80px -70px auto auto!important;
+}
+.v90Ring{
+  background:conic-gradient(from -90deg,#0057ff 0deg,#00c8ff var(--v90-angle),#e8eef7 var(--v90-angle),#eef4fb 360deg)!important;
+  box-shadow:
+    0 22px 48px rgba(0,97,255,.25),
+    0 0 38px rgba(0,216,255,.22),
+    inset 0 0 0 1px rgba(255,255,255,.96)!important;
+}
+.v90Ring:before{
+  background:linear-gradient(180deg,#ffffff 0%,#f8fcff 100%)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(185,221,255,.95),
+    0 0 0 11px rgba(255,255,255,.80)!important;
+}
+.v90PercentBadge{
+  background:linear-gradient(135deg,#004cff,#00b7ff)!important;
+  box-shadow:
+    0 12px 28px rgba(0,76,255,.32),
+    0 0 24px rgba(0,183,255,.38)!important;
+  border:4px solid #ffffff!important;
+}
+.v90PercentBadge strong{
+  color:#ffffff!important;
+  text-shadow:0 2px 6px rgba(0,0,0,.18);
+}
+.v90Knob{
+  border-color:#00e676!important;
+  box-shadow:
+    0 8px 22px rgba(0,230,118,.38),
+    0 0 18px rgba(0,230,118,.50)!important;
+}
+.v90Flame{
+  background:linear-gradient(135deg,#fff7ed,#ffedd5)!important;
+  box-shadow:0 8px 24px rgba(249,115,22,.24)!important;
+}
+.v90DailyGoal{
+  color:#061833!important;
+  text-shadow:0 2px 0 rgba(255,255,255,.7);
+}
+.v90Fraction em{
+  color:#004cff!important;
+  text-shadow:0 3px 12px rgba(0,76,255,.18);
+}
+.v90MiniCalStats{
+  background:linear-gradient(135deg,#ffffff,#f0f8ff)!important;
+  border-color:#b9ddff!important;
+  box-shadow:0 10px 25px rgba(0,97,255,.10)!important;
+}
+.v90MiniIcon.blue{
+  background:linear-gradient(135deg,#e8f1ff,#cce7ff)!important;
+  color:#004cff!important;
+}
+.v90MiniIcon.green{
+  background:linear-gradient(135deg,#ecfdf5,#bbf7d0)!important;
+  color:#00a85a!important;
+}
+.v90MiniIcon.orange{
+  background:linear-gradient(135deg,#fff7ed,#fed7aa)!important;
+  color:#ff7a00!important;
+}
+.v90MiniStat:nth-child(1) b{color:#004cff!important}
+.v90MiniStat:nth-child(2) b{color:#00a85a!important}
+.v90MiniStat:nth-child(3) b{color:#ff7a00!important}
+.v90RemainingLine{
+  color:#0d47a1!important;
+  font-weight:1000!important;
+}
+.v92FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v92FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v92FinalNote span{
+  color:#166534;
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -4547,7 +4680,7 @@ html, body{
       <div class="v90MiniCalStats">
         <div class="v90MiniStat">
           <span class="v90MiniIcon blue">🔥</span>
-          <small>Καμένες θερμίδες</small>
+          <small>Θερμίδες γευμάτων</small>
           <b id="v90BurnedCalories">0 kcal</b>
         </div>
         <div class="v90MiniStat">
@@ -4635,7 +4768,7 @@ html, body{
     <h2>🆕 Τι νέο υπάρχει</h2>
 
     <div class="v84InfoBox green">
-      <h3>V90 / 1.3.0</h3>
+      <h3>V92 / 1.3.2</h3>
       <p>Το Απόρρητο δεν εμφανίζεται πλέον με λουκέτο, για να μη μπερδεύεται με Premium λειτουργία. Ο Coach κλειδώθηκε στη δωρεάν έκδοση και ανοίγει με Premium.</p>
     </div>
 
@@ -4664,7 +4797,7 @@ html, body{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V90 / 1.3.0</p>
+      <p><b>Έκδοση:</b> V92 / 1.3.2</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> greekcalai.support@gmail.com</p>
@@ -4696,42 +4829,54 @@ html, body{
 
     
     <div class="v85FinalNote">
-      <b>✅ V90 / 1.3.0</b>
+      <b>✅ V92 / 1.3.2</b>
       <span>Καθαρή ροή αγοράς Premium: αίτηση με κωδικό συσκευής, οδηγίες πληρωμής, αποστολή Premium κωδικού μετά την πληρωμή.</span>
     </div>
 
 
     <div class="v86FinalNote">
-      <b>✅ V90 / 1.3.0</b>
+      <b>✅ V92 / 1.3.2</b>
       <span>Καθαρή διάκριση Δωρεάν / Premium: ο πελάτης ξεκινά δωρεάν και βλέπει ένα μόνο βασικό σημείο αναβάθμισης.</span>
     </div>
 
 
     <div class="v87FinalNote">
-      <b>✅ V90 / 1.3.0</b>
+      <b>✅ V92 / 1.3.2</b>
       <span>Το Απόρρητο φαίνεται ως δημόσια ενημερωτική σελίδα και ο Coach έγινε Premium λειτουργία.</span>
     </div>
 
 
     <div class="v88FinalNote">
-      <b>✅ V90 / 1.3.0</b>
+      <b>✅ V92 / 1.3.2</b>
       <span>Προστέθηκε καθαρός πίνακας αξίας Premium με Δωρεάν έκδοση και Premium ξεκλειδώματα.</span>
     </div>
 
 
     <div class="v89FinalNote">
-      <b>✅ V90 / 1.3.0</b>
+      <b>✅ V92 / 1.3.2</b>
       <span>Διόρθωση scroll: δεν πηγαίνει πλέον τέρμα πάνω με κάθε πάτημα κουμπιού.</span>
     </div>
 
 
     <div class="v90FinalNote">
-      <b>✅ V90 / 1.3.0</b>
+      <b>✅ V92 / 1.3.2</b>
       <span>Νέα στρογγυλή κάρτα θερμίδων στην αρχική με κυκλικό progress και πιο premium εμφάνιση.</span>
     </div>
 
+
+    <div class="v91FinalNote">
+      <b>✅ V92 / 1.3.2</b>
+      <span>Η στρογγυλή κάρτα παίρνει πλέον σωστά στόχο, καμένες θερμίδες από άσκηση, ποσοστό και υπόλοιπο.</span>
+    </div>
+
+
+    <div class="v92FinalNote">
+      <b>✅ V92 / 1.3.2</b>
+      <span>Δυνατά χρώματα και σωστές μετρήσεις: γεύματα, στόχος, άσκηση, υπόλοιπο και ποσοστό από τα πραγματικά δεδομένα.</span>
+    </div>
+
 <div class="v84UpdateHero">
-      <b>Τρέχουσα έκδοση: V90 / 1.3.0</b>
+      <b>Τρέχουσα έκδοση: V92 / 1.3.2</b>
       <span>Χρησιμοποίησε αυτό το κουμπί όταν θέλεις να φορτώσει η πιο πρόσφατη έκδοση της εφαρμογής.</span>
     </div>
 
@@ -8387,7 +8532,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=90").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=92").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -8410,7 +8555,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V90 / 1.3.0\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V92 / 1.3.2\n\nΠεριγραφή:");
   location.href = "mailto:greekcalai.support@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -8466,7 +8611,7 @@ window.addEventListener("load", ()=>{
 <script>
 /* V84 one-time προσωρινής μνήμης refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V90-1.3.0";
+  const wanted = "V92-1.3.2";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -8732,7 +8877,7 @@ function v82OpenPremiumEmail(){
 
 Θέλω να αγοράσω το Greek Cal AI Premium.
 
-Έκδοση: V90 / 1.3.0
+Έκδοση: V92 / 1.3.2
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Παρακαλώ στείλτε μου οδηγίες πληρωμής.
@@ -8752,7 +8897,7 @@ function v64OpenEmail(){
 
 Θέλω βοήθεια για το Greek Cal AI.
 
-Έκδοση: V90 / 1.3.0
+Έκδοση: V92 / 1.3.2
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Περιγραφή:`
@@ -9116,6 +9261,290 @@ window.addEventListener("load", ()=>{
   setTimeout(v90UpdateCalorieWidget, 700);
 });
 setInterval(v90UpdateCalorieWidget, 1600);
+</script>
+
+
+<script>
+/* V91: σωστές μετρήσεις στην κυκλική κάρτα */
+function v91NumFromText(text){
+  const m = String(text || "").replace(/\./g,"").replace(/,/g,"").match(/-?\d+/);
+  return m ? Number(m[0]) : 0;
+}
+function v91NumsFromText(text){
+  return (String(text || "").replace(/\./g,"").replace(/,/g,"").match(/-?\d+/g) || []).map(Number);
+}
+function v91ReadFoodAndGoal(){
+  const el = document.getElementById("dashCalories");
+  let food = Number(el?.dataset?.v91Food || NaN);
+  let goal = Number(el?.dataset?.v91Goal || NaN);
+
+  // Όταν το βασικό updateDashboard γράψει ξανά "φαγητό / στόχος", το αποθηκεύουμε.
+  const nums = v91NumsFromText(el?.textContent || "");
+  if(nums.length >= 2){
+    const first = nums[0];
+    const second = nums[1];
+
+    // Αν το κείμενο δεν είναι ήδη δικό μας rendered κλάσμα άσκησης, κράτα το σαν food/goal.
+    // Ακόμα κι αν είναι rendered, αν ο δεύτερος αριθμός είναι στόχος, παραμένει σωστό.
+    if(!el?.dataset?.v91Rendered || first !== Number(el?.dataset?.v91Exercise || -999999)){
+      food = Math.max(0, first);
+      goal = Math.max(1, second);
+      if(el){
+        el.dataset.v91Food = String(food);
+        el.dataset.v91Goal = String(goal);
+      }
+    }
+  }
+
+  if(!Number.isFinite(goal) || goal <= 0){
+    goal = v91NumFromText(document.getElementById("v90TargetCalories")?.textContent) || 
+           v91NumFromText(document.getElementById("v90DailyGoalValue")?.textContent) || 1800;
+  }
+  if(!Number.isFinite(food) || food < 0){
+    food = 0;
+  }
+
+  return { food, goal };
+}
+function v91ReadExercise(){
+  return Math.max(0, v91NumFromText(document.getElementById("dashExercise")?.textContent || "0"));
+}
+function v91SetText(id, text){
+  const el = document.getElementById(id);
+  if(el) el.textContent = text;
+}
+function v90UpdateCalorieWidget(){
+  try{
+    const base = v91ReadFoodAndGoal();
+    const food = Math.max(0, base.food);
+    const goal = Math.max(1, base.goal);
+    const exercise = v91ReadExercise();
+
+    // Για τον κύκλο δείχνουμε τις καμένες από άσκηση / στόχο, όπως ζητήθηκε.
+    const burned = exercise;
+    const pctRaw = Math.round((burned / goal) * 100);
+    const pct = Math.max(0, Math.min(100, pctRaw));
+    const deg = Math.round(pct * 3.6);
+
+    // Το υπόλοιπο παραμένει θερμίδες φαγητού που απομένουν.
+    const remaining = Math.max(0, goal - food);
+
+    const ring = document.getElementById("dashCalCircle");
+    if(ring){
+      ring.style.setProperty("--v90-angle", deg + "deg");
+      ring.style.background =
+        "conic-gradient(from -90deg, #1e88e5 0deg, #25a7f0 " +
+        Math.max(0, Math.round(deg*.55)) + "deg, #35d399 " + deg +
+        "deg, #e8eef7 " + deg + "deg, #eef4fb 360deg)";
+    }
+
+    const knob = document.getElementById("v90CalKnob");
+    if(knob && ring){
+      const angle = (-90 + deg) * Math.PI / 180;
+      const radius = ring.offsetWidth / 2;
+      const knobRadius = radius - 7;
+      const x = radius + Math.cos(angle) * knobRadius;
+      const y = radius + Math.sin(angle) * knobRadius;
+      knob.style.left = x + "px";
+      knob.style.top = y + "px";
+    }
+
+    v91SetText("dashCalPercent", pct + "%");
+    v91SetText("v90DailyGoalValue", goal);
+    v91SetText("v90BurnedCalories", burned + " kcal");
+    v91SetText("v90TargetCalories", goal + " kcal");
+    v91SetText("v90RemainingCalories", remaining + " kcal");
+
+    const frac = document.getElementById("dashCalories");
+    if(frac){
+      frac.dataset.v91Rendered = "1";
+      frac.dataset.v91Food = String(food);
+      frac.dataset.v91Goal = String(goal);
+      frac.dataset.v91Exercise = String(exercise);
+      frac.innerHTML = "<em>" + burned + "</em> <span>/ " + goal + "</span>";
+    }
+
+    const remainingLine = document.getElementById("dashRemainingMini");
+    if(remainingLine){
+      remainingLine.textContent = "Υπόλοιπο " + remaining + " kcal" + (exercise > 0 ? " • άσκηση " + exercise + " kcal" : "");
+    }
+  }catch(e){}
+}
+
+// Πάρε ξανά τις μετρήσεις μετά από κάθε βασικό update.
+const oldUpdateDashboardV91 = typeof updateDashboard === "function" ? updateDashboard : null;
+if(oldUpdateDashboardV91 && !oldUpdateDashboardV91.__v91Wrapped){
+  const wrappedUpdateDashboardV91 = function(){
+    const result = oldUpdateDashboardV91.apply(this, arguments);
+    v90UpdateCalorieWidget();
+    setTimeout(v90UpdateCalorieWidget, 40);
+    setTimeout(v90UpdateCalorieWidget, 160);
+    return result;
+  };
+  wrappedUpdateDashboardV91.__v91Wrapped = true;
+  updateDashboard = wrappedUpdateDashboardV91;
+}
+
+window.addEventListener("load", ()=>{
+  setTimeout(v90UpdateCalorieWidget, 250);
+  setTimeout(v90UpdateCalorieWidget, 800);
+  setTimeout(v90UpdateCalorieWidget, 1400);
+});
+setInterval(v90UpdateCalorieWidget, 1200);
+</script>
+
+
+<script>
+/* V92: πραγματικές μετρήσεις + έντονα χρώματα */
+function v92SafeNum(n, fallback=0){
+  n = Number(n);
+  return Number.isFinite(n) ? n : fallback;
+}
+function v92TodayTotals(){
+  try{
+    if(typeof v55Totals === "function"){
+      const t = v55Totals();
+      return {
+        total:v92SafeNum(t.total),
+        count:v92SafeNum(t.count),
+        prot:v92SafeNum(t.prot),
+        carbs:v92SafeNum(t.carbs),
+        fat:v92SafeNum(t.fat)
+      };
+    }
+  }catch(e){}
+  try{
+    if(typeof getTodayTotalsV45 === "function"){
+      const t = getTodayTotalsV45();
+      return {
+        total:v92SafeNum(t.total),
+        count:v92SafeNum(t.count),
+        prot:v92SafeNum(t.prot),
+        carbs:v92SafeNum(t.carbs),
+        fat:v92SafeNum(t.fat)
+      };
+    }
+  }catch(e){}
+  return {total:0,count:0,prot:0,carbs:0,fat:0};
+}
+function v92Exercise(){
+  try{
+    if(typeof v55Exercise === "function") return Math.max(0, v92SafeNum(v55Exercise()));
+  }catch(e){}
+  try{
+    if(typeof getExerciseCaloriesTodayV45 === "function") return Math.max(0, v92SafeNum(getExerciseCaloriesTodayV45()));
+  }catch(e){}
+  const txt = document.getElementById("dashExercise")?.textContent || "0";
+  const m = String(txt).replace(/\./g,"").replace(/,/g,"").match(/\d+/);
+  return m ? Number(m[0]) : 0;
+}
+function v92BaseGoal(){
+  try{
+    if(typeof v55BaseGoal === "function"){
+      const n = v92SafeNum(v55BaseGoal());
+      if(n > 0) return n;
+    }
+  }catch(e){}
+  try{
+    if(typeof getDailyGoalBaseV45 === "function"){
+      const n = v92SafeNum(getDailyGoalBaseV45());
+      if(n > 0) return n;
+    }
+  }catch(e){}
+  try{
+    if(typeof getDailyGoalBase === "function"){
+      const n = v92SafeNum(getDailyGoalBase());
+      if(n > 0) return n;
+    }
+  }catch(e){}
+  return parseInt(localStorage.getItem("gca_daily_goal") || "1800",10) || 1800;
+}
+function v92Metrics(){
+  const t = v92TodayTotals();
+  const ex = v92Exercise();
+  const baseGoal = v92BaseGoal();
+  const goal = Math.max(1, baseGoal + ex);
+  const consumed = Math.max(0, t.total);
+  const remaining = Math.max(0, goal - consumed);
+  const pct = Math.max(0, Math.min(100, Math.round((consumed / goal) * 100)));
+  return {t, ex, baseGoal, goal, consumed, remaining, pct};
+}
+function v92SetText(id, text){
+  const el = document.getElementById(id);
+  if(el) el.textContent = text;
+}
+function v92MoveKnob(ring, deg){
+  const knob = document.getElementById("v90CalKnob");
+  if(!knob || !ring) return;
+  const angle = (-90 + deg) * Math.PI / 180;
+  const radius = ring.offsetWidth / 2;
+  const knobRadius = radius - 7;
+  knob.style.left = (radius + Math.cos(angle) * knobRadius) + "px";
+  knob.style.top = (radius + Math.sin(angle) * knobRadius) + "px";
+}
+function v90UpdateCalorieWidget(){
+  try{
+    const m = v92Metrics();
+    const deg = Math.round(m.pct * 3.6);
+
+    const ring = document.getElementById("dashCalCircle");
+    if(ring){
+      ring.style.setProperty("--v90-angle", deg + "deg");
+      ring.style.background =
+        "conic-gradient(from -90deg, #004cff 0deg, #008cff " +
+        Math.max(0, Math.round(deg*.38)) + "deg, #00d8ff " +
+        Math.max(0, Math.round(deg*.70)) + "deg, #00e676 " + deg +
+        "deg, #e8eef7 " + deg + "deg, #f1f5f9 360deg)";
+      v92MoveKnob(ring, deg);
+    }
+
+    v92SetText("dashCalPercent", m.pct + "%");
+    v92SetText("v90DailyGoalValue", m.goal);
+    v92SetText("v90BurnedCalories", m.consumed + " kcal");
+    v92SetText("v90TargetCalories", m.goal + " kcal");
+    v92SetText("v90RemainingCalories", m.remaining + " kcal");
+
+    const frac = document.getElementById("dashCalories");
+    if(frac){
+      frac.dataset.v92Rendered = "1";
+      frac.dataset.v92Consumed = String(m.consumed);
+      frac.dataset.v92Goal = String(m.goal);
+      frac.innerHTML = "<em>" + m.consumed + "</em> <span>/ " + m.goal + "</span>";
+    }
+
+    const line = document.getElementById("dashRemainingMini");
+    if(line){
+      line.textContent = "Υπόλοιπο " + m.remaining + " kcal" + (m.ex > 0 ? " • άσκηση +" + m.ex + " kcal" : "");
+    }
+
+    const bar = document.getElementById("dashProgressBar");
+    if(bar) bar.style.width = m.pct + "%";
+
+    // Κράτα συγχρονισμένα και τα άλλα dashboard πεδία.
+    v92SetText("dashMeals", m.t.count);
+    v92SetText("dashExercise", m.ex + " kcal");
+  }catch(e){}
+}
+
+// Τελικό override μετά από κάθε dashboard update.
+const oldUpdateDashboardV92 = typeof updateDashboard === "function" ? updateDashboard : null;
+if(oldUpdateDashboardV92 && !oldUpdateDashboardV92.__v92Wrapped){
+  const wrappedUpdateDashboardV92 = function(){
+    const result = oldUpdateDashboardV92.apply(this, arguments);
+    v90UpdateCalorieWidget();
+    setTimeout(v90UpdateCalorieWidget, 50);
+    setTimeout(v90UpdateCalorieWidget, 180);
+    return result;
+  };
+  wrappedUpdateDashboardV92.__v92Wrapped = true;
+  updateDashboard = wrappedUpdateDashboardV92;
+}
+window.addEventListener("load", ()=>{
+  setTimeout(v90UpdateCalorieWidget, 250);
+  setTimeout(v90UpdateCalorieWidget, 800);
+  setTimeout(v90UpdateCalorieWidget, 1500);
+});
+setInterval(v90UpdateCalorieWidget, 1200);
 </script>
 
 </body>
