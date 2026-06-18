@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V61</title>
+<title>Greek Cal AI V62</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -5069,6 +5069,123 @@ if(oldClearHistoryV61){
     try{ updateDashboard(); }catch(e){}
   };
 }
+</script>
+
+
+<script>
+/* V62: Το τωρινό βάρος στο προφίλ είναι η πηγή για την Αρχική */
+function v62Num(v){
+  const n = Number(String(v ?? "").replace(",", "."));
+  return isNaN(n) ? 0 : n;
+}
+function v62ReadWeightData(){
+  try{
+    return JSON.parse(localStorage.getItem("gca_weight_data") || "{}");
+  }catch(e){
+    return {};
+  }
+}
+function v62GreekDate(ts){
+  try{
+    return new Date(ts || Date.now()).toLocaleDateString("el-GR");
+  }catch(e){
+    return new Date().toLocaleDateString("el-GR");
+  }
+}
+function v62CollectWeightForm(){
+  return {
+    profileName: val("profileName"),
+    startWeight: val("startWeight"),
+    currentWeight: val("currentWeight"),
+    targetWeight: val("targetWeight"),
+    height: val("height"),
+    age: val("age"),
+    gender: val("gender"),
+    activity: val("activity"),
+    goalPace: val("goalPace") || "500",
+    updatedAt: Date.now(),
+    updatedDate: new Date().toLocaleDateString("el-GR")
+  };
+}
+function v62WriteWeightData(){
+  const data = v62CollectWeightForm();
+  localStorage.setItem("gca_weight_data", JSON.stringify(data));
+  return data;
+}
+function v62SyncTodayWeightHistory(weight, note){
+  weight = v62Num(weight);
+  if(weight <= 0) return;
+
+  let h = [];
+  try{ h = JSON.parse(localStorage.getItem("gca_weight_history") || "[]"); }catch(e){ h = []; }
+  if(!Array.isArray(h)) h = [];
+
+  const now = new Date();
+  const today = now.toLocaleDateString("el-GR");
+  const existingToday = h.find(x => x && x.date === today);
+
+  if(existingToday){
+    existingToday.weight = weight;
+    existingToday.time = now.toLocaleTimeString("el-GR", {hour:"2-digit", minute:"2-digit"});
+    if(!existingToday.note || existingToday.source === "profile") existingToday.note = note || "Στοιχεία προφίλ";
+    existingToday.ts = Date.now();
+    existingToday.source = existingToday.source || "profile";
+  }else{
+    h.unshift({
+      date: today,
+      time: now.toLocaleTimeString("el-GR", {hour:"2-digit", minute:"2-digit"}),
+      ts: Date.now(),
+      weight,
+      note: note || "Στοιχεία προφίλ",
+      source: "profile"
+    });
+  }
+
+  h.sort((a,b)=>(Number(b.ts)||0)-(Number(a.ts)||0));
+  localStorage.setItem("gca_weight_history", JSON.stringify(h));
+}
+
+/* Η Αρχική να δείχνει πρώτα το Τωρινό βάρος από τα Στοιχεία, όχι παλιά μέτρηση. */
+getLastWeightText = function(){
+  const d = v62ReadWeightData();
+  const current = v62Num(d.currentWeight);
+  if(current > 0){
+    const date = d.updatedDate || v62GreekDate(d.updatedAt || Date.now());
+    return current.toFixed(1) + " kg • " + date;
+  }
+
+  try{
+    const h = getHistory();
+    if(h && h.length > 0) return Number(h[0].weight).toFixed(1) + " kg • " + h[0].date;
+  }catch(e){}
+  return "Δεν υπάρχει μέτρηση";
+};
+
+/* Αποθήκευση Στοιχείων: ενημερώνει αμέσως και την Αρχική και το σημερινό ιστορικό. */
+saveWeightData = function(){
+  const data = v62WriteWeightData();
+  v62SyncTodayWeightHistory(data.currentWeight, val("note").trim() || "Στοιχεία προφίλ");
+  try{ calculateWeight(); }catch(e){}
+  try{ loadDailyGoal(); }catch(e){}
+  try{ renderHistory(); }catch(e){}
+  try{ renderChart(); }catch(e){}
+  try{ updateDashboard(); }catch(e){}
+  alert("Τα στοιχεία αποθηκεύτηκαν και η Αρχική ενημερώθηκε.");
+};
+
+/* Χωρίς μήνυμα, για εσωτερική χρήση μετά από καταχώρηση μέτρησης. */
+saveWeightDataNoAlert = function(){
+  v62WriteWeightData();
+  try{ loadDailyGoal(); }catch(e){}
+  try{ updateDashboard(); }catch(e){}
+};
+
+/* Όταν αλλάζει το τωρινό βάρος στα στοιχεία, γίνεται γρήγορη προεπισκόπηση στην Αρχική μετά την αποθήκευση. */
+window.addEventListener("load", ()=>{
+  setTimeout(()=>{
+    try{ updateDashboard(); }catch(e){}
+  }, 250);
+});
 </script>
 
 </body>
