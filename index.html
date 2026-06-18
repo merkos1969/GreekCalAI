@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V66-1.0.4">
+<meta name="app-version" content="V67-1.0.5">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V66</title>
+<title>Greek Cal AI V67</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -2282,6 +2282,78 @@ body.v65NoFab #fabOverlay{
   display:none!important;
 }
 
+
+/* V67 update page + status buttons */
+.v67StatusBtns{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  width:100%;
+}
+.v67StatusBtns button{
+  width:100%!important;
+  margin:0!important;
+}
+.v67UpdateHero{
+  background:linear-gradient(135deg,#0d47a1,#1e88e5);
+  color:#fff;
+  border-radius:22px;
+  padding:18px;
+  margin:12px 0;
+  box-shadow:0 14px 28px rgba(30,108,199,.20);
+}
+.v67UpdateHero b{
+  display:block;
+  font-size:21px;
+}
+.v67UpdateHero span{
+  display:block;
+  margin-top:6px;
+  font-weight:800;
+  opacity:.95;
+}
+.v67UpdateCard{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:20px;
+  padding:14px;
+  margin:14px 0;
+}
+.v67UpdateCard h3{
+  margin:0 0 8px;
+  color:#0d47a1;
+}
+.v67UpdateCard p,
+.v67UpdateCard ol{
+  margin:0;
+  color:#475467;
+  font-weight:800;
+  line-height:1.45;
+}
+.v67UpdateCard ol{
+  padding-left:22px;
+}
+.v67BigUpdateBtn{
+  min-height:68px;
+  font-size:19px!important;
+  border-radius:20px!important;
+}
+.v67UpdateNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin-top:14px;
+  font-weight:900;
+  line-height:1.35;
+}
+@media(max-width:560px){
+  .v67StatusBtns{
+    grid-template-columns:1fr;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -2322,10 +2394,10 @@ body.v65NoFab #fabOverlay{
 
 <div class="v62StatusCard">
   <div>
-    <b>✅ Έκδοση 1.0.4 • PWA Ready</b>
+    <b>✅ Έκδοση 1.0.5 • PWA Ready</b>
     <span>Έτοιμο για εγκατάσταση από Chrome όταν ανέβει σε HTTPS.</span>
   </div>
-  <button type="button" onclick="showPage('premium')">⭐ Premium</button>
+  <div class="v67StatusBtns"><button type="button" onclick="showPage('premium')">⭐ Premium</button><button type="button" onclick="showPage('updates')">🔄 Update</button></div>
 </div>
 
 
@@ -2354,6 +2426,7 @@ body.v65NoFab #fabOverlay{
     <div class="v59GuideActions">
       <button type="button" onclick="showPage('weight')">⚖️ Στοιχεία / Στόχος</button>
       <button type="button" onclick="showPage('backup')">💾 Backup</button>
+      <button type="button" onclick="showPage('updates')">🔄 Ενημέρωση</button>
       <button type="button" onclick="showPage('premium')">⭐ Premium</button>
       <button type="button" onclick="showPage('landing')">💼 Πώληση</button>
       <button type="button" onclick="showPage('support')">📞 Υποστήριξη</button>
@@ -2430,6 +2503,7 @@ body.v65NoFab #fabOverlay{
     <button onclick="showPage('custom')">➕ Δικό μου</button>
     <button onclick="showPage('fasting')">⏱ Νηστεία</button>
     <button onclick="showPage('backup')">💾 Backup</button>
+      <button onclick="showPage('updates')">🔄 Ενημέρωση</button>
     <button onclick="showPage('premium')">⭐ Premium</button>
     <button onclick="showPage('privacy')">🔒 Απόρρητο</button>
       <button onclick="showPage('landing')">💼 Πώληση</button>
@@ -2442,6 +2516,43 @@ body.v65NoFab #fabOverlay{
 
 
 
+
+
+
+<section id="updates" class="hidden">
+  <button class="back" onclick="showPage('home')">← Πίσω</button>
+  <div class="card v67UpdatePage">
+    <h2>🔄 Ενημέρωση Εφαρμογής</h2>
+
+    <div class="v67UpdateHero">
+      <b>Έκδοση εφαρμογής: V67 / 1.0.5</b>
+      <span>Χρήσιμο όταν το κινητό κρατάει παλιά έκδοση λόγω cache / service worker.</span>
+    </div>
+
+    <div class="v67UpdateCard">
+      <h3>Πότε το χρησιμοποιώ;</h3>
+      <p>Αν ανέβηκε νέα έκδοση στο GitHub Pages αλλά στο κινητό συνεχίζει να φαίνεται παλιά έκδοση, πάτησε το κουμπί καθαρισμού.</p>
+    </div>
+
+    <button class="btnGreen v67BigUpdateBtn" onclick="v67ForceUpdate()">🔄 Καθαρισμός cache & φόρτωση νέας έκδοσης</button>
+
+    <div class="v67UpdateCard">
+      <h3>Χειροκίνητα βήματα</h3>
+      <ol>
+        <li>Ανέβασε όλα τα νέα αρχεία στο GitHub Pages.</li>
+        <li>Άνοιξε την εφαρμογή από Chrome.</li>
+        <li>Πάτησε το κουμπί ενημέρωσης.</li>
+        <li>Περίμενε να ξαναφορτώσει η εφαρμογή.</li>
+      </ol>
+    </div>
+
+    <div class="v67UpdateNote">
+      Δεν διαγράφει φαγητά, βάρος, νερό, στόχους ή backup. Καθαρίζει μόνο την προσωρινή μνήμη της εφαρμογής.
+    </div>
+
+    <div class="v58BottomSpace"></div>
+  </div>
+</section>
 
 
 <section id="landing" class="hidden">
@@ -2550,7 +2661,7 @@ body.v65NoFab #fabOverlay{
 
       <details>
         <summary>Τι να στείλω όταν έχω πρόβλημα;</summary>
-        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V66 / 1.0.4.</p>
+        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V67 / 1.0.5.</p>
       </details>
     </div>
 
@@ -5778,7 +5889,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=66").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=67").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -5801,7 +5912,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V66 / 1.0.4\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V67 / 1.0.5\n\nΠεριγραφή:");
   location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -5855,9 +5966,9 @@ window.addEventListener("load", ()=>{
 
 
 <script>
-/* V66 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
+/* V67 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V66-1.0.4";
+  const wanted = "V67-1.0.5";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -5876,6 +5987,53 @@ window.addEventListener("load", ()=>{
     });
   }
 })();
+</script>
+
+
+<script>
+/* V67 update/cache tools */
+async function v67ForceUpdate(){
+  if(!confirm("Να καθαρίσει η προσωρινή μνήμη της εφαρμογής και να ξαναφορτώσει; Τα δεδομένα σου δεν θα διαγραφούν.")) return;
+
+  try{
+    if("serviceWorker" in navigator){
+      const regs = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(r => r.unregister()));
+    }
+
+    if(window.caches){
+      const keys = await caches.keys();
+      await Promise.all(keys.filter(k => k.startsWith("greek-cal-ai")).map(k => caches.delete(k)));
+    }
+
+    localStorage.setItem("gca_loaded_version", "V67-1.0.5");
+    alert("Έγινε καθαρισμός cache. Η εφαρμογή θα ξαναφορτώσει.");
+    location.reload();
+  }catch(e){
+    alert("Δεν ολοκληρώθηκε αυτόματα. Κλείσε και άνοιξε ξανά την εφαρμογή.");
+  }
+}
+
+/* Το + να κρύβεται και στη σελίδα ενημέρωσης */
+const oldV65UpdateFabVisibilityV67 = typeof v65UpdateFabVisibility === "function" ? v65UpdateFabVisibility : null;
+v65UpdateFabVisibility = function(pageId){
+  if(oldV65UpdateFabVisibilityV67) oldV65UpdateFabVisibilityV67(pageId);
+  if(pageId === "updates"){
+    const fab = document.querySelector(".fab");
+    const toggle = document.getElementById("quickAddToggle");
+    const overlay = document.getElementById("fabOverlay");
+    if(fab) fab.classList.add("v65FabHidden");
+    if(toggle){
+      toggle.classList.add("v65FabHidden");
+      toggle.checked = false;
+    }
+    document.body.classList.add("v65NoFab");
+    if(overlay){
+      overlay.classList.remove("show");
+      overlay.style.display = "none";
+    }
+  }
+};
 </script>
 
 </body>
