@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V70-1.0.8">
+<meta name="app-version" content="V71-1.0.9">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V70</title>
+<title>Greek Cal AI V71</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -2465,6 +2465,81 @@ body.v65NoFab #fabOverlay{
   }
 }
 
+
+/* V71 changelog page */
+.v71ChangeHero{
+  background:linear-gradient(135deg,#0d47a1,#1e88e5);
+  color:#fff;
+  border-radius:22px;
+  padding:18px;
+  margin:12px 0;
+  box-shadow:0 14px 28px rgba(30,108,199,.20);
+}
+.v71ChangeHero b{
+  display:block;
+  font-size:21px;
+}
+.v71ChangeHero span{
+  display:block;
+  margin-top:6px;
+  font-weight:800;
+  opacity:.95;
+  line-height:1.35;
+}
+.v71VersionList{
+  display:grid;
+  gap:10px;
+  margin:14px 0;
+}
+.v71VersionItem{
+  background:#fff;
+  border:1px solid #d7e8f8;
+  border-radius:18px;
+  padding:13px;
+}
+.v71VersionItem.current{
+  background:#ecfdf5;
+  border-color:#bbf7d0;
+}
+.v71VersionItem b{
+  display:block;
+  color:#0d47a1;
+  font-size:18px;
+  margin-bottom:5px;
+}
+.v71VersionItem.current b{
+  color:#166534;
+}
+.v71VersionItem span{
+  display:block;
+  color:#667085;
+  font-weight:800;
+  line-height:1.35;
+}
+.v71ChangeActions,
+.v71UpdateActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px;
+}
+.v71ChangeActions button,
+.v71UpdateActions button{
+  margin:0!important;
+}
+.v71UpdateActions button{
+  grid-column:span 2;
+}
+@media(max-width:560px){
+  .v71ChangeActions,
+  .v71UpdateActions{
+    grid-template-columns:1fr;
+  }
+  .v71UpdateActions button{
+    grid-column:auto;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -2505,7 +2580,7 @@ body.v65NoFab #fabOverlay{
 
 <div class="v62StatusCard">
   <div>
-    <b>✅ Έκδοση 1.0.8 • PWA Ready</b>
+    <b>✅ Έκδοση 1.0.9 • PWA Ready</b>
     <span>Εγκατάσταση από Chrome: ⋮ → Εγκατάσταση εφαρμογής.</span>
   </div>
   <div class="v67StatusBtns"><button type="button" onclick="showPage('premium')">⭐ Premium</button><button type="button" onclick="showPage('updates')">🔄 Ενημέρωση</button></div>
@@ -2611,6 +2686,7 @@ body.v65NoFab #fabOverlay{
     <button onclick="showPage('fasting')">⏱ Νηστεία</button>
     <button onclick="showPage('backup')">💾 Backup</button>
       <button onclick="showPage('updates')">🔄 Ενημέρωση</button>
+      <button onclick="showPage('changelog')">📌 Εκδόσεις</button>
     <button onclick="showPage('premium')">⭐ Premium</button>
     <button onclick="showPage('privacy')">🔒 Απόρρητο</button>
       <button onclick="showPage('landing')">💼 Πώληση</button>
@@ -2627,6 +2703,56 @@ body.v65NoFab #fabOverlay{
 
 
 
+
+<section id="changelog" class="hidden">
+  <button class="back" onclick="showPage('home')">← Πίσω</button>
+  <div class="card v71ChangePage">
+    <h2>📌 Ιστορικό Εκδόσεων</h2>
+
+    <div class="v71ChangeHero">
+      <b>Τρέχουσα έκδοση: V71 / 1.0.9</b>
+      <span>Σταθερή εμπορική PWA βάση με καθαρή αρχική και πλήρη ενημερωτικές σελίδες.</span>
+    </div>
+
+    <div class="v71VersionList">
+      <div class="v71VersionItem current">
+        <b>V71 / 1.0.9</b>
+        <span>Προστέθηκε ιστορικό εκδόσεων, ώστε να φαίνεται καθαρά τι αλλάζει σε κάθε έκδοση.</span>
+      </div>
+      <div class="v71VersionItem">
+        <b>V70 / 1.0.8</b>
+        <span>Τελικό polish, σελίδα Σχετικά, ελληνικό κουμπί Ενημέρωση και καθαρότερη εμπορική βάση.</span>
+      </div>
+      <div class="v71VersionItem">
+        <b>V69 / 1.0.7</b>
+        <span>Αφαιρέθηκαν οριστικά τα διπλά κουμπιά από την κάρτα Σήμερα.</span>
+      </div>
+      <div class="v71VersionItem">
+        <b>V67 / 1.0.5</b>
+        <span>Προστέθηκε σελίδα Ενημέρωση Εφαρμογής για καθαρισμό cache / service worker.</span>
+      </div>
+      <div class="v71VersionItem">
+        <b>V64 / 1.0.2</b>
+        <span>Προστέθηκαν σελίδες Πώληση και Υποστήριξη για εμπορική χρήση εκτός Play Store.</span>
+      </div>
+      <div class="v71VersionItem">
+        <b>V62 / 1.0.0</b>
+        <span>Πρώτη PWA Commercial Ready έκδοση με manifest, service worker, icons, Premium, Απόρρητο και Όρους.</span>
+      </div>
+    </div>
+
+    <div class="v71ChangeActions">
+      <button onclick="showPage('updates')">🔄 Ενημέρωση</button>
+      <button onclick="showPage('about')">ℹ️ Σχετικά</button>
+      <button onclick="showPage('support')">📞 Υποστήριξη</button>
+      <button onclick="showPage('backup')">💾 Backup</button>
+    </div>
+
+    <div class="v58BottomSpace"></div>
+  </div>
+</section>
+
+
 <section id="about" class="hidden">
   <button class="back" onclick="showPage('home')">← Πίσω</button>
   <div class="card v70AboutPage">
@@ -2639,7 +2765,7 @@ body.v65NoFab #fabOverlay{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V70 / 1.0.8</p>
+      <p><b>Έκδοση:</b> V71 / 1.0.9</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> merkos1969@gmail.com</p>
@@ -2670,12 +2796,12 @@ body.v65NoFab #fabOverlay{
 
     
     <div class="v70ReleaseNote">
-      <b>✅ V70 / 1.0.8</b>
+      <b>✅ V71 / 1.0.9</b>
       <span>Σταθερή εμπορική βάση: καθαρή αρχική, Premium, υποστήριξη, απόρρητο, όροι, backup και ενημέρωση PWA.</span>
     </div>
 
     <div class="v67UpdateHero">
-      <b>Έκδοση εφαρμογής: V70 / 1.0.8</b>
+      <b>Έκδοση εφαρμογής: V71 / 1.0.9</b>
       <span>Χρήσιμο όταν το κινητό κρατάει παλιά έκδοση λόγω cache / service worker.</span>
     </div>
 
@@ -2811,7 +2937,7 @@ body.v65NoFab #fabOverlay{
 
       <details>
         <summary>Τι να στείλω όταν έχω πρόβλημα;</summary>
-        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V70 / 1.0.8.</p>
+        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V71 / 1.0.9.</p>
       </details>
     </div>
 
@@ -6039,7 +6165,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=70").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=71").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -6062,7 +6188,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V70 / 1.0.8\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V71 / 1.0.9\n\nΠεριγραφή:");
   location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -6116,9 +6242,9 @@ window.addEventListener("load", ()=>{
 
 
 <script>
-/* V70 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
+/* V71 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V70-1.0.8";
+  const wanted = "V71-1.0.9";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -6193,6 +6319,30 @@ const oldV65UpdateFabVisibilityV70 = typeof v65UpdateFabVisibility === "function
 v65UpdateFabVisibility = function(pageId){
   if(oldV65UpdateFabVisibilityV70) oldV65UpdateFabVisibilityV70(pageId);
   if(pageId === "about"){
+    const fab = document.querySelector(".fab");
+    const toggle = document.getElementById("quickAddToggle");
+    const overlay = document.getElementById("fabOverlay");
+    if(fab) fab.classList.add("v65FabHidden");
+    if(toggle){
+      toggle.classList.add("v65FabHidden");
+      toggle.checked = false;
+    }
+    document.body.classList.add("v65NoFab");
+    if(overlay){
+      overlay.classList.remove("show");
+      overlay.style.display = "none";
+    }
+  }
+};
+</script>
+
+
+<script>
+/* V71 hide + on Changelog page too */
+const oldV65UpdateFabVisibilityV71 = typeof v65UpdateFabVisibility === "function" ? v65UpdateFabVisibility : null;
+v65UpdateFabVisibility = function(pageId){
+  if(oldV65UpdateFabVisibilityV71) oldV65UpdateFabVisibilityV71(pageId);
+  if(pageId === "changelog"){
     const fab = document.querySelector(".fab");
     const toggle = document.getElementById("quickAddToggle");
     const overlay = document.getElementById("fabOverlay");
