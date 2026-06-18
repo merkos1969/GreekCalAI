@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V75-1.1.2">
+<meta name="app-version" content="V77-1.1.4">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V75</title>
+<title>Greek Cal AI V77</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -3268,6 +3268,72 @@ body.v65NoFab #fabOverlay{
   color:#166534;
 }
 
+
+/* V76 smart ml dropdown polish */
+.v76QtyRow{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:6px!important;
+}
+.v76QtyRow label{
+  color:#53627a;
+  font-weight:1000;
+  font-size:14px;
+  margin:0!important;
+}
+.v76FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v76FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v76FinalNote span{
+  color:#166534;
+}
+
+
+/* V77 live quantity preview */
+.v77LivePreview{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:16px;
+  padding:10px 12px;
+  margin:10px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v77LivePreview b{
+  color:#14532d;
+}
+.v77FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v77FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v77FinalNote span{
+  color:#166534;
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -3322,7 +3388,7 @@ body.v65NoFab #fabOverlay{
 <div class="v73InfoCard v73StatusCard">
   <div class="v73CardIcon shield">✓</div>
   <div class="v73StatusText">
-    <b>Έκδοση 1.1.2 • PWA Ready</b>
+    <b>Έκδοση 1.1.4 • PWA Ready</b>
     <span>Έτοιμο για εγκατάσταση από Chrome όταν βρίσκεσαι σε HTTPS.</span>
   </div>
   <em>Νέο</em>
@@ -3466,29 +3532,29 @@ body.v65NoFab #fabOverlay{
     <h2>📌 Ιστορικό Εκδόσεων</h2>
 
     <div class="v71ChangeHero">
-      <b>Τρέχουσα έκδοση: V75 / 1.1.2</b>
+      <b>Τρέχουσα έκδοση: V77 / 1.1.4</b>
       <span>Σταθερή εμπορική PWA βάση με καθαρή αρχική και πλήρη ενημερωτικές σελίδες.</span>
     </div>
 
     <div class="v71VersionList">
       <div class="v71VersionItem current">
-        <b>V75 / 1.1.2</b>
+        <b>V77 / 1.1.4</b>
         <span>Τελικό polish με περισσότερο κάτω κενό στις ενημερωτικές σελίδες και καθαρότερη προβολή κουμπιών.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V75 / 1.1.2</b>
+        <b>V77 / 1.1.4</b>
         <span>Τελικό polish, σελίδα Σχετικά, ελληνικό κουμπί Ενημέρωση και καθαρότερη εμπορική βάση.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V75 / 1.1.2</b>
+        <b>V77 / 1.1.4</b>
         <span>Αφαιρέθηκαν οριστικά τα διπλά κουμπιά από την κάρτα Σήμερα.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V75 / 1.1.2</b>
+        <b>V77 / 1.1.4</b>
         <span>Προστέθηκε σελίδα Ενημέρωση Εφαρμογής για καθαρισμό cache / service worker.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V75 / 1.1.2</b>
+        <b>V77 / 1.1.4</b>
         <span>Προστέθηκαν σελίδες Πώληση και Υποστήριξη για εμπορική χρήση εκτός Play Store.</span>
       </div>
       <div class="v71VersionItem">
@@ -3521,7 +3587,7 @@ body.v65NoFab #fabOverlay{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V75 / 1.1.2</p>
+      <p><b>Έκδοση:</b> V77 / 1.1.4</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> merkos1969@gmail.com</p>
@@ -3555,33 +3621,45 @@ body.v65NoFab #fabOverlay{
     
     
     
+    
+    
+    <div class="v77FinalNote">
+      <b>✅ V77 / 1.1.4</b>
+      <span>Ζωντανός υπολογισμός: όταν αλλάζεις ml, γραμμάρια ή μερίδες, ενημερώνονται αμέσως θερμίδες, πρωτεΐνη, υδατάνθρακες και λιπαρά.</span>
+    </div>
+
+    <div class="v76FinalNote">
+      <b>✅ V77 / 1.1.4</b>
+      <span>Έξυπνες προεπιλογές ml στα ποτά: μπύρα 330ml, κρασί/ρετσίνα 150ml, σφηνάκια 50ml, νερό 500ml, αναψυκτικά 330ml.</span>
+    </div>
+
     <div class="v75FinalNote">
-      <b>✅ V75 / 1.1.2</b>
+      <b>✅ V77 / 1.1.4</b>
       <span>Περισσότερα φαγητά, ποτά και αλκοολούχα. Η επιλογή κατηγορίας στα φαγητά έγινε dropdown και τα ποτά μετρώνται σε ml.</span>
     </div>
 
     <div class="v74FinalNote">
-      <b>✅ V75 / 1.1.2</b>
+      <b>✅ V77 / 1.1.4</b>
       <span>Διόρθωση κάρτας θερμίδων: το κυκλικό ποσοστό εμφανίζεται δεξιά και η πρόοδος είναι πιο καθαρή στο κινητό.</span>
     </div>
 
     <div class="v73FinalNote">
-      <b>✅ V75 / 1.1.2</b>
+      <b>✅ V77 / 1.1.4</b>
       <span>Νέο ελληνικό premium header και πιο όμορφη πρόοδος θερμίδων στην αρχική.</span>
     </div>
 
     <div class="v72FinalNote">
-      <b>✅ V75 / 1.1.2</b>
+      <b>✅ V77 / 1.1.4</b>
       <span>Τελικό polish: περισσότερο κενό κάτω στις ενημερωτικές σελίδες, για να μη σκεπάζει η κάτω μπάρα τα κουμπιά.</span>
     </div>
 
     <div class="v70ReleaseNote">
-      <b>✅ V75 / 1.1.2</b>
+      <b>✅ V77 / 1.1.4</b>
       <span>Σταθερή εμπορική βάση: καθαρή αρχική, Premium, υποστήριξη, απόρρητο, όροι, backup και ενημέρωση PWA.</span>
     </div>
 
     <div class="v67UpdateHero">
-      <b>Έκδοση εφαρμογής: V75 / 1.1.2</b>
+      <b>Έκδοση εφαρμογής: V77 / 1.1.4</b>
       <span>Χρήσιμο όταν το κινητό κρατάει παλιά έκδοση λόγω cache / service worker.</span>
     </div>
 
@@ -3717,7 +3795,7 @@ body.v65NoFab #fabOverlay{
 
       <details>
         <summary>Τι να στείλω όταν έχω πρόβλημα;</summary>
-        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V75 / 1.1.2.</p>
+        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V77 / 1.1.4.</p>
       </details>
     </div>
 
@@ -4498,12 +4576,117 @@ function renderFoodTabs(){
 function v75IsDrink(f){
   return f && (f.cat==="Ποτά" || f.cat==="Αλκοολούχα" || String(f.portion||"").toLowerCase().includes("ml"));
 }
+function v76DrinkMlConfig(f){
+  const name = String(f?.name || "").toLowerCase();
+  const cat = String(f?.cat || "");
+  const tag = String(f?.tag || "").toLowerCase();
+
+  // Σφηνάκια / δυνατά ποτά
+  if(cat === "Αλκοολούχα" && (
+    name.includes("ούζο") || name.includes("τσίπουρο") || name.includes("ρακή") ||
+    name.includes("whisky") || name.includes("vodka") || name.includes("gin") ||
+    name.includes("rum") || name.includes("λικέρ")
+  )){
+    return {sizes:[30,50,100,150,200], def:50, label:"Ποσότητα ποτού"};
+  }
+
+  // Κρασί / ρετσίνα
+  if(cat === "Αλκοολούχα" && (
+    name.includes("κρασί") || name.includes("ρετσίνα") || name.includes("ροζέ")
+  )){
+    return {sizes:[100,150,200,250,500], def:150, label:"Ποτήρι / καραφάκι"};
+  }
+
+  // Μπύρες
+  if(name.includes("μπύρα")){
+    return {sizes:[250,330,500,750,1000], def:330, label:"Ποσότητα μπύρας"};
+  }
+
+  // Κοκτέιλ
+  if(cat === "Αλκοολούχα" || tag.includes("κοκτέιλ")){
+    return {sizes:[150,200,250,330,500], def:250, label:"Ποσότητα cocktail"};
+  }
+
+  // Καφέδες
+  if(
+    name.includes("καφ") || name.includes("espresso") || name.includes("freddo") ||
+    name.includes("cappuccino") || name.includes("latte") || name.includes("φραπέ")
+  ){
+    return {sizes:[60,100,150,200,250,300,400], def:200, label:"Ποσότητα καφέ"};
+  }
+
+  // Γάλα / κεφίρ / ayran / κακάο
+  if(
+    name.includes("γάλα") || name.includes("κεφίρ") || name.includes("ayran") ||
+    name.includes("κακάο")
+  ){
+    return {sizes:[100,150,200,250,330,500], def:250, label:"Ποσότητα ροφήματος"};
+  }
+
+  // Αναψυκτικά / χυμοί / ενεργειακά / ισοτονικά
+  if(
+    name.includes("χυμός") || name.includes("αναψυκ") || name.includes("cola") ||
+    name.includes("λεμονάδα") || name.includes("πορτοκαλάδα") ||
+    name.includes("ενεργειακό") || name.includes("ισοτονικό") ||
+    name.includes("τσάι") || name.includes("σόδα")
+  ){
+    return {sizes:[100,200,250,330,500,750,1000], def:330, label:"Ποσότητα"};
+  }
+
+  // Νερό
+  if(name.includes("νερό")){
+    return {sizes:[250,330,500,750,1000,1500], def:500, label:"Ποσότητα νερού"};
+  }
+
+  // Γενικό fallback
+  return {sizes:[50,100,150,200,250,330,500,750,1000], def:250, label:"Ποσότητα"};
+}
+
+function v77BaseGrams(f){
+  const m = String(f?.portion || "").toLowerCase().match(/(\d+(?:[.,]\d+)?)\s*g/);
+  return m ? Math.max(1, Number(String(m[1]).replace(",", "."))) : 0;
+}
+function v77IsGramFood(f){
+  return !v75IsDrink(f) && v77BaseGrams(f) > 0;
+}
+function v77GramOptions(f){
+  const base = v77BaseGrams(f) || 100;
+  const sizes = base <= 100 ? [25,50,75,100,150,200,250,300,500] : [50,100,150,200,250,300,400,500];
+  const unique = Array.from(new Set([...sizes, base])).sort((a,b)=>a-b);
+  return unique.map(g=>`<option value="${g/base}" ${Math.round(g)===Math.round(base)?"selected":""}>${g} g</option>`).join("");
+}
 function v75QtyOptions(f){
   if(v75IsDrink(f)){
-    const sizes=[50,100,150,200,250,330,500,750,1000];
-    return sizes.map(ml=>`<option value="${ml/100}" ${ml===250?"selected":""}>${ml} ml</option>`).join("");
+    const cfg = v76DrinkMlConfig(f);
+    return cfg.sizes.map(ml=>`<option value="${ml/100}" ${ml===cfg.def?"selected":""}>${ml} ml</option>`).join("");
+  }
+  if(v77IsGramFood(f)){
+    return v77GramOptions(f);
   }
   return `<option value="0.25">0.25 μερίδα</option><option value="0.5">0.5 μερίδα</option><option value="1" selected>1 μερίδα</option><option value="1.5">1.5 μερίδα</option><option value="2">2 μερίδες</option><option value="3">3 μερίδες</option>`;
+}
+function v77ScaledFood(food, qty){
+  return {
+    cal: Math.round((food.cal || 0) * qty),
+    protein: Math.round((food.protein || 0) * qty),
+    carbs: Math.round((food.carbs || 0) * qty),
+    fat: Math.round((food.fat || 0) * qty)
+  };
+}
+function v77UpdateFoodPreview(i, food, selectEl){
+  try{
+    const qty = parseFloat(selectEl.value) || 1;
+    const label = selectEl.options[selectEl.selectedIndex] ? selectEl.options[selectEl.selectedIndex].text : "";
+    const scaled = v77ScaledFood(food, qty);
+    const calEl = document.getElementById("foodCal_" + i);
+    const macroEl = document.getElementById("foodMacro_" + i);
+    const previewEl = document.getElementById("foodPreview_" + i);
+    if(calEl) calEl.textContent = scaled.cal + " kcal";
+    if(macroEl) macroEl.textContent = "Π: " + scaled.protein + "g • Υ: " + scaled.carbs + "g • Λ: " + scaled.fat + "g";
+    if(previewEl){
+      previewEl.innerHTML = `<b>Σύνολο για ${label}:</b> ${scaled.cal} kcal • Π:${scaled.protein}g Υ:${scaled.carbs}g Λ:${scaled.fat}g`;
+    }
+  }catch(e){}
 }
 function renderFoods(){
   const q=(document.getElementById("foodSearch")?.value||"").toLowerCase();
@@ -4515,18 +4698,29 @@ function renderFoods(){
   document.getElementById("foodCount").textContent=list.length;
   document.getElementById("foodList").innerHTML=list.map((f,i)=>{
     const drink=v75IsDrink(f);
-    const unitText=drink ? "ανά 100ml" : "ανά " + (f.portion||"μερίδα");
+    const gramFood=v77IsGramFood(f);
+    const unitText=drink ? "ανά 100ml" : (gramFood ? "ανά " + (f.portion||"100g") : "ανά " + (f.portion||"μερίδα"));
+    const defaultSelectHtml = v75QtyOptions(f);
+    let defaultQty = 1;
+    const selectedMatch = defaultSelectHtml.match(/value="([^"]+)" selected/);
+    if(selectedMatch) defaultQty = parseFloat(selectedMatch[1]) || 1;
+    const scaled = v77ScaledFood(f, defaultQty);
+    const qtyLabel = drink ? v76DrinkMlConfig(f).label : (gramFood ? "Ποσότητα σε γραμμάρια" : "Ποσότητα");
     return `<div class="foodCard ${drink?"v75DrinkCard":""}">
       <div class="foodTop">
         <div>
           <div class="foodName">${drink?"🥤 ":""}${f.name}</div>
           <div class="foodMeta">Κατηγορία: ${f.cat} | ${unitText} <span class="badge">${f.tag}</span></div>
-          <div class="foodMeta">Π: ${f.protein||0}g • Υ: ${f.carbs||0}g • Λ: ${f.fat||0}g</div>
+          <div class="foodMeta" id="foodMacro_${i}">Π: ${scaled.protein}g • Υ: ${scaled.carbs}g • Λ: ${scaled.fat}g</div>
         </div>
-        <div class="foodCal">${f.cal} kcal</div>
+        <div class="foodCal" id="foodCal_${i}">${scaled.cal} kcal</div>
       </div>
       <button class="mealBtn btnLight" onclick='toggleFav("${encodeURIComponent(f.name)}")'>${favs.includes(f.name)?"★ Αγαπημένο":"☆ Αγαπημένο"}</button>
-      <div class="qtyRow singleQty"><select id="qty_${i}">${v75QtyOptions(f)}</select></div>
+      <div class="qtyRow singleQty v76QtyRow">
+        <label>${qtyLabel}</label>
+        <select id="qty_${i}" onchange='v77UpdateFoodPreview(${i}, ${JSON.stringify(f)}, this)'>${defaultSelectHtml}</select>
+      </div>
+      <div class="v77LivePreview" id="foodPreview_${i}"><b>Σύνολο για την επιλεγμένη ποσότητα:</b> ${scaled.cal} kcal • Π:${scaled.protein}g Υ:${scaled.carbs}g Λ:${scaled.fat}g</div>
       <button class="mealBtn btnGreen" onclick='addFoodToDiarySelectedMeal(${JSON.stringify(f)}, "qty_${i}")'>+ Προσθήκη στο ${selectedFoodMeal}</button>
     </div>`;
   }).join("")||"<p class='small'>Δεν βρέθηκε φαγητό ή ποτό.</p>";
@@ -6149,7 +6343,7 @@ function addFoodToDiarySelectedMeal(food, qtyId){
   const qtyLabel = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : "";
   const meal = selectedFoodMeal || "Σνακ";
   const item = {
-    name:food.name + (qtyLabel && String(food.portion||"").toLowerCase().includes("ml") ? " (" + qtyLabel + ")" : ""),
+    name:food.name + (qtyLabel && qtyLabel !== "1 μερίδα" ? " (" + qtyLabel + ")" : ""),
     cat:food.cat,
     portion:food.portion,
     cal:food.cal,
@@ -6992,7 +7186,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=75").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=77").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -7015,7 +7209,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V75 / 1.1.2\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V77 / 1.1.4\n\nΠεριγραφή:");
   location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -7069,9 +7263,9 @@ window.addEventListener("load", ()=>{
 
 
 <script>
-/* V75 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
+/* V77 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V75-1.1.2";
+  const wanted = "V77-1.1.4";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
