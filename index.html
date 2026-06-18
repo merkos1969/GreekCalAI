@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V89-1.2.9">
+<meta name="app-version" content="V90-1.3.0">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V89</title>
+<title>Greek Cal AI V90</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -4125,6 +4125,292 @@ html, body{
   color:#166534;
 }
 
+
+/* V90 premium circular calorie widget */
+.v90HeroCalBox{
+  background:#ffffff!important;
+  color:#17202c!important;
+  border:1px solid #d7e8f8!important;
+  border-radius:28px!important;
+  padding:20px 14px 18px!important;
+  box-shadow:0 18px 45px rgba(30,108,199,.12)!important;
+  overflow:hidden!important;
+  min-height:auto!important;
+  display:block!important;
+  position:relative;
+}
+.v90HeroCalBox:before{
+  content:"";
+  position:absolute;
+  inset:-60px -40px auto auto;
+  width:180px;
+  height:180px;
+  background:radial-gradient(circle, rgba(30,136,229,.13), transparent 68%);
+  pointer-events:none;
+}
+.v90CircleShell{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:6px 0 12px;
+  position:relative;
+  z-index:1;
+}
+.v90Ring{
+  --v90-angle:0deg;
+  width:min(82vw,360px);
+  aspect-ratio:1/1;
+  border-radius:50%;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:conic-gradient(from -90deg,#1e88e5 0deg,#25c2e8 var(--v90-angle),#e8eef7 var(--v90-angle),#eef4fb 360deg);
+  box-shadow:
+    0 18px 42px rgba(30,108,199,.18),
+    inset 0 0 0 1px rgba(255,255,255,.9);
+}
+.v90Ring:before{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:inset 0 0 0 1px rgba(215,232,248,.75), 0 0 0 10px rgba(255,255,255,.72);
+  z-index:1;
+}
+.v90RingInner{
+  position:relative;
+  z-index:2;
+  width:72%;
+  height:72%;
+  border-radius:50%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.v90Flame{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:#fff7ed;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  margin-bottom:8px;
+  box-shadow:0 8px 22px rgba(249,115,22,.13);
+}
+.v90CenterLabel{
+  color:#64748b;
+  font-weight:950;
+  font-size:clamp(15px,3.7vw,19px);
+  line-height:1.15;
+}
+.v90DailyGoal{
+  color:#0f172a;
+  font-size:clamp(48px,13vw,74px);
+  line-height:.98;
+  font-weight:1000;
+  letter-spacing:-1px;
+  margin-top:5px;
+}
+.v90Kcal{
+  color:#64748b;
+  font-size:18px;
+  font-weight:850;
+  line-height:1.1;
+}
+.v90Kcal.small{
+  font-size:15px;
+}
+.v90Divider{
+  width:46%;
+  height:2px;
+  border-radius:999px;
+  background:#e2e8f0;
+  margin:10px 0 8px;
+}
+.v90Fraction{
+  color:#334155;
+  font-size:clamp(22px,7vw,34px);
+  font-weight:1000;
+  line-height:1.1;
+}
+.v90Fraction em{
+  color:#1e88e5;
+  font-style:normal;
+}
+.v90Fraction span{
+  color:#334155;
+}
+.v90PercentBadge{
+  position:absolute;
+  z-index:3;
+  right:-8px;
+  top:25%;
+  min-width:86px;
+  background:linear-gradient(135deg,#1e88e5,#28a0ff);
+  color:white;
+  border:4px solid #fff;
+  border-radius:999px;
+  padding:8px 12px;
+  box-shadow:0 10px 24px rgba(30,108,199,.25);
+  text-align:center;
+}
+.v90PercentBadge strong{
+  display:block;
+  font-size:24px;
+  line-height:1;
+  font-weight:1000;
+}
+.v90PercentBadge small{
+  display:block;
+  font-size:11px;
+  font-weight:900;
+  opacity:.94;
+  margin-top:2px;
+}
+.v90Knob{
+  position:absolute;
+  z-index:4;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:#fff;
+  border:6px solid #30c88f;
+  box-shadow:0 8px 20px rgba(15,23,42,.18);
+  left:50%;
+  top:0;
+  transform:translate(-50%,-50%);
+}
+.v90MiniCalStats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  background:#f8fbff;
+  border:1px solid #d7e8f8;
+  border-radius:22px;
+  padding:12px 4px;
+  margin-top:8px;
+  position:relative;
+  z-index:1;
+}
+.v90MiniStat{
+  text-align:center;
+  padding:4px 6px;
+  border-right:1px solid #d7e8f8;
+}
+.v90MiniStat:last-child{
+  border-right:0;
+}
+.v90MiniIcon{
+  width:38px;
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 6px;
+  border-radius:50%;
+  font-size:20px;
+}
+.v90MiniIcon.blue{background:#e8f1ff;color:#1e88e5}
+.v90MiniIcon.green{background:#ecfdf5;color:#16a34a}
+.v90MiniIcon.orange{background:#fff7ed;color:#f97316}
+.v90MiniStat small{
+  display:block;
+  color:#64748b;
+  font-size:12px;
+  font-weight:900;
+  line-height:1.2;
+  min-height:30px;
+}
+.v90MiniStat b{
+  display:block;
+  color:#0d47a1;
+  font-size:17px;
+  font-weight:1000;
+  margin-top:4px;
+}
+.v90MiniStat:nth-child(2) b{color:#16a34a}
+.v90MiniStat:nth-child(3) b{color:#f97316}
+.v90RemainingLine{
+  display:block;
+  text-align:center;
+  margin:10px 0 0;
+  color:#53627a!important;
+  font-weight:950!important;
+  opacity:1!important;
+}
+.v90CompatProgress{
+  width:1px!important;
+  height:1px!important;
+  overflow:hidden!important;
+  opacity:0!important;
+  position:absolute!important;
+  pointer-events:none!important;
+}
+.v90FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v90FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v90FinalNote span{
+  color:#166534;
+}
+@media(max-width:430px){
+  .v90HeroCalBox{
+    padding:18px 10px 16px!important;
+    border-radius:26px!important;
+  }
+  .v90Ring{
+    width:min(86vw,330px);
+  }
+  .v90Ring:before{
+    inset:12px;
+  }
+  .v90PercentBadge{
+    right:-2px;
+    min-width:74px;
+    padding:7px 9px;
+  }
+  .v90PercentBadge strong{
+    font-size:21px;
+  }
+  .v90MiniStat small{
+    font-size:11px;
+  }
+  .v90MiniStat b{
+    font-size:15px;
+  }
+}
+@media(max-width:360px){
+  .v90Ring{
+    width:82vw;
+  }
+  .v90Flame{
+    width:40px;
+    height:40px;
+    font-size:22px;
+    margin-bottom:5px;
+  }
+  .v90Divider{
+    margin:7px 0 6px;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -4237,20 +4523,47 @@ html, body{
   <div class="dashboardCard compactHome">
     <h2>📊 Σήμερα</h2>
 
-    <div class="dashBox heroCalBox v73HeroCalBox">
-      <div class="v73CalIcon">🔥</div>
-      <div class="v73CalMain">
-        <b>Θερμίδες</b>
-        <span id="dashCalories">0 / 1800</span>
-        <div class="v73CalProgress"><div id="dashProgressBar" class="progressBar"></div></div>
-        <small id="dashRemainingMini">Υπόλοιπο 1800 kcal</small>
-      </div>
-      <div class="v73CalCircle" id="dashCalCircle">
-        <div>
-          <strong id="dashCalPercent">0%</strong>
-          <small>του στόχου</small>
+    <div class="dashBox heroCalBox v90HeroCalBox">
+      <div class="v90CircleShell">
+        <div class="v90Ring" id="dashCalCircle">
+          <div class="v90RingInner">
+            <div class="v90Flame">🔥</div>
+            <div class="v90CenterLabel">Ημερήσιες θερμίδες</div>
+            <div class="v90DailyGoal"><span id="v90DailyGoalValue">1800</span></div>
+            <div class="v90Kcal">kcal</div>
+            <div class="v90Divider"></div>
+            <div class="v90Fraction" id="dashCalories">0 / 1800</div>
+            <div class="v90Kcal small">kcal</div>
+          </div>
+
+          <div class="v90PercentBadge">
+            <strong id="dashCalPercent">0%</strong>
+            <small>του στόχου</small>
+          </div>
+          <div class="v90Knob" id="v90CalKnob"></div>
         </div>
       </div>
+
+      <div class="v90MiniCalStats">
+        <div class="v90MiniStat">
+          <span class="v90MiniIcon blue">🔥</span>
+          <small>Καμένες θερμίδες</small>
+          <b id="v90BurnedCalories">0 kcal</b>
+        </div>
+        <div class="v90MiniStat">
+          <span class="v90MiniIcon green">🎯</span>
+          <small>Στόχος</small>
+          <b id="v90TargetCalories">1800 kcal</b>
+        </div>
+        <div class="v90MiniStat">
+          <span class="v90MiniIcon orange">◔</span>
+          <small>Υπόλοιπο</small>
+          <b id="v90RemainingCalories">1800 kcal</b>
+        </div>
+      </div>
+
+      <small id="dashRemainingMini" class="v90RemainingLine">Υπόλοιπο 1800 kcal</small>
+      <div class="v90CompatProgress"><div id="dashProgressBar" class="progressBar"></div></div>
     </div>
 
     <div class="compactStats">
@@ -4322,7 +4635,7 @@ html, body{
     <h2>🆕 Τι νέο υπάρχει</h2>
 
     <div class="v84InfoBox green">
-      <h3>V89 / 1.2.9</h3>
+      <h3>V90 / 1.3.0</h3>
       <p>Το Απόρρητο δεν εμφανίζεται πλέον με λουκέτο, για να μη μπερδεύεται με Premium λειτουργία. Ο Coach κλειδώθηκε στη δωρεάν έκδοση και ανοίγει με Premium.</p>
     </div>
 
@@ -4351,7 +4664,7 @@ html, body{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V89 / 1.2.9</p>
+      <p><b>Έκδοση:</b> V90 / 1.3.0</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> greekcalai.support@gmail.com</p>
@@ -4383,36 +4696,42 @@ html, body{
 
     
     <div class="v85FinalNote">
-      <b>✅ V89 / 1.2.9</b>
+      <b>✅ V90 / 1.3.0</b>
       <span>Καθαρή ροή αγοράς Premium: αίτηση με κωδικό συσκευής, οδηγίες πληρωμής, αποστολή Premium κωδικού μετά την πληρωμή.</span>
     </div>
 
 
     <div class="v86FinalNote">
-      <b>✅ V89 / 1.2.9</b>
+      <b>✅ V90 / 1.3.0</b>
       <span>Καθαρή διάκριση Δωρεάν / Premium: ο πελάτης ξεκινά δωρεάν και βλέπει ένα μόνο βασικό σημείο αναβάθμισης.</span>
     </div>
 
 
     <div class="v87FinalNote">
-      <b>✅ V89 / 1.2.9</b>
+      <b>✅ V90 / 1.3.0</b>
       <span>Το Απόρρητο φαίνεται ως δημόσια ενημερωτική σελίδα και ο Coach έγινε Premium λειτουργία.</span>
     </div>
 
 
     <div class="v88FinalNote">
-      <b>✅ V89 / 1.2.9</b>
+      <b>✅ V90 / 1.3.0</b>
       <span>Προστέθηκε καθαρός πίνακας αξίας Premium με Δωρεάν έκδοση και Premium ξεκλειδώματα.</span>
     </div>
 
 
     <div class="v89FinalNote">
-      <b>✅ V89 / 1.2.9</b>
+      <b>✅ V90 / 1.3.0</b>
       <span>Διόρθωση scroll: δεν πηγαίνει πλέον τέρμα πάνω με κάθε πάτημα κουμπιού.</span>
     </div>
 
+
+    <div class="v90FinalNote">
+      <b>✅ V90 / 1.3.0</b>
+      <span>Νέα στρογγυλή κάρτα θερμίδων στην αρχική με κυκλικό progress και πιο premium εμφάνιση.</span>
+    </div>
+
 <div class="v84UpdateHero">
-      <b>Τρέχουσα έκδοση: V89 / 1.2.9</b>
+      <b>Τρέχουσα έκδοση: V90 / 1.3.0</b>
       <span>Χρησιμοποίησε αυτό το κουμπί όταν θέλεις να φορτώσει η πιο πρόσφατη έκδοση της εφαρμογής.</span>
     </div>
 
@@ -8068,7 +8387,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=89").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=90").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -8091,7 +8410,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V89 / 1.2.9\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V90 / 1.3.0\n\nΠεριγραφή:");
   location.href = "mailto:greekcalai.support@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -8147,7 +8466,7 @@ window.addEventListener("load", ()=>{
 <script>
 /* V84 one-time προσωρινής μνήμης refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V89-1.2.9";
+  const wanted = "V90-1.3.0";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -8413,7 +8732,7 @@ function v82OpenPremiumEmail(){
 
 Θέλω να αγοράσω το Greek Cal AI Premium.
 
-Έκδοση: V89 / 1.2.9
+Έκδοση: V90 / 1.3.0
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Παρακαλώ στείλτε μου οδηγίες πληρωμής.
@@ -8433,7 +8752,7 @@ function v64OpenEmail(){
 
 Θέλω βοήθεια για το Greek Cal AI.
 
-Έκδοση: V89 / 1.2.9
+Έκδοση: V90 / 1.3.0
 Κωδικός συσκευής: ${v82GetDeviceCode()}
 
 Περιγραφή:`
@@ -8714,6 +9033,89 @@ window.addEventListener("load", ()=>{
     }, 150);
   });
 })();
+</script>
+
+
+<script>
+/* V90: κυκλική κάρτα θερμίδων */
+function v90ParseDashCalories(){
+  const txt = (document.getElementById("dashCalories")?.textContent || "0 / 1800").replace(/\./g,"").replace(/,/g,"");
+  const nums = txt.match(/\d+/g) || [];
+  return {
+    current:Number(nums[0] || 0),
+    goal:Number(nums[1] || 1)
+  };
+}
+function v90SetText(id, text){
+  const el = document.getElementById(id);
+  if(el) el.textContent = text;
+}
+function v90UpdateCalorieWidget(){
+  try{
+    const data = v90ParseDashCalories();
+    const current = Math.max(0, data.current);
+    const goal = Math.max(1, data.goal);
+    const pctRaw = Math.round((current / goal) * 100);
+    const pct = Math.max(0, Math.min(100, pctRaw));
+    const deg = Math.round(pct * 3.6);
+    const remaining = Math.max(0, goal - current);
+
+    const ring = document.getElementById("dashCalCircle");
+    if(ring){
+      ring.style.setProperty("--v90-angle", deg + "deg");
+      ring.style.background =
+        "conic-gradient(from -90deg, #1e88e5 0deg, #25a7f0 " +
+        Math.max(8, Math.round(deg*.55)) + "deg, #35d399 " + deg +
+        "deg, #e8eef7 " + deg + "deg, #eef4fb 360deg)";
+    }
+
+    const knob = document.getElementById("v90CalKnob");
+    if(knob && ring){
+      const angle = (-90 + deg) * Math.PI / 180;
+      const radius = ring.offsetWidth / 2;
+      const knobRadius = radius - 7;
+      const x = radius + Math.cos(angle) * knobRadius;
+      const y = radius + Math.sin(angle) * knobRadius;
+      knob.style.left = x + "px";
+      knob.style.top = y + "px";
+    }
+
+    const pctEl = document.getElementById("dashCalPercent");
+    if(pctEl) pctEl.textContent = pct + "%";
+
+    v90SetText("v90DailyGoalValue", goal);
+    v90SetText("v90BurnedCalories", current + " kcal");
+    v90SetText("v90TargetCalories", goal + " kcal");
+    v90SetText("v90RemainingCalories", remaining + " kcal");
+
+    const frac = document.getElementById("dashCalories");
+    if(frac){
+      frac.innerHTML = "<em>" + current + "</em> <span>/ " + goal + "</span>";
+    }
+
+    const remainingLine = document.getElementById("dashRemainingMini");
+    if(remainingLine){
+      const exText = (document.getElementById("dashExercise")?.textContent || "");
+      remainingLine.textContent = "Υπόλοιπο " + remaining + " kcal" + (exText && !exText.startsWith("0") ? " • άσκηση " + exText : "");
+    }
+  }catch(e){}
+}
+const oldUpdateDashboardV90 = typeof updateDashboard === "function" ? updateDashboard : null;
+if(oldUpdateDashboardV90 && !oldUpdateDashboardV90.__v90Wrapped){
+  const wrappedUpdateDashboardV90 = function(){
+    const result = oldUpdateDashboardV90.apply(this, arguments);
+    v90UpdateCalorieWidget();
+    setTimeout(v90UpdateCalorieWidget, 30);
+    return result;
+  };
+  wrappedUpdateDashboardV90.__v90Wrapped = true;
+  updateDashboard = wrappedUpdateDashboardV90;
+}
+window.addEventListener("load", ()=>{
+  setTimeout(v90UpdateCalorieWidget, 200);
+  setTimeout(v90UpdateCalorieWidget, 700);
+});
+setInterval(v90UpdateCalorieWidget, 1600);
 </script>
 
 </body>
