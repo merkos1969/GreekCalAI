@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V64</title>
+<title>Greek Cal AI V65</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -2269,6 +2269,18 @@ section{
   }
 }
 
+
+/* V65: hide green + on informational / commercial pages */
+.fab.v65FabHidden{
+  display:none!important;
+}
+#quickAddToggle.v65FabHidden{
+  display:none!important;
+}
+body.v65NoFab #fabOverlay{
+  display:none!important;
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -2309,7 +2321,7 @@ section{
 
 <div class="v62StatusCard">
   <div>
-    <b>✅ Έκδοση 1.0.2 • PWA Ready</b>
+    <b>✅ Έκδοση 1.0.3 • PWA Ready</b>
     <span>Έτοιμο για εγκατάσταση από Chrome όταν ανέβει σε HTTPS.</span>
   </div>
   <button type="button" onclick="showPage('premium')">⭐ Premium</button>
@@ -5788,9 +5800,56 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V64 / 1.0.2\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V65 / 1.0.3\n\nΠεριγραφή:");
   location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
 }
+</script>
+
+
+<script>
+/* V65 hide + on informational pages */
+function v65UpdateFabVisibility(pageId){
+  const hiddenPages = new Set([
+    "support",
+    "landing",
+    "premium",
+    "privacy",
+    "terms",
+    "backup"
+  ]);
+
+  const hide = hiddenPages.has(pageId);
+  const fab = document.querySelector(".fab");
+  const toggle = document.getElementById("quickAddToggle");
+  const overlay = document.getElementById("fabOverlay");
+
+  if(fab) fab.classList.toggle("v65FabHidden", hide);
+  if(toggle) toggle.classList.toggle("v65FabHidden", hide);
+  document.body.classList.toggle("v65NoFab", hide);
+
+  if(hide){
+    if(toggle) toggle.checked = false;
+    if(overlay){
+      overlay.classList.remove("show");
+      overlay.style.display = "none";
+    }
+  }
+}
+
+const oldShowPageV65 = typeof showPage === "function" ? showPage : null;
+if(oldShowPageV65){
+  showPage = function(id){
+    oldShowPageV65(id);
+    setTimeout(()=>v65UpdateFabVisibility(id), 50);
+  };
+}
+
+window.addEventListener("load", ()=>{
+  setTimeout(()=>{
+    const active = document.querySelector("section.active");
+    v65UpdateFabVisibility(active ? active.id : "home");
+  }, 200);
+});
 </script>
 
 </body>
