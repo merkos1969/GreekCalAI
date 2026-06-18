@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V80-1.2.0">
+<meta name="app-version" content="V81-1.2.1">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V80</title>
+<title>Greek Cal AI V81</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -3587,6 +3587,30 @@ body.v65NoFab #fabOverlay{
   }
 }
 
+
+/* V81 scroll/top note */
+.v81FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v81FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v81FinalNote span{
+  color:#166534;
+}
+html, body{
+  scroll-behavior:auto!important;
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -3641,7 +3665,7 @@ body.v65NoFab #fabOverlay{
 <div class="v73InfoCard v73StatusCard">
   <div class="v73CardIcon shield">✓</div>
   <div class="v73StatusText">
-    <b>Έκδοση 1.2.0 • PWA Ready</b>
+    <b>Έκδοση 1.2.1 • PWA Ready</b>
     <span>Έτοιμο για εγκατάσταση από Chrome όταν βρίσκεσαι σε HTTPS.</span>
   </div>
   <em>Νέο</em>
@@ -3785,29 +3809,29 @@ body.v65NoFab #fabOverlay{
     <h2>📌 Ιστορικό Εκδόσεων</h2>
 
     <div class="v71ChangeHero">
-      <b>Τρέχουσα έκδοση: V80 / 1.2.0</b>
+      <b>Τρέχουσα έκδοση: V81 / 1.2.1</b>
       <span>Σταθερή εμπορική PWA βάση με καθαρή αρχική και πλήρη ενημερωτικές σελίδες.</span>
     </div>
 
     <div class="v71VersionList">
       <div class="v71VersionItem current">
-        <b>V80 / 1.2.0</b>
+        <b>V81 / 1.2.1</b>
         <span>Τελικό polish με περισσότερο κάτω κενό στις ενημερωτικές σελίδες και καθαρότερη προβολή κουμπιών.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V80 / 1.2.0</b>
+        <b>V81 / 1.2.1</b>
         <span>Τελικό polish, σελίδα Σχετικά, ελληνικό κουμπί Ενημέρωση και καθαρότερη εμπορική βάση.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V80 / 1.2.0</b>
+        <b>V81 / 1.2.1</b>
         <span>Αφαιρέθηκαν οριστικά τα διπλά κουμπιά από την κάρτα Σήμερα.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V80 / 1.2.0</b>
+        <b>V81 / 1.2.1</b>
         <span>Προστέθηκε σελίδα Ενημέρωση Εφαρμογής για καθαρισμό cache / service worker.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V80 / 1.2.0</b>
+        <b>V81 / 1.2.1</b>
         <span>Προστέθηκαν σελίδες Πώληση και Υποστήριξη για εμπορική χρήση εκτός Play Store.</span>
       </div>
       <div class="v71VersionItem">
@@ -3840,7 +3864,7 @@ body.v65NoFab #fabOverlay{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V80 / 1.2.0</p>
+      <p><b>Έκδοση:</b> V81 / 1.2.1</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> merkos1969@gmail.com</p>
@@ -3879,58 +3903,64 @@ body.v65NoFab #fabOverlay{
     
     
     
+    
+    <div class="v81FinalNote">
+      <b>✅ V81 / 1.2.1</b>
+      <span>Διόρθωση scroll: όταν πατάς οποιοδήποτε κουμπί ή αλλάζεις σελίδα, η νέα σελίδα ανοίγει αυτόματα από πάνω.</span>
+    </div>
+
     <div class="v80FinalNote">
-      <b>✅ V80 / 1.2.0</b>
+      <b>✅ V81 / 1.2.1</b>
       <span>Νέα επαγγελματική σελίδα πώλησης Premium και ξεχωριστή sales.html για εξωτερική προώθηση εκτός εφαρμογής.</span>
     </div>
 
     <div class="v79FinalNote">
-      <b>✅ V80 / 1.2.0</b>
+      <b>✅ V81 / 1.2.1</b>
       <span>Εμπλουτίστηκαν οι κατηγορίες με περισσότερα αρτοποιήματα, γαλακτοκομικά, πίτες, ρύζι, συνοδευτικά, σούπες, ξηρούς καρπούς, φρούτα, όσπρια και σαλάτες.</span>
     </div>
 
     <div class="v78FinalNote">
-      <b>✅ V80 / 1.2.0</b>
+      <b>✅ V81 / 1.2.1</b>
       <span>Διόρθωση κατηγοριών: οι καφέδες, οι χυμοί και τα αναψυκτικά βγήκαν από το γενικό «Ποτά» και εμφανίζονται ξεχωριστά.</span>
     </div>
 
     <div class="v77FinalNote">
-      <b>✅ V80 / 1.2.0</b>
+      <b>✅ V81 / 1.2.1</b>
       <span>Ζωντανός υπολογισμός: όταν αλλάζεις ml, γραμμάρια ή μερίδες, ενημερώνονται αμέσως θερμίδες, πρωτεΐνη, υδατάνθρακες και λιπαρά.</span>
     </div>
 
     <div class="v76FinalNote">
-      <b>✅ V80 / 1.2.0</b>
+      <b>✅ V81 / 1.2.1</b>
       <span>Έξυπνες προεπιλογές ml στα ποτά: μπύρα 330ml, κρασί/ρετσίνα 150ml, σφηνάκια 50ml, νερό 500ml, αναψυκτικά 330ml.</span>
     </div>
 
     <div class="v75FinalNote">
-      <b>✅ V80 / 1.2.0</b>
+      <b>✅ V81 / 1.2.1</b>
       <span>Περισσότερα φαγητά, ποτά και αλκοολούχα. Η επιλογή κατηγορίας στα φαγητά έγινε dropdown και τα ποτά μετρώνται σε ml.</span>
     </div>
 
     <div class="v74FinalNote">
-      <b>✅ V80 / 1.2.0</b>
+      <b>✅ V81 / 1.2.1</b>
       <span>Διόρθωση κάρτας θερμίδων: το κυκλικό ποσοστό εμφανίζεται δεξιά και η πρόοδος είναι πιο καθαρή στο κινητό.</span>
     </div>
 
     <div class="v73FinalNote">
-      <b>✅ V80 / 1.2.0</b>
+      <b>✅ V81 / 1.2.1</b>
       <span>Νέο ελληνικό premium header και πιο όμορφη πρόοδος θερμίδων στην αρχική.</span>
     </div>
 
     <div class="v72FinalNote">
-      <b>✅ V80 / 1.2.0</b>
+      <b>✅ V81 / 1.2.1</b>
       <span>Τελικό polish: περισσότερο κενό κάτω στις ενημερωτικές σελίδες, για να μη σκεπάζει η κάτω μπάρα τα κουμπιά.</span>
     </div>
 
     <div class="v70ReleaseNote">
-      <b>✅ V80 / 1.2.0</b>
+      <b>✅ V81 / 1.2.1</b>
       <span>Σταθερή εμπορική βάση: καθαρή αρχική, Premium, υποστήριξη, απόρρητο, όροι, backup και ενημέρωση PWA.</span>
     </div>
 
     <div class="v67UpdateHero">
-      <b>Έκδοση εφαρμογής: V80 / 1.2.0</b>
+      <b>Έκδοση εφαρμογής: V81 / 1.2.1</b>
       <span>Χρήσιμο όταν το κινητό κρατάει παλιά έκδοση λόγω cache / service worker.</span>
     </div>
 
@@ -4106,7 +4136,7 @@ body.v65NoFab #fabOverlay{
 
       <details>
         <summary>Τι να στείλω όταν έχω πρόβλημα;</summary>
-        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V80 / 1.2.0.</p>
+        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V81 / 1.2.1.</p>
       </details>
     </div>
 
@@ -7505,7 +7535,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=80").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=81").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -7528,7 +7558,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V80 / 1.2.0\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V81 / 1.2.1\n\nΠεριγραφή:");
   location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -7582,9 +7612,9 @@ window.addEventListener("load", ()=>{
 
 
 <script>
-/* V80 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
+/* V81 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V80-1.2.0";
+  const wanted = "V81-1.2.1";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -7762,6 +7792,60 @@ if(oldUpdateDashboardV74){
 }
 window.addEventListener("load", ()=>setTimeout(v74UpdateCalorieProgress, 450));
 setInterval(v74UpdateCalorieProgress, 1500);
+</script>
+
+
+<script>
+/* V81: κάθε αλλαγή σελίδας ανοίγει από την κορυφή */
+(function(){
+  function v81ForceTop(){
+    try{
+      if(document.activeElement && typeof document.activeElement.blur === "function"){
+        document.activeElement.blur();
+      }
+      if("scrollRestoration" in history){
+        history.scrollRestoration = "manual";
+      }
+      document.documentElement.style.scrollBehavior = "auto";
+      document.body.style.scrollBehavior = "auto";
+
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+
+      const scrollers = document.querySelectorAll(".card, section, main, .app, .page, .menu");
+      scrollers.forEach(el=>{
+        try{ el.scrollTop = 0; }catch(e){}
+      });
+    }catch(e){}
+  }
+
+  window.v81ForceTop = v81ForceTop;
+
+  const originalShowPage = window.showPage;
+  if(typeof originalShowPage === "function" && !originalShowPage.__v81Wrapped){
+    const wrappedShowPage = function(pageId){
+      const result = originalShowPage.apply(this, arguments);
+      v81ForceTop();
+      requestAnimationFrame(v81ForceTop);
+      setTimeout(v81ForceTop, 60);
+      setTimeout(v81ForceTop, 180);
+      return result;
+    };
+    wrappedShowPage.__v81Wrapped = true;
+    window.showPage = wrappedShowPage;
+  }
+
+  document.addEventListener("click", function(e){
+    const el = e.target.closest("button,[onclick],.navItem,.bottomNav button,a[href^='#']");
+    if(!el) return;
+    setTimeout(v81ForceTop, 80);
+  }, true);
+
+  window.addEventListener("load", function(){
+    setTimeout(v81ForceTop, 120);
+  });
+})();
 </script>
 
 </body>
