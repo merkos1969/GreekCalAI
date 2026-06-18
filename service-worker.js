@@ -1,4 +1,4 @@
-const CACHE_NAME = "greek-cal-ai-v67";
+const CACHE_NAME = "greek-cal-ai-v68";
 const APP_SHELL = [
   "./",
   "./index.html",

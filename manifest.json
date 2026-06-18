@@ -1,7 +1,7 @@
 {
   "name": "Greek Cal AI",
   "short_name": "Greek Cal AI",
-  "description": "Greek Cal AI V67 / 1.0.5 - Smart Greek Diet Coach με ενημέρωση PWA, θερμίδες, στόχο βάρους, νερό, άσκηση, Premium και backup.",
+  "description": "Greek Cal AI V68 / 1.0.6 - Smart Greek Diet Coach με καθαρότερη αρχική, ενημέρωση PWA, θερμίδες, στόχο βάρους, νερό, άσκηση, Premium και backup.",
   "lang": "el-GR",
   "start_url": "./",
   "scope": "./",
