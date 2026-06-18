@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta name="app-version" content="V81-1.2.1">
+<meta name="app-version" content="V82-1.2.2">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greek Cal AI V81</title>
+<title>Greek Cal AI V82</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#1e6cc7;--bg:#eef3f8;--card:#fff;--text:#17202c;--muted:#717987;--green:#198754;--red:#dc3545;--orange:#f59e0b;--purple:#7c3aed}
@@ -3611,6 +3611,102 @@ html, body{
   scroll-behavior:auto!important;
 }
 
+
+/* V82 device-bound Premium activation */
+.v82DeviceBox,
+.v82PremiumSteps{
+  background:#ffffff;
+  border:1px solid #d7e8f8;
+  border-radius:22px;
+  padding:16px;
+  margin:14px 0;
+  box-shadow:0 10px 26px rgba(15,23,42,.05);
+}
+.v82DeviceBox h3,
+.v82PremiumSteps h3{
+  color:#0d47a1;
+  font-size:24px;
+  margin:0 0 8px;
+}
+.v82DeviceBox p,
+.v82PremiumSteps p,
+.v82PremiumSteps small{
+  color:#53627a;
+  font-weight:850;
+  line-height:1.45;
+}
+.v82DeviceCode{
+  background:linear-gradient(135deg,#0d47a1,#1e88e5);
+  color:white;
+  border-radius:18px;
+  padding:16px 12px;
+  text-align:center;
+  font-size:22px;
+  font-weight:1000;
+  letter-spacing:.8px;
+  margin:12px 0;
+  word-break:break-word;
+  box-shadow:0 12px 26px rgba(30,108,199,.20);
+}
+.v82DeviceActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.v82DeviceActions button{
+  margin:0!important;
+  border-radius:999px!important;
+}
+.v82PremiumSteps ol{
+  margin:0;
+  padding-left:22px;
+  color:#53627a;
+  font-weight:850;
+  line-height:1.55;
+}
+.v82PremiumSteps li{
+  margin:4px 0;
+}
+.v82PremiumSteps small{
+  display:block;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#7c2d12;
+  border-radius:16px;
+  padding:10px;
+  margin-top:12px;
+}
+.v82ActivationBox input{
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+.v82FinalNote{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  border-radius:18px;
+  padding:13px;
+  margin:12px 0;
+  font-weight:900;
+  line-height:1.35;
+}
+.v82FinalNote b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+.v82FinalNote span{
+  color:#166534;
+}
+@media(max-width:560px){
+  .v82DeviceActions{
+    grid-template-columns:1fr;
+  }
+  .v82DeviceCode{
+    font-size:18px;
+  }
+}
+
 </style>
 
 <meta name="theme-color" content="#1767c2">
@@ -3665,7 +3761,7 @@ html, body{
 <div class="v73InfoCard v73StatusCard">
   <div class="v73CardIcon shield">✓</div>
   <div class="v73StatusText">
-    <b>Έκδοση 1.2.1 • PWA Ready</b>
+    <b>Έκδοση 1.2.2 • PWA Ready</b>
     <span>Έτοιμο για εγκατάσταση από Chrome όταν βρίσκεσαι σε HTTPS.</span>
   </div>
   <em>Νέο</em>
@@ -3809,29 +3905,29 @@ html, body{
     <h2>📌 Ιστορικό Εκδόσεων</h2>
 
     <div class="v71ChangeHero">
-      <b>Τρέχουσα έκδοση: V81 / 1.2.1</b>
+      <b>Τρέχουσα έκδοση: V82 / 1.2.2</b>
       <span>Σταθερή εμπορική PWA βάση με καθαρή αρχική και πλήρη ενημερωτικές σελίδες.</span>
     </div>
 
     <div class="v71VersionList">
       <div class="v71VersionItem current">
-        <b>V81 / 1.2.1</b>
+        <b>V82 / 1.2.2</b>
         <span>Τελικό polish με περισσότερο κάτω κενό στις ενημερωτικές σελίδες και καθαρότερη προβολή κουμπιών.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V81 / 1.2.1</b>
+        <b>V82 / 1.2.2</b>
         <span>Τελικό polish, σελίδα Σχετικά, ελληνικό κουμπί Ενημέρωση και καθαρότερη εμπορική βάση.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V81 / 1.2.1</b>
+        <b>V82 / 1.2.2</b>
         <span>Αφαιρέθηκαν οριστικά τα διπλά κουμπιά από την κάρτα Σήμερα.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V81 / 1.2.1</b>
+        <b>V82 / 1.2.2</b>
         <span>Προστέθηκε σελίδα Ενημέρωση Εφαρμογής για καθαρισμό cache / service worker.</span>
       </div>
       <div class="v71VersionItem">
-        <b>V81 / 1.2.1</b>
+        <b>V82 / 1.2.2</b>
         <span>Προστέθηκαν σελίδες Πώληση και Υποστήριξη για εμπορική χρήση εκτός Play Store.</span>
       </div>
       <div class="v71VersionItem">
@@ -3864,7 +3960,7 @@ html, body{
     </div>
 
     <div class="v70AboutInfo">
-      <p><b>Έκδοση:</b> V81 / 1.2.1</p>
+      <p><b>Έκδοση:</b> V82 / 1.2.2</p>
       <p><b>Μορφή:</b> PWA Web App</p>
       <p><b>Δεδομένα:</b> αποθηκεύονται τοπικά στη συσκευή</p>
       <p><b>Υποστήριξη:</b> merkos1969@gmail.com</p>
@@ -3904,63 +4000,69 @@ html, body{
     
     
     
+    
+    <div class="v82FinalNote">
+      <b>✅ V82 / 1.2.2</b>
+      <span>Προστέθηκε κωδικός συσκευής και ενεργοποίηση Premium δεμένη με συσκευή, ώστε ο κωδικός να μη μοιράζεται εύκολα σε άλλα κινητά.</span>
+    </div>
+
     <div class="v81FinalNote">
-      <b>✅ V81 / 1.2.1</b>
+      <b>✅ V82 / 1.2.2</b>
       <span>Διόρθωση scroll: όταν πατάς οποιοδήποτε κουμπί ή αλλάζεις σελίδα, η νέα σελίδα ανοίγει αυτόματα από πάνω.</span>
     </div>
 
     <div class="v80FinalNote">
-      <b>✅ V81 / 1.2.1</b>
+      <b>✅ V82 / 1.2.2</b>
       <span>Νέα επαγγελματική σελίδα πώλησης Premium και ξεχωριστή sales.html για εξωτερική προώθηση εκτός εφαρμογής.</span>
     </div>
 
     <div class="v79FinalNote">
-      <b>✅ V81 / 1.2.1</b>
+      <b>✅ V82 / 1.2.2</b>
       <span>Εμπλουτίστηκαν οι κατηγορίες με περισσότερα αρτοποιήματα, γαλακτοκομικά, πίτες, ρύζι, συνοδευτικά, σούπες, ξηρούς καρπούς, φρούτα, όσπρια και σαλάτες.</span>
     </div>
 
     <div class="v78FinalNote">
-      <b>✅ V81 / 1.2.1</b>
+      <b>✅ V82 / 1.2.2</b>
       <span>Διόρθωση κατηγοριών: οι καφέδες, οι χυμοί και τα αναψυκτικά βγήκαν από το γενικό «Ποτά» και εμφανίζονται ξεχωριστά.</span>
     </div>
 
     <div class="v77FinalNote">
-      <b>✅ V81 / 1.2.1</b>
+      <b>✅ V82 / 1.2.2</b>
       <span>Ζωντανός υπολογισμός: όταν αλλάζεις ml, γραμμάρια ή μερίδες, ενημερώνονται αμέσως θερμίδες, πρωτεΐνη, υδατάνθρακες και λιπαρά.</span>
     </div>
 
     <div class="v76FinalNote">
-      <b>✅ V81 / 1.2.1</b>
+      <b>✅ V82 / 1.2.2</b>
       <span>Έξυπνες προεπιλογές ml στα ποτά: μπύρα 330ml, κρασί/ρετσίνα 150ml, σφηνάκια 50ml, νερό 500ml, αναψυκτικά 330ml.</span>
     </div>
 
     <div class="v75FinalNote">
-      <b>✅ V81 / 1.2.1</b>
+      <b>✅ V82 / 1.2.2</b>
       <span>Περισσότερα φαγητά, ποτά και αλκοολούχα. Η επιλογή κατηγορίας στα φαγητά έγινε dropdown και τα ποτά μετρώνται σε ml.</span>
     </div>
 
     <div class="v74FinalNote">
-      <b>✅ V81 / 1.2.1</b>
+      <b>✅ V82 / 1.2.2</b>
       <span>Διόρθωση κάρτας θερμίδων: το κυκλικό ποσοστό εμφανίζεται δεξιά και η πρόοδος είναι πιο καθαρή στο κινητό.</span>
     </div>
 
     <div class="v73FinalNote">
-      <b>✅ V81 / 1.2.1</b>
+      <b>✅ V82 / 1.2.2</b>
       <span>Νέο ελληνικό premium header και πιο όμορφη πρόοδος θερμίδων στην αρχική.</span>
     </div>
 
     <div class="v72FinalNote">
-      <b>✅ V81 / 1.2.1</b>
+      <b>✅ V82 / 1.2.2</b>
       <span>Τελικό polish: περισσότερο κενό κάτω στις ενημερωτικές σελίδες, για να μη σκεπάζει η κάτω μπάρα τα κουμπιά.</span>
     </div>
 
     <div class="v70ReleaseNote">
-      <b>✅ V81 / 1.2.1</b>
+      <b>✅ V82 / 1.2.2</b>
       <span>Σταθερή εμπορική βάση: καθαρή αρχική, Premium, υποστήριξη, απόρρητο, όροι, backup και ενημέρωση PWA.</span>
     </div>
 
     <div class="v67UpdateHero">
-      <b>Έκδοση εφαρμογής: V81 / 1.2.1</b>
+      <b>Έκδοση εφαρμογής: V82 / 1.2.2</b>
       <span>Χρήσιμο όταν το κινητό κρατάει παλιά έκδοση λόγω cache / service worker.</span>
     </div>
 
@@ -4106,7 +4208,7 @@ html, body{
 
     <div class="v64SupportHero">
       <b>Χρειάζεσαι βοήθεια ή Premium κωδικό;</b>
-      <span>Στείλε μήνυμα με το θέμα σου και την έκδοση της εφαρμογής.</span>
+      <span>Στείλε μήνυμα με το θέμα σου, την έκδοση της εφαρμογής και τον κωδικό συσκευής για Premium.</span>
     </div>
 
     <div class="v64ContactCard">
@@ -4126,7 +4228,12 @@ html, body{
 
       <details>
         <summary>Πώς ενεργοποιώ Premium;</summary>
-        <p>Πηγαίνεις στη σελίδα Premium, βάζεις τον κωδικό ενεργοποίησης και πατάς Ενεργοποίηση Premium.</p>
+        <p>Πηγαίνεις στη σελίδα Premium, αντιγράφεις τον Κωδικό συσκευής και τον στέλνεις με email. Μετά την πληρωμή λαμβάνεις προσωπικό Premium κωδικό, τον βάζεις στην εφαρμογή και πατάς Ενεργοποίηση Premium.</p>
+      </details>
+
+      <details>
+        <summary>Γιατί χρειάζεται Κωδικός συσκευής;</summary>
+        <p>Για να μην μπορεί να χρησιμοποιηθεί ο ίδιος Premium κωδικός σε άλλα κινητά. Ο κωδικός ενεργοποίησης δένεται με τη συγκεκριμένη συσκευή.</p>
       </details>
 
       <details>
@@ -4136,7 +4243,7 @@ html, body{
 
       <details>
         <summary>Τι να στείλω όταν έχω πρόβλημα;</summary>
-        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot και την έκδοση της εφαρμογής, π.χ. V81 / 1.2.1.</p>
+        <p>Στείλε τι έκανες, τι δεν δουλεύει, screenshot, την έκδοση της εφαρμογής και αν αφορά Premium τον κωδικό συσκευής.</p>
       </details>
     </div>
 
@@ -4171,22 +4278,43 @@ html, body{
       <div>➕ <b>Δικά μου φαγητά</b><span>Προσωπική λίστα τροφίμων.</span></div>
     </div>
 
-    <div class="v62ActivationBox">
-      <h3>🔑 Κωδικός ενεργοποίησης</h3>
-      <p>Για πρώτη εμπορική δοκιμή μπορείς να δίνεις κωδικό μετά την πληρωμή.</p>
-      <input id="premiumCodeInput" placeholder="π.χ. GCAI-2026-MERKOS-001">
+    <div class="v82DeviceBox">
+      <h3>📱 Κωδικός συσκευής</h3>
+      <p>Αυτός ο κωδικός είναι μοναδικός για αυτή τη συσκευή. Τον στέλνει ο χρήστης μετά την πληρωμή για να λάβει Premium κωδικό που δουλεύει μόνο εδώ.</p>
+      <div class="v82DeviceCode" id="v82DeviceCodeText">DEV-----</div>
+      <div class="v82DeviceActions">
+        <button type="button" onclick="v82CopyDeviceCode()">📋 Αντιγραφή κωδικού συσκευής</button>
+        <button type="button" class="btnGreen" onclick="v82OpenPremiumEmail()">✉️ Αποστολή για Premium</button>
+      </div>
+    </div>
+
+    <div class="v82PremiumSteps">
+      <h3>📘 Οδηγίες Premium</h3>
+      <ol>
+        <li>Αντέγραψε ή στείλε τον <b>Κωδικό συσκευής</b>.</li>
+        <li>Μετά την πληρωμή θα λάβεις προσωπικό <b>Premium κωδικό ενεργοποίησης</b>.</li>
+        <li>Ο Premium κωδικός δουλεύει μόνο σε αυτή τη συσκευή.</li>
+        <li>Βάλε τον κωδικό παρακάτω και πάτα <b>Ενεργοποίηση Premium</b>.</li>
+      </ol>
+      <small>Αν αλλάξεις κινητό ή καθαρίσεις όλα τα δεδομένα του browser, μπορεί να αλλάξει ο κωδικός συσκευής.</small>
+    </div>
+
+    <div class="v62ActivationBox v82ActivationBox">
+      <h3>🔑 Premium κωδικός ενεργοποίησης</h3>
+      <p>Βάλε τον κωδικό που έλαβες μετά την πληρωμή. Ο κωδικός ελέγχεται με τον κωδικό συσκευής.</p>
+      <input id="premiumCodeInput" placeholder="π.χ. GCAI-AB12-CD34-EF56">
       <button class="btnGreen" onclick="activatePremiumCode()">Ενεργοποίηση Premium</button>
       <button class="btnLight" onclick="deactivatePremium()">Επαναφορά σε δωρεάν</button>
     </div>
 
     <div class="v64PremiumCommercialBtns">
       <button onclick="showPage('landing')">💼 Σελίδα πώλησης</button>
-      <button onclick="showPage('support')">📞 Υποστήριξη / αγορά</button>
+      <button onclick="showPage('support')">📞 Αγορά / Υποστήριξη</button>
     </div>
 
     <div class="v62InfoBox">
       <b>Προτεινόμενη πρώτη εμπορική τιμή</b>
-      <p>4,99€ εφάπαξ για αρχική Premium έκδοση, με χειροκίνητη αποστολή κωδικού. Μετά μπορεί να συνδεθεί Stripe / Paddle.</p>
+      <p><b>4,99€ εφάπαξ</b><br>Για την αρχική Premium έκδοση με χειροκίνητη αποστολή προσωπικού κωδικού ενεργοποίησης.</p>
     </div>
 
     <div class="v58BottomSpace"></div>
@@ -7535,7 +7663,7 @@ if(oldShowPageV62){
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load", ()=>{
-    navigator.serviceWorker.register("./service-worker.js?v=81").catch(err=>{
+    navigator.serviceWorker.register("./service-worker.js?v=82").catch(err=>{
       console.log("Service worker registration failed:", err);
     });
   });
@@ -7558,7 +7686,7 @@ function v64CopyEmail(){
 }
 function v64OpenEmail(){
   const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
-  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V81 / 1.2.1\n\nΠεριγραφή:");
+  const body = encodeURIComponent("Γεια σας,\n\nΘέλω βοήθεια για το Greek Cal AI.\nΈκδοση: V82 / 1.2.2\n\nΠεριγραφή:");
   location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
@@ -7612,9 +7740,9 @@ window.addEventListener("load", ()=>{
 
 
 <script>
-/* V81 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
+/* V82 one-time cache refresh so old 1.0.2 / 1.0.3 text disappears */
 (function(){
-  const wanted = "V81-1.2.1";
+  const wanted = "V82-1.2.2";
   const current = localStorage.getItem("gca_loaded_version");
   if(current !== wanted && "serviceWorker" in navigator){
     localStorage.setItem("gca_loaded_version", wanted);
@@ -7846,6 +7974,158 @@ setInterval(v74UpdateCalorieProgress, 1500);
     setTimeout(v81ForceTop, 120);
   });
 })();
+</script>
+
+
+<script>
+/* V82: Premium κωδικός δεμένος με Κωδικό συσκευής */
+const GCAI_V82_LICENSE_SECRET = "GCAI-MERKOS-2026-V82-PREMIUM-LOCAL";
+
+function v82RandomPart(){
+  const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let out = "";
+  try{
+    const arr = new Uint8Array(4);
+    crypto.getRandomValues(arr);
+    for(let i=0;i<arr.length;i++) out += alphabet[arr[i] % alphabet.length];
+  }catch(e){
+    for(let i=0;i<4;i++) out += alphabet[Math.floor(Math.random()*alphabet.length)];
+  }
+  return out;
+}
+
+function v82GetDeviceCode(){
+  let code = localStorage.getItem("gca_device_code");
+  if(!code){
+    code = "DEV-" + v82RandomPart() + "-" + v82RandomPart() + "-" + v82RandomPart() + "-" + v82RandomPart();
+    localStorage.setItem("gca_device_code", code);
+  }
+  return code;
+}
+
+function v82NormalizeCode(code){
+  return String(code || "").toUpperCase().replace(/[^A-Z0-9]/g,"");
+}
+
+function v82Hash(input){
+  const s = String(input || "");
+  let h1 = 0x811c9dc5;
+  let h2 = 0x9747b28c;
+  for(let i=0;i<s.length;i++){
+    const c = s.charCodeAt(i);
+    h1 ^= c;
+    h1 = (h1 + ((h1<<1) + (h1<<4) + (h1<<7) + (h1<<8) + (h1<<24))) >>> 0;
+    h2 ^= (c + i);
+    h2 = Math.imul(h2, 0x5bd1e995) >>> 0;
+    h2 ^= h2 >>> 15;
+  }
+  const a = (h1>>>0).toString(36).toUpperCase().padStart(7,"0");
+  const b = (h2>>>0).toString(36).toUpperCase().padStart(7,"0");
+  return (a + b).replace(/[^A-Z0-9]/g,"").slice(0,12).padEnd(12,"X");
+}
+
+function v82PremiumCodeForDevice(deviceCode){
+  const cleanDevice = v82NormalizeCode(deviceCode);
+  const h = v82Hash(cleanDevice + "|" + GCAI_V82_LICENSE_SECRET);
+  return "GCAI-" + h.slice(0,4) + "-" + h.slice(4,8) + "-" + h.slice(8,12);
+}
+
+function v82RefreshDeviceUI(){
+  const code = v82GetDeviceCode();
+  const el = document.getElementById("v82DeviceCodeText");
+  if(el) el.textContent = code;
+}
+
+function updatePremiumStatus(){
+  const enabled = localStorage.getItem("gca_premium") === "1";
+  const el = document.getElementById("premiumStatusText");
+  if(el) el.textContent = enabled ? "Τρέχουσα έκδοση: Premium ενεργό ✅" : "Τρέχουσα έκδοση: Δωρεάν";
+  v82RefreshDeviceUI();
+}
+
+function v82CopyText(text, okMsg){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>alert(okMsg || "Αντιγράφηκε.")).catch(()=>alert(text));
+  }else{
+    alert(text);
+  }
+}
+
+function v82CopyDeviceCode(){
+  v82CopyText(v82GetDeviceCode(), "Ο κωδικός συσκευής αντιγράφηκε.");
+}
+
+function v82OpenPremiumEmail(){
+  const subject = encodeURIComponent("Greek Cal AI Premium");
+  const body = encodeURIComponent(
+`Γεια σας,
+
+Θέλω Premium για το Greek Cal AI.
+
+Έκδοση: V82 / 1.2.2
+Κωδικός συσκευής: ${v82GetDeviceCode()}
+
+Περιγραφή: Θέλω premium`
+  );
+  location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
+}
+
+function v64OpenEmail(){
+  const subject = encodeURIComponent("Greek Cal AI υποστήριξη / Premium");
+  const body = encodeURIComponent(
+`Γεια σας,
+
+Θέλω βοήθεια για το Greek Cal AI.
+
+Έκδοση: V82 / 1.2.2
+Κωδικός συσκευής: ${v82GetDeviceCode()}
+
+Περιγραφή:`
+  );
+  location.href = "mailto:merkos1969@gmail.com?subject=" + subject + "&body=" + body;
+}
+
+function activatePremiumCode(){
+  const codeRaw = (document.getElementById("premiumCodeInput")?.value || "").trim();
+  const input = v82NormalizeCode(codeRaw);
+  const expected = v82NormalizeCode(v82PremiumCodeForDevice(v82GetDeviceCode()));
+
+  if(input === expected){
+    localStorage.setItem("gca_premium","1");
+    localStorage.setItem("gca_premium_code",codeRaw.toUpperCase());
+    localStorage.setItem("gca_premium_device",v82GetDeviceCode());
+    updatePremiumStatus();
+    alert("Το Premium ενεργοποιήθηκε σε αυτή τη συσκευή.");
+  }else{
+    alert("Ο κωδικός δεν αναγνωρίστηκε για αυτή τη συσκευή. Έλεγξε ότι έστειλες σωστά τον Κωδικό συσκευής.");
+  }
+}
+
+function deactivatePremium(){
+  if(!confirm("Να γίνει επαναφορά σε δωρεάν έκδοση;")) return;
+  localStorage.removeItem("gca_premium");
+  localStorage.removeItem("gca_premium_code");
+  localStorage.removeItem("gca_premium_device");
+  updatePremiumStatus();
+}
+
+const oldShowPageV82 = typeof showPage === "function" ? showPage : null;
+if(oldShowPageV82 && !oldShowPageV82.__v82Wrapped){
+  const wrappedShowPageV82 = function(id){
+    const result = oldShowPageV82.apply(this, arguments);
+    if(id === "premium" || id === "support"){
+      setTimeout(()=>{ updatePremiumStatus(); v82RefreshDeviceUI(); }, 80);
+    }
+    return result;
+  };
+  wrappedShowPageV82.__v82Wrapped = true;
+  showPage = wrappedShowPageV82;
+}
+
+window.addEventListener("load", ()=>{
+  v82GetDeviceCode();
+  setTimeout(()=>{ updatePremiumStatus(); v82RefreshDeviceUI(); }, 200);
+});
 </script>
 
 </body>
